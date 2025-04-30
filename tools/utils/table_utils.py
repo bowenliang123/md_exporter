@@ -16,6 +16,8 @@ class TableParser:
         :return: list of tables
         """
         try:
+            if "\\n" in md_text:
+                md_text = md_text.replace("\\n", "\n")
             md_text = MarkdownUtils.strip_markdown_wrapper(md_text)
             html_str = markdown.markdown(text=md_text, extensions=['tables'])
             tables = pd.read_html(StringIO(html_str))
