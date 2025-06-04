@@ -37,7 +37,7 @@ class MarkdownToDocxTool(Tool):
             new_parser = HtmlToDocx()
             doc: Document = new_parser.parse_html_string(html)
 
-            # 为所有文本设置字体
+            # Set fonts for all text elements
             self.set_fonts_for_all_runs(doc)
 
             result_bytes_io = io.BytesIO()
@@ -71,31 +71,31 @@ class MarkdownToDocxTool(Tool):
         rPr.rFonts.set(qn('w:eastAsia'), '宋体')
 
     def set_fonts_for_all_runs(self, doc: Document):
-        """为所有文本段落设置英文字体为 Times New Roman，中文字体为宋体。"""
+        """Set Times New Roman for English text and SimSun for Chinese text in all text elements."""
         for paragraph in doc.paragraphs:
             for run in paragraph.runs:
-                if run.text.strip():  # 只处理非空文本
-                    # 设置默认字体为 Times New Roman
+                if run.text.strip():  # Skip empty text
+                    # Set default font to Times New Roman
                     run.font.name = 'Times New Roman'
-                    # 设置东亚字体为宋体
+                    # Set East Asian font to SimSun
                     run._element.rPr.rFonts.set(qn('w:eastAsia'), '宋体')
-                    # 设置 ASCII 字体为 Times New Roman
+                    # Set ASCII font to Times New Roman
                     run._element.rPr.rFonts.set(qn('w:ascii'), 'Times New Roman')
-                    # 设置高 ANSI 字体为 Times New Roman
+                    # Set high ANSI font to Times New Roman
                     run._element.rPr.rFonts.set(qn('w:hAnsi'), 'Times New Roman')
 
-        # 同时处理表格
+        # Process tables
         for table in doc.tables:
             for row in table.rows:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
                         for run in paragraph.runs:
-                            if run.text.strip():  # 只处理非空文本
-                                # 设置默认字体为 Times New Roman
+                            if run.text.strip():  # Skip empty text
+                                # Set default font to Times New Roman
                                 run.font.name = 'Times New Roman'
-                                # 设置东亚字体为宋体
+                                # Set East Asian font to SimSun
                                 run._element.rPr.rFonts.set(qn('w:eastAsia'), '宋体')
-                                # 设置 ASCII 字体为 Times New Roman
+                                # Set ASCII font to Times New Roman
                                 run._element.rPr.rFonts.set(qn('w:ascii'), 'Times New Roman')
-                                # 设置高 ANSI 字体为 Times New Roman
+                                # Set high ANSI font to Times New Roman
                                 run._element.rPr.rFonts.set(qn('w:hAnsi'), 'Times New Roman')
