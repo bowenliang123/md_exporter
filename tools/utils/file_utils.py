@@ -20,4 +20,5 @@ def get_meta_data(mime_type: MimeType, output_filename: Optional[str]) -> dict[s
     return {
         "mime_type": mime_type,
         "filename": result_filename,
+        "file_name": result_filename
     }
