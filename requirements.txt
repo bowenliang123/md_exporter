@@ -21,7 +21,7 @@ python-pptx~=1.0.2
 
 # for markdown to png
 PyMuPDF~=1.26.4
-pillow~=11.3.0
+pillow~=12.0.0
 
 # pandoc
 pypandoc-binary~=1.15
