@@ -30,6 +30,10 @@ class MarkdownToPptxTool(Tool):
         # get parameters
         md_text = get_md_text(tool_parameters)
         pptx_template_file: Optional[File] = tool_parameters.get("pptx_template_file")
+
+        # check parameters
+        if "``` run-python" in md_text:
+            raise ValueError("The `run-python` marco of md2pptx is not allowed.")
         if pptx_template_file and not isinstance(pptx_template_file, File):
             raise ValueError("Not a valid file for pptx template file")
 
