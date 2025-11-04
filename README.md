@@ -342,7 +342,6 @@ viewed as PDF:
 
 Output `.md` file with original input Markdown text.
 
-
 ---
 
 ## Changelog
