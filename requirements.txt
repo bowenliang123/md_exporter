@@ -1,6 +1,6 @@
 # dify plugin python sdk
 dify_plugin~=0.5.1
-markdown~=3.9
+markdown~=3.10
 
 # for tables
 pandas[excel,html,xml]~=2.3.2
