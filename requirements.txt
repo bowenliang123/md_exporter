@@ -3,7 +3,7 @@ dify_plugin~=0.6.1
 markdown~=3.10
 
 # for tables
-pandas[excel,html,xml]~=2.3.2
+pandas[excel,html,xml]~=2.3.3
 
 # for markdown to pdf
 xhtml2pdf~=0.2.17
