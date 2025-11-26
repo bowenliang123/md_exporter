@@ -24,7 +24,7 @@ PyMuPDF~=1.26.4
 pillow~=12.0.0
 
 # pandoc
-pypandoc-binary~=1.15
+6
 
 # deprecated 1:
 # markdowntodocx~=0.1.5.10
