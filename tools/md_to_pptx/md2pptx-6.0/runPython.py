@@ -2,7 +2,7 @@
 runPython
 """
 
-version = "0.9"
+version = "0.11"
 
 import csv
 from pptx.chart.data import CategoryChartData
@@ -19,6 +19,8 @@ from pptx.enum.shapes import PP_PLACEHOLDER
 from paragraph import *
 from pptx.util import Inches, Pt
 from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
+
+from media import *
 
 import globals
 
@@ -185,9 +187,9 @@ class RunPython:
         return s
 
     def doChecklistChecks(placeholder, checklist, colourChecks = False):
+        slide = placeholder._parent._parent
         tf = placeholder.text_frame
         paras = tf.paragraphs
-
         for paraNumber, para in enumerate(paras):
             # Save original font size
             originalFontSize = para.font.size
@@ -204,38 +206,84 @@ class RunPython:
             xml += f'<a:pPr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" marL="{Inches(0.25) * level}" indent="{Inches(0.33)}" lvl="{level}">'
 
 
-            if checklist[paraNumber] == None:
-                # Checkbox unchecked
+            if checklist[paraNumber] == "Unset":
+                # Set the bullet to an empty square
+                image_part, rId = createMediaRel(slide, "unset-black.png")
+                
+                # Following is non-graphic bullet
+                # xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings" pitchFamily="2" charset="2"/>'
+                # xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="o"/>'
 
-                # Set the bullet to an empty square - and don't colour it
-                xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings" pitchFamily="2" charset="2"/>'
-                xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="o"/>'
-            elif checklist[paraNumber] == True:
-                # Checkbox ticked
-
-                # Maybe colour the mark
-                if colourChecks:
-                    xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
-                    xml += '<a:srgbClr val="00FF00" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
-                    xml += '</a:buClr>'
-
+            elif checklist[paraNumber] == "Yes":
                 # Set the bullet to a square with a tick
-                xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings 2" pitchFamily="2" charset="2"/>'
-                xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="R"/>'
-            else:
-                # Checkbox crossed
-
-                # Maybe colour the mark
                 if colourChecks:
-                    xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
-                    xml += '<a:srgbClr val="FF0000" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
-                    xml += '</a:buClr>'
+                    image_part, rId = createMediaRel(slide, "tick-colour.png")
+                else:
+                    image_part, rId = createMediaRel(slide, "tick-black.png")
                 
+                # Following is non-graphic colouring
+                # xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                # xml += '<a:srgbClr val="00FF00" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
+                # xml += '</a:buClr>'
+
+                # Following is non-graphic bullet
+                # xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings 2" pitchFamily="2" charset="2"/>'
+                # xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="R"/>'
+
+            elif checklist[paraNumber] == "Maybe":
+                # Bullet set to maybe
+                if colourChecks:
+                    image_part, rId = createMediaRel(slide, "query-colour.png")
+                else:
+                    image_part, rId = createMediaRel(slide, "query-black.png")
+                
+                # Following is non-graphic colouring
+                # xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                # xml += '<a:srgbClr val="FFA500" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
+                # xml += '</a:buClr>'
+
+                # Following is non-graphic bullet
+                # xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings" pitchFamily="2" charset="2"/>'
+                # xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="⍰"/>'
+
+            elif checklist[paraNumber] == "Partial":
+                # Bullet set to partial
+                if colourChecks:
+                    image_part, rId = createMediaRel(slide, "partial-colour.png")
+                else:
+                    image_part, rId = createMediaRel(slide, "partial-black.png")
+                
+                # Following is non-graphic colouring
+                # xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                # xml += '<a:srgbClr val="0000FF" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
+                # xml += '</a:buClr>'
+
+                # Following is non-graphic bullet
+                # xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Courier" pitchFamily="2" charset="2"/>'
+                # xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="▃"/>'
+
+            else:
                 # Set the bullet to a square with a cross
-                xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings 2" pitchFamily="2" charset="2"/>'
-                xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="T"/>'
+                if colourChecks:
+                    image_part, rId = createMediaRel(slide, "cross-colour.png")
+                else:
+                    image_part, rId = createMediaRel(slide, "cross-black.png")
                 
+                
+                # Following is non-graphic colouring
+                # xml += '<a:buClr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                # xml += '<a:srgbClr val="FF0000" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" />'
+                # xml += '</a:buClr>'
+
+                # Following is non-graphic bullet
+                # xml += '<a:buFont xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" typeface="Wingdings 2" pitchFamily="2" charset="2"/>'
+                # xml += '<a:buChar xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" char="T"/>'
      
+            xml += '<a:buBlip xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+            xml += f'    <a:blip xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="{rId}"/>'
+            xml += '</a:buBlip>'
+
+
             xml += '</a:pPr>'
     
             # Parse this XML
@@ -277,14 +325,37 @@ class RunPython:
         
         return placeholder
 
-    def makeTruthy(table_array, columnNumber = 1, trueString = "Yes", falseString = "No", unsetString = ""):
+    def testForValues(cellValue, testValues):
+        if isinstance(testValues, list):
+            # Work through list of possible values
+            for testValue in testValues:
+                if cellValue == testValue:
+                    return True
+
+            return False
+        else:
+            # Single string value to check for
+            return cellValue == testValues
+
+    def makeTruthy(table_array, columnNumber = 1, trueValues = "yes", falseValues = "no", unsetValues = "", maybeValues = "maybe", partialValues = "partial"):
         for row in table_array:
-            if row[columnNumber] == unsetString:
-                row[columnNumber] = None
-            elif row[columnNumber] == trueString:
-                row[columnNumber] = True
-            else:
-                row[columnNumber] = False
+            # Test is case insensitive
+            cellValue = row[columnNumber].lower()
+
+            if RunPython.testForValues(cellValue, unsetValues):
+                row[columnNumber] = "Unset"
+
+            elif RunPython.testForValues(cellValue, trueValues):
+                row[columnNumber] = "Yes"
+
+            elif RunPython.testForValues(cellValue, maybeValues):
+                row[columnNumber] = "Maybe"
+
+            elif RunPython.testForValues(cellValue, partialValues):
+                row[columnNumber] = "Partial"
+
+            elif RunPython.testForValues(cellValue, falseValues):
+                row[columnNumber] = "No"
 
         return table_array
 
@@ -335,7 +406,14 @@ class RunPython:
         
     def checklistFromCSV(slide, renderingRectangle, filename, shapeIndex = None, colourChecks = False):
         # Read in CSV and turn second column into "truthy" values
-        myChecklist = RunPython.makeTruthy(RunPython.readCSV(filename), 1)
+        myChecklist = RunPython.makeTruthy(RunPython.readCSV(filename),
+            1,
+            trueValues = ["yes", "x", "y"],
+            falseValues = ["no", "n"],
+            unsetValues = ["", " "],
+            maybeValues = ["maybe", "m", "?"],
+            partialValues = ["partial", "p"],
+        )
 
         # Ensure we have a placeholder - whether first or second or specified
         textShape = RunPython.ensureTextbox(slide, renderingRectangle, shapeIndex)
