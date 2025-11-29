@@ -2,7 +2,7 @@ import os.path
 import subprocess
 import sys
 from pathlib import Path
-from tempfile import NamedTemporaryFile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 from typing import Generator, Optional
 
 import pptx  # type: ignore
@@ -16,7 +16,7 @@ from tools.utils.mimetype_utils import MimeType
 from tools.utils.param_utils import get_md_text
 
 DEFAULT_TEMPLATE_PPTX_FILE_PATH = str(Path(__file__).resolve().parent / "template" / "Bowen Template.pptx")
-MD2PPTX_FOLDER = "md2pptx-6.0"
+MD2PPTX_FOLDER = "md2pptx-6.1"
 
 
 class MarkdownToPptxTool(Tool):
@@ -46,34 +46,40 @@ class MarkdownToPptxTool(Tool):
                 temp_pptx_template_file.close()
                 temp_pptx_template_file_path = temp_pptx_template_file.name
 
-            # prepend md2pptx metadata configs
-            md_text = self._prepend_metadata(md_text=md_text, custom_template_file_path=temp_pptx_template_file_path)
-            # write markdown text to a temp source file
-            with NamedTemporaryFile(suffix=".md", delete=True) as temp_md_file:
-                Path(temp_md_file.name).write_text(md_text, encoding="utf-8")
+            # create a temp directory that md2pptx uses
+            with TemporaryDirectory() as temp_dir_path:
+                # prepend md2pptx metadata configs
+                md_text = self._prepend_metadata(
+                    md_text=md_text,
+                    temp_dir_path=temp_dir_path,
+                    custom_template_file_path=temp_pptx_template_file_path,
+                )
+                # write markdown text to a temp source file
+                with NamedTemporaryFile(suffix=".md", delete=True) as temp_md_file:
+                    Path(temp_md_file.name).write_text(md_text, encoding="utf-8")
 
-                # run md2pptx to convert md file to pptx file
-                with NamedTemporaryFile(suffix=".pptx", delete=True) as temp_pptx_file:
-                    current_script_folder = os.path.split(os.path.realpath(__file__))[0]
-                    python_exec = sys.executable or "python3"
-                    cmd = [python_exec, f"{current_script_folder}/{MD2PPTX_FOLDER}/md2pptx.py",
-                           temp_md_file.name,
-                           temp_pptx_file.name]
+                    # run md2pptx to convert md file to pptx file
+                    with NamedTemporaryFile(suffix=".pptx", delete=True) as temp_pptx_file:
+                        current_script_folder = os.path.split(os.path.realpath(__file__))[0]
+                        python_exec = sys.executable or "python3"
+                        cmd = [python_exec, f"{current_script_folder}/{MD2PPTX_FOLDER}/md2pptx.py",
+                               temp_md_file.name,
+                               temp_pptx_file.name]
 
-                    result = subprocess.run(
-                        cmd,
-                        timeout=60,  # timeout in seconds
-                        capture_output=True,
-                        text=True
-                    )
-                    if result.returncode != 0:
-                        print(cmd)
-                        raise Exception(f"Failed to convert markdown text to PPTX file,"
-                                        f" command: {" ".join(cmd)},"
-                                        f" return code: {result.returncode},"
-                                        f" stdout: {result.stdout},"
-                                        f" error: {result.stderr}")
-                    result_file_bytes = Path(temp_pptx_file.name).read_bytes()
+                        result = subprocess.run(
+                            cmd,
+                            timeout=60,  # timeout in seconds
+                            capture_output=True,
+                            text=True
+                        )
+                        if result.returncode != 0:
+                            print(cmd)
+                            raise Exception(f"Failed to convert markdown text to PPTX file,"
+                                            f" command: {" ".join(cmd)},"
+                                            f" return code: {result.returncode},"
+                                            f" stdout: {result.stdout},"
+                                            f" error: {result.stderr}")
+                        result_file_bytes = Path(temp_pptx_file.name).read_bytes()
 
         except Exception as e:
             self.logger.exception("Failed to convert markdown text to PPTX file")
@@ -93,19 +99,20 @@ class MarkdownToPptxTool(Tool):
         return
 
     @staticmethod
-    def _prepend_metadata(md_text: str, custom_template_file_path: Optional[str]) -> str:
+    def _prepend_metadata(md_text: str, temp_dir_path: str, custom_template_file_path: Optional[str]) -> str:
         """
         Prepend metadata to Markdown text
         """
         # the default template name is "Martin Template.pptx" in "md2pptx-*" subfolder
         template_pptx_file_path = custom_template_file_path if custom_template_file_path \
             else DEFAULT_TEMPLATE_PPTX_FILE_PATH
+        temp_dir = f'tempDir: {temp_dir_path}'
         ppt_template = f"template: {template_pptx_file_path}"
 
         # delete the first slide
         # doc: https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#deleting-the-first-processing-summary-slide---with-deletefirstslide
         delete_first_slide = "DeleteFirstSlide: yes"
 
-        metadata_str = "\n".join([ppt_template, delete_first_slide])
+        metadata_str = "\n".join([temp_dir, ppt_template, delete_first_slide])
         text = metadata_str + "\n" + md_text
         return text

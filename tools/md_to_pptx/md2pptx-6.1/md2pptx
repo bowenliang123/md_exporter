@@ -86,8 +86,8 @@ except:
     have_graphviz = False
 
 
-md2pptx_level = "6.0"
-md2pptx_date = "29 August, 2025"
+md2pptx_level = "6.1"
+md2pptx_date = "28 November, 2025"
 
 namespaceURL = {
     "mc":  "http://schemas.openxmlformats.org/markup-compatibility/2006",
@@ -116,6 +116,7 @@ class SlideInfo:
         cards,
         code,
         sequence,
+        tableCaptions,
     ):
         self.titleText = titleText
         self.subtitleText = subtitleText
@@ -125,13 +126,17 @@ class SlideInfo:
         self.cards = cards
         self.code = code
         self.sequence = sequence
+        self.tableCaptions = tableCaptions
 
 
 # Information about a single table. (A slide might have more than one - or none.)
 class TableInfo:
     def __init__(self, tableRows, tableCaption):
-        self.tableRows = []
-        self.tableCaption = ""
+        self.rows = []
+        self.caption = ""
+        
+    def addRow(row):
+        self.rows.append(row)
 
 
 # Information about a video
@@ -1364,14 +1369,14 @@ def handleWhateverGraphicType(GraphicFilename):
                 # Note: It's been translated to lower case above
                 if content_type in ["image/jpeg", "image/jpg"]:
                     # Note: only the first of these two is legitimate
-                    fileExt = "jpg"
+                    fileExt = ".jpg"
                 elif content_type == "image/png":
-                    fileExt = "png"
+                    fileExt = ".png"
                 elif content_type in ["image/svg+xml", "image/svg"]:
                     # Note: only the first of these two is legitimate
-                    fileExt = "svg"
+                    fileExt = ".svg"
                 elif content_type == "application/postscript":
-                    fileExt = "eps"
+                    fileExt = ".eps"
                 else:
                     fileExt = None
         else:
@@ -3369,8 +3374,24 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
         rows = len(tableRows)
         alignments_count = len(alignments)
 
+        # Potentially add a caption row
+        if tableCaptions[tableBlockNumber] == "":
+            captionRowCount = 0
+        else:
+            captionRowCount = 1
+            
+            tableRows.append([tableCaptions[tableBlockNumber]])
+            rows += 1
+
         # Create the table with the above number of rows and columns
-        newTableShape = slide.shapes.add_table(rows, columns, 0, 0, 0, 0)
+        newTableShape = slide.shapes.add_table(
+            rows,
+            columns,
+            0,
+            0,
+            0,
+            0
+        )
         
         newTable = newTableShape.table
 
@@ -3386,14 +3407,24 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
 
         # Set whether first row is not special
         newTable.first_row = haveTableHeading
+        if captionRowCount == 0:
+            tableCaptionBlurb = ""
+        else:
+            if tableHeadingBlurb == "without heading":
+                tableCaptionBlurb = "with caption"
+            else:
+               tableCaptionBlurb = " and caption"
 
+        rowCountBlurb =str(rows - captionRowCount)
+        
         print(
             "           --> "
-            + str(rows)
+            + rowCountBlurb
             + " x "
             + str(columns)
             + " table"
             + tableHeadingBlurb
+            + tableCaptionBlurb
         )
 
         # Set column widths
@@ -3405,6 +3436,9 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
         compactTables = globals.processingOptions.getCurrentOption("compactTables")
         spanCells = globals.processingOptions.getCurrentOption("spanCells")
         tableHeadingSize = globals.processingOptions.getCurrentOption("tableHeadingSize")
+
+        # Get options table captions
+        numberedTableCaptions = globals.processingOptions.getCurrentOption("numberedTableCaptions")
 
         # Fill in the cells
         cellsWithExplicitBoxStyle = []
@@ -3467,6 +3501,15 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                 else:
                     p.alignment = PP_ALIGN.LEFT
 
+                # Massage any table caption cell
+                if (captionRowCount == 1) & (rowNumber == rows -1) & (columnNumber == 0):
+                    if numberedTableCaptions:
+                        cell = f"*Table {globals.tableNumber}. {cell}*"
+
+                        globals.tableNumber += 1
+                    else:
+                        cell = f"*{cell}*"
+                
                 # Add the cell text, respecting formatting
                 addFormattedText(p, cell)
                 
@@ -3490,7 +3533,6 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                     cff = newCell.fill
                     cff.solid()
                     cff.fore_color.rgb = RGBColor.from_string(cellBackgroundColor)
-
 
         # Apply table border styling - whether there is any or not
         applyTableLineStyling(
@@ -4157,7 +4199,7 @@ def createTaskSlides(prs, slideNumber, tasks, titleStem):
                 taskBlock = [taskRows]
 
                 slideInfo = SlideInfo(
-                    title, "", "table", [], taskBlock, [], [], ["table"]
+                    title, "", "table", [], taskBlock, [], [], ["table"], []
                 )
                 slide = createContentSlide(prs, slideNumber, slideInfo)
 
@@ -4201,7 +4243,7 @@ def createTaskSlides(prs, slideNumber, tasks, titleStem):
         title = titleStem
 
     taskBlock = [taskRows]
-    slideInfo = SlideInfo(title, "", "table", [], taskBlock, [], [], ["table"])
+    slideInfo = SlideInfo(title, "", "table", [], taskBlock, [], [], ["table"],[])
     slide = createContentSlide(prs, slideNumber, slideInfo)
 
     # Fix up references to be active links to the slide where the task
@@ -4246,7 +4288,7 @@ def createGlossarySlides(prs, slideNumber, abbrevDictionary):
 
                 glossaryBlock = [glossaryRows]
                 slideInfo = SlideInfo(
-                    title, "", "table", [], glossaryBlock, [], [], ["table"]
+                    title, "", "table", [], glossaryBlock, [], [], ["table"],[]
                 )
                 slide = createContentSlide(prs, slideNumber, slideInfo)
 
@@ -4271,7 +4313,8 @@ def createGlossarySlides(prs, slideNumber, abbrevDictionary):
         title = glossaryTitle
 
     glossaryBlock = [glossaryRows]
-    slideInfo = SlideInfo(title, "", "table", [], glossaryBlock, [], [], ["table"])
+    slideInfo = SlideInfo(title, "", "table", [], glossaryBlock, [], [], ["table"],[]
+    )
     slide = createContentSlide(prs, slideNumber, slideInfo)
     glossarySlides.append(slide)
     slideNumber += 1
@@ -4319,7 +4362,7 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
                     title = footnotesTitle
 
                 slideInfo = SlideInfo(
-                    title, "", "content", bullets, [], cards, [], ["list"]
+                    title, "", "content", bullets, [], cards, [], ["list", []]
                 )
                 slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
@@ -4349,7 +4392,8 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
         # Only one footnotes page
         title = footnotesTitle
 
-    slideInfo = SlideInfo(title, "", "content", bullets, [], cards, [], ["list"])
+    slideInfo = SlideInfo(title, "", "content", bullets, [], cards, [], ["list"], []
+    )
     slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
     footnoteSlides.append(slide)
@@ -4364,6 +4408,8 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
 
 start_time = time.time()
 
+md2pptx_path = os.path.dirname(__file__)
+
 banner = (
     "md2pptx Markdown To Powerpoint Converter " + md2pptx_level + " " + md2pptx_date
 )
@@ -4374,6 +4420,8 @@ for i in range(len(banner)):
 
 print("\n" + banner + "\n" + bannerUnderline)
 print("\nOpen source project: https://github.com/MartinPacker/md2pptx")
+
+print(f"\nmd2pptx is found in {md2pptx_path}")
 
 print("\nExternal Dependencies:")
 print("\n  Python: " + platform.python_version())
@@ -4623,6 +4671,7 @@ globals.processingOptions.setOptionValuesArray(
         ["spanCells", "yes"],
         ["tableHeadingSize", 0],
         ["tableShadow", False],
+        ["numberedTableCaptions", False],
     ]
 )
 
@@ -4740,7 +4789,9 @@ globals.processingOptions.setOptionValuesArray(
         ["applescript", ""],
         ["applescriptReload", False],
         ["applescriptRun", False],
-        ["bookmark", 0]
+        ["bookmark", 0],
+        ["applescriptPrologue", []],
+        ["applescriptEpilogue", []],
     ]
 )
 
@@ -4991,6 +5042,10 @@ for line in metadata_lines:
         globals.processingOptions.setOptionValues(name, float(value))
 
     elif name == "tableshadow":
+        if value.lower() == "yes":
+            globals.processingOptions.setOptionValues(name, True)
+
+    elif name == "numberedtablecaptions":
         if value.lower() == "yes":
             globals.processingOptions.setOptionValues(name, True)
 
@@ -5333,6 +5388,41 @@ for line in metadata_lines:
     elif name == "bookmark":
         globals.processingOptions.setOptionValues(name, int(value))
         
+    elif name in ["applescriptprolog", "applescriptprologue"]:
+        if value[:1] == "!":
+            prologFile = md2pptx_path + os.sep + "applescript" + os.sep + value[1:]
+        else:
+            prologFile = value
+
+        applescriptPrologueFiles = globals.processingOptions.getCurrentOption("applescriptprologue")
+        applescriptPrologueFiles.append(prologFile)
+        globals.processingOptions.setOptionValues("applescriptprologue", applescriptPrologueFiles)
+        
+    elif name in ["applescriptepilog", "applescriptepilogue"]:
+        if value[:1] == "!":
+            epilogFile = md2pptx_path + os.sep + "applescript" + os.sep + value[1:]
+        else:
+            epilogFile = value
+
+        applescriptEpilogueFiles = globals.processingOptions.getCurrentOption("applescriptepilogue")
+        applescriptEpilogueFiles.append(epilogFile)
+        globals.processingOptions.setOptionValues("applescriptepilogue", applescriptEpilogueFiles)
+        
+# Add any prologue file contents to the AppleScript that will be generated
+if (applescriptPrologueFiles := globals.processingOptions.getCurrentOption("applescriptprologue")) is not []:
+    for prologueFile in applescriptPrologueFiles:
+        try:
+            with open(prologueFile, 'r') as pf:
+                pfLines = pf.readlines()
+                
+                for pfLine in pfLines:
+                    if pfLine.rstrip("\n") != "":
+                        pfLine = pfLine.rstrip("\n")
+                    globals.applescriptLines.append(pfLine)
+        except IOError:
+            print(f"Could not open AppleScript Prologue file {prologueFile}. Ignoring.")
+    globals.applescriptLines.append("")
+
 if (applescriptFilename := globals.processingOptions.getCurrentOption("applescript")) != "":
     globals.applescriptLines += [
         "tell application \"Microsoft PowerPoint\"",
@@ -5340,6 +5430,9 @@ if (applescriptFilename := globals.processingOptions.getCurrentOption("applescri
         "    if activePresentation is not missing value",
         "        tell active presentation",
     ]
+
+# Prime AppleScript presentation insert list
+ASpresentationInserts = []
 
 slideTemplateFile = globals.processingOptions.getCurrentOption("slideTemplateFile")
 if slideTemplateFile != "":
@@ -5349,8 +5442,7 @@ if slideTemplateFile != "":
         slideTemplateFile = os.path.expanduser(slideTemplateFile)
     else:
         # Slide template file is not present if we expand path
-        script_path = os.path.dirname(__file__)
-        slideTemplateFile = script_path + os.sep + slideTemplateFile
+        slideTemplateFile = md2pptx_path + os.sep + slideTemplateFile
         if not Path(slideTemplateFile).exists():
             print(
                 f"\nTemplate file {originalSlideTemplateFile} does not exist. Terminating."
@@ -6020,6 +6112,11 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
                             f"Invalid value for {metadataKey}: {metadataValue} in '{line}"
                         )
 
+                elif metadataKey == "asinsertpresentation":
+                    ASinsertAfterSlide = slideNumber
+
+                    ASpresentationInserts.append((ASinsertAfterSlide, metadataValue))
+
                 else:
                     # Invalid dynamic metadata specification
                     print(f"Invalid dynamic metadata key: '{metadataKey}' in '{line}'")
@@ -6072,6 +6169,7 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
                     cards,
                     code,
                     sequence,
+                    tableCaptions,
                 )
                 slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
@@ -6110,6 +6208,7 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
             tableRows = []
             cards = []
             code = []
+            tableCaptions = []
 
             if (notes_text != "") & (slide != None):
                 createSlideNotes(slide, notes_text)
@@ -6235,9 +6334,6 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
                 inList = False
                 inCard = False
 
-                # Create a new empty table
-                # tableRows = []
-
             # Start the creation of a new row
             tableRow = []
 
@@ -6351,7 +6447,7 @@ if len(tableCaptions) < len(tableRows):
 ######################################################################################
 if (inBlock is True) | (inCode is True) | (inTable is True):
     slideInfo = SlideInfo(
-        slideTitle, slideSubtitle, blockType, bullets, tableRows, cards, code, sequence
+        slideTitle, slideSubtitle, blockType, bullets, tableRows, cards, code, sequence, tableCaptions
     )
     slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
@@ -6378,10 +6474,17 @@ if len(globals.footnoteDefinitions) > 0:
     footnoteNumber = -1
     for footnoteRun in globals.footnoteRunsDictionary.keys():
         footnoteNumber += 1
-        run = globals.footnoteRunsDictionary[footnoteRun]
-
+        runs = globals.footnoteRunsDictionary[footnoteRun]
+        
+        # Handle both single run (old format) and multiple runs (new format)
+        if isinstance(runs, list):
+            run_list = runs
+        else:
+            run_list = [runs]
+        
         footnoteSlideNumber = int(footnoteNumber / footnotesPerPage)
-        createRunHyperlinkOrTooltip(run, footnoteSlides[footnoteSlideNumber], "")
+        for run in run_list:
+            createRunHyperlinkOrTooltip(run, footnoteSlides[footnoteSlideNumber], "")
 
 ######################################################################################
 #                                                                                    #
@@ -6532,11 +6635,19 @@ if globals.processingOptions.getCurrentOption("sectionArrows"):
 ######################################################################################
 xrefCheck_errors = False
 for href in globals.href_runs.keys():
-    run = globals.href_runs[href]
+    runs = globals.href_runs[href]
+    
+    # Handle both single run (old format) and multiple runs (new format)
+    if isinstance(runs, list):
+        run_list = runs
+    else:
+        run_list = [runs]
+    
     if href in slideHrefs.keys():
-        createRunHyperlinkOrTooltip(
-            run, prs.slides[slideHrefs[href] - 2 + templateSlideCount], ""
-        )
+        for run in run_list:
+            createRunHyperlinkOrTooltip(
+                run, prs.slides[slideHrefs[href] - 2 + templateSlideCount], ""
+            )
     else:
         # No id defined with that name
         if not xrefCheck_errors:
@@ -6545,11 +6656,12 @@ for href in globals.href_runs.keys():
             print("\nHyperlink Reference Errors")
             print("--------------------------")
 
-        print(
-            "Slide "
-            + str(prs.slides.index(SlideFromRun(run)) + 1 - templateSlideCount)
-            + f": '{href}'"
-        )
+        for run in run_list:
+            print(
+                "Slide "
+                + str(prs.slides.index(SlideFromRun(run)) + 1 - templateSlideCount)
+                + f": '{href}'"
+            )
 
 # Each picture appears in pictures
 # There's a corresponding entry in picture_Hrefs
@@ -6615,11 +6727,16 @@ if applescriptFilename != "":
     globals.applescriptLines += [
         "        end tell",
         "    end if",
+        "",
     ]
 
     if want_reload:
         full_filename = os.path.abspath(output_filename)
-        globals.applescriptLines.append(f"    open \"{full_filename}\"")
+        globals.applescriptLines+=[
+            f"    set targetPresentation to \"{full_filename}\"",
+            "    open targetPresentation",
+            "",
+        ]
 
 
     # Maybe add "go to slide" code
@@ -6629,11 +6746,61 @@ if applescriptFilename != "":
             "        set FDWView to view of front document window",
             "        go to slide FDWView number " + str(bookmark),
             "    end tell"
+            "",
     ]
 
     # Close off applescript
-    globals.applescriptLines.append("end tell")
+    globals.applescriptLines+= [
+        "end tell",
+        "",
+        "tell application \"Microsoft PowerPoint\"",
+        "    activate",
+        "end tell",
+    ]
 
+    applescriptEpilogueFiles = globals.processingOptions.getCurrentOption("applescriptepilogue")
+
+    
+    # Handle any instructions to insert slides from other presentations
+    if ASpresentationInserts is not []:
+        if templateSlideCount > 0:
+            slideNumberAdjustment = 1
+        else:
+            slideNumberAdjustment = 0
+
+        target_path = os.path.dirname(os.path.abspath(output_filename))
+
+        # Plant calls to copySlides() - in reverse order to maintain slide numbers in the target presentation
+        for copyInstruction in reversed(ASpresentationInserts):
+            slideAfter, sourcePresentation = copyInstruction
+            
+            slideAfter += slideNumberAdjustment
+            
+            if sourcePresentation[:1] != os.sep:
+                sourcePresentation = target_path + os.sep + sourcePresentation
+
+            globals.applescriptLines.append(f"\ncopySlides(\"{sourcePresentation}\", targetPresentation,  {slideAfter}, \"yes\")")
+    
+        # Ensure applescript to copy slides from one presentation to another is present
+        copyPresentationAS = md2pptx_path + os.sep + "applescript" + os.sep + "copyPresentation.applescript"
+        
+        applescriptEpilogueFiles.append(copyPresentationAS)
+
+    # Add any epilogue file contents to the AppleScript that will be generated
+    if applescriptEpilogueFiles is not []:
+        globals.applescriptLines.append("")
+
+        for epilogueFile in applescriptEpilogueFiles:
+            try:
+                with open(epilogueFile, 'r') as ef:
+                    efLines = ef.readlines()
+                    
+                    for efLine in efLines:
+                        if efLine.rstrip("\n") != "":
+                            efLine = efLine.rstrip("\n")
+                        globals.applescriptLines.append(efLine)
+            except IOError:
+                print(f"Could not open AppleScript Epilogue file {epilogueFile}. Ignoring.")
 
     # Write the applescript out
     with open(applescriptFilename, "w") as a:
