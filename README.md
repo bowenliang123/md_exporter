@@ -346,6 +346,9 @@ Output `.md` file with original input Markdown text.
 
 ## Changelog
 - 2.1.0:
+  - fix remote image fetching in `md_to_pptx` tool by updating `md2pptx` to 6.1
+
+- 2.1.0:
   - fix missing table border in `md_to_docx` tool by updating default docx template file
   - intercept `run-python` marco usage in `md_to_pptx` tool
 
