@@ -21,7 +21,7 @@ This Dify plugin `md_exporter` provides tools to export Markdown text to DOCX, P
   </tr>
   <tr>
     <td><code>md_to_docx</code></td>
-    <td rowspan="8">
+    <td rowspan="7">
       <a href="https://daringfireball.net/projects/markdown/syntax">Markdown text</a>
     </td>
     <td>Word file (.docx)</td>
