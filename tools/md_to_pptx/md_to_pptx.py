@@ -16,7 +16,7 @@ from tools.utils.mimetype_utils import MimeType
 from tools.utils.param_utils import get_md_text
 
 DEFAULT_TEMPLATE_PPTX_FILE_PATH = str(Path(__file__).resolve().parent / "template" / "Bowen Template.pptx")
-MD2PPTX_FOLDER = "md2pptx-6.0"
+MD2PPTX_FOLDER = "md2pptx-6.1"
 
 
 class MarkdownToPptxTool(Tool):
