@@ -1,4 +1,5 @@
-# Markdown Exporter - Generate files from Markdown
+# Markdown Exporter
+### Transform Your Markdowns Into Powerful Documents
 
 **Author:** [bowenliang123](https://github.com/bowenliang123)
 
@@ -6,176 +7,143 @@
 
 **Dify Marketplace:** https://marketplace.dify.ai/plugins/bowenliang123/md_exporter
 
-## Description
+---
 
-This Dify plugin `md_exporter` provides tools to export Markdown text to DOCX, PPTX, XLSX, PDF, HTML, MD, CSV, JSON, XML, LaTex files, and extract code blocks to snippet files as `.py`, `.sh` , `.js`, `.xml` file, and etc.
+## ✨ What is Markdown Exporter?
+
+**Markdown Exporter** is a powerful Dify plugin that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+
+With support for **15+ output formats**, Markdown Exporter bridges the gap between simple text editing and professional document creation, all while maintaining the simplicity and elegance of Markdown syntax.
+
+### 🎯 Why You'll Love It
+
+- **🚀 Lightning Fast** – Export your Markdown to multiple formats in milliseconds
+- **🎨 Customizable** – Use custom templates for DOCX and PPTX to match your brand
+- **🔒 100% Private** – All processing happens locally, no data ever leaves your environment
+- **📊 Versatile** – From documents to spreadsheets, presentations to code files
+- **🌐 Multi-Language Support** – Perfect for international teams and content
+
+---
+
+## 🛠️ Introduction and Use Guide
+
+### Tools and Supported Formats
 
 <table>
   <tr>
     <th>Tool</th>
-    <th>
-    	Input
-    	<p>(Syntax)</p>
-    </th>
+    <th>Input</th>
     <th>Output</th>
   </tr>
   <tr>
     <td><code>md_to_docx</code></td>
-    <td rowspan="7">
-      <a href="https://daringfireball.net/projects/markdown/syntax">Markdown text</a>
-    </td>
-    <td>Word file (.docx)</td>
+    <td rowspan="6">📝 Markdown text</td>
+    <td>📄 Word document (.docx)</td>
   </tr>
   <tr>
     <td><code>md_to_html</code></td>
-    <td>HTML file (.html)</td>
+    <td>🌐 HTML file (.html)</td>
   </tr>
   <tr>
     <td><code>md_to_html_text</code></td>
-    <td>HTML text</td>
+    <td>🌐 HTML text string</td>
   </tr>
   <tr>
     <td><code>md_to_pdf</code></td>
-    <td>PDF file (.pdf)</td>
+    <td>📑 PDF file (.pdf)</td>
   </tr>
   <tr>
     <td><code>md_to_png</code></td>
-    <td>
-      <div>PNG image (.png) of generated PDF pages.</div>
-      Or a ZIP file of image files.
-    </td>
+    <td>🖼️ PNG image(s) of PDF pages</td>
   </tr>
   <tr>
     <td><code>md_to_md</code></td>
-    <td>Markdown file (.md)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_xml</code></td>
-    <td>XML file (.xml)</td>
+    <td>📝 Markdown file (.md)</td>
   </tr>
   <tr>
     <td><code>md_to_pptx</code></td>
     <td>
       <div>
-        Markdown slides
+        📝 Markdown slides
       </div>
       <div>
-      with <a href="https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides"> md2pptx </a> style
+      in <a href="https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides"> md2pptx </a> style
       </div>
     </td>
-    <td>PowerPoint file (.pptx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_codeblock</code></td>
-    <td>
-      <div>
-      <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks">
-        Code Blocks
-      </a>
-      </div>
-      <div>
-         in Markdown text
-      </div>
-    </td>
-    <td>
-      Generating files by language:
-      <ul>
-          <li>python → .py file</li>
-          <li>javascript → .js file</li>
-          <li>html → .html file</li>
-          <li>bash → .sh file</li>
-          <li>json → .json file</li>
-          <li>xml → .xml file</li>
-          <li>svg → .svg file</li>
-          <li>css → .css file</li>
-          <li>yaml → .yaml file</li>
-          <li>ruby → .rb file</li>
-          <li>java → .java file</li>
-          <li>php → .php file</li>
-          <li>markdown → .md file</li>
-      </ul>
-      <div>
-      Or a ZIP file of codeblock files.
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td><code>md_to_linked_image</code></td>
-    <td>
-      <div>
-      <a href="https://www.markdownguide.org/basic-syntax/#linking-images">
-        Linked images
-      </a>
-      </div>
-      <div>
-         in Markdown text
-      </div>
-    </td>
-    <td>
-      <div>
-      Images files from the linked image URLs.
-      </div>
-      <div>
-      Only http or https URLs are supported.
-      </div>
-    </td>
+    <td>🎯 PowerPoint (.pptx)</td>
   </tr>
   <tr>
     <td><code>md_to_xlsx</code></td>
-    <td rowspan="5">
-      <a href="https://www.markdownguide.org/extended-syntax/#tables">Markdown tables</a>
-  </td>
-    <td>Excel file (.xlsx)</td>
+    <td rowspan="5">📋<a href="https://www.markdownguide.org/extended-syntax/#tables"> Markdown tables </a> </td>
+    <td>📊 Excel spreadsheet (.xlsx)</td>
   </tr>
   <tr>
     <td><code>md_to_csv</code></td>
-    <td>CSV file (.csv)</td>
+    <td>📋 CSV file (.csv)</td>
   </tr>
   <tr>
     <td><code>md_to_json</code></td>
-    <td>
-      JSON file (.json), in style of
-      <ul>
-        <li>JSONL (JSON Lines, one object per line)</li>
-        <li>JSON Array (all objects in single array)</li>
-      </ul>
-    </td>
+    <td>📦 JSON/JSONL file (.json)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_xml</code></td>
+    <td>🏷️ XML file (.xml)</td>
   </tr>
   <tr>
     <td><code>md_to_latex</code></td>
-    <td>LaTeX file (.tex)</td>
+    <td>📝 LaTeX file (.tex)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_codeblock</code></td>
+    <td>💻 <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks"> Code blocks in Markdown </a> </td>
+    <td>📁 Code files by language (.py, .js, .sh, etc.)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_linked_image</code></td>
+    <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
+    <td>🖼️ Downloaded image files</td>
   </tr>
 </table>
 
-## Usage
-![](_assets/usage_md_to_docx.png)
+---
 
+## 📖 Usage Example
 
-## Tools
+![Usage Demo](_assets/usage_md_to_docx.png)
 
-### Markdown → DOCX
-
-> **Custom styling: Template DOCX file**
-> `md_to_docx` tool supports using an optional custom DOCX template file.
-> The default template docx file used in `md_to_docx` tool could be found in [this link](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_docx/template).
->
-> In Microsoft Word, the template docx file controls the styles
-> for headings, paragraphs, tables, lists, etc.
->
-> Please refer to Microsoft Words's official docs at `Modify an existing style`
-> section of [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
-> Use Microsoft Word's "Home" - "Style Panel"
-> to set the fonts, font size, color, spacing, indentation, alignment, etc.
-
-![](_assets/md_to_docx_1.png)
+Simply input your Markdown text, select your desired output format, and click export. It's that easy!
 
 ---
 
-### Markdown → XLSX
+## 🎨 Tool Showcase
 
-Input Markdown text:
+### 📄 Markdown → DOCX
 
-```
+Create professional Word documents with beautiful formatting.
+
+> **✨ Pro Tip: Custom Styling with Templates**
+>
+> The `md_to_docx` tool supports custom DOCX template files, giving you full control over your document's appearance.
+>
+> **What you can customize:**
+> - Heading styles (fonts, sizes, colors)
+> - Paragraph formatting (spacing, indentation)
+> - Table styles and borders
+> - List styles and bullets
+> - And much more!
+>
+> Check out our [default template](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_docx/template) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
+
+![DOCX Example](_assets/md_to_docx_1.png)
+
+---
+
+### 📊 Markdown → XLSX
+
+Convert your Markdown tables into polished Excel spreadsheets with auto-fitted columns and preserved data types.
+
+**Input:**
+```markdown
 | Name    | Age | City        |
 |---------|-----|-------------|
 | Alice   | 30  | New York    |
@@ -184,38 +152,32 @@ Input Markdown text:
 | David   | 40  | Miami       |
 ```
 
-
-output XLSX file:
-
-![](_assets/md_to_xlsx_1.png)
+**Output:**
+![XLSX Example](_assets/md_to_xlsx_1.png)
 
 ---
 
-### Markdown → PPTX
+### 🎯 Markdown → PPTX
 
-> **Syntax**
-> 
-> The input Markdown text of slides **MUST** follows the syle rules of [md2pptx's  syntax](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides).
-> It supports:
-> - [Title Slides](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#presentation-title-slides)
-> - [Bullet Items](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#bullet-slides)
-> - [Tables](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#table-slides)
-> - [Hyper links and Inner links](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#hyperlinks-and-vba-macros)
-> - and more, please refer to [docs](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md).
+Turn your Markdown into stunning PowerPoint presentations automatically.
 
-> **Custom styling by Template PPTX file: Slide Master**
-> `md_to_pptx` tool supports using an optional custom PPTX template file with slide master.
-> The default template pptx file used in `md_to_pptx` tool could be found in [this link](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_pptx/template).
+> **✨ Syntax Requirements**
 >
-> In Microsoft PowerPoint, a slide master controls the overall design and layout of the slides in a presentation,
-> eg. font size on title, color style for text, layouts.
+> Input slides must follow [md2pptx syntax](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides).
 >
-> If you are looking for a way to customize the appearance of your slides, you can create a template PPTX file with slide master.
-> 
-> To update the slide master of template pptx file, please refer to Microsoft's official docs at [Customize a slide master](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56).
+> **Supported Features:**
+> - ✅ Title slides
+> - ✅ Bullet lists with nesting
+> - ✅ Tables
+> - ✅ Hyperlinks
+> - ✅ And more!
+>
+> > **🎨 Custom Templates:**
+> >
+> > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get our [default template](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_pptx/template).
 
-As with the input Markdown text in [md2pptx](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides) sytle below:
-```
+**Input Example:**
+```markdown
 # Markdown Exporter
 
 ### Slide 1 Title
@@ -231,122 +193,138 @@ As with the input Markdown text in [md2pptx](https://github.com/MartinPacker/md2
 |:---|:-:|--:|
 |Alpha|Bravo|1|
 |Charlie|Delta|2|
-
 ```
 
-
-The output PPTX file:
-
-![](_assets/md_to_pptx_1.png)
+**Output:**
+![PPTX Example](_assets/md_to_pptx_1.png)
 
 ---
 
-### Markdown → HTML
+### 🌐 Markdown → HTML
 
-![](_assets/md_to_html_1.png)
+Transform your Markdown into clean, semantic HTML perfect for web pages.
 
----
-
-### Markdown → PDF
-
-![](_assets/md_to_pdf_1.png)
+![HTML Example](_assets/md_to_html_1.png)
 
 ---
 
-### Markdown → PNG
+### 📑 Markdown → PDF
 
-![](_assets/md_to_png_1.png)
+Generate professional PDF documents perfect for printing or sharing.
 
----
-
-### Markdown → Code Blocks files (.py/.sh/.html/.css, etc.)
-
-  Multiple generated files in formats by language type of the extracted code blocks:
-  <ul>
-      <li>python → .py file</li>
-      <li>javascript → .js file</li>
-      <li>html → .html file</li>
-      <li>bash → .sh file</li>
-      <li>json → .json file</li>
-      <li>xml → .xml file</li>
-      <li>svg → .svg file</li>
-      <li>css → .css file</li>
-      <li>yaml → .yaml file</li>
-      <li>ruby → .rb file</li>
-      <li>java → .java file</li>
-      <li>php → .php file</li>
-      <li>markdown → .md file</li>
-  </ul>
-
-![](_assets/usage_md_to_codeblock_2.png)
-
-If compression is enabled, all the code blocks will be generated into a single ZIP file.
-![](_assets/usage_md_to_codeblock_3.png)
-![](_assets/usage_md_to_codeblock_4.png)
+![PDF Example](_assets/md_to_pdf_1.png)
 
 ---
 
-### Markdown → Linked Image files
+### 🖼️ Markdown → PNG
 
-![](_assets/usage_md_to_linked_image_1.png)
+Convert your Markdown into beautiful PNG images. Great for:
+- Social media posts
+- Documentation screenshots
+- Quick sharing in chat apps
 
----
-
-### Markdown → RST (reStructedText)
-
-Converted .rst file by using mistune's RST render with basic reStructedText syntax support.
-
-![](_assets/md_to_rst_1.png)
+![PNG Example](_assets/md_to_png_1.png)
 
 ---
 
-### Markdown → CSV
+### 💻 Markdown → Code Block Files
 
+Extract code blocks from your Markdown and save them as individual files.
 
-![](_assets/md_to_csv_1.png)
+**Supported Languages:**
+- Python → `.py`
+- JavaScript → `.js`
+- HTML → `.html`
+- Bash → `.sh`
+- JSON → `.json`
+- XML → `.xml`
+- SVG → `.svg`
+- CSS → `.css`
+- YAML → `.yaml`
+- Ruby → `.rb`
+- Java → `.java`
+- PHP → `.php`
+- Markdown → `.md`
+
+![Code Block Example 1](_assets/usage_md_to_codeblock_2.png)
+
+Need all files in one place? Enable compression to get a single ZIP file!
+
+![Code Block Example 2](_assets/usage_md_to_codeblock_3.png)
+![Code Block Example 3](_assets/usage_md_to_codeblock_4.png)
+
+---
+
+### 🖼️ Markdown → Linked Images
+
+Automatically download all images referenced in your Markdown.
+
+![Linked Image Example](_assets/usage_md_to_linked_image_1.png)
+
+---
+
+### 📋 Markdown → CSV
+
+Export your Markdown tables to universal CSV format.
+
+![CSV Example](_assets/md_to_csv_1.png)
+
+---
+
+### 📦 Markdown → JSON / JSONL
+
+Convert your tables into structured data formats.
+
+**JSONL Style (default)**
+- One JSON object per line
+- Perfect for streaming and logging
+
+![JSONL Example](_assets/md_to_json_2.png)
+
+**JSON Array Style**
+- All objects in a single array
+- Ideal for API responses
+
+![JSON Example](_assets/md_to_json_1.png)
+
+---
+
+### 🏷️ Markdown → XML
+
+Transform your data into XML format.
+
+![XML Example](_assets/md_to_xml_1.png)
+
+---
+
+### 📝 Markdown → LaTeX
+
+Generate LaTeX source code for academic and technical documents.
+
+**LaTeX Output:**
+![LaTeX Example 1](_assets/md_to_latex_1.png)
+
+**Compiled PDF:**
+![LaTeX Example 2](_assets/md_to_latex_2.png)
+
+---
+
+### 📝 Markdown → Markdown
+
+Save your Markdown content as a `.md` file for future use.
 
 
 ---
 
-### Markdown → JSON / JSONL
+## 📢 Changelog
+Releases are available at
+- [Github Repo Releases](https://github.com/bowenliang123/md_exporter/releases).
+- [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
-- JSONL style (default output style)
-  - one object per line
-   ![](_assets/md_to_json_2.png)
+Release changelogs:
 
-- JSON Array style
-  - all objects in a single array
-  ![](_assets/md_to_json_1.png)
-
----
-
-### Markdown → XML
-
-![](_assets/md_to_xml_1.png)
-
----
-
-### Markdown → LaTeX
-
-output LaTeX file:
-
-![](_assets/md_to_latex_1.png)
-
-viewed as PDF:
-
-![](_assets/md_to_latex_2.png)
-
----
-
-### Markdown → Markdown
-
-Output `.md` file with original input Markdown text.
-
----
-
-## Changelog
 - 2.3.0:
-  - resolve xlsx generation by skipping irrelevant chars before first table in `md_to_xlsx` tool 
+  - resolve xlsx generation by skipping irrelevant chars before first table in `md_to_xlsx` tool
 
 - 2.2.0:
   - fix CI problems in GitHub Actions
@@ -359,7 +337,7 @@ Output `.md` file with original input Markdown text.
   - intercept `run-python` marco usage in `md_to_pptx` tool
 
 - 2.0.0:
-  - [ BREAKING CHANGE ] migrate `md_to_docx` tool to use `pandoc` for conversion 
+  - [ BREAKING CHANGE ] migrate `md_to_docx` tool to use `pandoc` for conversion
   - Major improvements in `md_to_docx` tool
     - support custom styling by using a template DOCX file, setting the fonts, font size, color style for headings, paragraphs, etc.
     - optimized file size in generated docx file
@@ -410,7 +388,7 @@ Output `.md` file with original input Markdown text.
   - add `md_to_png` tool, support converting Markdown text to PNG image files
 
 - 1.3.0:
-  - update SDK version  
+  - update SDK version
 
 - 1.2.0:
   - Support compressing images to single zip file in `md_to_linked_image` tool
@@ -445,7 +423,7 @@ Output `.md` file with original input Markdown text.
   - Fixed the error in importing libraries of `md_to_pptx` tool when running on self-hosted Dify plugin-daemon service
 
 - 0.2.0:
-  - Introducing `md_to_codeblock` tool, support extracting code blocks in Markdown to Python, JSON, JS, BASH, SVG, HTML, XML, MARKDOWN files. 
+  - Introducing `md_to_codeblock` tool, support extracting code blocks in Markdown to Python, JSON, JS, BASH, SVG, HTML, XML, MARKDOWN files.
   - Introducing `md_to_rst` tool, support reStructuredText `.rst` file format as destination file format
 
 - 0.1.x:
@@ -455,22 +433,40 @@ Output `.md` file with original input Markdown text.
   - Published to Dify Marketplace
   - support exporting Markdown to DOCX, PPTX, XLSX, PDF, HTML, MD, CSV, JSON, XML, LaTex files
 
-## Used Open sourced projects
-
-This Dify plugin uses the following open sourced projects:
-
-- [md2pptx](https://github.com/MartinPacker/md2pptx) , MIT License
-- [pypandoc](https://github.com/JessicaTegner/pypandoc), MIT License
-- [pandas](https://github.com/pandas-dev/pandas), BSD 3-Clause License
-- [python-pptx](https://github.com/scanny/python-pptx), MIT License
-- [xhtml2pdf](https://github.com/xhtml2pdf/xhtml2pdf), Apache License 2.0
-
-## License
-- Apache License 2.0
+---
 
 
-## Privacy
+## 🤝 Contributing
 
-This plugin collects no data.
+Contributions are welcome! Please feel free to submit issues or pull requests on our [GitHub repository](https://github.com/bowenliang123/md_exporter).
 
-All the file transformations are completed locally. NO data is transmitted to third-party services.
+---
+
+## 📜 License
+
+This project is licensed under the **Apache License 2.0**.
+
+---
+
+## 🔒 Privacy
+
+Your privacy matters. This plugin:
+- **Collects NO data**
+- Processes everything **locally**
+- Sends **NO information** to third-party services
+
+All file transformations happen entirely within your environment.
+
+---
+
+## 🙏 Acknowledgments
+
+This project stands on the shoulders of giants. We're grateful to these amazing open-source projects:
+
+| Project | License |
+|---------|---------|
+| [md2pptx](https://github.com/MartinPacker/md2pptx) | MIT License |
+| [pypandoc](https://github.com/JessicaTegner/pypandoc) | MIT License |
+| [pandas](https://github.com/pandas-dev/pandas) | BSD 3-Clause License |
+| [python-pptx](https://github.com/scanny/python-pptx) | MIT License |
+| [xhtml2pdf](https://github.com/xhtml2pdf/xhtml2pdf) | Apache License 2.0 |
