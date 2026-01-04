@@ -49,6 +49,6 @@ class MarkdownUtils:
     def contains_chinese(md_text: str) -> bool:
         return bool(CHINESE_CHAR_PATTERN.search(md_text))
 
-    @ staticmethod
+    @staticmethod
     def contains_japanese(md_text: str) -> bool:
         return bool(JAPANESE_CHAR_PATTERN.search(md_text))
