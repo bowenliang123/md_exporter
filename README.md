@@ -345,6 +345,12 @@ Output `.md` file with original input Markdown text.
 ---
 
 ## Changelog
+- 2.3.0:
+  - resolve xlsx generation by skipping irrelevant chars before first table in `md_to_xlsx` tool 
+
+- 2.2.0:
+  - fix CI problems in GitHub Actions
+
 - 2.1.0:
   - fix remote image fetching in `md_to_pptx` tool by updating `md2pptx` to 6.1
 
