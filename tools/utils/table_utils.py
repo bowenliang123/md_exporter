@@ -27,6 +27,9 @@ class TableParser:
         """
         try:
             md_text = MarkdownUtils.strip_markdown_wrapper(md_text)
+            if not md_text.startswith('|') and '|' in md_text:
+                md_text = md_text.replace('|', '\n|', 1)
+
             html_str = markdown.markdown(text=md_text, extensions=['tables'])
             tables: list[DataFrame] = pd.read_html(StringIO(html_str), encoding="utf-8")
             headings: list[str] = TableParser.extract_headings(html_str, extract_headings_for_sheet_names)
