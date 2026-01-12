@@ -14,9 +14,9 @@ from docx.text.run import Run
 from htmldocx import HtmlToDocx
 
 from tools.md_to_docx.font_enum import DocxFontEnum
-from tools.utils.file_utils import get_meta_data
-from tools.utils.mimetype_utils import MimeType
-from tools.utils.param_utils import get_md_text
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text
 
 
 class MarkdownToDocxTool(Tool):

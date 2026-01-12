@@ -8,9 +8,9 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
 
-from tools.utils.file_utils import get_meta_data
-from tools.utils.mimetype_utils import MimeType
-from tools.utils.param_utils import get_md_text
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text
 
 
 from scripts.lib.svc_md_to_docx import convert_md_to_docx, get_default_template

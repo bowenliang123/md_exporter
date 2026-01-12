@@ -8,8 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-
-from utils.utils import get_md_text
+from lib.svc_md_to_md import convert_md_to_md
 
 
 def main():
@@ -35,20 +34,13 @@ def main():
     else:
         md_text = args.input
 
-    # Process Markdown text
-    try:
-        md_text = get_md_text(md_text)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # Write to output file
+    # Convert to MD file
     output_path = Path(args.output)
     try:
-        output_path.write_text(md_text, encoding='utf-8')
-        print(f"Successfully saved to {output_path}")
+        output_file = convert_md_to_md(md_text, output_path)
+        print(f"Successfully saved to {output_file}")
     except Exception as e:
-        print(f"Error: Failed to save MD file - {e}", file=sys.stderr)
+        print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
 

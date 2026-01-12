@@ -1,4 +1,3 @@
-import logging
 from typing import Generator
 
 import markdown
@@ -6,9 +5,9 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from html2docx import html2docx
 
-from tools.utils.file_utils import get_meta_data
-from tools.utils.mimetype_utils import MimeType
-from tools.utils.param_utils import get_md_text
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text
 
 
 class MarkdownToDocxTool(Tool):
