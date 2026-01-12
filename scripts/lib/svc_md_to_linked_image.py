@@ -13,6 +13,8 @@ import httpx
 import markdown
 from bs4 import BeautifulSoup
 
+from .utils.utils import get_md_text
+
 # MIME type mapping
 MIME_TYPE_MAP = {
     "image/png": ".png",
@@ -64,7 +66,8 @@ def extract_image_urls(md_text: str) -> list[str]:
     return result_image_urls
 
 
-def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool = False,
+                               is_strip_wrapper: bool = False) -> list[Path]:
     """
     Extract image links from Markdown and download them as files
     Args:
@@ -79,22 +82,22 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         Exception: If conversion fails
     """
     # Process Markdown text
-    from ..utils.utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Extract image URLs
     image_urls = extract_image_urls(processed_md)
-    
+
     if not image_urls:
         raise ValueError("No image URLs found in the input text")
-    
+
     # Prepare downloaded images
     downloaded_images = []
     for url in image_urls:
         try:
             response = httpx.get(url, timeout=120)
             if response.status_code != 200:
-                print(f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}", file=sys.stderr)
+                print(f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}",
+                      file=sys.stderr)
                 continue
 
             content_type = response.headers.get('Content-Type', 'image/png')
@@ -107,10 +110,11 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         except Exception as e:
             print(f"Warning: Failed to download image from URL: {url}, error: {e}", file=sys.stderr)
             continue
-    
+
     if not downloaded_images:
-        raise Exception("No images were successfully downloaded")
-    
+        # raise Exception("No images were successfully downloaded")
+        return []
+
     # Output files
     created_files = []
     if compress:
@@ -157,8 +161,5 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
 
         except Exception as e:
             raise Exception(f"Failed to save images: {e}")
-    
+
     return created_files
-
-
-

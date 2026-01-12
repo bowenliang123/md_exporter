@@ -1,5 +1,5 @@
 
-from scripts.utils.mimetype_utils import MimeType
+from scripts.lib.utils.mimetype_utils import MimeType
 
 
 def get_meta_data(mime_type: MimeType, output_filename: str | None) -> dict[str, str]:

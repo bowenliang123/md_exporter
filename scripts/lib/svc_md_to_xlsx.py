@@ -9,7 +9,11 @@ from tempfile import NamedTemporaryFile
 
 import pandas as pd
 
-from scripts.utils.utils import SUGGESTED_SHEET_NAME, get_md_text, parse_md_to_tables
+from scripts.lib.utils.utils import (
+    SUGGESTED_SHEET_NAME,
+    get_md_text,
+    parse_md_to_tables,
+)
 
 
 def convert_md_to_xlsx(md_text: str, output_path: Path, is_strip_wrapper: bool = False, force_text: bool = True) -> None:
