@@ -8,6 +8,9 @@ import argparse
 import sys
 from pathlib import Path
 
+# Add the scripts directory to Python path to fix import issues
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
 # Import shared utility functions
 from lib.svc_md_to_docx import convert_md_to_docx, get_default_template
 
