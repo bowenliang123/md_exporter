@@ -25,7 +25,7 @@ dev = [
 ]
 
 [tool.ruff]
-exclude = ["md2pptx-6.1"]
+exclude = ["md2pptx-6.1.1"]
 
 [tool.ruff.lint]
 select = [
