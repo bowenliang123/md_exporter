@@ -8,7 +8,7 @@ from pathlib import Path
 
 from xhtml2pdf import pisa
 
-from scripts.utils.utils import (
+from scripts.lib.utils.utils import (
     contains_chinese,
     contains_japanese,
     convert_markdown_to_html,

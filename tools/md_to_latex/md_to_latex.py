@@ -6,10 +6,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from scripts.lib.svc_md_to_latex import convert_md_to_latex
-from scripts.utils.file_utils import get_meta_data
-from scripts.utils.logger_utils import get_logger
-from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text
+from scripts.lib.utils.file_utils import get_meta_data
+from scripts.lib.utils.logger_utils import get_logger
+from scripts.lib.utils.mimetype_utils import MimeType
+from scripts.lib.utils.param_utils import get_md_text
 
 
 class MarkdownToLatexTool(Tool):

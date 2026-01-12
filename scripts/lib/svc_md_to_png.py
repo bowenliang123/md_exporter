@@ -12,14 +12,16 @@ import pymupdf
 from PIL import Image
 from xhtml2pdf import pisa
 
+from scripts.lib.utils.utils import (
+    contains_chinese,
+    contains_japanese,
+    convert_markdown_to_html,
+)
+
 
 def convert_to_html_with_font_support(md_text: str) -> str:
     """Convert Markdown to HTML with Chinese font support"""
-    from utils.utils import (
-        contains_chinese,
-        contains_japanese,
-        convert_markdown_to_html,
-    )
+
     html_str = convert_markdown_to_html(md_text)
 
     if not contains_chinese(md_text) and not contains_japanese(md_text):
@@ -63,7 +65,7 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
         Exception: If conversion fails
     """
     # Process Markdown text
-    from ..utils.utils import get_md_text
+    from scripts.lib.utils.utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
     
     output_filename = output_path.stem if output_path.suffix else "output"
