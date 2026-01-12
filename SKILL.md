@@ -18,7 +18,7 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 
 ## 📦 Usage
 
-All scripts are located in the `scripts/` directory. You can run them using `uv run --project scripts` to use the dependencies managed by pyproject.toml.
+All scripts are located in the `scripts/` directory. You can run them using `uv run` to use the dependencies managed by pyproject.toml.
 
 ### md_to_csv - Convert Markdown tables to CSV
 
