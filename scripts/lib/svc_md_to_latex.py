@@ -55,20 +55,4 @@ def convert_md_to_latex(md_text: str, output_path: Path, is_strip_wrapper: bool 
     return created_files
 
 
-class MarkdownToLatexService:
-    """
-    Service class for converting Markdown to LaTeX
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> List[Path]:
-        """
-        Convert Markdown tables to LaTeX format
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output LaTeX file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            List of paths to the created LaTeX files
-        """
-        return convert_md_to_latex(md_text, output_path, is_strip_wrapper)
+

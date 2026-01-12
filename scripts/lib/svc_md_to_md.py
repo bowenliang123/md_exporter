@@ -32,20 +32,4 @@ def convert_md_to_md(md_text: str, output_path: Path, is_strip_wrapper: bool = F
         raise Exception(f"Failed to save MD file: {e}")
 
 
-class MarkdownToMdService:
-    """
-    Service class for converting Markdown to .md file
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> Path:
-        """
-        Convert Markdown text to .md file
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output MD file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            Path to the created MD file
-        """
-        return convert_md_to_md(md_text, output_path, is_strip_wrapper)
+

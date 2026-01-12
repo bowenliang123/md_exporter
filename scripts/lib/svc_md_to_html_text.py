@@ -33,19 +33,4 @@ def convert_md_to_html_text(md_text: str, is_strip_wrapper: bool = False) -> str
         raise Exception(f"Failed to convert Markdown to HTML: {e}")
 
 
-class MarkdownToHtmlTextService:
-    """
-    Service class for converting Markdown to HTML
-    """
-    
-    @staticmethod
-    def convert(md_text: str, is_strip_wrapper: bool = False) -> str:
-        """
-        Convert Markdown text to HTML format
-        Args:
-            md_text: Markdown text to convert
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            HTML formatted string
-        """
-        return convert_md_to_html_text(md_text, is_strip_wrapper=is_strip_wrapper)
+

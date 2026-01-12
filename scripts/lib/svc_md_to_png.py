@@ -146,21 +146,4 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
     return created_files
 
 
-class MarkdownToPngService:
-    """
-    Service class for converting Markdown to PNG images
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
-        """
-        Convert Markdown text to PNG images
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output PNG files or ZIP file
-            compress: Whether to compress all PNG images into a ZIP file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            List of paths to the created files
-        """
-        return convert_md_to_png(md_text, output_path, compress, is_strip_wrapper)
+

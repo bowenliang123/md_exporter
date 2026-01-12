@@ -90,21 +90,4 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Optional[
         raise Exception(f"Failed to convert to PPTX: {e}")
 
 
-class MarkdownToPptxService:
-    """
-    Service class for converting Markdown to PPTX using md2pptx
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, template_path: Optional[Path] = None, is_strip_wrapper: bool = False) -> Path:
-        """
-        Convert Markdown text to PPTX format using md2pptx
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output PPTX file
-            template_path: Path to PPTX template file (optional)
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            Path to the created PPTX file
-        """
-        return convert_md_to_pptx(md_text, output_path, template_path, is_strip_wrapper)
+
