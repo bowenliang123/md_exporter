@@ -1,10 +1,11 @@
 from collections.abc import Generator
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
-import markdown
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-from lxml import etree, html
 
+from scripts.lib.svc_md_to_xml import convert_md_to_xml
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
@@ -21,15 +22,26 @@ class MarkdownToXmlTool(Tool):
 
         # get parameters
         md_text = get_md_text(tool_parameters, is_strip_wrapper=True)
+
         try:
-            html_str = markdown.markdown(text=md_text, extensions=["extra", "toc"])
-            xml_element = html.fromstring(html_str)
-            result_file_bytes = etree.tostring(element_or_tree=xml_element,
-                                               xml_declaration=True, pretty_print=True, encoding="UTF-8")
+            # create a temporary output XML file
+            with NamedTemporaryFile(suffix=".xml", delete=False) as temp_xml_file:
+                temp_xml_output_path = Path(temp_xml_file.name)
+
+            # convert markdown to xml using the shared function
+            created_file = convert_md_to_xml(md_text, temp_xml_output_path, is_strip_wrapper=True)
+            
+            # read the result bytes
+            result_file_bytes = created_file.read_bytes()
+
         except Exception as e:
-            self.logger.exception("Failed to convert to XML file")
+            self.logger.exception("Failed to convert markdown text to XML file")
             yield self.create_text_message(f"Failed to convert markdown text to XML file, error: {str(e)}")
             return
+        finally:
+            # clean up temporary files
+            if 'temp_xml_output_path' in locals():
+                temp_xml_output_path.unlink(missing_ok=True)
 
         yield self.create_blob_message(
             blob=result_file_bytes,

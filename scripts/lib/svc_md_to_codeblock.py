@@ -53,6 +53,7 @@ SUFFIX_MAP = {
     "ruby": ".rb",
     "php": ".php",
     "java": ".java",
+    "js": ".js",
 }
 
 
@@ -79,7 +80,8 @@ def get_suffix_by_language(lang_type: str) -> str:
     return SUFFIX_MAP.get(lang_type.lower(), ".txt")
 
 
-def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> \
+list[Path]:
     """
     Extract code blocks from Markdown and save them as files
     Args:
@@ -96,15 +98,15 @@ def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = Fa
     # Process Markdown text
     from ..utils.utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Extract code blocks
     code_blocks = extract_code_blocks(processed_md)
-    
+
     if not code_blocks:
         raise ValueError("No code blocks found in the input text")
-    
+
     created_files = []
-    
+
     if compress:
         # Compress into ZIP file
         try:
@@ -120,7 +122,7 @@ def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = Fa
 
                 output_path.write_bytes(Path(zip_file.filename).read_bytes())
                 created_files.append(output_path)
-            
+
             print(f"Successfully created ZIP file with {len(code_blocks)} code blocks: {output_path}")
         except Exception as e:
             raise Exception(f"Failed to create ZIP file: {e}")
@@ -149,8 +151,5 @@ def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = Fa
 
         except Exception as e:
             raise Exception(f"Failed to save code blocks: {e}")
-    
+
     return created_files
-
-
-

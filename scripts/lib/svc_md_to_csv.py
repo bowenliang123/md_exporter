@@ -9,17 +9,19 @@ from pathlib import Path
 from scripts.utils.utils import get_md_text, parse_md_to_tables
 
 
-def convert_md_to_csv(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_csv(md_text: str, output_path: Path = None, is_strip_wrapper: bool = False, return_strings: bool = False) -> list[Path] | list[str]:
     """
     Convert Markdown tables to CSV format
     
     Args:
         md_text: Markdown text to convert
-        output_path: Path to save the output CSV file(s)
+        output_path: Path to save the output CSV file(s) (optional if return_strings=True)
         is_strip_wrapper: Whether to remove code block wrapper if present
+        return_strings: Whether to return CSV strings instead of writing to files
         
     Returns:
-        List[Path]: List of paths to the created CSV files
+        List[Path]: List of paths to the created CSV files if return_strings=False
+        List[str]: List of CSV strings if return_strings=True
         
     Raises:
         ValueError: If input processing or table parsing fails
@@ -30,13 +32,20 @@ def convert_md_to_csv(md_text: str, output_path: Path, is_strip_wrapper: bool = 
     # Parse Markdown tables
     tables = parse_md_to_tables(processed_md)
     
-    # Convert to CSV files
-    created_files = []
-    for i, table in enumerate(tables):
+    # Convert to CSV
+    csv_strings = []
+    for table in tables:
         csv_str = table.to_csv(index=False, encoding="utf-8")
-        
+        csv_strings.append(csv_str)
+    
+    if return_strings:
+        return csv_strings
+    
+    # Write to files
+    created_files = []
+    for i, csv_str in enumerate(csv_strings):
         # Determine output filename
-        if len(tables) > 1:
+        if len(csv_strings) > 1:
             output_file = output_path.parent / f"{output_path.stem}_{i + 1}.csv"
         else:
             output_file = output_path
