@@ -145,7 +145,7 @@ def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = Fa
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 file_path.write_bytes(code_block.code_bytes)
                 created_files.append(file_path)
-                print(f"Successfully saved code block to {file_path}")
+                print(f"Successfully saved code block [{index}] to {file_path}")
 
         except Exception as e:
             raise Exception(f"Failed to save code blocks: {e}")

@@ -1,4 +1,3 @@
-import re
 import zipfile
 from collections.abc import Generator
 from pathlib import Path
@@ -11,7 +10,7 @@ from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text, get_param_value
-from tools.md_to_codeblock.codeblock import CodeBlock
+from scripts.lib.svc_md_to_codeblock import convert_md_to_codeblock, extract_code_blocks
 
 
 class MarkdownToCodeblockTool(Tool):
@@ -25,90 +24,81 @@ class MarkdownToCodeblockTool(Tool):
         # get parameters
         md_text = get_md_text(tool_parameters)
         is_compress = get_param_value(tool_parameters, "is_compress", "true")
+        compress = "true" == is_compress.lower()
+        
+        # create a temporary output path
+        with NamedTemporaryFile(suffix=".zip" if compress else ".txt", delete=False) as temp_file:
+            temp_output_path = Path(temp_file.name)
+        
+        try:
+            # convert markdown to codeblocks using the shared function
+            created_files = convert_md_to_codeblock(md_text, temp_output_path, compress=compress)
 
-        # extract code blocks
-        code_blocks = self.extract_code_blocks(md_text)
-
-        if "true" == is_compress.lower():
-            with NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file, \
-                    zipfile.ZipFile(temp_zip_file.name, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
-                for idx, code_block in enumerate(code_blocks, 1):
-                    suffix = self.get_suffix_by_language(code_block.lang_type)
-                    with NamedTemporaryFile(prefix=f"code_{idx}", suffix=suffix, delete=True) as temp_file:
-                        temp_file.write(code_block.code_bytes)
-                        temp_file.flush()
-                        zip_file.write(temp_file.name, arcname=f"code_{idx}{suffix}")
-                zip_file.close()
+            # generate blob messages based on the created files
+            if compress:
+                # single ZIP file
                 yield self.create_blob_message(
-                    blob=Path(zip_file.filename).read_bytes(),
+                    blob=created_files[0].read_bytes(),
                     meta=get_meta_data(
                         mime_type=MimeType.ZIP,
                         output_filename=tool_parameters.get("output_filename"),
                     ),
                 )
-        else:
-            for index, code_block in enumerate(code_blocks):
-                yield self.create_blob_message(
-                    blob=code_block.code_bytes,
-                    meta=get_meta_data(
-                        mime_type=self.get_mime_type(code_block.lang_type),
-                        output_filename=tool_parameters.get("output_filename") +
-                                        (("_" + str(index + 1)) if len(code_blocks) > 1 else ""),
-                    ),
-                )
+            else:
+                # multiple code files
+                for index, file_path in enumerate(created_files):
+                    # determine MIME type based on file suffix
+                    suffix = file_path.suffix.lower()
+                    mime_type = MimeType.TXT  # default
+                    if suffix == ".css":
+                        mime_type = MimeType.CSS
+                    elif suffix == ".csv":
+                        mime_type = MimeType.CSV
+                    elif suffix == ".py":
+                        mime_type = MimeType.PY
+                    elif suffix == ".json":
+                        mime_type = MimeType.JSON
+                    elif suffix in (".js", ".javascript"):
+                        mime_type = MimeType.JS
+                    elif suffix in (".sh", ".bash"):
+                        mime_type = MimeType.SH
+                    elif suffix == ".svg":
+                        mime_type = MimeType.SVG
+                    elif suffix == ".xml":
+                        mime_type = MimeType.XML
+                    elif suffix == ".html":
+                        mime_type = MimeType.HTML
+                    elif suffix == ".md":
+                        mime_type = MimeType.MD
+                    elif suffix in (".yaml", ".yml"):
+                        mime_type = MimeType.YAML
+                    elif suffix == ".rb":
+                        mime_type = MimeType.RUBY
+                    elif suffix == ".php":
+                        mime_type = MimeType.PHP
+                    elif suffix == ".java":
+                        mime_type = MimeType.JAVA
 
-    @staticmethod
-    def extract_code_blocks(text: str) -> list[CodeBlock]:
-        code_blocks: list[CodeBlock] = []
-        # Extract language type and code content
-        pattern = re.compile(r'```([a-zA-Z0-9\+#\-_]*)\s*\n(.*?)\n```', re.DOTALL)
 
-        for match in pattern.finditer(text):
-            lang_type = match.group(1).strip() or 'text'
-            code_content = match.group(2).strip()
+                    yield self.create_blob_message(
+                        blob=file_path.read_bytes(),
+                        meta=get_meta_data(
+                            mime_type=mime_type,
+                            output_filename=tool_parameters.get("output_filename","codeblock") +
+                                            (("_" + str(index + 1)) if len(created_files) > 1 else ""),
+                        ),
+                    )
+        except Exception as e:
+            self.logger.exception("Failed to convert markdown to codeblocks")
+            raise e
+        finally:
+            # clean up temporary files
+            if temp_output_path.exists():
+                temp_output_path.unlink()
+            # clean up any other created files if not compressed
+            if not compress and 'created_files' in locals():
+                for file_path in created_files:
+                    if file_path.exists():
+                        file_path.unlink()
 
-            code_blocks.append(CodeBlock(lang_type, code_content))
 
-        return code_blocks
-
-    @staticmethod
-    def get_mime_type(lang_type: str) -> MimeType:
-        mime_types = {
-            "css": MimeType.CSS,
-            "csv": MimeType.CSV,
-            "python": MimeType.PY,
-            "json": MimeType.JSON,
-            "javascript": MimeType.JS,
-            "bash": MimeType.SH,
-            "sh": MimeType.SH,
-            "svg": MimeType.SVG,
-            "xml": MimeType.XML,
-            "html": MimeType.HTML,
-            "ruby": MimeType.RUBY,
-            "markdown": MimeType.MD,
-            "yaml": MimeType.YAML,
-            "php": MimeType.PHP,
-            "java": MimeType.JAVA,
-        }
-        return mime_types.get(lang_type.lower(), MimeType.TXT)
-
-    @staticmethod
-    def get_suffix_by_language(lang_type: str) -> str:
-        suffixes = {
-            "css": ".css",
-            "csv": ".csv",
-            "python": ".py",
-            "json": ".json",
-            "javascript": ".js",
-            "bash": ".sh",
-            "sh": ".sh",
-            "svg": ".svg",
-            "xml": ".xml",
-            "html": ".html",
-            "markdown": ".md",
-            "yaml": ".yaml",
-            "ruby": ".rb",
-            "php": ".php",
-            "java": ".java",
-        }
-        return suffixes.get(lang_type.lower(), ".txt")
