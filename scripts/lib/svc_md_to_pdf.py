@@ -5,11 +5,15 @@ Provides common functionality for converting Markdown to PDF format
 """
 
 from pathlib import Path
-from typing import Optional
 
 from xhtml2pdf import pisa
 
-from scripts.utils.utils import get_md_text, convert_markdown_to_html, contains_chinese, contains_japanese
+from scripts.utils.utils import (
+    contains_chinese,
+    contains_japanese,
+    convert_markdown_to_html,
+    get_md_text,
+)
 
 
 def convert_to_html_with_font_support(md_text: str) -> str:

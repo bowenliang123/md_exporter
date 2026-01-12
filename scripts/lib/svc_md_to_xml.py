@@ -3,11 +3,10 @@
 MdToXml service
 """
 
-from typing import Optional, List
 from pathlib import Path
 
 import markdown
-from lxml import html, etree
+from lxml import etree, html
 
 
 def convert_md_to_xml(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> Path:

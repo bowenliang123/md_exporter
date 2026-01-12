@@ -3,12 +3,9 @@
 MdToCodeblock service
 """
 
-from typing import Optional, List, Dict, Any
-from pathlib import Path
-import argparse
 import re
-import sys
 import zipfile
+from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 
@@ -82,7 +79,7 @@ def get_suffix_by_language(lang_type: str) -> str:
     return SUFFIX_MAP.get(lang_type.lower(), ".txt")
 
 
-def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
     """
     Extract code blocks from Markdown and save them as files
     Args:

@@ -6,7 +6,6 @@ Converts Markdown text to HTML and outputs to stdout
 
 import argparse
 import sys
-from pathlib import Path
 
 from lib.svc_md_to_html_text import convert_md_to_html_text
 
@@ -26,7 +25,7 @@ def main():
     # Read input
     input_path = args.input
     try:
-        with open(input_path, 'r', encoding='utf-8') as f:
+        with open(input_path, encoding='utf-8') as f:
             md_text = f.read()
     except FileNotFoundError:
         md_text = args.input

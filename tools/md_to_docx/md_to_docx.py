@@ -1,19 +1,17 @@
 import logging
 import os
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Generator, Optional
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
 
+from scripts.lib.svc_md_to_docx import convert_md_to_docx, get_default_template
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
-
-
-from scripts.lib.svc_md_to_docx import convert_md_to_docx, get_default_template
 
 
 class MarkdownToDocxTool(Tool):
@@ -25,8 +23,8 @@ class MarkdownToDocxTool(Tool):
         """
         # get parameters
         md_text = get_md_text(tool_parameters, is_strip_wrapper=True)
-        docx_template_file: Optional[File] = tool_parameters.get("docx_template_file")
-        temp_pptx_template_file_path: Optional[str] = None
+        docx_template_file: File | None = tool_parameters.get("docx_template_file")
+        temp_pptx_template_file_path: str | None = None
         if docx_template_file and not isinstance(docx_template_file, File):
             raise ValueError("Not a valid file for pptx template file")
 

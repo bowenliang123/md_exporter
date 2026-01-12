@@ -3,18 +3,16 @@
 MdToPptx service
 """
 
-from typing import Optional, List
-from pathlib import Path
-import argparse
 import os
-import sys
 import subprocess
-from tempfile import TemporaryDirectory, NamedTemporaryFile
+import sys
+from pathlib import Path
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from utils.utils import get_md_text
 
 
-def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Optional[Path] = None, is_strip_wrapper: bool = False) -> Path:
+def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> Path:
     """
     Convert Markdown text to PPTX format using md2pptx
     Args:

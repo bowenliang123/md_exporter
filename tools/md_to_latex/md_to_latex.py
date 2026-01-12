@@ -1,4 +1,4 @@
-from typing import Generator, Optional
+from collections.abc import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -36,7 +36,7 @@ class MarkdownToLatexTool(Tool):
                                  + "\\end{document}\n")
                 result_file_bytes = doc_latex_str.encode("utf-8")
 
-                result_filename: Optional[str] = None
+                result_filename: str | None = None
                 if output_filename:
                     if len(tables) > 1:
                         result_filename = f"{output_filename}_{i + 1}.csv"

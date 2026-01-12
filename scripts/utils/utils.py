@@ -1,8 +1,9 @@
 import re
-import markdown
 from io import StringIO
-from bs4 import BeautifulSoup
+
+import markdown
 import pandas as pd
+from bs4 import BeautifulSoup
 
 # Regex pattern for removing think tags
 THINK_TAG_REGEX = re.compile(r'</think>', flags=re.DOTALL)

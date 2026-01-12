@@ -1,15 +1,13 @@
-from typing import Generator
+from collections.abc import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from scripts.lib.svc_md_to_html import convert_md_to_html
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
-
-
-from scripts.lib.svc_md_to_html import convert_md_to_html
 
 
 class MarkdownToHtmlTool(Tool):
@@ -19,8 +17,8 @@ class MarkdownToHtmlTool(Tool):
         """
         invoke tools
         """
-        from tempfile import NamedTemporaryFile
         from pathlib import Path
+        from tempfile import NamedTemporaryFile
         
         # get parameters
         md_text = get_md_text(tool_parameters)

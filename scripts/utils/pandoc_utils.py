@@ -1,11 +1,10 @@
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Optional
 
 from pypandoc import convert_file, convert_text
 
 
-def pandoc_convert_file(md_text: str, dst_format: str, extra_args: Optional[list[str]]) -> bytes:
+def pandoc_convert_file(md_text: str, dst_format: str, extra_args: list[str] | None) -> bytes:
     with NamedTemporaryFile(suffix=".md", delete=True) as md_file:
         md_file.write(md_text.encode("utf-8"))
         md_file.flush()

@@ -3,11 +3,10 @@
 MdToLatex service
 """
 
-from typing import Optional, List
 from pathlib import Path
 
 
-def convert_md_to_latex(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_latex(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> list[Path]:
     """
     Convert Markdown tables to LaTeX format
     Args:

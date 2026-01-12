@@ -440,6 +440,20 @@ Release changelogs:
 
 Contributions are welcome! Please feel free to submit issues or pull requests on our [GitHub repository](https://github.com/bowenliang123/md_exporter).
 
+### Code Style
+
+We use `ruff` to ensure code consistency. Run the following command to automatically fix code style issues:
+
+```bash
+uv run ruff check --fix --select UP .
+```
+
+Or use the provided script:
+
+```bash
+uv run dev.reformat.sh
+```
+
 ---
 
 ## 📜 License

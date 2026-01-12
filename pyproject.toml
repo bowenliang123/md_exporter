@@ -18,6 +18,24 @@ dependencies = [
     "pypandoc-binary~=1.16.2",
 ]
 
+[dependency-groups]
+dev = [
+    "ruff>=0.14.11",
+]
+
+[tool.ruff]
+exclude = ["md2pptx-6.1"]
+
+[tool.ruff.lint]
+select = [
+    "I",
+    "UP",
+    "F401",
+]
+
+[project.scripts]
+dev.reformat = "uv run ruff check --fix ."
+
 #[build-system]
 #requires = ["setuptools>=61.0"]
 #build-backend = "setuptools.build_meta"

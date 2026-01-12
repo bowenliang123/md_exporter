@@ -3,12 +3,9 @@
 MdToPng service
 """
 
-from typing import Optional, List, Dict, Any
-from pathlib import Path
-import argparse
 import io
-import sys
 import zipfile
+from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 import pymupdf
@@ -18,7 +15,11 @@ from xhtml2pdf import pisa
 
 def convert_to_html_with_font_support(md_text: str) -> str:
     """Convert Markdown to HTML with Chinese font support"""
-    from utils.utils import convert_markdown_to_html, contains_chinese, contains_japanese
+    from utils.utils import (
+        contains_chinese,
+        contains_japanese,
+        convert_markdown_to_html,
+    )
     html_str = convert_markdown_to_html(md_text)
 
     if not contains_chinese(md_text) and not contains_japanese(md_text):
@@ -47,7 +48,7 @@ def convert_to_html_with_font_support(md_text: str) -> str:
     return result
 
 
-def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
     """
     Convert Markdown text to PNG images
     Args:

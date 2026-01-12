@@ -1,8 +1,8 @@
 import re
 import zipfile
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Generator
 
 import httpx
 import markdown

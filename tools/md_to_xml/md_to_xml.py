@@ -1,9 +1,9 @@
-from typing import Generator
+from collections.abc import Generator
 
 import markdown
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
-from lxml import html, etree
+from lxml import etree, html
 
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger

@@ -1,13 +1,13 @@
 import io
 import zipfile
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Generator
 
 import pymupdf
-from PIL import Image
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
+from PIL import Image
 
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger

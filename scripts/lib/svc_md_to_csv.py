@@ -5,12 +5,11 @@ Provides common functionality for converting Markdown tables to CSV format
 """
 
 from pathlib import Path
-from typing import List, Optional, Tuple
 
 from scripts.utils.utils import get_md_text, parse_md_to_tables
 
 
-def convert_md_to_csv(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_csv(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> list[Path]:
     """
     Convert Markdown tables to CSV format
     
