@@ -16,7 +16,9 @@ from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
 
 DEFAULT_TEMPLATE_PPTX_FILE_PATH = str(Path(__file__).resolve().parent / "template" / "Bowen Template.pptx")
-MD2PPTX_FOLDER = "md2pptx-6.1"
+# Use md2pptx from scripts directory instead of local directory
+SCRIPTS_DIR = Path(__file__).resolve().parent.parent.parent / "scripts"
+MD2PPTX_FOLDER = str(SCRIPTS_DIR / "md2pptx-6.1")
 
 
 class MarkdownToPptxTool(Tool):
@@ -60,9 +62,8 @@ class MarkdownToPptxTool(Tool):
 
                     # run md2pptx to convert md file to pptx file
                     with NamedTemporaryFile(suffix=".pptx", delete=True) as temp_pptx_file:
-                        current_script_folder = os.path.split(os.path.realpath(__file__))[0]
                         python_exec = sys.executable or "python3"
-                        cmd = [python_exec, f"{current_script_folder}/{MD2PPTX_FOLDER}/md2pptx.py",
+                        cmd = [python_exec, f"{MD2PPTX_FOLDER}/md2pptx.py",
                                temp_md_file.name,
                                temp_pptx_file.name]
 
