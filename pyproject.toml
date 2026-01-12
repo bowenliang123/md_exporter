@@ -1,0 +1,23 @@
+[project]
+name = "md_exporter"
+version = "0.1.0"
+description = "Convert markdown text to files in various formats such as DOCX, XLSX, PDF, PPTX, and images."
+requires-python = ">=3.11"
+authors = [
+    { name = "bowenliang123", email = "liang.bowen.123@qq.com" },
+]
+
+dependencies = [
+    "dify_plugin~=0.7.1",
+    "markdown>=3.10",
+    "pandas[excel,html,xml]~=2.3.3",
+    "xhtml2pdf~=0.2.17",
+    "python-pptx~=1.0.2",
+    "PyMuPDF~=1.26.4",
+    "pillow~=12.0.0",
+    "pypandoc-binary~=1.16.2",
+]
+
+#[build-system]
+#requires = ["setuptools>=61.0"]
+#build-backend = "setuptools.build_meta"
