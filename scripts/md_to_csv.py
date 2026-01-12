@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 # Import shared utility functions
-from utils.utils import get_md_text, parse_md_to_tables
+from lib.svc_md_to_csv import convert_md_to_csv
 
 
 def main():
@@ -40,34 +40,15 @@ def main():
     else:
         md_text = args.input
 
-    # Process Markdown text
-    try:
-        md_text = get_md_text(md_text, is_strip_wrapper=args.strip_wrapper)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # Parse Markdown tables
-    try:
-        tables = parse_md_to_tables(md_text)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
     # Convert to CSV
     output_path = Path(args.output)
-    for i, table in enumerate(tables):
-        csv_str = table.to_csv(index=False, encoding="utf-8")
-        
-        # Determine output filename
-        if len(tables) > 1:
-            output_file = output_path.parent / f"{output_path.stem}_{i + 1}.csv"
-        else:
-            output_file = output_path
-        
-        # Write to file
-        output_file.write_text(csv_str, encoding='utf-8')
-        print(f"Successfully converted to {output_file}")
+    try:
+        created_files = convert_md_to_csv(md_text, output_path, args.strip_wrapper)
+        for file_path in created_files:
+            print(f"Successfully converted to {file_path}")
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == '__main__':

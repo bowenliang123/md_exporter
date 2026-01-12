@@ -8,10 +8,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from pypandoc import convert_text
-
-
-from utils.utils import get_md_text
+# Import shared utility functions
+from lib.svc_md_to_html import convert_md_to_html
 
 
 def main():
@@ -42,20 +40,15 @@ def main():
     else:
         md_text = args.input
 
-    # Process Markdown text
-    try:
-        md_text = get_md_text(md_text, is_strip_wrapper=args.strip_wrapper)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
     # Convert to HTML
     output_path = Path(args.output)
     try:
-        result_file_bytes = convert_text(md_text, format="markdown", to="html")
-        output_path.write_bytes(result_file_bytes)
+        convert_md_to_html(md_text, output_path, args.strip_wrapper)
         print(f"Successfully converted to {output_path}")
 
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
         print(f"Error: Failed to convert to HTML - {e}", file=sys.stderr)
         sys.exit(1)

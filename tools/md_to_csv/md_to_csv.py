@@ -10,6 +10,9 @@ from tools.utils.param_utils import get_md_text
 from tools.utils.table_utils import TableParser
 
 
+from scripts.lib.svc_md_to_csv import get_csv_output_encoding
+
+
 class MarkdownToCsvTool(Tool):
     logger = get_logger(__name__)
 
@@ -28,7 +31,7 @@ class MarkdownToCsvTool(Tool):
         for i, table in enumerate(tables):
             try:
                 csv_str = table.to_csv(index=False, encoding="utf-8")
-                csv_output_encoding = "utf-8" if csv_str.isascii() else "utf-8-sig"
+                csv_output_encoding = get_csv_output_encoding(csv_str)
                 result_file_bytes = csv_str.encode(csv_output_encoding)
 
                 result_filename: Optional[str] = None
