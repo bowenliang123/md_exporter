@@ -25,7 +25,7 @@ All scripts are located in the `scripts/` directory. You can run them using `uv 
 Converts Markdown tables to CSV format.
 
 ```bash
-uv run --project scripts python scripts/md_to_csv.py <input> <output> [options]
+uv run python scripts/md_to_csv.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -37,7 +37,7 @@ uv run --project scripts python scripts/md_to_csv.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_csv.py ./abc.md ./tt.csv
+uv run python scripts/md_to_csv.py ./abc.md ./tt.csv
 ```
 
 
@@ -46,7 +46,7 @@ uv run --project scripts python scripts/md_to_csv.py ./abc.md ./tt.csv
 Converts Markdown text to PDF format with support for Chinese, Japanese, and other languages.
 
 ```bash
-uv run --project scripts python scripts/md_to_pdf.py <input> <output> [options]
+uv run python scripts/md_to_pdf.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -58,7 +58,7 @@ uv run --project scripts python scripts/md_to_pdf.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_pdf.py ./abc.md ./output.pdf
+uv run python scripts/md_to_pdf.py ./abc.md ./output.pdf
 ```
 
 
@@ -67,7 +67,7 @@ uv run --project scripts python scripts/md_to_pdf.py ./abc.md ./output.pdf
 Converts Markdown text to DOCX format using pandoc.
 
 ```bash
-uv run --project scripts python scripts/md_to_docx.py <input> <output> [options]
+uv run python scripts/md_to_docx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -80,8 +80,8 @@ uv run --project scripts python scripts/md_to_docx.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_docx.py ./abc.md ./output.docx
-uv run --project scripts python scripts/md_to_docx.py ./abc.md ./output.docx --template ./template.docx
+uv run python scripts/md_to_docx.py ./abc.md ./output.docx
+uv run python scripts/md_to_docx.py ./abc.md ./output.docx --template ./template.docx
 ```
 
 
@@ -90,7 +90,7 @@ uv run --project scripts python scripts/md_to_docx.py ./abc.md ./output.docx --t
 Converts Markdown tables to XLSX format with multiple sheets support.
 
 ```bash
-uv run --project scripts python scripts/md_to_xlsx.py <input> <output> [options]
+uv run python scripts/md_to_xlsx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -103,7 +103,7 @@ uv run --project scripts python scripts/md_to_xlsx.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
+uv run python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
 ```
 
 
@@ -112,7 +112,7 @@ uv run --project scripts python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
 Converts Markdown text to PPTX format using md2pptx.
 
 ```bash
-uv run --project scripts python scripts/md_to_pptx.py <input> <output> [options]
+uv run python scripts/md_to_pptx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -124,7 +124,7 @@ uv run --project scripts python scripts/md_to_pptx.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_pptx.py ./abc.md ./output.pptx
+uv run python scripts/md_to_pptx.py ./abc.md ./output.pptx
 ```
 
 
@@ -133,7 +133,7 @@ uv run --project scripts python scripts/md_to_pptx.py ./abc.md ./output.pptx
 Extracts code blocks from Markdown and saves them as individual files.
 
 ```bash
-uv run --project scripts python scripts/md_to_codeblock.py <input> <output> [options]
+uv run python scripts/md_to_codeblock.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -145,8 +145,8 @@ uv run --project scripts python scripts/md_to_codeblock.py <input> <output> [opt
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_codeblock.py ./abc.md ./output_dir
-uv run --project scripts python scripts/md_to_codeblock.py ./abc.md ./output.zip --compress
+uv run python scripts/md_to_codeblock.py ./abc.md ./output_dir
+uv run python scripts/md_to_codeblock.py ./abc.md ./output.zip --compress
 ```
 
 
@@ -155,7 +155,7 @@ uv run --project scripts python scripts/md_to_codeblock.py ./abc.md ./output.zip
 Converts Markdown tables to JSON or JSONL format.
 
 ```bash
-uv run --project scripts python scripts/md_to_json.py <input> <output> [options]
+uv run python scripts/md_to_json.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -168,8 +168,8 @@ uv run --project scripts python scripts/md_to_json.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_json.py ./abc.md ./output.json
-uv run --project scripts python scripts/md_to_json.py ./abc.md ./output.json --style json_array
+uv run python scripts/md_to_json.py ./abc.md ./output.json
+uv run python scripts/md_to_json.py ./abc.md ./output.json --style json_array
 ```
 
 
@@ -178,7 +178,7 @@ uv run --project scripts python scripts/md_to_json.py ./abc.md ./output.json --s
 Converts Markdown text to XML format.
 
 ```bash
-uv run --project scripts python scripts/md_to_xml.py <input> <output> [options]
+uv run python scripts/md_to_xml.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -190,7 +190,7 @@ uv run --project scripts python scripts/md_to_xml.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_xml.py ./abc.md ./output.xml
+uv run python scripts/md_to_xml.py ./abc.md ./output.xml
 ```
 
 
@@ -199,7 +199,7 @@ uv run --project scripts python scripts/md_to_xml.py ./abc.md ./output.xml
 Converts Markdown tables to LaTeX format.
 
 ```bash
-uv run --project scripts python scripts/md_to_latex.py <input> <output> [options]
+uv run python scripts/md_to_latex.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -211,7 +211,7 @@ uv run --project scripts python scripts/md_to_latex.py <input> <output> [options
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_latex.py ./abc.md ./output.tex
+uv run python scripts/md_to_latex.py ./abc.md ./output.tex
 ```
 
 
@@ -220,7 +220,7 @@ uv run --project scripts python scripts/md_to_latex.py ./abc.md ./output.tex
 Converts Markdown text to HTML format using pandoc.
 
 ```bash
-uv run --project scripts python scripts/md_to_html.py <input> <output> [options]
+uv run python scripts/md_to_html.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -232,7 +232,7 @@ uv run --project scripts python scripts/md_to_html.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_html.py ./abc.md ./output.html
+uv run python scripts/md_to_html.py ./abc.md ./output.html
 ```
 
 
@@ -241,7 +241,7 @@ uv run --project scripts python scripts/md_to_html.py ./abc.md ./output.html
 Converts Markdown text to HTML and outputs to stdout.
 
 ```bash
-uv run --project scripts python scripts/md_to_html_text.py <input>
+uv run python scripts/md_to_html_text.py <input>
 ```
 
 **Arguments:**
@@ -249,7 +249,7 @@ uv run --project scripts python scripts/md_to_html_text.py <input>
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_html_text.py ./abc.md
+uv run python scripts/md_to_html_text.py ./abc.md
 ```
 
 
@@ -258,7 +258,7 @@ uv run --project scripts python scripts/md_to_html_text.py ./abc.md
 Converts Markdown text to PNG images (one per page).
 
 ```bash
-uv run --project scripts python scripts/md_to_png.py <input> <output> [options]
+uv run python scripts/md_to_png.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -271,8 +271,8 @@ uv run --project scripts python scripts/md_to_png.py <input> <output> [options]
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_png.py ./abc.md ./output.png
-uv run --project scripts python scripts/md_to_png.py ./abc.md ./output.png --compress
+uv run python scripts/md_to_png.py ./abc.md ./output.png
+uv run python scripts/md_to_png.py ./abc.md ./output.png --compress
 ```
 
 
@@ -281,7 +281,7 @@ uv run --project scripts python scripts/md_to_png.py ./abc.md ./output.png --com
 Saves Markdown text to a .md file.
 
 ```bash
-uv run --project scripts python scripts/md_to_md.py <input> <output>
+uv run python scripts/md_to_md.py <input> <output>
 ```
 
 **Arguments:**
@@ -290,7 +290,7 @@ uv run --project scripts python scripts/md_to_md.py <input> <output>
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_md.py ./abc.md ./output.md
+uv run python scripts/md_to_md.py ./abc.md ./output.md
 ```
 
 
@@ -299,7 +299,7 @@ uv run --project scripts python scripts/md_to_md.py ./abc.md ./output.md
 Extracts image links from Markdown and downloads them as files.
 
 ```bash
-uv run --project scripts python scripts/md_to_linked_image.py <input> <output> [options]
+uv run python scripts/md_to_linked_image.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -311,8 +311,8 @@ uv run --project scripts python scripts/md_to_linked_image.py <input> <output> [
 
 **Example:**
 ```bash
-uv run --project scripts python scripts/md_to_linked_image.py ./abc.md ./output_dir
-uv run --project scripts python scripts/md_to_linked_image.py ./abc.md ./output.zip --compress
+uv run python scripts/md_to_linked_image.py ./abc.md ./output_dir
+uv run python scripts/md_to_linked_image.py ./abc.md ./output.zip --compress
 ```
 
 
