@@ -10,8 +10,10 @@ from dify_plugin.file.file import File
 
 from tools.utils.file_utils import get_meta_data
 from tools.utils.mimetype_utils import MimeType
-from tools.utils.pandoc_utils import pandoc_convert_file
 from tools.utils.param_utils import get_md_text
+
+
+from scripts.lib.svc_md_to_docx import convert_md_to_docx, get_default_template
 
 
 class MarkdownToDocxTool(Tool):
@@ -29,31 +31,42 @@ class MarkdownToDocxTool(Tool):
             raise ValueError("Not a valid file for pptx template file")
 
         try:
+            template_path = None
             if docx_template_file:
                 temp_pptx_template_file = NamedTemporaryFile(delete=False)
                 temp_pptx_template_file.write(docx_template_file.blob)
                 temp_pptx_template_file.close()
                 temp_pptx_template_file_path = temp_pptx_template_file.name
-
-            current_script_folder = os.path.split(os.path.realpath(__file__))[0]
-            if temp_pptx_template_file_path:
-                template_docx_file = temp_pptx_template_file_path
+                template_path = Path(temp_pptx_template_file_path)
             else:
-                template_docx_file = f"{current_script_folder}/template/docx_template.docx"
+                # Get default template path
+                current_script_folder = Path(os.path.split(os.path.realpath(__file__))[0])
+                # Use scripts/lib's get_default_template function but adjust for tools directory structure
+                scripts_dir = current_script_folder.parent.parent / "scripts"
+                template_path = get_default_template(scripts_dir)
 
-            # Options for pandoc
-            # https://pandoc.org/MANUAL.html#options
-            extra_args = [
-                "--reference-doc", template_docx_file,
-            ]
-            result_file_bytes = pandoc_convert_file(md_text, dst_format="docx", extra_args=extra_args)
-            yield self.create_blob_message(
-                blob=result_file_bytes,
-                meta=get_meta_data(
-                    mime_type=MimeType.DOCX,
-                    output_filename=tool_parameters.get("output_filename"),
-                ),
-            )
+            # Create temporary output file
+            with NamedTemporaryFile(suffix=".docx", delete=False) as temp_output_file:
+                temp_output_path = Path(temp_output_file.name)
+            
+            try:
+                # Convert to DOCX using the public service
+                convert_md_to_docx(md_text, temp_output_path, template_path, is_strip_wrapper=True)
+                
+                # Read the converted file content
+                result_file_bytes = temp_output_path.read_bytes()
+                
+                yield self.create_blob_message(
+                    blob=result_file_bytes,
+                    meta=get_meta_data(
+                        mime_type=MimeType.DOCX,
+                        output_filename=tool_parameters.get("output_filename"),
+                    ),
+                )
+            finally:
+                # Clean up temporary output file
+                if temp_output_path.exists():
+                    temp_output_path.unlink()
         except Exception as e:
             self.logger.exception("Failed to convert markdown text to DOCX file")
             yield self.create_text_message(f"Failed to convert markdown text to DOCX file, error: {str(e)}")

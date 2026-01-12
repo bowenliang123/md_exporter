@@ -10,7 +10,9 @@ from tools.utils.file_utils import get_meta_data
 from tools.utils.logger_utils import get_logger
 from tools.utils.mimetype_utils import MimeType
 from tools.utils.param_utils import get_md_text, get_param_value
-from tools.utils.table_utils import TableParser, SUGGESTED_SHEET_NAME
+
+
+from scripts.lib.svc_md_to_xlsx import convert_md_to_xlsx
 
 
 class MarkdownToXlsxTool(Tool):
@@ -25,27 +27,30 @@ class MarkdownToXlsxTool(Tool):
         md_text = get_md_text(tool_parameters)
         force_text_value: bool = ("true" == get_param_value(tool_parameters, "force_text_value", "true").lower())
 
-        # parse markdown to tables
-        tables = TableParser.parse_md_to_tables(self.logger, md_text=md_text, force_value_to_str=force_text_value)
-
-        # generate XLSX file
+        # generate XLSX file using shared service
         try:
-            with NamedTemporaryFile(suffix=".xlsx", delete=True) as temp_xlsx_file:
-                with pd.ExcelWriter(temp_xlsx_file) as writer:
-                    for i, table in enumerate(tables):
-                        sheet_name = table.attrs.get(SUGGESTED_SHEET_NAME, f"Sheet{i + 1}")
-                        table.to_excel(writer, sheet_name=sheet_name, index=False, na_rep='')
-                        writer.sheets[sheet_name].autofit(max_width=200)
-
-                result_file_bytes = Path(temp_xlsx_file.name).read_bytes()
-
-            yield self.create_blob_message(
-                blob=result_file_bytes,
-                meta=get_meta_data(
-                    mime_type=MimeType.XLSX,
-                    output_filename=tool_parameters.get("output_filename"),
-                ),
-            )
+            # Create temporary output file
+            with NamedTemporaryFile(suffix=".xlsx", delete=False) as temp_xlsx_file:
+                temp_output_path = Path(temp_xlsx_file.name)
+            
+            try:
+                # Convert to XLSX using the public service
+                convert_md_to_xlsx(md_text, temp_output_path, is_strip_wrapper=True, force_text=force_text_value)
+                
+                # Read the converted file content
+                result_file_bytes = temp_output_path.read_bytes()
+                
+                yield self.create_blob_message(
+                    blob=result_file_bytes,
+                    meta=get_meta_data(
+                        mime_type=MimeType.XLSX,
+                        output_filename=tool_parameters.get("output_filename"),
+                    ),
+                )
+            finally:
+                # Clean up temporary output file
+                if temp_output_path.exists():
+                    temp_output_path.unlink()
         except Exception as e:
             self.logger.exception("Failed to convert file")
             yield self.create_text_message(

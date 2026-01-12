@@ -8,10 +8,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from pypandoc import convert_file, convert_text
-
 # Import shared utility functions
-from utils.utils import get_md_text
+from lib.svc_md_to_docx import convert_md_to_docx, get_default_template
 
 
 def main():
@@ -46,13 +44,6 @@ def main():
     else:
         md_text = args.input
 
-    # Process Markdown text
-    try:
-        md_text = get_md_text(md_text, is_strip_wrapper=args.strip_wrapper)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
     # Determine template file
     script_dir = Path(__file__).resolve().parent
     template_path = None
@@ -63,37 +54,16 @@ def main():
             sys.exit(1)
     else:
         # Use default template
-        default_template = script_dir / "template" / "docx_template.docx"
-        if default_template.exists():
-            template_path = default_template
-
-    # Prepare pandoc arguments
-    extra_args = []
-    if template_path:
-        extra_args.append(f"--reference-doc={template_path}")
+        template_path = get_default_template(script_dir)
 
     # Convert to DOCX
     output_path = Path(args.output)
     try:
-        if extra_args:
-            # Use template
-            result = convert_text(
-                md_text,
-                format="markdown",
-                to="docx",
-                extra_args=extra_args
-            )
-            output_path.write_bytes(result)
-        else:
-            # No template
-            result = convert_text(
-                md_text,
-                format="markdown",
-                to="docx"
-            )
-            output_path.write_bytes(result)
-        
+        convert_md_to_docx(md_text, output_path, template_path, args.strip_wrapper)
         print(f"Successfully converted to {output_path}")
+    except ValueError as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
     except Exception as e:
         print(f"Error: Failed to convert to DOCX - {e}", file=sys.stderr)
         sys.exit(1)
