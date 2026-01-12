@@ -1,11 +1,9 @@
-import os.path
 import subprocess
 import sys
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
-from typing import Generator, Optional
 
-import pptx  # type: ignore
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
@@ -31,7 +29,7 @@ class MarkdownToPptxTool(Tool):
 
         # get parameters
         md_text = get_md_text(tool_parameters)
-        pptx_template_file: Optional[File] = tool_parameters.get("pptx_template_file")
+        pptx_template_file: File | None = tool_parameters.get("pptx_template_file")
 
         # check parameters
         if "``` run-python" in md_text:
@@ -39,8 +37,8 @@ class MarkdownToPptxTool(Tool):
         if pptx_template_file and not isinstance(pptx_template_file, File):
             raise ValueError("Not a valid file for pptx template file")
 
-        temp_pptx_template_file: Optional[NamedTemporaryFile] = None
-        temp_pptx_template_file_path: Optional[str] = None
+        temp_pptx_template_file: NamedTemporaryFile | None = None
+        temp_pptx_template_file_path: str | None = None
         try:
             if pptx_template_file:
                 temp_pptx_template_file = NamedTemporaryFile(delete=False)
@@ -75,10 +73,10 @@ class MarkdownToPptxTool(Tool):
                         )
                         if result.returncode != 0:
                             print(cmd)
-                            raise Exception(f"Failed to convert markdown text to PPTX file,"
-                                            f" command: {" ".join(cmd)},"
-                                            f" return code: {result.returncode},"
-                                            f" stdout: {result.stdout},"
+                            raise Exception(f"Failed to convert markdown text to PPTX file," \
+                                            f" command: {' '.join(cmd)}," \
+                                            f" return code: {result.returncode}," \
+                                            f" stdout: {result.stdout}," \
                                             f" error: {result.stderr}")
                         result_file_bytes = Path(temp_pptx_file.name).read_bytes()
 
@@ -100,7 +98,7 @@ class MarkdownToPptxTool(Tool):
         return
 
     @staticmethod
-    def _prepend_metadata(md_text: str, temp_dir_path: str, custom_template_file_path: Optional[str]) -> str:
+    def _prepend_metadata(md_text: str, temp_dir_path: str, custom_template_file_path: str | None) -> str:
         """
         Prepend metadata to Markdown text
         """

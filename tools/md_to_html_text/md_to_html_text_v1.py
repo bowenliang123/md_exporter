@@ -1,4 +1,4 @@
-from typing import Generator
+from collections.abc import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage

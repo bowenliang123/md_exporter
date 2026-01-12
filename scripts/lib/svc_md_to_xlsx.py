@@ -6,11 +6,10 @@ Provides common functionality for converting Markdown tables to XLSX format
 
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Optional
 
 import pandas as pd
 
-from scripts.utils.utils import get_md_text, parse_md_to_tables, SUGGESTED_SHEET_NAME
+from scripts.utils.utils import SUGGESTED_SHEET_NAME, get_md_text, parse_md_to_tables
 
 
 def convert_md_to_xlsx(md_text: str, output_path: Path, is_strip_wrapper: bool = False, force_text: bool = True) -> None:

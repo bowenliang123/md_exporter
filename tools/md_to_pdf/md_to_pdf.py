@@ -1,15 +1,13 @@
-from typing import Generator
+from collections.abc import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from scripts.lib.svc_md_to_pdf import convert_to_html_with_font_support
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
-
-
-from scripts.lib.svc_md_to_pdf import convert_to_html_with_font_support
 
 
 class MarkdownToPdfTool(Tool):

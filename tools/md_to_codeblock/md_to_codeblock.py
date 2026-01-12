@@ -1,17 +1,17 @@
 import re
 import zipfile
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools.md_to_codeblock.codeblock import CodeBlock
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text, get_param_value
+from tools.md_to_codeblock.codeblock import CodeBlock
 
 
 class MarkdownToCodeblockTool(Tool):

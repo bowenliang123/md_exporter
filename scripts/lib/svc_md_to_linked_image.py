@@ -3,18 +3,15 @@
 MdToLinkedImage service
 """
 
-from typing import Optional, List, Dict, Any
-from pathlib import Path
-from tempfile import NamedTemporaryFile
-import argparse
 import re
 import sys
 import zipfile
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 import httpx
 import markdown
 from bs4 import BeautifulSoup
-
 
 # MIME type mapping
 MIME_TYPE_MAP = {
@@ -67,7 +64,7 @@ def extract_image_urls(md_text: str) -> list[str]:
     return result_image_urls
 
 
-def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
     """
     Extract image links from Markdown and download them as files
     Args:

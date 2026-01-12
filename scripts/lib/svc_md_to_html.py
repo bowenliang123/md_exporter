@@ -5,7 +5,6 @@ Provides common functionality for converting Markdown to HTML format
 """
 
 from pathlib import Path
-from typing import Optional
 
 from pypandoc import convert_text
 

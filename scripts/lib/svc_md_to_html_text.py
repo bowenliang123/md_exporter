@@ -3,8 +3,6 @@
 MdToHtmlText service
 """
 
-from typing import Optional, List
-from pathlib import Path
 
 from pypandoc import convert_text
 

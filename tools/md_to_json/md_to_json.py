@@ -1,5 +1,5 @@
+from collections.abc import Generator
 from enum import StrEnum
-from typing import Generator, Optional
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
@@ -39,7 +39,7 @@ class MarkdownToJsonTool(Tool):
                                          indent=indent, lines=object_per_line)
                 result_file_bytes = json_str.encode("utf-8")
 
-                result_filename: Optional[str] = None
+                result_filename: str | None = None
                 if output_filename:
                     if len(tables) > 1:
                         result_filename = f"{output_filename}_{i + 1}"

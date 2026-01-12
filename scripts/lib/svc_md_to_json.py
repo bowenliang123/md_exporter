@@ -3,9 +3,8 @@
 MdToJson service
 """
 
-from typing import Optional, List, Dict, Any, Tuple
-from pathlib import Path
 from enum import StrEnum
+from pathlib import Path
 
 
 class JsonOutputStyle(StrEnum):
@@ -25,7 +24,7 @@ def get_json_styles(output_style: str) -> tuple[int, bool]:
             return 0, True
 
 
-def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is_strip_wrapper: bool = False) -> List[Path]:
+def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is_strip_wrapper: bool = False) -> list[Path]:
     """
     Convert Markdown tables to JSON or JSONL format
     Args:

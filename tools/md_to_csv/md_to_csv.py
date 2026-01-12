@@ -1,16 +1,14 @@
-from typing import Generator, Optional
+from collections.abc import Generator
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from scripts.lib.svc_md_to_csv import get_csv_output_encoding
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
 from scripts.utils.table_utils import TableParser
-
-
-from scripts.lib.svc_md_to_csv import get_csv_output_encoding
 
 
 class MarkdownToCsvTool(Tool):
@@ -34,7 +32,7 @@ class MarkdownToCsvTool(Tool):
                 csv_output_encoding = get_csv_output_encoding(csv_str)
                 result_file_bytes = csv_str.encode(csv_output_encoding)
 
-                result_filename: Optional[str] = None
+                result_filename: str | None = None
                 if output_filename:
                     if len(tables) > 1:
                         result_filename = f"{output_filename}_{i + 1}.csv"

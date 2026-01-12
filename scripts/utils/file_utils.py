@@ -1,14 +1,13 @@
-from typing import Optional
 
 from scripts.utils.mimetype_utils import MimeType
 
 
-def get_meta_data(mime_type: MimeType, output_filename: Optional[str]) -> dict[str, str]:
+def get_meta_data(mime_type: MimeType, output_filename: str | None) -> dict[str, str]:
     if not MimeType:
         raise ValueError("Failed to generate meta data, mime_type is not defined")
 
     # normalize the filename
-    result_filename: Optional[str] = None
+    result_filename: str | None = None
     temp_filename = output_filename.strip() if output_filename else None
     if temp_filename:
         # ensure extension name

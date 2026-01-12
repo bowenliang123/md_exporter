@@ -1,7 +1,7 @@
 import io
 import logging
 import re
-from typing import Generator
+from collections.abc import Generator
 
 import markdown
 from dify_plugin import Tool
@@ -13,10 +13,10 @@ from docx.text.paragraph import Paragraph
 from docx.text.run import Run
 from htmldocx import HtmlToDocx
 
-from tools.md_to_docx.font_enum import DocxFontEnum
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
+from tools.md_to_docx.font_enum import DocxFontEnum
 
 
 class MarkdownToDocxTool(Tool):

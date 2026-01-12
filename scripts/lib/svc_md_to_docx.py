@@ -5,14 +5,11 @@ Provides common functionality for converting Markdown to DOCX format
 """
 
 from pathlib import Path
-from typing import Optional
-
-from pypandoc import convert_text
 
 from scripts.utils.utils import get_md_text
 
 
-def convert_md_to_docx(md_text: str, output_path: Path, template_path: Optional[Path] = None, is_strip_wrapper: bool = False) -> None:
+def convert_md_to_docx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> None:
     """
     Convert Markdown text to DOCX format
     
@@ -36,6 +33,7 @@ def convert_md_to_docx(md_text: str, output_path: Path, template_path: Optional[
     
     # Convert to DOCX - use convert_file with temporary file since convert_text doesn't work for DOCX
     from tempfile import NamedTemporaryFile
+
     from pypandoc import convert_file
     
     with NamedTemporaryFile(suffix=".md", delete=False, mode='w', encoding='utf-8') as temp_md_file:
@@ -57,7 +55,7 @@ def convert_md_to_docx(md_text: str, output_path: Path, template_path: Optional[
         os.unlink(temp_md_file_path)
 
 
-def get_default_template(script_dir: Path) -> Optional[Path]:
+def get_default_template(script_dir: Path) -> Path | None:
     """
     Get the default DOCX template path
     

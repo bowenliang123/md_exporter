@@ -3,7 +3,6 @@
 MdToMd service
 """
 
-from typing import Optional, List
 from pathlib import Path
 
 
