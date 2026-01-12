@@ -79,7 +79,7 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         Exception: If conversion fails
     """
     # Process Markdown text
-    from utils.utils import get_md_text
+    from ..utils.utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
     
     # Extract image URLs

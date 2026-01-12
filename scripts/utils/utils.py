@@ -6,7 +6,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 # Regex pattern for removing think tags
-THINK_TAG_REGEX = re.compile(r'</think>', flags=re.DOTALL)
+THINK_TAG_REGEX = re.compile(r'<think>.*?</think>', flags=re.DOTALL)
 
 # Regex pattern for matching Chinese characters
 CHINESE_CHAR_PATTERN = re.compile(r'[\u4e00-\u9fff]')
