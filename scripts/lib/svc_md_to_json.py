@@ -6,7 +6,7 @@ MdToJson service
 from enum import StrEnum
 from pathlib import Path
 
-from .utils.utils import get_md_text, parse_md_to_tables
+from .utils.common_utils import get_md_text, parse_md_to_tables
 
 
 class JsonOutputStyle(StrEnum):
