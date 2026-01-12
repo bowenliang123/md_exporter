@@ -44,20 +44,4 @@ def convert_md_to_xml(md_text: str, output_path: Path, is_strip_wrapper: bool = 
         raise Exception(f"Failed to convert Markdown to XML: {e}")
 
 
-class MarkdownToXmlService:
-    """
-    Service class for converting Markdown to XML
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> Path:
-        """
-        Convert Markdown text to XML format
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output XML file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            Path to the created XML file
-        """
-        return convert_md_to_xml(md_text, output_path, is_strip_wrapper)
+

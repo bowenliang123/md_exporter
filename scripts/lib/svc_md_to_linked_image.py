@@ -164,21 +164,4 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
     return created_files
 
 
-class MarkdownToLinkedImageService:
-    """
-    Service class for extracting image links from Markdown and downloading them as files
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
-        """
-        Extract image links from Markdown and download them as files
-        Args:
-            md_text: Markdown text to process
-            output_path: Path to save the output files
-            compress: Whether to compress all images into a ZIP file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            List of paths to the created files
-        """
-        return convert_md_to_linked_image(md_text, output_path, compress, is_strip_wrapper)
+

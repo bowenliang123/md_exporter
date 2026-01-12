@@ -156,21 +156,4 @@ def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = Fa
     return created_files
 
 
-class MarkdownToCodeBlockService:
-    """
-    Service class for extracting code blocks from Markdown and saving them as files
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> List[Path]:
-        """
-        Extract code blocks from Markdown and save them as files
-        Args:
-            md_text: Markdown text to process
-            output_path: Path to save the output files or ZIP file
-            compress: Whether to compress all code blocks into a ZIP file
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            List of paths to the created files
-        """
-        return convert_md_to_codeblock(md_text, output_path, compress, is_strip_wrapper)
+

@@ -71,21 +71,4 @@ def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is
     return created_files
 
 
-class MarkdownToJsonService:
-    """
-    Service class for converting Markdown to JSON
-    """
-    
-    @staticmethod
-    def convert(md_text: str, output_path: Path, style: str = "jsonl", is_strip_wrapper: bool = False) -> List[Path]:
-        """
-        Convert Markdown tables to JSON or JSONL format
-        Args:
-            md_text: Markdown text to convert
-            output_path: Path to save the output JSON file
-            style: JSON output style (jsonl or json_array)
-            is_strip_wrapper: Whether to remove code block wrapper if present
-        Returns:
-            List of paths to the created JSON files
-        """
-        return convert_md_to_json(md_text, output_path, style, is_strip_wrapper)
+
