@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from scripts.lib.svc_md_to_csv import convert_md_to_csv, get_csv_output_encoding
+from scripts.lib.svc_md_to_csv import convert_md_to_csv
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
