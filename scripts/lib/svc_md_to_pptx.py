@@ -11,6 +11,8 @@ import sys
 import subprocess
 from tempfile import TemporaryDirectory, NamedTemporaryFile
 
+from utils.utils import get_md_text
+
 
 def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Optional[Path] = None, is_strip_wrapper: bool = False) -> Path:
     """
@@ -27,7 +29,6 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Optional[
         Exception: If conversion fails
     """
     # Process Markdown text
-    from utils.utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
     
     # Check for disallowed macros
@@ -45,7 +46,7 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Optional[
     final_template_path = template_path
     if not final_template_path:
         # Use default template
-        default_template = script_dir / "template" / "Bowen Template.pptx"
+        default_template = script_dir.parent / "resources" / "template" / "pptx_template.pptx"
         if default_template.exists():
             final_template_path = default_template
     

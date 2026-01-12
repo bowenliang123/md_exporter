@@ -15,7 +15,7 @@ from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
 
-DEFAULT_TEMPLATE_PPTX_FILE_PATH = str(Path(__file__).resolve().parent / "template" / "Bowen Template.pptx")
+DEFAULT_TEMPLATE_PPTX_FILE_PATH = str(Path(__file__).resolve().parent.parent.parent / "resources" / "template" / "pptx_template.pptx")
 # Use md2pptx from scripts directory instead of local directory
 SCRIPTS_DIR = Path(__file__).resolve().parent.parent.parent / "scripts"
 MD2PPTX_FOLDER = str(SCRIPTS_DIR / "md2pptx-6.1")
