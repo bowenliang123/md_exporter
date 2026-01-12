@@ -18,13 +18,16 @@ def get_json_styles(output_style: str) -> tuple[int, bool]:
     :return: indent, object_per_line
     """
     match output_style:
+        case JsonOutputStyle.JSON_ARRAY:
+            return 0, False
         case JsonOutputStyle.JSONL:
             return 0, True
         case _:
             return 0, True
 
 
-def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is_strip_wrapper: bool = False) -> list[
+    Path]:
     """
     Convert Markdown tables to JSON or JSONL format
     Args:
@@ -41,10 +44,10 @@ def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is
     # Process Markdown text
     from ..utils.utils import get_md_text, parse_md_to_tables
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Parse Markdown tables
     tables = parse_md_to_tables(processed_md)
-    
+
     # Convert to JSON
     created_files = []
     for i, table in enumerate(tables):
@@ -66,8 +69,5 @@ def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is
         # Write to file
         output_file.write_text(json_str, encoding='utf-8')
         created_files.append(output_file)
-    
+
     return created_files
-
-
-
