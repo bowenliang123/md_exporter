@@ -1,4 +1,3 @@
-import zipfile
 from collections.abc import Generator
 from pathlib import Path
 from tempfile import NamedTemporaryFile
@@ -6,15 +5,15 @@ from tempfile import NamedTemporaryFile
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from scripts.lib.svc_md_to_codeblock import convert_md_to_codeblock
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text, get_param_value
-from scripts.lib.svc_md_to_codeblock import convert_md_to_codeblock, extract_code_blocks
 
 
 class MarkdownToCodeblockTool(Tool):
-    logger= get_logger(__name__)
+    logger = get_logger(__name__)
 
     def _invoke(self, tool_parameters: dict) -> Generator[ToolInvokeMessage, None, None]:
         """
@@ -25,11 +24,11 @@ class MarkdownToCodeblockTool(Tool):
         md_text = get_md_text(tool_parameters)
         is_compress = get_param_value(tool_parameters, "is_compress", "true")
         compress = "true" == is_compress.lower()
-        
+
         # create a temporary output path
         with NamedTemporaryFile(suffix=".zip" if compress else ".txt", delete=False) as temp_file:
             temp_output_path = Path(temp_file.name)
-        
+
         try:
             # convert markdown to codeblocks using the shared function
             created_files = convert_md_to_codeblock(md_text, temp_output_path, compress=compress)
@@ -79,12 +78,11 @@ class MarkdownToCodeblockTool(Tool):
                     elif suffix == ".java":
                         mime_type = MimeType.JAVA
 
-
                     yield self.create_blob_message(
                         blob=file_path.read_bytes(),
                         meta=get_meta_data(
                             mime_type=mime_type,
-                            output_filename=tool_parameters.get("output_filename","codeblock") +
+                            output_filename=(tool_parameters.get("output_filename") or "code") +
                                             (("_" + str(index + 1)) if len(created_files) > 1 else ""),
                         ),
                     )
@@ -100,5 +98,3 @@ class MarkdownToCodeblockTool(Tool):
                 for file_path in created_files:
                     if file_path.exists():
                         file_path.unlink()
-
-

@@ -1,14 +1,16 @@
 from collections.abc import Generator
 from enum import StrEnum
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
+from scripts.lib.svc_md_to_json import convert_md_to_json
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
-from scripts.utils.table_utils import TableParser
 
 
 class JsonOutputStyle(StrEnum):
@@ -29,19 +31,21 @@ class MarkdownToJsonTool(Tool):
         output_filename = tool_parameters.get("output_filename")
         output_style = tool_parameters.get("output_style", JsonOutputStyle.JSONL)
 
-        # parse markdown to tables
-        tables = TableParser.parse_md_to_tables(self.logger, md_text)
+        try:
+            # create a temporary output JSON file
+            with NamedTemporaryFile(suffix=".json", delete=False) as temp_json_file:
+                temp_json_output_path = Path(temp_json_file.name)
 
-        for i, table in enumerate(tables):
-            try:
-                indent, object_per_line = self.get_json_sytles(output_style)
-                json_str = table.to_json(index=False, orient='records', force_ascii=False,
-                                         indent=indent, lines=object_per_line)
-                result_file_bytes = json_str.encode("utf-8")
-
+            # convert markdown to json using the shared function
+            created_files = convert_md_to_json(md_text, temp_json_output_path, style=output_style, is_strip_wrapper=True)
+            
+            # read the result bytes for each created file
+            for i, file_path in enumerate(created_files):
+                result_file_bytes = file_path.read_bytes()
+                
                 result_filename: str | None = None
                 if output_filename:
-                    if len(tables) > 1:
+                    if len(created_files) > 1:
                         result_filename = f"{output_filename}_{i + 1}"
                     else:
                         result_filename = output_filename
@@ -53,17 +57,17 @@ class MarkdownToJsonTool(Tool):
                         output_filename=result_filename,
                     ),
                 )
-            except Exception as e:
-                self.logger.exception("Failed to convert to JSON file")
-                yield self.create_text_message(f"Failed to convert markdown text to JSON file, error: {str(e)}")
-                return
 
-    def get_json_sytles(self, output_style) -> tuple[int, bool]:
-        """
-        :return: indent, object_per_line
-        """
-        match output_style:
-            case JsonOutputStyle.JSONL:
-                return 0, True
-            case _:
-                return 0, True
+        except Exception as e:
+            self.logger.exception("Failed to convert markdown text to JSON file")
+            yield self.create_text_message(f"Failed to convert markdown text to JSON file, error: {str(e)}")
+            return
+        finally:
+            # clean up temporary files
+            if 'temp_json_output_path' in locals():
+                temp_json_output_path.unlink(missing_ok=True)
+            if 'created_files' in locals():
+                for file_path in created_files:
+                    file_path.unlink(missing_ok=True)
+
+        return

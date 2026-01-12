@@ -1,14 +1,15 @@
 from collections.abc import Generator
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from scripts.lib.svc_md_to_csv import get_csv_output_encoding
+from scripts.lib.svc_md_to_csv import convert_md_to_csv, get_csv_output_encoding
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
 from scripts.utils.param_utils import get_md_text
-from scripts.utils.table_utils import TableParser
 
 
 class MarkdownToCsvTool(Tool):
@@ -23,18 +24,21 @@ class MarkdownToCsvTool(Tool):
         md_text = get_md_text(tool_parameters)
         output_filename = tool_parameters.get("output_filename")
 
-        # parse markdown to tables
-        tables = TableParser.parse_md_to_tables(self.logger, md_text)
+        try:
+            # create a temporary output CSV file
+            with NamedTemporaryFile(suffix=".csv", delete=False) as temp_csv_file:
+                temp_csv_output_path = Path(temp_csv_file.name)
 
-        for i, table in enumerate(tables):
-            try:
-                csv_str = table.to_csv(index=False, encoding="utf-8")
-                csv_output_encoding = get_csv_output_encoding(csv_str)
-                result_file_bytes = csv_str.encode(csv_output_encoding)
-
+            # convert markdown to csv using the shared function
+            created_files = convert_md_to_csv(md_text, temp_csv_output_path)
+            
+            # read the result bytes for each created file
+            for i, file_path in enumerate(created_files):
+                result_file_bytes = file_path.read_bytes()
+                
                 result_filename: str | None = None
                 if output_filename:
-                    if len(tables) > 1:
+                    if len(created_files) > 1:
                         result_filename = f"{output_filename}_{i + 1}.csv"
                     else:
                         result_filename = output_filename
@@ -46,7 +50,17 @@ class MarkdownToCsvTool(Tool):
                         output_filename=result_filename,
                     ),
                 )
-            except Exception as e:
-                self.logger.exception("Failed to convert to CSV file")
-                yield self.create_text_message(f"Failed to convert markdown text to CSV file, error: {str(e)}")
-                return
+
+        except Exception as e:
+            self.logger.exception("Failed to convert markdown text to CSV file")
+            yield self.create_text_message(f"Failed to convert markdown text to CSV file, error: {str(e)}")
+            return
+        finally:
+            # clean up temporary files
+            if 'temp_csv_output_path' in locals():
+                temp_csv_output_path.unlink(missing_ok=True)
+            if 'created_files' in locals():
+                for file_path in created_files:
+                    file_path.unlink(missing_ok=True)
+
+        return
