@@ -30,4 +30,4 @@ This is a paragraph with **bold** and *italic* text.
 
 ## Image Test
 
-![Test Image](https://via.placeholder.com/150)
+![Test Image](https://avatars.githubusercontent.com/u/127165244?s=48&v=4)
