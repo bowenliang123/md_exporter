@@ -8,8 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-
-from utils.utils import get_md_text, parse_md_to_tables
+from lib.svc_md_to_latex import convert_md_to_latex
 
 
 def main():
@@ -40,48 +39,14 @@ def main():
     else:
         md_text = args.input
 
-    # Process Markdown text
-    try:
-        md_text = get_md_text(md_text, is_strip_wrapper=args.strip_wrapper)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # Parse Markdown tables
-    try:
-        tables = parse_md_to_tables(md_text)
-    except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
-
     # Convert to LaTeX
     output_path = Path(args.output)
     try:
-        for i, table in enumerate(tables):
-            table_latex_str = table.to_latex(index=False, bold_rows=True)
-            doc_latex_str = (
-                "\\documentclass[]{article}\n"
-                + "\\usepackage{booktabs}\n"
-                + "\\begin{document}\n"
-                + "\n"
-                + table_latex_str
-                + "\n"
-                + "\\end{document}\n"
-            )
-            result_file_bytes = doc_latex_str.encode("utf-8")
-
-            # Determine output file name
-            if len(tables) > 1:
-                output_file = output_path.parent / f"{output_path.stem}_{i + 1}.tex"
-            else:
-                output_file = output_path
-
-            # Write to file
-            output_file.write_bytes(result_file_bytes)
-            print(f"Successfully converted to {output_file}")
-
+        created_files = convert_md_to_latex(md_text, output_path, args.strip_wrapper)
+        for file_path in created_files:
+            print(f"Successfully converted to {file_path}")
     except Exception as e:
-        print(f"Error: Failed to convert to LaTeX - {e}", file=sys.stderr)
+        print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
 
 

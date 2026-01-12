@@ -1,7 +1,7 @@
 import re
 from typing import Any
 
-from tools.utils.md_utils import MarkdownUtils
+from scripts.utils.md_utils import MarkdownUtils
 
 THINK_TAG_REGEX = re.compile(r'<think>.*?</think>', flags=re.DOTALL)
 

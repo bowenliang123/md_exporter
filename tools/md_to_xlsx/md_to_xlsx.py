@@ -2,14 +2,13 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Generator
 
-import pandas as pd
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools.utils.file_utils import get_meta_data
-from tools.utils.logger_utils import get_logger
-from tools.utils.mimetype_utils import MimeType
-from tools.utils.param_utils import get_md_text, get_param_value
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.logger_utils import get_logger
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text, get_param_value
 
 
 from scripts.lib.svc_md_to_xlsx import convert_md_to_xlsx

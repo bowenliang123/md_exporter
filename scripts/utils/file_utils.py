@@ -1,6 +1,6 @@
 from typing import Optional
 
-from tools.utils.mimetype_utils import MimeType
+from scripts.utils.mimetype_utils import MimeType
 
 
 def get_meta_data(mime_type: MimeType, output_filename: Optional[str]) -> dict[str, str]:

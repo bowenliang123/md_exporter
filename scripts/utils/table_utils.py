@@ -6,7 +6,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from pandas import DataFrame
 
-from tools.utils.md_utils import MarkdownUtils
+from scripts.utils.md_utils import MarkdownUtils
 
 SUGGESTED_SHEET_NAME = "suggested_sheet_name"
 
