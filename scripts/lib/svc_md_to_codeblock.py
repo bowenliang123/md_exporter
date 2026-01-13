@@ -96,7 +96,7 @@ list[Path]:
         Exception: If conversion fails
     """
     # Process Markdown text
-    from scripts.lib.utils.common_utils import get_md_text
+    from .utils.common_utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
 
     # Extract code blocks

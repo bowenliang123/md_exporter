@@ -9,7 +9,7 @@ from tempfile import NamedTemporaryFile
 
 import pandas as pd
 
-from scripts.lib.utils.common_utils import (
+from .utils.common_utils import (
     SUGGESTED_SHEET_NAME,
     get_md_text,
     parse_md_to_tables,
