@@ -6,7 +6,7 @@ MdToJson service
 from enum import StrEnum
 from pathlib import Path
 
-from .utils.common_utils import get_md_text, parse_md_to_tables
+from scripts.utils.common_utils import get_md_text, parse_md_to_tables
 
 
 class JsonOutputStyle(StrEnum):
@@ -44,7 +44,7 @@ def convert_md_to_json(md_text: str, output_path: Path, style: str = "jsonl", is
         Exception: If conversion fails
     """
     # Process Markdown text
-    # from ..utils.utils import get_md_text, parse_md_to_tables
+    # from scripts.utils.utils import get_md_text, parse_md_to_tables
 
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
 

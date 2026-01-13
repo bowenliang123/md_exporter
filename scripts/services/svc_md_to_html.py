@@ -8,7 +8,7 @@ from pathlib import Path
 
 from pypandoc import convert_text
 
-from .utils.common_utils import get_md_text
+from scripts.utils.common_utils import get_md_text
 
 
 def convert_md_to_html(md_text: str, output_path: Path, is_strip_wrapper: bool = False) -> None:

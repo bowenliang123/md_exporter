@@ -11,7 +11,7 @@ from pathlib import Path
 # Add the scripts directory to Python path to fix import issues
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lib.svc_md_to_pptx import convert_md_to_pptx
+from services.svc_md_to_pptx import convert_md_to_pptx
 
 
 def main():

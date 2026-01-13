@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 # Import shared utility functions
-from lib.svc_md_to_html import convert_md_to_html
+from services.svc_md_to_html import convert_md_to_html
 
 
 def main():

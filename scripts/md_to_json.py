@@ -8,7 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from lib.svc_md_to_json import convert_md_to_json
+from services.svc_md_to_json import convert_md_to_json
 
 
 def main():

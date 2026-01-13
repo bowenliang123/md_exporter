@@ -8,10 +8,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
 
-from scripts.lib.svc_md_to_docx import convert_md_to_docx, get_default_template
-from scripts.lib.utils.file_utils import get_meta_data
-from scripts.lib.utils.mimetype_utils import MimeType
-from scripts.lib.utils.param_utils import get_md_text
+from scripts.services.svc_md_to_docx import convert_md_to_docx, get_default_template
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text
 
 
 class MarkdownToDocxTool(Tool):

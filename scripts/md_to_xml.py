@@ -8,7 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from lib.svc_md_to_xml import convert_md_to_xml
+from services.svc_md_to_xml import convert_md_to_xml
 
 
 def main():

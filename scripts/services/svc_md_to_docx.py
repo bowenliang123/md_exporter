@@ -6,7 +6,7 @@ Provides common functionality for converting Markdown to DOCX format
 
 from pathlib import Path
 
-from .utils.common_utils import get_md_text
+from scripts.utils.common_utils import get_md_text
 
 
 def convert_md_to_docx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> None:

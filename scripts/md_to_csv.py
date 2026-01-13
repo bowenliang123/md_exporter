@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 # Import shared utility functions
-from lib.svc_md_to_csv import convert_md_to_csv
+from services.svc_md_to_csv import convert_md_to_csv
 
 
 def main():

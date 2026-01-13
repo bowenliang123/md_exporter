@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 # Import shared utility functions
-from lib.svc_md_to_xlsx import convert_md_to_xlsx
+from services.svc_md_to_xlsx import convert_md_to_xlsx
 
 
 def main():

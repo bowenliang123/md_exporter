@@ -9,7 +9,7 @@ from test_base import TestBase
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, project_root)
 
-from scripts.lib.svc_md_to_md import convert_md_to_md
+from scripts.services.svc_md_to_md import convert_md_to_md
 
 
 class TestMdToMd(TestBase):

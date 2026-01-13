@@ -13,7 +13,7 @@ import httpx
 import markdown
 from bs4 import BeautifulSoup
 
-from .utils.common_utils import get_md_text
+from scripts.utils.common_utils import get_md_text
 
 # MIME type mapping
 MIME_TYPE_MAP = {

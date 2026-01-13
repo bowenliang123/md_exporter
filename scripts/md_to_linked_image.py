@@ -8,7 +8,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from lib.svc_md_to_linked_image import convert_md_to_linked_image
+from services.svc_md_to_linked_image import convert_md_to_linked_image
 
 
 def main():

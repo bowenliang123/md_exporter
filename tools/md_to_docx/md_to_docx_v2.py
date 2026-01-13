@@ -13,9 +13,9 @@ from docx.text.paragraph import Paragraph
 from docx.text.run import Run
 from htmldocx import HtmlToDocx
 
-from scripts.lib.utils.file_utils import get_meta_data
-from scripts.lib.utils.mimetype_utils import MimeType
-from scripts.lib.utils.param_utils import get_md_text
+from scripts.utils.file_utils import get_meta_data
+from scripts.utils.mimetype_utils import MimeType
+from scripts.utils.param_utils import get_md_text
 from tools.md_to_docx.font_enum import DocxFontEnum
 
 
