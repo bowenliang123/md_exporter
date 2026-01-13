@@ -18,19 +18,16 @@ class TestMdToMd(TestBase):
         input_file = "test/resources/example_md.md"
         output_file = "test_output/test.md"
         
-        try:
-            # Read input file
-            with open(input_file, encoding='utf-8') as f:
-                md_text = f.read()
-            
-            # Call the conversion function directly
-            output_path = Path(output_file)
-            result_path = convert_md_to_md(md_text, output_path)
-            
-            # Verify the output file is not empty
-            self.verify_output_file(result_path)
-            
-        finally:
-            # Clean up the output file
-            if os.path.exists(output_file):
-                os.remove(output_file)
+        # Register output for cleanup
+        self.register_output(output_file)
+        
+        # Read input file
+        with open(input_file, encoding='utf-8') as f:
+            md_text = f.read()
+        
+        # Call the conversion function directly
+        output_path = Path(output_file)
+        result_path = convert_md_to_md(md_text, output_path)
+        
+        # Verify the output file is not empty
+        self.verify_output_file(result_path)

@@ -1,5 +1,3 @@
-import os
-import shutil
 
 from test_base import TestBase
 
@@ -10,14 +8,8 @@ class TestMdToLinkedImage(TestBase):
         input_file = "test/resources/example_md.md"
         output_dir = "test_output/images"
         
-        try:
-            # Run the tool using the base class method
-            self.run_script("md_to_linked_image.py", input_file, output_dir)
-            
-            # Verify the output directory is not empty
-            self.verify_output_dir(output_dir)
-            
-        finally:
-            # Clean up the output directory
-            if os.path.exists(output_dir):
-                shutil.rmtree(output_dir)
+        # Run the tool using the base class method
+        self.run_script("md_to_linked_image.py", input_file, output_dir)
+        
+        # Verify the output directory is not empty
+        self.verify_output_dir(output_dir)
