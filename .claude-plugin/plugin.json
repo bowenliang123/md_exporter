@@ -1,0 +1,20 @@
+{
+  "name": "md_exporter",
+  "version": "3.0.0",
+  "description": "Transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML files, and extract code blocks in Markdown to Python, Bash, JS and etc files.",
+  "author": {
+    "name": "bowenliang123",
+    "url": "https://github.com/bowenliang123"
+  },
+  "homepage": "https://github.com/bowenliang123/md_exporter/",
+  "repository": "https://github.com/bowenliang123/md_exporter.git",
+  "license": "Apache-2.0",
+  "keywords": [
+    "markdown",
+    "md_exporter",
+    "md2docx",
+    "md2xlsx",
+    "md2pptx"
+  ],
+  "skills": "./"
+}
