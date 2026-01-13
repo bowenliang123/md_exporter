@@ -44,7 +44,7 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
     final_template_path = template_path
     if not final_template_path:
         # Use default template
-        default_template = script_dir.parent / "resources" / "template" / "pptx_template.pptx"
+        default_template = script_dir.parent / "assets" / "template" / "pptx_template.pptx"
         if default_template.exists():
             final_template_path = default_template
     
