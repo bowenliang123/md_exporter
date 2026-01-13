@@ -132,7 +132,7 @@ Create professional Word documents with beautiful formatting.
 > - List styles and bullets
 > - And much more!
 >
-> Check out our [default template](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_docx/template) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
+> Check out the [default docx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/docx_template.docx) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
 
 ![DOCX Example](_assets/md_to_docx_1.png)
 
@@ -174,7 +174,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 >
 > > **🎨 Custom Templates:**
 > >
-> > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get our [default template](https://github.com/bowenliang123/md_exporter/tree/main/tools/md_to_pptx/template).
+> > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get the [default pptx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/pptx_template.pptx).
 
 **Input Example:**
 ```markdown
