@@ -70,5 +70,8 @@ uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/md_to_xlsx.py <input
 - The ruff rules and configs are defined in `ruff.toml`.
 
 ### Testing
-- run `dev/test` to run the tests with `pytest`.
-- test files are located in the `tests` folder, which are testing the scripts as Agent Skills and can be run in standalone
+- test files are located in the `tests` folder, which are testing the each script and tool of Agent Skills and can be run in standalone
+- - run `dev/test` to test all scripts with `pytest`.
+
+### Exclusions
+- The `md2pptx-X.Y.Z` folder contains upstream code of `md2pptx` project used for Markdown to PPTX conversion. The content of this folder should be kept as-is and excluded from linting, formatting, and testing.
