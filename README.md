@@ -322,6 +322,14 @@ Releases are available at
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
 Release changelogs:
+- 3.0.0:
+  - `md_exporter` is now ready for Claude Agent Skills and runnable in standalone
+    - Add `SKILL.md` for Claude Skills description
+    - Add `/scripts` for code scripts of all tools as Claude Skills exectuion entry
+    - Extract the core file transformation logic into `/scripts/lib` sharing by both Claude Skills scripts and Dify Plugin
+    - Add `pyproject.toml` as Python project description and dependency management
+  - Add automated tests covering all usage of entry of Claude Skills scripts
+  - bump `md2pptx` from 6.1 to 6.1.1 for bug fix in table caption 
 
 - 2.3.0:
   - resolve xlsx generation by skipping irrelevant chars before first table in `md_to_xlsx` tool
