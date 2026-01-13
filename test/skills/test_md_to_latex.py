@@ -4,7 +4,7 @@ import subprocess
 
 def test_md_to_latex():
     # Define input and output paths
-    input_file = "test/skills/test_table_sample.md"
+    input_file = "test/resources/example_md_table.md"
     output_file = "test_output/test.tex"
     
     # Ensure output directory exists

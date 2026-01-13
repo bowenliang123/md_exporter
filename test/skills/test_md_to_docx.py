@@ -4,7 +4,7 @@ import subprocess
 
 def test_md_to_docx():
     # Define input and output paths
-    input_file = "test/skills/test_sample.md"
+    input_file = "test/resources/example_md.md"
     output_file = "test_output/test.docx"
     
     # Ensure output directory exists
