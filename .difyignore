@@ -175,5 +175,8 @@ cython_debug/
 # Windows
 Thumbs.db
 
+# Claude Skills
+.claude-plugin/
+
 # dev scripts in local
 dev/*.sh
