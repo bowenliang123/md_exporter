@@ -34,9 +34,11 @@ select = [
     "F401",
 ]
 
-[project.scripts]
-reformat = "uv run ruff check --fix ."
+[tool.setuptools]
+include-package-data = true
 
-#[build-system]
-#requires = ["setuptools>=61.0"]
-#build-backend = "setuptools.build_meta"
+[tool.setuptools.packages.find]
+exclude = ["dev", "provider", "test", "test_output"]
+
+[tool.setuptools.package-data]
+"*" = ["assets/template/docx_template.docx", "assets/template/pptx_template.pptx"]
