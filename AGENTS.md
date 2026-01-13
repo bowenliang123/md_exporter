@@ -65,9 +65,9 @@ uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/md_to_xlsx.py <input
 
 ### Code Linting and Formatting
 
+- do the linting and formatting every time the Python code is modified and before running the code.
 - run `dev/reformat` to lint and format the code with `ruff`.
 - The ruff rules and configs are defined in `ruff.toml`.
-- do the linting and formatting before running the Python code.
 
 ### Testing
 - run `dev/test` to run the tests with `pytest`.
