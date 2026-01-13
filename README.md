@@ -1,17 +1,17 @@
 # Markdown Exporter
-### Transform Your Markdowns Into Powerful Documents on Dify
+### Transform Your Markdowns Into Powerful Documents as Dify Plugin and Claude Skills
 
-**Author:** [bowenliang123](https://github.com/bowenliang123)
-
-**Github Repository:** https://github.com/bowenliang123/md_exporter
-
-**Dify Marketplace:** https://marketplace.dify.ai/plugins/bowenliang123/md_exporter
+- Author: [bowenliang123](https://github.com/bowenliang123)
+- Github Repository: https://github.com/bowenliang123/md_exporter
+- Available as:
+  - Dify plugin: [Install via Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
+  - Claude Skill (standalone): [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md)
 
 ---
 
 ## ✨ What is Markdown Exporter?
 
-**Markdown Exporter** is a powerful Dify plugin that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+**Markdown Exporter** is a powerful toolset as both Dify plugin and Claude Skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
 
 With support for **15+ output formats**, Markdown Exporter bridges the gap between simple text editing and professional document creation, all while maintaining the simplicity and elegance of Markdown syntax.
 
