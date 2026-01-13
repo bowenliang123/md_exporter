@@ -12,13 +12,24 @@ description: Transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CS
 ## Prerequisites
 
 To use the Markdown Exporter skill, ensure you have the following prerequisites installed:
-- Python 3.12 or higher
-- uv package manager
+- Python 3.11 or higher
+- (optional) uv package manager
 
 
 ## 📦 Usage
 
-All scripts are located in the `scripts/` directory. You can run them using `uv run` to use the dependencies managed by pyproject.toml.
+All skill scripts are located in the `scripts/` directory.
+
+All the required Python dependencies can be found `[dependencies]` section in [pyproject.toml](./pyproject.toml) file.
+
+To run the scripts with Python dependencies, choose either way:
+- Approach 1: prefer to use `uv run python --with` command to execute scripts, if `uv` has been installed and ready for use.
+  - Use `uv` to run the scripts with dependencies installed automatically.
+    - example: `uv run python --with dependency1,dependency2 scripts/some_script.py <args> [options]` for running the scripts with dependency1 and dependency2 installed from pypi
+- Approach 2:use `pip` command to install dependencies first, then run the scripts with `python` command.
+  - example: `pip install dependency1 dependency2` for installing dependency1 and dependency2 from pypi
+  - and then run `python scripts/some_script.py <args> [options]`
+
 
 ### md_to_csv - Convert Markdown tables to CSV
 
