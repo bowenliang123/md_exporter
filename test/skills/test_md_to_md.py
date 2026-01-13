@@ -12,7 +12,7 @@ from scripts.lib.svc_md_to_md import convert_md_to_md
 
 def test_md_to_md():
     # Define input and output paths
-    input_file = "test/skills/test_sample.md"
+    input_file = "test/resources/example_md.md"
     output_file = "test_output/test.md"
     
     # Ensure output directory exists

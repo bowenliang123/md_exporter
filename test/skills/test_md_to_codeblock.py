@@ -5,7 +5,7 @@ import subprocess
 
 def test_md_to_codeblock():
     # Define input and output paths
-    input_file = "test/skills/test_sample.md"
+    input_file = "test/resources/example_md.md"
     output_dir = "test_output/codeblocks"
     
     # Ensure output directory exists

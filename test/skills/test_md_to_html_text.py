@@ -4,7 +4,7 @@ import subprocess
 
 def test_md_to_html_text():
     # Define input path
-    input_file = "test/skills/test_sample.md"
+    input_file = "test/resources/example_md.md"
     
     try:
         # Run the tool using uv command, setting PYTHONPATH to include the project root

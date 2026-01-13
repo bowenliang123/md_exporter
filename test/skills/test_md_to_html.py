@@ -4,7 +4,7 @@ import subprocess
 
 def test_md_to_html():
     # Define input and output paths
-    input_file = "test/skills/test_sample.md"
+    input_file = "test/resources/example_md.md"
     output_file = "test_output/test.html"
     
     # Ensure output directory exists
