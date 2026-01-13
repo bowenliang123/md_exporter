@@ -174,3 +174,6 @@ cython_debug/
 
 # Windows
 Thumbs.db
+
+# dev scripts in local
+dev/*.sh
