@@ -1,6 +1,6 @@
 ---
 name: md_exporter
-description: Convert Markdown text into files of  formats like PDF, DOCX, PPTX, XLSX, and code files.
+description: Transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML files, and extract code blocks in Markdown to Python, Bash,JS and etc files.
 ---
 
 
