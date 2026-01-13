@@ -24,6 +24,12 @@ dev = [
     "ruff>=0.14.11",
 ]
 
+[project.urls]
+Homepage = "https://github.com/bowenliang123/md_exporter/"
+Repository = "https://github.com/bowenliang123/md_exporter.git"
+Issues = "https://github.com/bowenliang123/md_exporter/issues"
+Changelog = "https://github.com/bowenliang123/md_exporter/?tab=readme-ov-file#-changelog"
+
 [tool.ruff]
 exclude = ["md2pptx-6.1.1"]
 
