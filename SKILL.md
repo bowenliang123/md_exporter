@@ -1,6 +1,8 @@
 ---
 name: md_exporter
 description: Transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML files, and extract code blocks in Markdown to Python, Bash,JS and etc files.
+allowed-tools: 
+disable: false
 ---
 
 
@@ -18,6 +20,8 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 
 ## 📦 Usage
 
+Before executing any scripts, make sure to navigate to the root directory of the project, which is the same directory as this file.
+
 All skill scripts are located in the `scripts/` directory.
 
 All the required Python dependencies can be found `[dependencies]` section in [pyproject.toml](./pyproject.toml) file.
@@ -25,9 +29,9 @@ All the required Python dependencies can be found `[dependencies]` section in [p
 To run the scripts with Python dependencies, choose either way:
 - Approach 1: prefer to use `uv run python --with` command to execute scripts, if `uv` has been installed and ready for use.
   - Use `uv` to run the scripts with dependencies installed automatically.
-    - example: `uv run python --with dependency1,dependency2 scripts/some_script.py <args> [options]` for running the scripts with dependency1 and dependency2 installed from pypi
+    - example: `uv run python --with pandas,markdown scripts/some_script.py <args> [options]` for running the scripts with pandas and markdown installed from pypi
 - Approach 2:use `pip` command to install dependencies first, then run the scripts with `python` command.
-  - example: `pip install dependency1 dependency2` for installing dependency1 and dependency2 from pypi
+  - example: `pip install pandas markdown` for installing pandas and markdown from pypi
   - and then run `python scripts/some_script.py <args> [options]`
 
 
