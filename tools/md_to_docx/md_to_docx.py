@@ -11,7 +11,7 @@ from dify_plugin.file.file import File
 from scripts.services.svc_md_to_docx import convert_md_to_docx, get_default_template
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text
+from scripts.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToDocxTool(Tool):
@@ -22,7 +22,7 @@ class MarkdownToDocxTool(Tool):
         invoke tools
         """
         # get parameters
-        md_text = get_md_text(tool_parameters, is_strip_wrapper=True)
+        md_text = get_md_text_from_tool_params(tool_parameters, is_strip_wrapper=True)
         docx_template_file: File | None = tool_parameters.get("docx_template_file")
         temp_pptx_template_file_path: str | None = None
         if docx_template_file and not isinstance(docx_template_file, File):

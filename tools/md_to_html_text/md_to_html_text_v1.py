@@ -5,7 +5,7 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 
 from scripts.utils import MarkdownUtils
 from scripts.utils.logger_utils import get_logger
-from scripts.utils.param_utils import get_md_text
+from scripts.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToHtmlTextTool(Tool):
@@ -16,7 +16,7 @@ class MarkdownToHtmlTextTool(Tool):
         invoke tools
         """
         # get parameters
-        md_text = get_md_text(tool_parameters)
+        md_text = get_md_text_from_tool_params(tool_parameters)
 
         try:
             html_str = MarkdownUtils.convert_markdown_to_html(md_text)

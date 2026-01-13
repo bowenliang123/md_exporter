@@ -6,11 +6,11 @@ from .md_utils import MarkdownUtils
 THINK_TAG_REGEX = re.compile(r'<think>.*?</think>', flags=re.DOTALL)
 
 
-def get_md_text(tool_parameters: dict[str, Any],
-                is_strip_wrapper: bool = False,
-                is_remove_think_tag: bool = True,
-                is_normalize_line_breaks: bool = True,
-                ) -> str:
+def get_md_text_from_tool_params(tool_parameters: dict[str, Any],
+                                 is_strip_wrapper: bool = False,
+                                 is_remove_think_tag: bool = True,
+                                 is_normalize_line_breaks: bool = True,
+                                 ) -> str:
     md_text = tool_parameters.get("md_text")
     md_text = md_text.strip() if md_text else None
     if not md_text:

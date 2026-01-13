@@ -10,7 +10,7 @@ from scripts.services.svc_md_to_pptx import convert_md_to_pptx
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text
+from scripts.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToPptxTool(Tool):
@@ -22,7 +22,7 @@ class MarkdownToPptxTool(Tool):
         """
 
         # get parameters
-        md_text = get_md_text(tool_parameters)
+        md_text = get_md_text_from_tool_params(tool_parameters)
         pptx_template_file: File | None = tool_parameters.get("pptx_template_file")
 
         # check parameters

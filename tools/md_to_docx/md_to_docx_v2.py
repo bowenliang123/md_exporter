@@ -15,7 +15,7 @@ from htmldocx import HtmlToDocx
 
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text
+from scripts.utils.param_utils import get_md_text_from_tool_params
 from tools.md_to_docx.font_enum import DocxFontEnum
 
 
@@ -27,7 +27,7 @@ class MarkdownToDocxTool(Tool):
         invoke tools
         """
         # get parameters
-        md_text = get_md_text(tool_parameters, is_strip_wrapper=True)
+        md_text = get_md_text_from_tool_params(tool_parameters, is_strip_wrapper=True)
         try:
             # Legacy: using markdowntodocx lib
             # with NamedTemporaryFile(suffix=".docx", delete=True) as temp_docx_file:

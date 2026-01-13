@@ -9,7 +9,7 @@ from scripts.services.svc_md_to_linked_image import convert_md_to_linked_image
 from scripts.utils.file_utils import get_meta_data
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text, get_param_value
+from scripts.utils.param_utils import get_md_text_from_tool_params, get_param_value
 
 
 class MarkdownToLinkedImageTool(Tool):
@@ -21,7 +21,7 @@ class MarkdownToLinkedImageTool(Tool):
         """
 
         # get parameters
-        md_text = get_md_text(tool_parameters)
+        md_text = get_md_text_from_tool_params(tool_parameters)
         is_compress = get_param_value(tool_parameters, "is_compress", "true")
         compress = "true" == is_compress.lower()
 
