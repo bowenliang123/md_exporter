@@ -12,7 +12,7 @@ import pymupdf
 from PIL import Image
 from xhtml2pdf import pisa
 
-from scripts.lib.utils.common_utils import (
+from .utils.common_utils import (
     contains_chinese,
     contains_japanese,
     convert_markdown_to_html,
@@ -65,7 +65,7 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
         Exception: If conversion fails
     """
     # Process Markdown text
-    from scripts.lib.utils.common_utils import get_md_text
+    from .utils.common_utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
     
     output_filename = output_path.stem if output_path.suffix else "output"
