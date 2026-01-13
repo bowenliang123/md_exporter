@@ -1,24 +1,18 @@
-import os
-import subprocess
+from test_base import TestBase
 
 
-def test_md_to_html_text():
-    # Define input path
-    input_file = "test/resources/example_md.md"
-    
-    try:
-        # Run the tool using uv command, setting PYTHONPATH to include the project root
-        env = os.environ.copy()
-        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-        env["PYTHONPATH"] = f"{project_root}:{env.get('PYTHONPATH', '')}"
-        result = subprocess.run([
-            "uv", "run", "python", "scripts/md_to_html_text.py",
-            input_file
-        ], check=True, capture_output=True, text=True, env=env)
+class TestMdToHtmlText(TestBase):
+    def test_md_to_html_text(self):
+        # Define input path
+        input_file = "test/resources/example_md.md"
         
-        # Verify the output is not empty
-        assert result.stdout.strip() != "", "Output is empty"
-        
-    finally:
-        # No output file to clean up for this tool
-        pass
+        try:
+            # Run the tool using the base class method and capture output
+            result = self.run_script_with_output("md_to_html_text.py", input_file)
+            
+            # Verify the output is not empty
+            self.assertNotEqual(result.stdout.strip(), "", "Output is empty")
+            
+        finally:
+            # No output file to clean up for this tool
+            pass
