@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from scripts.utils.common_utils import get_md_text
+from scripts.utils.markdown_utils import get_md_text
 
 
 def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> Path:

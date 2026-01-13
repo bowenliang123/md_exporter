@@ -8,12 +8,8 @@ from pathlib import Path
 
 from xhtml2pdf import pisa
 
-from scripts.utils.common_utils import (
-    contains_chinese,
-    contains_japanese,
-    convert_markdown_to_html,
-    get_md_text,
-)
+from scripts.utils.markdown_utils import get_md_text, convert_markdown_to_html
+from scripts.utils.text_utils import contains_chinese, contains_japanese
 
 
 def convert_to_html_with_font_support(md_text: str) -> str:

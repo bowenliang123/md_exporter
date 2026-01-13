@@ -96,7 +96,7 @@ list[Path]:
         Exception: If conversion fails
     """
     # Process Markdown text
-    from scripts.utils.common_utils import get_md_text
+    from scripts.utils.markdown_utils import get_md_text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
 
     # Extract code blocks
@@ -147,7 +147,7 @@ list[Path]:
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 file_path.write_bytes(code_block.code_bytes)
                 created_files.append(file_path)
-                print(f"Successfully saved code block [{index}] to {file_path}")
+                # print(f"Successfully saved code block [{index}] to {file_path}")
 
         except Exception as e:
             raise Exception(f"Failed to save code blocks: {e}")

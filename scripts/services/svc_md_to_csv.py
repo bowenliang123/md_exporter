@@ -6,7 +6,8 @@ Provides common functionality for converting Markdown tables to CSV format
 
 from pathlib import Path
 
-from scripts.utils.common_utils import get_md_text, parse_md_to_tables
+from scripts.utils.markdown_utils import get_md_text
+from scripts.utils.table_utils import parse_md_to_tables
 
 
 def convert_md_to_csv(md_text: str, output_path: Path = None, is_strip_wrapper: bool = False, return_strings: bool = False) -> list[Path] | list[str]:

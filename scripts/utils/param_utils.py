@@ -1,9 +1,7 @@
-import re
 from typing import Any
 
-from .md_utils import MarkdownUtils
-
-THINK_TAG_REGEX = re.compile(r'<think>.*?</think>', flags=re.DOTALL)
+from .markdown_utils import strip_markdown_wrapper
+from .text_utils import remove_think_tags, normalize_line_breaks
 
 
 def get_md_text_from_tool_params(tool_parameters: dict[str, Any],
@@ -18,14 +16,14 @@ def get_md_text_from_tool_params(tool_parameters: dict[str, Any],
 
     # remove think tag
     if is_remove_think_tag:
-        md_text = THINK_TAG_REGEX.sub('', md_text)
+        md_text = remove_think_tags(md_text)
 
     if is_strip_wrapper:
-        md_text = MarkdownUtils.strip_markdown_wrapper(md_text)
+        md_text = strip_markdown_wrapper(md_text)
 
-    # line breaks normalization by auto conversion from `\\n` to `\n`
-    if is_normalize_line_breaks and "\\n" in md_text:
-        md_text = md_text.replace("\\n", "\n")
+    # line breaks normalization by auto conversion from `\n` to `\n`
+    if is_normalize_line_breaks:
+        md_text = normalize_line_breaks(md_text)
 
     return md_text
 
