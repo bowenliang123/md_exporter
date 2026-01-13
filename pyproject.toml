@@ -1,6 +1,6 @@
 [project]
 name = "md_exporter"
-version = "0.1.0"
+version = "3.0.0"
 description = "Convert markdown text to files in various formats such as DOCX, XLSX, PDF, PPTX, and images."
 requires-python = ">=3.11"
 authors = [
