@@ -1,0 +1,12 @@
+line-length = 120
+exclude = [
+    "md2pptx-6.1.1",
+]
+
+
+[lint]
+select = [
+    "I",
+    "UP",
+    "F401",
+]

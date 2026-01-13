@@ -30,16 +30,6 @@ Repository = "https://github.com/bowenliang123/md_exporter.git"
 Issues = "https://github.com/bowenliang123/md_exporter/issues"
 Changelog = "https://github.com/bowenliang123/md_exporter/?tab=readme-ov-file#-changelog"
 
-[tool.ruff]
-exclude = ["md2pptx-6.1.1"]
-
-[tool.ruff.lint]
-select = [
-    "I",
-    "UP",
-    "F401",
-]
-
 [tool.setuptools]
 include-package-data = true
 
