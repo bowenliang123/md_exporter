@@ -35,7 +35,7 @@ select = [
 ]
 
 [project.scripts]
-dev.reformat = "uv run ruff check --fix ."
+reformat = "uv run ruff check --fix ."
 
 #[build-system]
 #requires = ["setuptools>=61.0"]
