@@ -1,7 +1,7 @@
 from typing import Any
 
 from .markdown_utils import strip_markdown_wrapper
-from .text_utils import remove_think_tags, normalize_line_breaks
+from .text_utils import normalize_line_breaks, remove_think_tags
 
 
 def get_md_text_from_tool_params(tool_parameters: dict[str, Any],

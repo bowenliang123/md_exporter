@@ -1,5 +1,5 @@
+
 import markdown
-from typing import Any
 
 
 def strip_markdown_wrapper(md_text: str) -> str:
@@ -41,7 +41,7 @@ def get_md_text(md_text: str,
                 is_remove_think_tag: bool = True,
                 is_normalize_line_breaks: bool = True) -> str:
     """Process Markdown text"""
-    from .text_utils import remove_think_tags, normalize_line_breaks
+    from .text_utils import normalize_line_breaks, remove_think_tags
     
     md_text = md_text.strip() if md_text else None
     if not md_text:

@@ -12,7 +12,7 @@ import pymupdf
 from PIL import Image
 from xhtml2pdf import pisa
 
-from scripts.utils.markdown_utils import get_md_text, convert_markdown_to_html
+from scripts.utils.markdown_utils import convert_markdown_to_html
 from scripts.utils.text_utils import contains_chinese, contains_japanese
 
 
