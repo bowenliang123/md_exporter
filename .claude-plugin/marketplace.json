@@ -2,11 +2,12 @@
   "name": "md-exporter-plugins",
   "owner": {
     "name": "bowenliang123",
+    "email":"liang.bowen.123@qq.com",
     "url": "https://github.com/bowenliang123"
   },
   "plugins": [
     {
-      "name": "md_exporter",
+      "name": "markdown-exporter",
       "source": "./",
       "description": "Transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML files, and extract code blocks in Markdown to Python, Bash,JS and etc files.",
       "version": "3.0.0",
