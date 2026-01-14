@@ -35,6 +35,8 @@ To run the scripts with Python dependencies, choose either way:
   - and then run `python scripts/some_script.py <args> [options]`
 
 
+## 🔧 Scripts
+
 ### md_to_csv - Convert Markdown tables to CSV
 
 Converts Markdown tables to CSV format.
