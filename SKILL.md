@@ -20,19 +20,53 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 
 ## 📦 Usage
 
-Before executing any scripts, make sure to navigate to the root directory of the project, which is the same directory as this file.
+### Overview
+All scripts provided in this project are Python scripts located in the `scripts/` directory. All required Python dependencies are declared in the project's [pyproject.toml](./pyproject.toml) file.
 
-All skill scripts are located in the `scripts/` directory.
+### Recommended Execution Method
+We strongly recommend using the `uv` package manager for running the scripts, as it simplifies dependency management and execution. Here's how to proceed:
 
-All the required Python dependencies can be found `[dependencies]` section in [pyproject.toml](./pyproject.toml) file.
+1. **Check if `uv` is installed**:
+   ```bash
+   uv --version
+   ```
+   If `uv` is not installed, you can install it following the official instructions at https://docs.astral.sh/uv/getting-started/installation/ or use the alternative method described below.
 
-To run the scripts with Python dependencies, choose either way:
-- Approach 1: prefer to use `uv run python --with` command to execute scripts, if `uv` has been installed and ready for use.
-  - Use `uv` to run the scripts with dependencies installed automatically.
-    - example: `uv run python --with pandas,markdown scripts/some_script.py <args> [options]` for running the scripts with pandas and markdown installed from pypi
-- Approach 2:use `pip` command to install dependencies first, then run the scripts with `python` command.
-  - example: `pip install pandas markdown` for installing pandas and markdown from pypi
-  - and then run `python scripts/some_script.py <args> [options]`
+2. **Execute scripts with `uv`**:
+   ```bash
+   uv run --with package1,package2,package3 python scripts/some_script.py <args> [options]
+   ```
+   Replace `package1,package2,package3` with the actual dependencies required for the script (refer to pyproject.toml). This command automatically installs the specified dependencies and runs the script in one step.
+
+### Alternative Execution Method (Without `uv`)
+If you don't have `uv` installed, you can use `pip` to manage dependencies:
+
+1. **Check Python version**:
+   Ensure you have Python 3.11 or higher installed:
+   ```bash
+   python --version
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pip install package1 package2 package3
+   ```
+   Replace `package1 package2 package3` with the actual dependencies required for the script.
+
+3. **Run the script**:
+   ```bash
+   python scripts/some_script.py <args> [options]
+   ```
+
+### Important Notes
+- Always navigate to the root directory of the project before executing any scripts.
+- The exact dependencies required for each script are specified in the project's pyproject.toml file.
+- For simplicity, you can install all dependencies at once using:
+  ```bash
+  pip install -r requirements.txt  # If requirements.txt is available
+  # or
+  uv run --with-all python scripts/some_script.py <args> [options]  # Using uv
+  ```
 
 
 ## 🔧 Scripts
