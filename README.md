@@ -5,7 +5,7 @@
 - Github Repository: https://github.com/bowenliang123/md_exporter
 - Available as:
   - Dify plugin: [Install via Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
-  - Claude Skill (standalone): [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md)
+  - Claude Agent Skill (standalone): [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md)
 
 ---
 
