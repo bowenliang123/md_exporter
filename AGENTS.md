@@ -40,6 +40,8 @@ It's alright and ignorable to see the following error message:
     - `tools/md_to_XXX` - Dify Tool implementation code for converting Markdown to XXX format in `tools/md_to_XXX/md_to_XXX.py` and Dify tool specification in `tools/md_to_XXX/md_to_XXX.yaml`.
 - `/scripts/services/*.py` - Shared python code used for Dify Plugin and Agent Skill.
 - `.env` - Environment variables for running the Dify Plugin
+- `/_assets` - Assets used by both Dify Plugin, such as Dify Plugin icons, images used in `README.md`, etc.
+- `/assets` - Assets used by both Agent Skill and Dify Plugin, such as file templates used for generating `.docx` and `.pptx` files
 
 ### Claude Agent Skill
 
@@ -59,7 +61,7 @@ uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/md_to_xlsx.py <input
 - `SKILL.md` - Agent Skill specification file and the usage guides and examples of the kills.
 - `/scripts/md_to_XXX.py` - Skill implementation code for converting Markdown to XXX format.
 - `/scripts/services/*.py` - Shared python code used for Dify Plugin and Agent Skill.
-
+- `/assets` - Assets used by both Agent Skill and Dify Plugin, such as file templates used for generating `.docx` and `.pptx` files
 
 ## Development Guide
 
