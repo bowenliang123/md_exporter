@@ -75,6 +75,12 @@ If you don't have `uv` installed, you can use `pip` to manage dependencies:
 
 Converts Markdown tables to CSV format.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_csv.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_csv.py <input> <output> [options]
 ```
@@ -96,6 +102,12 @@ python scripts/md_to_csv.py ./abc.md ./tt.csv
 
 Converts Markdown text to PDF format with support for Chinese, Japanese, and other languages.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_pdf.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_pdf.py <input> <output> [options]
 ```
@@ -117,6 +129,12 @@ python scripts/md_to_pdf.py ./abc.md ./output.pdf
 
 Converts Markdown text to DOCX format using pandoc.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_docx.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_docx.py <input> <output> [options]
 ```
@@ -140,6 +158,12 @@ python scripts/md_to_docx.py ./abc.md ./output.docx --template ./template.docx
 
 Converts Markdown tables to XLSX format with multiple sheets support.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_xlsx.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_xlsx.py <input> <output> [options]
 ```
@@ -162,6 +186,12 @@ python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
 
 Converts Markdown text to PPTX format using md2pptx.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_pptx.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_pptx.py <input> <output> [options]
 ```
@@ -183,6 +213,12 @@ python scripts/md_to_pptx.py ./abc.md ./output.pptx
 
 Extracts code blocks from Markdown and saves them as individual files.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_codeblock.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_codeblock.py <input> <output> [options]
 ```
@@ -205,6 +241,12 @@ python scripts/md_to_codeblock.py ./abc.md ./output.zip --compress
 
 Converts Markdown tables to JSON or JSONL format.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_json.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_json.py <input> <output> [options]
 ```
@@ -228,6 +270,12 @@ python scripts/md_to_json.py ./abc.md ./output.json --style json_array
 
 Converts Markdown text to XML format.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_xml.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_xml.py <input> <output> [options]
 ```
@@ -249,6 +297,12 @@ python scripts/md_to_xml.py ./abc.md ./output.xml
 
 Converts Markdown tables to LaTeX format.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_latex.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_latex.py <input> <output> [options]
 ```
@@ -270,6 +324,12 @@ python scripts/md_to_latex.py ./abc.md ./output.tex
 
 Converts Markdown text to HTML format using pandoc.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_html.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_html.py <input> <output> [options]
 ```
@@ -291,6 +351,12 @@ python scripts/md_to_html.py ./abc.md ./output.html
 
 Converts Markdown text to HTML and outputs to stdout.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_html_text.sh <input>
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_html_text.py <input>
 ```
@@ -308,6 +374,12 @@ python scripts/md_to_html_text.py ./abc.md
 
 Converts Markdown text to PNG images (one per page).
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_png.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_png.py <input> <output> [options]
 ```
@@ -331,6 +403,12 @@ python scripts/md_to_png.py ./abc.md ./output.png --compress
 
 Saves Markdown text to a .md file.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_md.sh <input> <output>
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_md.py <input> <output>
 ```
@@ -349,6 +427,12 @@ python scripts/md_to_md.py ./abc.md ./output.md
 
 Extracts image links from Markdown and downloads them as files.
 
+[Preferred] Use bash script to check and install dependencies and run the Python script:
+```bash
+scripts/bin/md_to_linked_image.sh <input> <output> [options]
+```
+
+Or run Python script directly:
 ```bash
 python scripts/md_to_linked_image.py <input> <output> [options]
 ```
