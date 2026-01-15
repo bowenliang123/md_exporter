@@ -23,50 +23,40 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 ### Overview
 All scripts provided in this project are Python scripts located in the `scripts/` directory. All required Python dependencies are declared in the project's [pyproject.toml](./pyproject.toml) file.
 
-### Recommended Execution Method
-We strongly recommend using the `uv` package manager for running the scripts, as it simplifies dependency management and execution. Here's how to proceed:
+### Recommended Execution Method - Using Bash Scripts
+We strongly recommend using the bash scripts located in the `scripts/bin/` directory. These scripts provide a seamless experience by automatically handling dependency management and execution:
 
-1. **Check if `uv` is installed**:
+1. **Automatic Dependency Management**: When you run a bash script from the `scripts/bin/` directory, it will:
+   - First check if the `uv` package manager is installed
+   - If `uv` is available, it will use `uv run` to automatically install dependencies and execute the Python script in one step
+   - If `uv` is not available, it will fall back to using `pip` to install dependencies from `requirements.txt` before executing the script
+   - Check that Python 3.11 or higher is installed (when using pip fallback)
+
+2. **Execute scripts with bash**:
    ```bash
-   uv --version
-   ```
-   If `uv` is not installed, you can install it following the official instructions at https://docs.astral.sh/uv/getting-started/installation/ or use the alternative method described below.
-
-2. **Execute scripts with `uv`**:
-   ```bash
-   uv run --with package1,package2,package3 python scripts/some_script.py <args> [options]
-   ```
-   Replace `package1,package2,package3` with the actual dependencies required for the script (refer to pyproject.toml). This command automatically installs the specified dependencies and runs the script in one step.
-
-### Alternative Execution Method (Without `uv`)
-If you don't have `uv` installed, you can use `pip` to manage dependencies:
-
-1. **Check Python version**:
-   Ensure you have Python 3.11 or higher installed:
-   ```bash
-   python --version
+   scripts/bin/<script_name>.sh <args> [options]
    ```
 
-2. **Install dependencies**:
-   ```bash
-   pip install package1 package2 package3
-   ```
-   Replace `package1 package2 package3` with the actual dependencies required for the script.
+### Alternative Execution Method - Direct Python Execution
+You can also run the Python scripts directly, but you'll need to manage dependencies yourself:
 
-3. **Run the script**:
+1. **Using uv** (recommended if running directly):
    ```bash
-   python scripts/some_script.py <args> [options]
+   uv run python scripts/<script_name>.py <args> [options]
+   ```
+
+2. **Using pip**:
+   ```bash
+   # Install dependencies first
+   pip install -r requirements.txt
+   # Then run the script
+   python scripts/<script_name>.py <args> [options]
    ```
 
 ### Important Notes
 - Always navigate to the root directory of the project before executing any scripts.
-- The exact dependencies required for each script are specified in the project's pyproject.toml file.
-- For simplicity, you can install all dependencies at once using:
-  ```bash
-  pip install -r requirements.txt  # If requirements.txt is available
-  # or
-  uv run --with-all python scripts/some_script.py <args> [options]  # Using uv
-  ```
+- The bash scripts in `scripts/bin/` provide the most convenient way to run the tools, as they handle all dependency management automatically.
+- All scripts support both file paths and direct Markdown text as input
 
 
 ## 🔧 Scripts
@@ -75,14 +65,9 @@ If you don't have `uv` installed, you can use `pip` to manage dependencies:
 
 Converts Markdown tables to CSV format.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_csv.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_csv.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -94,7 +79,7 @@ python scripts/md_to_csv.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_csv.py ./abc.md ./tt.csv
+scripts/bin/md_to_csv.sh ./abc.md ./tt.csv
 ```
 
 
@@ -102,14 +87,9 @@ python scripts/md_to_csv.py ./abc.md ./tt.csv
 
 Converts Markdown text to PDF format with support for Chinese, Japanese, and other languages.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_pdf.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_pdf.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -121,7 +101,7 @@ python scripts/md_to_pdf.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_pdf.py ./abc.md ./output.pdf
+scripts/bin/md_to_pdf.sh ./abc.md ./output.pdf
 ```
 
 
@@ -129,14 +109,9 @@ python scripts/md_to_pdf.py ./abc.md ./output.pdf
 
 Converts Markdown text to DOCX format using pandoc.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_docx.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_docx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -149,8 +124,8 @@ python scripts/md_to_docx.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_docx.py ./abc.md ./output.docx
-python scripts/md_to_docx.py ./abc.md ./output.docx --template ./template.docx
+scripts/bin/md_to_docx.sh ./abc.md ./output.docx
+scripts/bin/md_to_docx.sh ./abc.md ./output.docx --template ./template.docx
 ```
 
 
@@ -158,14 +133,9 @@ python scripts/md_to_docx.py ./abc.md ./output.docx --template ./template.docx
 
 Converts Markdown tables to XLSX format with multiple sheets support.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_xlsx.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_xlsx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -178,7 +148,7 @@ python scripts/md_to_xlsx.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
+scripts/bin/md_to_xlsx.sh ./abc.md ./output.xlsx
 ```
 
 
@@ -186,14 +156,9 @@ python scripts/md_to_xlsx.py ./abc.md ./output.xlsx
 
 Converts Markdown text to PPTX format using md2pptx.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_pptx.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_pptx.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -205,7 +170,7 @@ python scripts/md_to_pptx.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_pptx.py ./abc.md ./output.pptx
+scripts/bin/md_to_pptx.sh ./abc.md ./output.pptx
 ```
 
 
@@ -213,14 +178,9 @@ python scripts/md_to_pptx.py ./abc.md ./output.pptx
 
 Extracts code blocks from Markdown and saves them as individual files.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_codeblock.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_codeblock.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -232,8 +192,8 @@ python scripts/md_to_codeblock.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_codeblock.py ./abc.md ./output_dir
-python scripts/md_to_codeblock.py ./abc.md ./output.zip --compress
+scripts/bin/md_to_codeblock.sh ./abc.md ./output_dir
+scripts/bin/md_to_codeblock.sh ./abc.md ./output.zip --compress
 ```
 
 
@@ -241,14 +201,9 @@ python scripts/md_to_codeblock.py ./abc.md ./output.zip --compress
 
 Converts Markdown tables to JSON or JSONL format.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_json.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_json.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -261,8 +216,8 @@ python scripts/md_to_json.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_json.py ./abc.md ./output.json
-python scripts/md_to_json.py ./abc.md ./output.json --style json_array
+scripts/bin/md_to_json.sh ./abc.md ./output.json
+scripts/bin/md_to_json.sh ./abc.md ./output.json --style json_array
 ```
 
 
@@ -270,14 +225,9 @@ python scripts/md_to_json.py ./abc.md ./output.json --style json_array
 
 Converts Markdown text to XML format.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_xml.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_xml.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -289,7 +239,7 @@ python scripts/md_to_xml.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_xml.py ./abc.md ./output.xml
+scripts/bin/md_to_xml.sh ./abc.md ./output.xml
 ```
 
 
@@ -297,14 +247,9 @@ python scripts/md_to_xml.py ./abc.md ./output.xml
 
 Converts Markdown tables to LaTeX format.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_latex.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_latex.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -316,7 +261,7 @@ python scripts/md_to_latex.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_latex.py ./abc.md ./output.tex
+scripts/bin/md_to_latex.sh ./abc.md ./output.tex
 ```
 
 
@@ -324,14 +269,9 @@ python scripts/md_to_latex.py ./abc.md ./output.tex
 
 Converts Markdown text to HTML format using pandoc.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_html.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_html.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -343,7 +283,7 @@ python scripts/md_to_html.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_html.py ./abc.md ./output.html
+scripts/bin/md_to_html.sh ./abc.md ./output.html
 ```
 
 
@@ -351,14 +291,9 @@ python scripts/md_to_html.py ./abc.md ./output.html
 
 Converts Markdown text to HTML and outputs to stdout.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_html_text.sh <input>
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_html_text.py <input>
 ```
 
 **Arguments:**
@@ -366,7 +301,7 @@ python scripts/md_to_html_text.py <input>
 
 **Example:**
 ```bash
-python scripts/md_to_html_text.py ./abc.md
+scripts/bin/md_to_html_text.sh ./abc.md
 ```
 
 
@@ -374,14 +309,9 @@ python scripts/md_to_html_text.py ./abc.md
 
 Converts Markdown text to PNG images (one per page).
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_png.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_png.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -394,8 +324,8 @@ python scripts/md_to_png.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_png.py ./abc.md ./output.png
-python scripts/md_to_png.py ./abc.md ./output.png --compress
+scripts/bin/md_to_png.sh ./abc.md ./output.png
+scripts/bin/md_to_png.sh ./abc.md ./output.png --compress
 ```
 
 
@@ -403,14 +333,9 @@ python scripts/md_to_png.py ./abc.md ./output.png --compress
 
 Saves Markdown text to a .md file.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_md.sh <input> <output>
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_md.py <input> <output>
 ```
 
 **Arguments:**
@@ -419,7 +344,7 @@ python scripts/md_to_md.py <input> <output>
 
 **Example:**
 ```bash
-python scripts/md_to_md.py ./abc.md ./output.md
+scripts/bin/md_to_md.sh ./abc.md ./output.md
 ```
 
 
@@ -427,14 +352,9 @@ python scripts/md_to_md.py ./abc.md ./output.md
 
 Extracts image links from Markdown and downloads them as files.
 
-[Preferred] Use bash script to check and install dependencies and run the Python script:
+**Usage:**
 ```bash
 scripts/bin/md_to_linked_image.sh <input> <output> [options]
-```
-
-Or run Python script directly:
-```bash
-python scripts/md_to_linked_image.py <input> <output> [options]
 ```
 
 **Arguments:**
@@ -446,8 +366,8 @@ python scripts/md_to_linked_image.py <input> <output> [options]
 
 **Example:**
 ```bash
-python scripts/md_to_linked_image.py ./abc.md ./output_dir
-python scripts/md_to_linked_image.py ./abc.md ./output.zip --compress
+scripts/bin/md_to_linked_image.sh ./abc.md ./output_dir
+scripts/bin/md_to_linked_image.sh ./abc.md ./output.zip --compress
 ```
 
 
