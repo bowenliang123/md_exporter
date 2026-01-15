@@ -230,26 +230,23 @@ Convert your Markdown into beautiful PNG images. Great for:
 
 ### 💻 Markdown → Code Block Files
 
-Extract code blocks from your Markdown and save them as individual files.
+Effortlessly extract code blocks from your Markdown and save them as individual files, preserving syntax highlighting and formatting.
 
-**Supported Languages:**
-- Python → `.py`
-- JavaScript → `.js`
-- HTML → `.html`
-- Bash → `.sh`
-- JSON → `.json`
-- XML → `.xml`
-- SVG → `.svg`
-- CSS → `.css`
-- YAML → `.yaml`
-- Ruby → `.rb`
-- Java → `.java`
-- PHP → `.php`
-- Markdown → `.md`
+#### Supported Languages & File Extensions
+
+| Language   | File Extension | Language   | File Extension |
+|------------|----------------|------------|----------------|
+| Python     | `.py`          | CSS        | `.css`         |
+| JavaScript | `.js`          | YAML       | `.yaml`        |
+| HTML       | `.html`        | Ruby       | `.rb`          |
+| Bash       | `.sh`          | Java       | `.java`        |
+| JSON       | `.json`        | PHP        | `.php`         |
+| XML        | `.xml`         | Markdown   | `.md`          |
+| SVG        | `.svg`         |            |                |
 
 ![Code Block Example 1](_assets/usage_md_to_codeblock_2.png)
 
-Need all files in one place? Enable compression to get a single ZIP file!
+**Pro Tip:** Enable compression to bundle all extracted files into a single ZIP archive for easy sharing and organization!
 
 ![Code Block Example 2](_assets/usage_md_to_codeblock_3.png)
 ![Code Block Example 3](_assets/usage_md_to_codeblock_4.png)
