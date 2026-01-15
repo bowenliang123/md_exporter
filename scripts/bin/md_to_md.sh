@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 引入通用脚本
+# Import common script
 source "$(dirname "${BASH_SOURCE[0]}")/script_runner.sh"
 
-# 运行Python脚本
+# Run Python script
 run_python_script "md_to_md.py" "$@"
