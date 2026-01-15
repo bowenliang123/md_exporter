@@ -156,7 +156,7 @@ scripts/bin/md_to_csv.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_csv.sh ./abc.md ./tt.csv
+scripts/bin/md_to_csv.sh /path/input.md /path/output.csv
 ```
 
 
@@ -178,7 +178,7 @@ scripts/bin/md_to_pdf.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_pdf.sh ./abc.md ./output.pdf
+scripts/bin/md_to_pdf.sh /path/input.md /path/output.pdf
 ```
 
 
@@ -201,8 +201,8 @@ scripts/bin/md_to_docx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_docx.sh ./abc.md ./output.docx
-scripts/bin/md_to_docx.sh ./abc.md ./output.docx --template ./template.docx
+scripts/bin/md_to_docx.sh /path/input.md /path/output.docx
+scripts/bin/md_to_docx.sh /path/input.md /path/output.docx --template /path/template.docx
 ```
 
 
@@ -225,7 +225,7 @@ scripts/bin/md_to_xlsx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_xlsx.sh ./abc.md ./output.xlsx
+scripts/bin/md_to_xlsx.sh /path/input.md /path/output.xlsx
 ```
 
 
@@ -247,7 +247,7 @@ scripts/bin/md_to_pptx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_pptx.sh ./abc.md ./output.pptx
+scripts/bin/md_to_pptx.sh /path/input.md /path/output.pptx
 ```
 
 
@@ -269,8 +269,8 @@ scripts/bin/md_to_codeblock.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_codeblock.sh ./abc.md ./output_dir
-scripts/bin/md_to_codeblock.sh ./abc.md ./output.zip --compress
+scripts/bin/md_to_codeblock.sh /path/input.md /path/output_dir
+scripts/bin/md_to_codeblock.sh /path/input.md /path/output.zip --compress
 ```
 
 
@@ -293,8 +293,8 @@ scripts/bin/md_to_json.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_json.sh ./abc.md ./output.json
-scripts/bin/md_to_json.sh ./abc.md ./output.json --style json_array
+scripts/bin/md_to_json.sh /path/input.md /path/output.json
+scripts/bin/md_to_json.sh /path/input.md /path/output.json --style json_array
 ```
 
 
@@ -316,7 +316,7 @@ scripts/bin/md_to_xml.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_xml.sh ./abc.md ./output.xml
+scripts/bin/md_to_xml.sh /path/input.md /path/output.xml
 ```
 
 
@@ -338,7 +338,7 @@ scripts/bin/md_to_latex.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_latex.sh ./abc.md ./output.tex
+scripts/bin/md_to_latex.sh /path/input.md /path/output.tex
 ```
 
 
@@ -360,7 +360,7 @@ scripts/bin/md_to_html.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_html.sh ./abc.md ./output.html
+scripts/bin/md_to_html.sh /path/input.md /path/output.html
 ```
 
 
@@ -378,7 +378,7 @@ scripts/bin/md_to_html_text.sh <input>
 
 **Example:**
 ```bash
-scripts/bin/md_to_html_text.sh ./abc.md
+scripts/bin/md_to_html_text.sh /path/input.md
 ```
 
 
@@ -401,8 +401,8 @@ scripts/bin/md_to_png.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_png.sh ./abc.md ./output.png
-scripts/bin/md_to_png.sh ./abc.md ./output.png --compress
+scripts/bin/md_to_png.sh /path/input.md /path/output.png
+scripts/bin/md_to_png.sh /path/input.md /path/output.png --compress
 ```
 
 
@@ -421,7 +421,7 @@ scripts/bin/md_to_md.sh <input> <output>
 
 **Example:**
 ```bash
-scripts/bin/md_to_md.sh ./abc.md ./output.md
+scripts/bin/md_to_md.sh /path/input.md /path/output.md
 ```
 
 
@@ -443,8 +443,8 @@ scripts/bin/md_to_linked_image.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_linked_image.sh ./abc.md ./output_dir
-scripts/bin/md_to_linked_image.sh ./abc.md ./output.zip --compress
+scripts/bin/md_to_linked_image.sh /path/input.md /path/output_dir
+scripts/bin/md_to_linked_image.sh /path/input.md /path/output.zip --compress
 ```
 
 
