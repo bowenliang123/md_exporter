@@ -6,6 +6,7 @@
 - Available as:
   - Dify plugin: [Install via Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
   - Claude Agent Skill (standalone): [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md)
+    - Install to Claude Code: `/plugin marketplace add bowenliang123/md_exporter`
 
 ---
 
