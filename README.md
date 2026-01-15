@@ -1,5 +1,5 @@
 # Markdown Exporter
-### Transform Your Markdowns Into Powerful Documents as Dify Plugin and Claude Skills
+### Transform Your Markdowns Into Powerful Documents as Dify Plugin and Agent Skills
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
 - Github Repository: https://github.com/bowenliang123/md_exporter
