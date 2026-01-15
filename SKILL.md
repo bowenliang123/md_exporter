@@ -10,6 +10,83 @@ disable: false
 
 **Markdown Exporter** is a powerful skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
 
+### Tools and Supported Formats
+
+<table>
+  <tr>
+    <th>Tool</th>
+    <th>Input</th>
+    <th>Output</th>
+  </tr>
+  <tr>
+    <td><code>md_to_docx</code></td>
+    <td rowspan="6">📝 Markdown text</td>
+    <td>📄 Word document (.docx)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_html</code></td>
+    <td>🌐 HTML file (.html)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_html_text</code></td>
+    <td>🌐 HTML text string</td>
+  </tr>
+  <tr>
+    <td><code>md_to_pdf</code></td>
+    <td>📑 PDF file (.pdf)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_png</code></td>
+    <td>🖼️ PNG image(s) of PDF pages</td>
+  </tr>
+  <tr>
+    <td><code>md_to_md</code></td>
+    <td>📝 Markdown file (.md)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_pptx</code></td>
+    <td>
+      <div>
+        📝 Markdown slides
+      </div>
+      <div>
+      in <a href="https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides"> md2pptx </a> style
+      </div>
+    </td>
+    <td>🎯 PowerPoint (.pptx)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_xlsx</code></td>
+    <td rowspan="5">📋<a href="https://www.markdownguide.org/extended-syntax/#tables"> Markdown tables </a> </td>
+    <td>📊 Excel spreadsheet (.xlsx)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_csv</code></td>
+    <td>📋 CSV file (.csv)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_json</code></td>
+    <td>📦 JSON/JSONL file (.json)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_xml</code></td>
+    <td>🏷️ XML file (.xml)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_latex</code></td>
+    <td>📝 LaTeX file (.tex)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_codeblock</code></td>
+    <td>💻 <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks"> Code blocks in Markdown </a> </td>
+    <td>📁 Code files by language (.py, .js, .sh, etc.)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_linked_image</code></td>
+    <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
+    <td>🖼️ Downloaded image files</td>
+  </tr>
+</table>
 
 ## Prerequisites
 
