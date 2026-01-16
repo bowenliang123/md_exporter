@@ -86,6 +86,11 @@ disable: false
     <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
     <td>🖼️ Downloaded image files</td>
   </tr>
+  <tr>
+    <td><code>md_to_mermaid</code></td>
+    <td>📊 <a href="https://mermaid.js.org/">Mermaid diagrams in Markdown</a> </td>
+    <td>🖼️ PNG image(s) of Mermaid diagrams</td>
+  </tr>
 </table>
 
 ## Prerequisites
@@ -445,6 +450,30 @@ scripts/bin/md_to_linked_image.sh <input> <output> [options]
 ```bash
 scripts/bin/md_to_linked_image.sh /path/input.md /path/output_dir
 scripts/bin/md_to_linked_image.sh /path/input.md /path/output.zip --compress
+```
+
+
+### md_to_mermaid - Convert Mermaid Diagrams to PNG
+
+Converts Mermaid diagram code blocks in Markdown to PNG images.
+
+**Usage:**
+```bash
+scripts/bin/md_to_mermaid.sh <input> <output> [options]
+```
+
+**Arguments:**
+- `input` - Input Markdown file path or Markdown text
+- `output` - Output PNG file path or directory path
+
+**Options:**
+- `--compress` - Compress all PNG images into a ZIP file
+- `--strip-wrapper` - Remove code block wrapper if present
+
+**Example:**
+```bash
+scripts/bin/md_to_mermaid.sh /path/input.md /path/output.png
+scripts/bin/md_to_mermaid.sh /path/input.md /path/output.zip --compress
 ```
 
 
