@@ -52,7 +52,7 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
 
     try:
         # Create a temporary file for mermaid code (without markdown wrapper)
-        # Mermaid CLI can process plain mermaid code files
+        # Mermaid CLI can process plain mermaid code files with .mmd extension
         with NamedTemporaryFile(suffix=".mmd", delete=False) as temp_mermaid_file:
             temp_mermaid_path = Path(temp_mermaid_file.name)
             temp_mermaid_path.write_text(mermaid_code)
@@ -68,7 +68,12 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
             print("Using nodejs-wheel npx")
             
             # Command arguments for mermaid-cli
-            cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli", "mmdc", "-i", str(temp_mermaid_path), "-o", str(output_path)]
+            cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli",
+                        "mmdc",
+                        "-i", str(temp_mermaid_path),
+                        "-o", str(output_path),
+                        "--scale", "2",
+                        ]
             print(f"Running command: npx {' '.join(cmd_args)}")
             
             # Execute the command using nodejs-wheel npx
