@@ -1,12 +1,13 @@
 [project]
 name = "md_exporter"
-version = "3.0.0"
+version = "3.0.1"
 description = "Convert markdown text to files in various formats such as DOCX, XLSX, PDF, PPTX, and images."
 license = "Apache-2.0"
 requires-python = ">=3.11"
 authors = [
     { name = "bowenliang123", email = "liang.bowen.123@qq.com" },
 ]
+readme="README.md"
 
 dependencies = [
     "dify_plugin~=0.7.1",
