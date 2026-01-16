@@ -1,12 +1,16 @@
 # Markdown Exporter
-### Transform Your Markdowns Into Powerful Documents as Dify Plugin and Agent Skills
+### Transform Your Markdowns Into Powerful Documents
+### as Agent Skills and Dify Plugin 
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
-- Github Repository: https://github.com/bowenliang123/md_exporter
+- Github Repository: [![GitHub Repo stars](https://img.shields.io/github/stars/bowenliang123/md_exporter?label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
 - This plugin can be used as:
-  - Dify plugin: [Install via Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
-  - Claude Agent Skill (standalone): [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md)
-    - Install to Claude Code: `/plugin marketplace add bowenliang123/md_exporter`
+
+| Usage                                                                                                 | Installation                                                                                                                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Dify Plugin](https://docs.dify.ai/en/develop-plugin/getting-started/getting-started-dify-plugin)** | Install to Dify platform from the [Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).                                                                                                              |
+| **[Agent Skills](https://agentskills.io/home)** <br> (standalone)                                     | Use as standalone Agent Skills. <br> Import and use the [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md) with [the repo zip](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip) |
+| **[Claude Code](https://code.claude.com/docs/en/skills)** <br> (Agent Skills in Claude Plugin)        | Install to Claude Code as Claude Plugin. <br> Run `/plugin marketplace add bowenliang123/md_exporter` on Claude Code CLI.                                                                                                         |
 
 ---
 
