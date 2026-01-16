@@ -17,7 +17,7 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from services.svc_md_to_pptx import convert_md_to_pptx
+from services.svc_md_to_pptx import convert_md_to_pptx  # noqa: E402
 
 
 def main():

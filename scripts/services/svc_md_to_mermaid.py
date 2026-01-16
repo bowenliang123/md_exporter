@@ -4,7 +4,6 @@ MdToMermaid service
 """
 
 import re
-import subprocess
 import sys
 import zipfile
 from pathlib import Path
@@ -12,7 +11,6 @@ from subprocess import CalledProcessError
 from tempfile import NamedTemporaryFile
 
 from nodejs_wheel import npx
-
 
 from scripts.utils.markdown_utils import get_md_text
 
