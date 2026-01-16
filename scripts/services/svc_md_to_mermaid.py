@@ -23,7 +23,8 @@ def pre_install_mermaid():
     """
     try:
         # Execute npx command to install mermaid-cli
-        cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli", "-h"]
+        cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
+                    "mmdc", "-V"]
         print("Pre-installing mermaid-cli...")
         result = npx(cmd_args, return_completed_process=True)
         print("Mermaid-cli pre-installation completed successfully")
@@ -96,7 +97,7 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
             print("Using nodejs-wheel npx")
             
             # Command arguments for mermaid-cli
-            cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli",
+            cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
                         "mmdc",
                         "-i", str(temp_mermaid_path),
                         "-o", str(output_path),
