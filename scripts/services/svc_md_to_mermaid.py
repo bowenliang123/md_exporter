@@ -5,6 +5,7 @@ MdToMermaid service
 
 import re
 import sys
+import threading
 import zipfile
 from pathlib import Path
 from subprocess import CalledProcessError
@@ -13,6 +14,35 @@ from tempfile import NamedTemporaryFile
 from nodejs_wheel import npx
 
 from scripts.utils.markdown_utils import get_md_text
+
+
+# Function to pre-install mermaid-cli
+def pre_install_mermaid():
+    """
+    Pre-install mermaid-cli using npx to avoid installation during first conversion
+    """
+    try:
+        # Execute npx command to install mermaid-cli
+        cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli", "-h"]
+        print("Pre-installing mermaid-cli...")
+        result = npx(cmd_args, return_completed_process=True)
+        print("Mermaid-cli pre-installation completed successfully")
+    except Exception as e:
+        print(f"Warning: Mermaid-cli pre-installation failed: {e}", file=sys.stderr)
+        # Continue execution even if pre-installation fails
+
+
+# Run pre-installation asynchronously when module is imported
+def start_pre_installation():
+    """
+    Start pre-installation in a separate thread to avoid blocking module loading
+    """
+    thread = threading.Thread(target=pre_install_mermaid, daemon=True)
+    thread.start()
+
+
+# Start asynchronous pre-installation
+start_pre_installation()
 
 
 def extract_mermaid_blocks(md_text: str) -> list[str]:
