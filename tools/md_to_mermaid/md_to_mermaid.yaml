@@ -2,13 +2,13 @@ identity:
   name: md_to_mermaid
   author: bowenliang123
   label:
-    en_US: Mermaid diagrams to SVG
-    zh_Hans: 提取 Mermaid 为 SVG 文件
+    en_US: Mermaid markdown diagrams to PNG
+    zh_Hans: 提取 Mermaid Markdown流程图为 PNG 文件
 description:
   human:
-    en_US: Extract mermaid code blocks in Markdown text to SVG image files
-    zh_Hans: 提取Markdown中Mermaid代码块为SVG图片文件
-  llm: Extract mermaid code blocks in Markdown text to SVG image files
+    en_US: Extract Mermaid diagram codeblocks in Markdown text to PNG image files
+    zh_Hans: 提取 Markdown 中 Mermaid 流程图代码块为 PNG 图片文件
+  llm: Extract mermaid code blocks in Markdown text to PNG image files
 parameters:
   - name: md_text
     type: string
