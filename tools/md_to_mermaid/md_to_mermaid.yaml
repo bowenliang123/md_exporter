@@ -1,0 +1,46 @@
+identity:
+  name: md_to_mermaid
+  author: bowenliang123
+  label:
+    en_US: Mermaid diagrams to SVG
+    zh_Hans: 提取 Mermaid 为 SVG 文件
+description:
+  human:
+    en_US: Extract mermaid code blocks in Markdown text to SVG image files
+    zh_Hans: 提取Markdown中Mermaid代码块为SVG图片文件
+  llm: Extract mermaid code blocks in Markdown text to SVG image files
+parameters:
+  - name: md_text
+    type: string
+    required: true
+    label:
+      en_US: Markdown text
+      zh_Hans: Markdown格式文本
+    human_description:
+      en_US: Markdown text
+      zh_Hans: Markdown格式文本
+    form: llm
+  - name: is_compress
+    type: select
+    required: false
+    default: "false"
+    options:
+      - value: "true"
+        label:
+          en_US: "Yes"
+          zh_Hans: 是
+      - value: "false"
+        label:
+          en_US: "No"
+          zh_Hans: 否
+    label:
+      en_US: Generate into ZIP file
+      zh_Hans: 是否压缩为ZIP文件
+    human_description:
+      en_US: Whether to generate into ZIP file
+      zh_Hans: 是否压缩为ZIP文件
+    form: llm
+
+extra:
+  python:
+    source: tools/md_to_mermaid/md_to_mermaid.py

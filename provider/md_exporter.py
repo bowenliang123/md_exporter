@@ -12,6 +12,7 @@ from tools.md_to_json.md_to_json import MarkdownToJsonTool
 from tools.md_to_latex.md_to_latex import MarkdownToLatexTool
 from tools.md_to_linked_image.md_to_linked_image import MarkdownToLinkedImageTool
 from tools.md_to_md.md_to_md import MarkdownToMarkdownTool
+from tools.md_to_mermaid.md_to_mermaid import MarkdownToMermaidTool
 from tools.md_to_pdf.md_to_pdf import MarkdownToPdfTool
 from tools.md_to_png.md_to_png import MarkdownToPngTool
 from tools.md_to_pptx.md_to_pptx import MarkdownToPptxTool
@@ -40,6 +41,7 @@ class MdExporterProvider(ToolProvider):
                 MarkdownToPptxTool,
                 MarkdownToXlsxTool,
                 MarkdownToXmlTool,
+                MarkdownToMermaidTool,
             ]
             for tool in tools:
                 tool.from_credentials({})
