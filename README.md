@@ -11,6 +11,7 @@
 | **[Dify Plugin](https://docs.dify.ai/en/develop-plugin/getting-started/getting-started-dify-plugin)** | Install to Dify platform from the [Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).                                                                                                              |
 | **[Agent Skills](https://agentskills.io/home)** <br> (standalone)                                     | Use as standalone Agent Skills. <br> Import and use the [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md) with [the repo zip](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip) |
 | **[Claude Code](https://code.claude.com/docs/en/skills)** <br> (Agent Skills in Claude Plugin)        | Install to Claude Code as Claude Plugin. <br> Run `/plugin marketplace add bowenliang123/md_exporter` on Claude Code CLI.                                                                                                         |
+| **Python Package**                                                                                    | As python package availiable on Pypi. `pip install md-exporter`                                                                                                                                                                   |
 
 ---
 
