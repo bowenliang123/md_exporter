@@ -11,15 +11,8 @@ from pathlib import Path
 from subprocess import CalledProcessError
 from tempfile import NamedTemporaryFile
 
-# Try to import nodejs-wheel-binaries
-# If it fails, we'll use system npx
-try:
-    from nodejs_wheel import npx
-    has_nodejs_wheel = True
-except ImportError:
-    print("Warning: nodejs-wheel-binaries not installed. Using system npx instead.", file=sys.stderr)
-    npx = None
-    has_nodejs_wheel = False
+from nodejs_wheel import npx
+
 
 from scripts.utils.markdown_utils import get_md_text
 
@@ -66,90 +59,42 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
 
         print(f"Created temporary file with content:\n{mermaid_code}")
 
-        # Execute mermaid-cli command
+        # Execute mermaid-cli command using nodejs-wheel npx
         print(f"Executing mermaid-cli command for file: {temp_mermaid_path}")
-        
-        # Try different approaches to execute mermaid-cli
-        approaches = [
-            # Approach 1: Use system npx (most reliable)
-            {
-                "name": "system npx",
-                "command": ["npx", "--yes", "-p", "@mermaid-js/mermaid-cli", "mmdc", "-i", str(temp_mermaid_path), "-o", str(output_path)],
-                "use_subprocess": True
-            },
-            # Approach 2: Use nodejs-wheel npx if available
-            {
-                "name": "nodejs-wheel npx",
-                "command": ["--yes", "-p", "@mermaid-js/mermaid-cli", "mmdc", "-i", str(temp_mermaid_path), "-o", str(output_path)],
-                "use_subprocess": False
-            }
-        ]
         
         success = False
         
-        for approach in approaches:
-            try:
-                print(f"\nTrying approach: {approach['name']}")
-                
-                if approach['use_subprocess']:
-                    # Use subprocess to execute system npx
-                    cmd = approach['command']
-                    print(f"Running command: {' '.join(cmd)}")
-                    
-                    # Set environment variables to avoid Puppeteer issues
-                    import os
-                    env = os.environ.copy()
-                    env["PUPPETEER_SKIP_CHROMIUM_DOWNLOAD"] = "true"
-                    
-                    # Execute the command
-                    result = subprocess.run(
-                        cmd,
-                        capture_output=True,
-                        text=True,
-                        check=False,
-                        timeout=60,  # Increase timeout to 60 seconds
-                        env=env
-                    )
-                    
-                    print(f"Command returned: {result.returncode}")
-                    print(f"stdout: {result.stdout}")
-                    print(f"stderr: {result.stderr}")
-                    
-                else:
-                    # Use nodejs-wheel npx if available
-                    if not has_nodejs_wheel:
-                        print("Skipping approach: nodejs-wheel not available", file=sys.stderr)
-                        continue
-                    
-                    cmd_args = approach['command']
-                    print(f"Running command: npx {' '.join(cmd_args)}")
-                    
-                    # Execute the command
-                    result = npx(cmd_args, return_completed_process=True)
-                    
-                    print(f"Command returned: {result}")
-                
-                # Check if output file exists and has content
-                if output_path.exists() and output_path.stat().st_size > 0:
-                    print(f"Success with approach: {approach['name']}")
-                    print(f"Output file size: {output_path.stat().st_size} bytes")
-                    success = True
-                    break
-                else:
-                    print(f"Output file not created or empty with approach: {approach['name']}")
-                    # Clean up empty output file
-                    if output_path.exists():
-                        output_path.unlink()
-                        
-            except Exception as e:
-                print(f"Error with approach {approach['name']}: {e}", file=sys.stderr)
+        try:
+            print("Using nodejs-wheel npx")
+            
+            # Command arguments for mermaid-cli
+            cmd_args = ["--yes", "-p", "@mermaid-js/mermaid-cli", "mmdc", "-i", str(temp_mermaid_path), "-o", str(output_path)]
+            print(f"Running command: npx {' '.join(cmd_args)}")
+            
+            # Execute the command using nodejs-wheel npx
+            result = npx(cmd_args, return_completed_process=True)
+            
+            print(f"Command returned: {result}")
+            
+            # Check if output file exists and has content
+            if output_path.exists() and output_path.stat().st_size > 0:
+                print("Success with nodejs-wheel npx")
+                print(f"Output file size: {output_path.stat().st_size} bytes")
+                success = True
+            else:
+                print("Output file not created or empty", file=sys.stderr)
                 # Clean up empty output file
                 if output_path.exists():
                     output_path.unlink()
-                continue
+                    
+        except Exception as e:
+            print(f"Error with nodejs-wheel npx: {e}", file=sys.stderr)
+            # Clean up empty output file
+            if output_path.exists():
+                output_path.unlink()
         
         if not success:
-            print("Error: All approaches failed to convert mermaid code to PNG", file=sys.stderr)
+            print("Error: Failed to convert mermaid code to PNG", file=sys.stderr)
             return False
 
         # Output file should exist and have content since we checked it in the loop
