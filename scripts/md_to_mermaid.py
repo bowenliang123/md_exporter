@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Convert Markdown text to mermaid SVG files
+Convert Markdown text to mermaid PNG files
 """
 
 import os
@@ -42,7 +42,7 @@ def main():
         compress = True
 
     try:
-        # Convert markdown to mermaid SVGs
+        # Convert markdown to mermaid PNG images
         created_files = convert_md_to_mermaid(md_text, output_path, compress=compress)
         print(f"Successfully created {len(created_files)} files:")
         for file_path in created_files:
