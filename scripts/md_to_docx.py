@@ -18,7 +18,7 @@ if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
 # Import shared utility functions
-from services.svc_md_to_docx import convert_md_to_docx, get_default_template
+from services.svc_md_to_docx import convert_md_to_docx, get_default_template  # noqa: E402
 
 
 def main():

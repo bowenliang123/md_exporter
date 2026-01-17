@@ -109,6 +109,11 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
     <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
     <td>🖼️ Downloaded image files</td>
   </tr>
+  <tr>
+    <td><code>md_to_mermaid</code></td>
+    <td>📊 <a href="https://mermaid.js.org/">Mermaid diagrams in Markdown</a> </td>
+    <td>🖼️ PNG image(s) of Mermaid diagrams</td>
+  </tr>
 </table>
 
 ---
@@ -266,7 +271,31 @@ Automatically download all images referenced in your Markdown.
 
 ---
 
-### 📋 Markdown → CSV
+### � Markdown → Mermaid Diagrams
+
+Convert Mermaid diagram code blocks in your Markdown to beautiful PNG images.
+
+
+
+**Input Example:**
+```markdown
+```mermaid
+graph TD
+    A[Start] --> B[Process]
+    B --> C[Decision]
+    C -->|Yes| D[Success]
+    C -->|No| E[Failure]
+    D --> F[End]
+    E --> F
+```
+```
+
+**Output:**
+PNG images of your Mermaid diagrams, ready to use in presentations, reports, or documentation.
+
+---
+
+### �📋 Markdown → CSV
 
 Export your Markdown tables to universal CSV format.
 

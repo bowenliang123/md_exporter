@@ -18,7 +18,7 @@ if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
 # Import shared utility functions
-from services.svc_md_to_csv import convert_md_to_csv
+from services.svc_md_to_csv import convert_md_to_csv  # noqa: E402
 
 
 def main():
