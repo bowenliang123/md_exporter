@@ -288,7 +288,6 @@ graph TD
     D --> F[End]
     E --> F
 ```
-```
 
 **Output:**
 PNG images of your Mermaid diagrams, ready to use in presentations, reports, or documentation.
