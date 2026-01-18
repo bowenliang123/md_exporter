@@ -15,8 +15,9 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from scripts.utils.logger_utils import get_logger
 from services.svc_md_to_mermaid import convert_md_to_mermaid, start_pre_installation  # noqa: E402
+
+from scripts.utils.logger_utils import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 

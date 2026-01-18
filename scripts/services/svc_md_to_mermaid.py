@@ -4,7 +4,6 @@ MdToMermaid service
 """
 
 import re
-import sys
 import threading
 import zipfile
 from pathlib import Path
