@@ -8,6 +8,10 @@ import zipfile
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
+from scripts.utils.logger_utils import get_logger
+
+logger = get_logger(__name__)
+
 
 class CodeBlock:
     def __init__(self, lang_type: str, code: str):
@@ -123,7 +127,7 @@ list[Path]:
                 output_path.write_bytes(Path(zip_file.filename).read_bytes())
                 created_files.append(output_path)
 
-            print(f"Successfully created ZIP file with {len(code_blocks)} code blocks: {output_path}")
+            logger.info(f"Successfully created ZIP file with {len(code_blocks)} code blocks: {output_path}")
         except Exception as e:
             raise Exception(f"Failed to create ZIP file: {e}")
     else:

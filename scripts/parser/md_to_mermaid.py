@@ -15,21 +15,23 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
+from scripts.utils.logger_utils import get_logger
 from services.svc_md_to_mermaid import convert_md_to_mermaid, start_pre_installation  # noqa: E402
 
+logger = get_logger(__name__)
 
 def main():
     """
     Main function
     """
     if len(sys.argv) < 2:
-        print("Usage: python md_to_mermaid.py <markdown_file> [output_path] [--compress]")
+        logger.info("Usage: python md_to_mermaid.py <markdown_file> [output_path] [--compress]")
         sys.exit(1)
 
     # Get input file path
     input_file = Path(sys.argv[1])
     if not input_file.exists():
-        print(f"Error: Input file not found: {input_file}")
+        logger.error(f"Error: Input file not found: {input_file}")
         sys.exit(1)
 
     # Read markdown text
@@ -48,11 +50,11 @@ def main():
     try:
         # Convert markdown to mermaid PNG images
         created_files = convert_md_to_mermaid(md_text, output_path, compress=compress)
-        print(f"Successfully created {len(created_files)} files:")
+        logger.info(f"Successfully created {len(created_files)} files:")
         for file_path in created_files:
-            print(f"  - {file_path}")
+            logger.info(f"  - {file_path}")
     except Exception as e:
-        print(f"Error: {e}")
+        logger.error(f"Error: {e}")
         sys.exit(1)
 
 

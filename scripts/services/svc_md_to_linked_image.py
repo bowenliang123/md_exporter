@@ -13,7 +13,10 @@ import httpx
 import markdown
 from bs4 import BeautifulSoup
 
+from scripts.utils.logger_utils import get_logger
 from scripts.utils.markdown_utils import get_md_text
+
+logger = get_logger(__name__)
 
 # MIME type mapping
 MIME_TYPE_MAP = {
@@ -43,7 +46,7 @@ def extract_image_urls(md_text: str) -> list[str]:
         img_tags = soup.find_all('img')
         image_urls = [img.get('src') for img in img_tags if img.get('src')]
     except Exception as e:
-        print(f"Warning: Failed to extract image URLs by HTML parser, trying regex: {e}", file=sys.stderr)
+        logger.warning(f"Warning: Failed to extract image URLs by HTML parser, trying regex: {e}")
 
         # Fallback: Use regex
         markdown_image_pattern = re.compile(r"!\[.*?]\(.*?\)")
@@ -96,8 +99,7 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         try:
             response = httpx.get(url, timeout=120)
             if response.status_code != 200:
-                print(f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}",
-                      file=sys.stderr)
+                logger.warning(f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}")
                 continue
 
             content_type = response.headers.get('Content-Type', 'image/png')
@@ -105,10 +107,10 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
                 "blob": response.content,
                 "mime_type": content_type
             })
-            print(f"Downloaded: {url}")
+            logger.info(f"Downloaded: {url}")
 
         except Exception as e:
-            print(f"Warning: Failed to download image from URL: {url}, error: {e}", file=sys.stderr)
+            logger.warning(f"Warning: Failed to download image from URL: {url}, error: {e}")
             continue
 
     if not downloaded_images:
@@ -132,7 +134,7 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
 
                 output_path.write_bytes(Path(zip_file.filename).read_bytes())
                 created_files.append(output_path)
-                print(f"Successfully created ZIP file with {len(downloaded_images)} images: {output_path}")
+                logger.info(f"Successfully created ZIP file with {len(downloaded_images)} images: {output_path}")
 
         except Exception as e:
             raise Exception(f"Failed to create ZIP file: {e}")
@@ -157,7 +159,7 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 file_path.write_bytes(image_data["blob"])
                 created_files.append(file_path)
-                print(f"Successfully saved image to {file_path}")
+                logger.info(f"Successfully saved image to {file_path}")
 
         except Exception as e:
             raise Exception(f"Failed to save images: {e}")

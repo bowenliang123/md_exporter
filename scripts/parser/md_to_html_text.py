@@ -17,8 +17,10 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
+from scripts.utils.logger_utils import get_logger
 from services.svc_md_to_html_text import convert_md_to_html_text  # noqa: E402
 
+logger = get_logger(__name__)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -38,7 +40,7 @@ def main():
         with open(input_path, encoding='utf-8') as f:
             md_text = f.read()
     except FileNotFoundError:
-        print(f"Error: Input file '{input_path}' does not exist", file=sys.stderr)
+        logger.error(f"Error: Input file '{input_path}' does not exist")
         sys.exit(1)
 
     # Convert to HTML
@@ -46,7 +48,7 @@ def main():
         html_str = convert_md_to_html_text(md_text)
         print(html_str)
     except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
+        logger.error(f"Error: {e}")
         sys.exit(1)
 
 

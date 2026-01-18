@@ -17,9 +17,10 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-# Import shared utility functions
+from scripts.utils.logger_utils import get_logger
 from services.svc_md_to_docx import convert_md_to_docx, get_default_template  # noqa: E402
 
+logger = get_logger(__name__)
 
 def main():
     parser = argparse.ArgumentParser(
@@ -49,7 +50,7 @@ def main():
     # Read input
     input_path = Path(args.input)
     if not input_path.exists():
-        print(f"Error: Input file '{input_path}' does not exist", file=sys.stderr)
+        logger.error(f"Error: Input file '{input_path}' does not exist")
         sys.exit(1)
     md_text = input_path.read_text(encoding='utf-8')
 
@@ -59,7 +60,7 @@ def main():
     if args.template:
         template_path = Path(args.template)
         if not template_path.exists():
-            print(f"Error: Template file not found: {args.template}", file=sys.stderr)
+            logger.error(f"Error: Template file not found: {args.template}")
             sys.exit(1)
     else:
         # Use default template
@@ -69,12 +70,12 @@ def main():
     output_path = Path(args.output)
     try:
         convert_md_to_docx(md_text, output_path, template_path, args.strip_wrapper)
-        print(f"Successfully converted to {output_path}")
+        logger.info(f"Successfully converted to {output_path}")
     except ValueError as e:
-        print(f"Error: {e}", file=sys.stderr)
+        logger.error(f"Error: {e}")
         sys.exit(1)
     except Exception as e:
-        print(f"Error: Failed to convert to DOCX - {e}", file=sys.stderr)
+        logger.error(f"Error: Failed to convert to DOCX - {e}")
         sys.exit(1)
 
 

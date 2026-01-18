@@ -13,7 +13,10 @@ from tempfile import NamedTemporaryFile
 
 from nodejs_wheel import npx
 
+from scripts.utils.logger_utils import get_logger
 from scripts.utils.markdown_utils import get_md_text
+
+logger = get_logger(__name__)
 
 
 # Function to pre-install mermaid-cli
@@ -25,11 +28,11 @@ def pre_install_mermaid():
         # Execute npx command to install mermaid-cli
         cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
                     "mmdc", "-V"]
-        print("Pre-installing mermaid-cli...")
+        logger.info("Pre-installing mermaid-cli...")
         result = npx(cmd_args, return_completed_process=True)
-        print("Mermaid-cli pre-installation completed successfully")
+        logger.info("Mermaid-cli pre-installation completed successfully")
     except Exception as e:
-        print(f"Warning: Mermaid-cli pre-installation failed: {e}", file=sys.stderr)
+        logger.warning(f"Warning: Mermaid-cli pre-installation failed: {e}")
         # Continue execution even if pre-installation fails
 
 
@@ -82,15 +85,15 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
             temp_mermaid_path = Path(temp_mermaid_file.name)
             temp_mermaid_path.write_text(mermaid_code)
 
-        print(f"Created temporary file with content:\n{mermaid_code}")
+        logger.debug(f"Created temporary file with content:\n{mermaid_code}")
 
         # Execute mermaid-cli command using nodejs-wheel npx
-        print(f"Executing mermaid-cli command for file: {temp_mermaid_path}")
+        logger.info(f"Executing mermaid-cli command for file: {temp_mermaid_path}")
         
         success = False
         
         try:
-            print("Using nodejs-wheel npx")
+            logger.debug("Using nodejs-wheel npx")
             
             # Command arguments for mermaid-cli
             cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
@@ -99,44 +102,44 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
                         "-o", str(output_path),
                         "--scale", "2",
                         ]
-            print(f"Running command: npx {' '.join(cmd_args)}")
+            logger.debug(f"Running command: npx {' '.join(cmd_args)}")
             
             # Execute the command using nodejs-wheel npx
             result = npx(cmd_args, return_completed_process=True)
             
-            print(f"Command returned: {result}")
+            logger.debug(f"Command returned: {result}")
             
             # Check if output file exists and has content
             if output_path.exists() and output_path.stat().st_size > 0:
-                print("Success with nodejs-wheel npx")
-                # print(f"Output file size: {output_path.stat().st_size} bytes")
+                logger.info("Success with nodejs-wheel npx")
+                # logger.debug(f"Output file size: {output_path.stat().st_size} bytes")
                 success = True
             else:
-                print("Output file not created or empty", file=sys.stderr)
+                logger.error("Output file not created or empty")
                 # Clean up empty output file
                 if output_path.exists():
                     output_path.unlink()
                     
         except Exception as e:
-            print(f"Error with nodejs-wheel npx: {e}", file=sys.stderr)
+            logger.error(f"Error with nodejs-wheel npx: {e}")
             # Clean up empty output file
             if output_path.exists():
                 output_path.unlink()
         
         if not success:
-            print("Error: Failed to convert mermaid code to PNG", file=sys.stderr)
+            logger.error("Error: Failed to convert mermaid code to PNG")
             return False
 
         # Output file should exist and have content since we checked it in the loop
-        print(f"Successfully converted mermaid code to PNG: {output_path}")
-        print(f"Output file size: {output_path.stat().st_size} bytes")
+        logger.info(f"Successfully converted mermaid code to PNG: {output_path}")
+        logger.debug(f"Output file size: {output_path.stat().st_size} bytes")
         return True
 
     except CalledProcessError as e:
-        print(f"Error: mermaid-cli execution failed: {e}", file=sys.stderr)
+        logger.error(f"Error: mermaid-cli execution failed: {e}")
         return False
     except Exception as e:
-        print(f"Error: Unexpected error during conversion: {e}", file=sys.stderr)
+        logger.error(f"Error: Unexpected error during conversion: {e}")
         return False
     finally:
         # Clean up temporary files
@@ -185,15 +188,15 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
             success = convert_mermaid_to_png(mermaid_code, temp_png_path)
             if success:
                 png_files.append(temp_png_path)
-                print(f"Converted mermaid diagram {i + 1}")
+                logger.info(f"Converted mermaid diagram {i + 1}")
             else:
-                print(f"Failed to convert mermaid diagram {i + 1}", file=sys.stderr)
+                logger.error(f"Failed to convert mermaid diagram {i + 1}")
                 # Clean up failed conversion
                 if temp_png_path.exists():
                     temp_png_path.unlink()
 
         except Exception as e:
-            print(f"Error converting mermaid diagram {i + 1}: {e}", file=sys.stderr)
+            logger.error(f"Error converting mermaid diagram {i + 1}: {e}")
             # Clean up temporary files
             if 'temp_png_path' in locals() and temp_png_path.exists():
                 try:
@@ -219,7 +222,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
             # Copy to final output path
             output_path.write_bytes(temp_zip_path.read_bytes())
             created_files.append(output_path)
-            print(f"Successfully created ZIP file with {len(png_files)} PNG diagrams: {output_path}")
+            logger.info(f"Successfully created ZIP file with {len(png_files)} PNG diagrams: {output_path}")
 
             # Clean up temporary files
             temp_zip_path.unlink()
@@ -255,7 +258,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
                 # Copy PNG content
                 file_path.write_bytes(png_path.read_bytes())
                 created_files.append(file_path)
-                print(f"Successfully saved PNG to {file_path}")
+                logger.info(f"Successfully saved PNG to {file_path}")
 
                 # Clean up temporary file
                 png_path.unlink()

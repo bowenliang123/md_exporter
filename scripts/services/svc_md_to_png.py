@@ -12,8 +12,11 @@ import pymupdf
 from PIL import Image
 from xhtml2pdf import pisa
 
+from scripts.utils.logger_utils import get_logger
 from scripts.utils.markdown_utils import convert_markdown_to_html
 from scripts.utils.text_utils import contains_chinese, contains_japanese
+
+logger = get_logger(__name__)
 
 
 def convert_to_html_with_font_support(md_text: str) -> str:
@@ -117,7 +120,7 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
                 output_file.parent.mkdir(parents=True, exist_ok=True)
                 output_file.write_bytes(image_bytes)
                 created_files.append(output_file)
-                print(f"Successfully converted to {output_file}")
+                logger.info(f"Successfully converted to {output_file}")
             else:
                 # Add to ZIP list
                 images_for_zip.append({
@@ -138,7 +141,7 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
 
                 output_path.write_bytes(Path(zip_file.filename).read_bytes())
                 created_files.append(output_path)
-                print(f"Successfully created ZIP file with {len(images_for_zip)} PNG images: {output_path}")
+                logger.info(f"Successfully created ZIP file with {len(images_for_zip)} PNG images: {output_path}")
 
     except Exception as e:
         raise Exception(f"Failed to convert to PNG: {e}")
