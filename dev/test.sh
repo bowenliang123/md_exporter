@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pytest ./test
+test/bin/run_all_tests.sh

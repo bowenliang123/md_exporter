@@ -73,7 +73,7 @@ uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/parser/md_to_xlsx.py
 
 ### Testing
 - test files are located in the `tests` folder, which are testing the each script and tool of Agent Skills and can be run in standalone
-- - run `dev/test` to test all scripts with `pytest`.
+- run `test/bin/run_all_tests.sh` to test all scripts`.
 
 ### Exclusions
 - The `md2pptx-X.Y.Z` folder contains upstream code of `md2pptx` project used for Markdown to PPTX conversion. The content of this folder should be kept as-is and excluded from linting, formatting, and testing.
