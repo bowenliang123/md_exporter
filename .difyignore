@@ -180,3 +180,6 @@ Thumbs.db
 
 # dev scripts in local
 dev/*.sh
+
+# Trae IDE
+.trae/
