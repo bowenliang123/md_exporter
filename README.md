@@ -271,14 +271,11 @@ Automatically download all images referenced in your Markdown.
 
 ---
 
-### � Markdown → Mermaid Diagrams
+### 🖼️ Markdown → Mermaid Diagrams
 
-Convert Mermaid diagram code blocks in your Markdown to beautiful PNG images.
-
-
+Convert Mermaid diagram code blocks in your Markdown to PNG images.
 
 **Input Example:**
-```markdown
 ```mermaid
 graph TD
     A[Start] --> B[Process]
@@ -290,11 +287,14 @@ graph TD
 ```
 
 **Output:**
-PNG images of your Mermaid diagrams, ready to use in presentations, reports, or documentation.
+
+![Mermaid Usage](_assets/md_to_mermaid_1.png)
+
+![Mermaid Output](_assets/md_to_mermaid_2.png)
 
 ---
 
-### �📋 Markdown → CSV
+### 📋 Markdown → CSV
 
 Export your Markdown tables to universal CSV format.
 
@@ -353,6 +353,9 @@ Releases are available at
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
 Release changelogs:
+- 3.1.0:
+  - Introduce `md_to_mermaid` tool for converting Mermaid diagram code blocks in Markdown to PNG images
+  
 - 3.0.0:
   - `md_exporter` is now ready for Claude Agent Skills and runnable in standalone
     - Add `SKILL.md` for Claude Skills description

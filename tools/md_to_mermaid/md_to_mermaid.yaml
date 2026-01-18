@@ -2,8 +2,8 @@ identity:
   name: md_to_mermaid
   author: bowenliang123
   label:
-    en_US: Mermaid markdown diagrams to PNG
-    zh_Hans: 提取 Mermaid Markdown流程图为 PNG 文件
+    en_US: Mermaid diagrams to PNG images
+    zh_Hans: Mermaid 流程图 转 PNG 文件
 description:
   human:
     en_US: Extract Mermaid diagram codeblocks in Markdown text to PNG image files
