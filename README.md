@@ -1,10 +1,10 @@
 # Markdown Exporter
-### Transform Your Markdowns Into Powerful Documents
-### as Agent Skills and Dify Plugin 
+### An Agent Skill and Dify plugin to Transform Markdowns Into Powerful Documents
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
-- Github Repository: [![GitHub Repo stars](https://img.shields.io/github/stars/bowenliang123/md_exporter?label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
-- This plugin can be used as:
+- Github Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
+
+- Markdown Exporter can be used as:
 
 | Usage                                                                                                 | Installation                                                                                                                                                                                                                      |
 |-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
