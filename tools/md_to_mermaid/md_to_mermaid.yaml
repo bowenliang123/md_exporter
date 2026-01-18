@@ -14,11 +14,11 @@ parameters:
     type: string
     required: true
     label:
-      en_US: Markdown text
-      zh_Hans: Markdown格式文本
+      en_US: Mermaid diagram Markdown text
+      zh_Hans: Mermaid 流程图 Markdown 文本
     human_description:
-      en_US: Markdown text
-      zh_Hans: Markdown格式文本
+      en_US: 'Support multiple "```mermaid" codeblocks in Markdown text, and generate PNG image files for each codeblock. For the Mermaid flowchart syntax, please refer to: https://mermaid.js.org/syntax/flowchart.html'
+      zh_Hans: 支持多段 "```mermaid" 代码块，生成对应多个PNG图片文件。Mermaid 流程图Markdown格式,请参考：https://mermaid.js.org/syntax/flowchart.html
     form: llm
   - name: is_compress
     type: select
