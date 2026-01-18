@@ -54,12 +54,12 @@ Unlike the Dify Plugin, the Agent Skill is not running as a server. It should be
 For example, to translate a Markdown table to Excel file `.xlsx`, run the following command:
 
 ```bash
-uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/parser/md_to_xlsx.py <input> <output> [options]
+uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/parser/cli_md_to_xlsx.py <input> <output> [options]
 ```
 
 #### Scripts and Resources used for Dify Plugin
 - `SKILL.md` - Agent Skill specification file and the usage guides and examples of the kills.
-- `/scripts/parser/md_to_XXX.py` - Skill implementation code for converting Markdown to XXX format.
+- `/scripts/parser/cli_md_to_XXX.py` - Skill implementation code for converting Markdown to XXX format.
 - `/scripts/services/*.py` - Shared python code used for Dify Plugin and Agent Skill.
 - `/assets` - Assets used by both Agent Skill and Dify Plugin, such as file templates used for generating `.docx` and `.pptx` files
 

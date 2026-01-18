@@ -9,7 +9,7 @@ class TestMdToLinkedImage(TestBase):
         output_dir = "test_output/images"
         
         # Run the tool using the base class method
-        self.run_script("md_to_linked_image.py", input_file, output_dir)
+        self.run_script("parser/cli_md_to_linked_image.py", input_file, output_dir)
         
         # Verify the output directory is not empty
         self.verify_output_dir(output_dir)
