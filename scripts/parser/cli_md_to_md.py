@@ -17,7 +17,7 @@ if script_dir not in sys.path:
 if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
-from services.svc_md_to_md import convert_md_to_md  # noqa: E402
+from scripts.services.svc_md_to_md import convert_md_to_md  # noqa: E402
 
 from scripts.utils.logger_utils import get_logger  # noqa: E402
 
