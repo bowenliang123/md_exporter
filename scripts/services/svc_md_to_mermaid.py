@@ -163,7 +163,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
         Exception: If conversion fails
     """
     # Process Markdown text
-    processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
+    processed_md = get_md_text(md_text, is_strip_wrapper=False)
     if "```mermaid" not in processed_md:
         processed_md = f"```mermaid\n{processed_md}\n```"
 
