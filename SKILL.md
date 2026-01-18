@@ -20,7 +20,7 @@ disable: false
   </tr>
   <tr>
     <td><code>md_to_docx</code></td>
-    <td rowspan="6">📝 Markdown text</td>
+    <td rowspan="6">📝 Markdown</td>
     <td>📄 Word document (.docx)</td>
   </tr>
   <tr>
@@ -138,7 +138,7 @@ You can also run the Python scripts directly, but you'll need to manage dependen
 ### Important Notes
 - Always navigate to the root directory of the project before executing any scripts.
 - The bash scripts in `scripts/` provide the most convenient way to run the tools, as they handle all dependency management automatically.
-- All scripts support both file paths and direct Markdown text as input
+- All scripts only support file paths as input
 
 
 ## 🔧 Scripts
@@ -153,7 +153,7 @@ scripts/md_to_csv.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output CSV file path
 
 **Options:**
@@ -175,7 +175,7 @@ scripts/md_to_pdf.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output PDF file path
 
 **Options:**
@@ -197,7 +197,7 @@ scripts/md_to_docx.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output DOCX file path
 
 **Options:**
@@ -221,7 +221,7 @@ scripts/md_to_xlsx.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output XLSX file path
 
 **Options:**
@@ -244,7 +244,7 @@ scripts/md_to_pptx.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output PPTX file path
 
 **Options:**
@@ -266,7 +266,7 @@ scripts/md_to_codeblock.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output file or directory path
 
 **Options:**
@@ -289,7 +289,7 @@ scripts/md_to_json.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output JSON file path
 
 **Options:**
@@ -313,7 +313,7 @@ scripts/md_to_xml.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output XML file path
 
 **Options:**
@@ -335,7 +335,7 @@ scripts/md_to_latex.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output LaTeX file path
 
 **Options:**
@@ -357,7 +357,7 @@ scripts/md_to_html.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output HTML file path
 
 **Options:**
@@ -379,7 +379,7 @@ scripts/md_to_html_text.sh <input>
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 
 **Example:**
 ```bash
@@ -397,7 +397,7 @@ scripts/md_to_png.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output PNG file path or directory path
 
 **Options:**
@@ -421,7 +421,7 @@ scripts/md_to_md.sh <input> <output>
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output MD file path
 
 **Example:**
@@ -440,7 +440,7 @@ scripts/md_to_linked_image.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output file or directory path
 
 **Options:**
@@ -463,7 +463,7 @@ scripts/md_to_mermaid.sh <input> <output> [options]
 ```
 
 **Arguments:**
-- `input` - Input Markdown file path or Markdown text
+- `input` - Input Markdown file path
 - `output` - Output PNG file path or directory path
 
 **Options:**
@@ -479,8 +479,7 @@ scripts/md_to_mermaid.sh /path/input.md /path/output.zip --compress
 
 ## 📝 Notes
 
-- All scripts support both file paths and direct Markdown text as input
-- When providing direct Markdown text as input, the script will treat the first argument as the text content
+- All scripts only support file paths as input
 - For scripts that generate multiple files (e.g., multiple tables, multiple code blocks), the output filename will be automatically numbered
 - Use the `--strip-wrapper` option to remove code block wrappers (```) from the input Markdown
 - For PPTX conversion, ensure the `md2pptx` directory is available in the `tools/md_to_pptx/` directory

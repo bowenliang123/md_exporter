@@ -27,7 +27,7 @@ def main():
     )
     parser.add_argument(
         'input',
-        help='Input Markdown file path or Markdown text'
+        help='Input Markdown file path'
     )
 
     args = parser.parse_args()
@@ -38,7 +38,8 @@ def main():
         with open(input_path, encoding='utf-8') as f:
             md_text = f.read()
     except FileNotFoundError:
-        md_text = args.input
+        print(f"Error: Input file '{input_path}' does not exist", file=sys.stderr)
+        sys.exit(1)
 
     # Convert to HTML
     try:

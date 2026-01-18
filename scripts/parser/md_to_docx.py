@@ -28,7 +28,7 @@ def main():
     )
     parser.add_argument(
         'input',
-        help='Input Markdown file path or Markdown text'
+        help='Input Markdown file path'
     )
     parser.add_argument(
         'output',
@@ -48,10 +48,10 @@ def main():
 
     # Read input
     input_path = Path(args.input)
-    if input_path.exists():
-        md_text = input_path.read_text(encoding='utf-8')
-    else:
-        md_text = args.input
+    if not input_path.exists():
+        print(f"Error: Input file '{input_path}' does not exist", file=sys.stderr)
+        sys.exit(1)
+    md_text = input_path.read_text(encoding='utf-8')
 
     # Determine template file
     script_dir = Path(__file__).resolve().parent
