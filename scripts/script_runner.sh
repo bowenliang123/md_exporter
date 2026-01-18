@@ -8,7 +8,10 @@ function get_script_dir() {
 # Get the project root directory
 function get_project_root() {
     local script_dir="$(get_script_dir)"
-    echo "$(dirname "$(dirname "$script_dir")")"
+    # 当从scripts目录运行时，需要向上一级目录
+    # 当从test/bin目录运行时，会在run_python_script函数中cd到正确的目录
+    local project_root="$(dirname "$script_dir")"
+    echo "$project_root"
 }
 
 # Check if Python version is >= 3.11
@@ -40,12 +43,14 @@ function run_python_script() {
     shift
     
     local project_root="$(get_project_root)"
-    local script_path="scripts/$script_name"
+    local script_path="scripts/parser/$script_name"
     
     # Check if uv is installed
     if command -v uv &> /dev/null; then
         echo "Using uv package manager..."
         cd "$project_root"
+        # Set PYTHONPATH to include project root
+        export PYTHONPATH="$project_root:$PYTHONPATH"
         # uv run automatically handles dependencies
         uv run python "$script_path" "$@"
     else
@@ -54,6 +59,8 @@ function run_python_script() {
 
         echo "uv not found, using pip..."
         cd "$project_root"
+        # Set PYTHONPATH to include project root
+        export PYTHONPATH="$project_root:$PYTHONPATH"
         pip install -r requirements.txt
         python "$script_path" "$@"
     fi

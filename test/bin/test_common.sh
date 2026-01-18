@@ -69,7 +69,7 @@ function run_file_test() {
     
     # Run the bash script
     echo "Running test for ${script_name}.sh..."
-    "$PROJECT_ROOT/scripts/bin/${script_name}.sh" "$input_file" "$output_file"
+    "$PROJECT_ROOT/scripts/${script_name}.sh" "$input_file" "$output_file"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_file_output "$output_file"; then
@@ -100,7 +100,7 @@ function run_dir_test() {
     
     # Run the bash script
     echo "Running test for ${script_name}.sh..."
-    "$PROJECT_ROOT/scripts/bin/${script_name}.sh" "$input_file" "$output_dir"
+    "$PROJECT_ROOT/scripts/${script_name}.sh" "$input_file" "$output_dir"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_dir_output "$output_dir"; then
@@ -126,7 +126,7 @@ function run_stdout_test() {
     
     # Run the bash script and capture output
     echo "Running test for ${script_name}.sh..."
-    local output="$($PROJECT_ROOT/scripts/bin/${script_name}.sh "$input_file")"
+    local output="$($PROJECT_ROOT/scripts/${script_name}.sh "$input_file")"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_stdout_output "$output"; then

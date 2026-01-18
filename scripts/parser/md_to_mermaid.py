@@ -3,15 +3,19 @@
 Convert Markdown text to mermaid PNG files
 """
 
-import os
 import sys
-
-# Add current directory to Python path
-sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
-
 from pathlib import Path
 
-from scripts.services.svc_md_to_mermaid import convert_md_to_mermaid, start_pre_installation
+# Add the scripts directory to Python path to fix import issues
+script_dir = str(Path(__file__).resolve().parent)
+parent_dir = str(Path(__file__).resolve().parent.parent)
+
+if script_dir not in sys.path:
+    sys.path.insert(0, script_dir)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
+
+from services.svc_md_to_mermaid import convert_md_to_mermaid, start_pre_installation  # noqa: E402
 
 
 def main():
