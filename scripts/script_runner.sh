@@ -8,8 +8,8 @@ function get_script_dir() {
 # Get the project root directory
 function get_project_root() {
     local script_dir="$(get_script_dir)"
-    # 当从scripts目录运行时，需要向上一级目录
-    # 当从test/bin目录运行时，会在run_python_script函数中cd到正确的目录
+    # When running from the scripts directory, go up one directory
+    # When running from the test/bin directory, the run_python_script function will cd to the correct directory
     local project_root="$(dirname "$script_dir")"
     echo "$project_root"
 }
