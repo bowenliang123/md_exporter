@@ -42,8 +42,46 @@ function run_python_script() {
     local script_name="$1"
     shift
     
+    local original_dir="$(pwd)"
     local project_root="$(get_project_root)"
     local script_path="scripts/parser/$script_name"
+    
+    # Convert relative paths to absolute paths
+    local abs_args=()
+    local i=0
+    while [[ $i -lt $# ]]; do
+        local arg="${@:i+1:1}"
+        if [[ "$arg" == --* ]]; then
+            # This is an option, add it as-is
+            abs_args+=("$arg")
+            i=$((i+1))
+            # Check if this option has a value
+            if [[ $i -lt $# ]]; then
+                local next_arg="${@:i+1:1}"
+                if [[ "$next_arg" != --* ]]; then
+                    # This is the value for the option
+                    if [[ "$next_arg" == /* ]]; then
+                        # Already an absolute path
+                        abs_args+=("$next_arg")
+                    else
+                        # Convert relative path to absolute path using original directory
+                        abs_args+=("$original_dir/$next_arg")
+                    fi
+                    i=$((i+1))
+                fi
+            fi
+        else
+            # This is a non-option argument (file path)
+            if [[ "$arg" == /* ]]; then
+                # Already an absolute path
+                abs_args+=("$arg")
+            else
+                # Convert relative path to absolute path using original directory
+                abs_args+=("$original_dir/$arg")
+            fi
+            i=$((i+1))
+        fi
+    done
     
     # Check if uv is installed
     if command -v uv &> /dev/null; then
@@ -52,7 +90,7 @@ function run_python_script() {
         # Set PYTHONPATH to include project root
         export PYTHONPATH="$project_root:$PYTHONPATH"
         # uv run automatically handles dependencies
-        uv run python "$script_path" "$@"
+        uv run python "$script_path" "${abs_args[@]}"
     else
         # Check Python version
         check_python_version
@@ -62,6 +100,6 @@ function run_python_script() {
         # Set PYTHONPATH to include project root
         export PYTHONPATH="$project_root:$PYTHONPATH"
         pip install -r requirements.txt
-        python "$script_path" "$@"
+        python "$script_path" "${abs_args[@]}"
     fi
 }
