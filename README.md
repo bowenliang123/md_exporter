@@ -275,6 +275,8 @@ Automatically download all images referenced in your Markdown.
 Convert Mermaid diagram code blocks in your Markdown to PNG images.
 
 **Input Example:**
+
+<code>
 ```mermaid
 graph TD
     A[Start] --> B[Process]
@@ -284,6 +286,7 @@ graph TD
     D --> F[End]
     E --> F
 ```
+</code>
 
 **Output:**
 
