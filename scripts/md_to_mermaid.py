@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
 from pathlib import Path
 
-from scripts.services.svc_md_to_mermaid import convert_md_to_mermaid
+from scripts.services.svc_md_to_mermaid import convert_md_to_mermaid, start_pre_installation
 
 
 def main():
@@ -53,4 +53,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # Start asynchronous pre-installation
+    start_pre_installation()
+
     main()

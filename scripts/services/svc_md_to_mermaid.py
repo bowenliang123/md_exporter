@@ -42,10 +42,6 @@ def start_pre_installation():
     thread.start()
 
 
-# Start asynchronous pre-installation
-start_pre_installation()
-
-
 def extract_mermaid_blocks(md_text: str) -> list[str]:
     """
     Extract mermaid code blocks from Markdown text
@@ -113,7 +109,7 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
             # Check if output file exists and has content
             if output_path.exists() and output_path.stat().st_size > 0:
                 print("Success with nodejs-wheel npx")
-                print(f"Output file size: {output_path.stat().st_size} bytes")
+                # print(f"Output file size: {output_path.stat().st_size} bytes")
                 success = True
             else:
                 print("Output file not created or empty", file=sys.stderr)
