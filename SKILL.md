@@ -106,9 +106,9 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 All scripts provided in this project are Python scripts located in the `scripts/` directory. All required Python dependencies are declared in the project's [pyproject.toml](./pyproject.toml) file.
 
 ### Recommended Execution Method - Using Bash Scripts
-We strongly recommend using the bash scripts located in the `scripts/bin/` directory. These scripts provide a seamless experience by automatically handling dependency management and execution:
+We strongly recommend using the bash scripts located in the `scripts/` directory. These scripts provide a seamless experience by automatically handling dependency management and execution:
 
-1. **Automatic Dependency Management**: When you run a bash script from the `scripts/bin/` directory, it will:
+1. **Automatic Dependency Management**: When you run a bash script from the `scripts/` directory, it will:
    - First check if the `uv` package manager is installed
    - If `uv` is available, it will use `uv run` to automatically install dependencies and execute the Python script in one step
    - If `uv` is not available, it will fall back to using `pip` to install dependencies from `requirements.txt` before executing the script
@@ -116,7 +116,7 @@ We strongly recommend using the bash scripts located in the `scripts/bin/` direc
 
 2. **Execute scripts with bash**:
    ```bash
-   scripts/bin/<script_name>.sh <args> [options]
+   scripts/<script_name>.sh <args> [options]
    ```
 
 ### Alternative Execution Method - Direct Python Execution
@@ -124,7 +124,7 @@ You can also run the Python scripts directly, but you'll need to manage dependen
 
 1. **Using uv** (recommended if running directly):
    ```bash
-   uv run python scripts/<script_name>.py <args> [options]
+   uv run python scripts/parser/<script_name>.py <args> [options]
    ```
 
 2. **Using pip**:
@@ -132,12 +132,12 @@ You can also run the Python scripts directly, but you'll need to manage dependen
    # Install dependencies first
    pip install -r requirements.txt
    # Then run the script
-   python scripts/<script_name>.py <args> [options]
+   python scripts/parser/<script_name>.py <args> [options]
    ```
 
 ### Important Notes
 - Always navigate to the root directory of the project before executing any scripts.
-- The bash scripts in `scripts/bin/` provide the most convenient way to run the tools, as they handle all dependency management automatically.
+- The bash scripts in `scripts/` provide the most convenient way to run the tools, as they handle all dependency management automatically.
 - All scripts support both file paths and direct Markdown text as input
 
 
@@ -149,7 +149,7 @@ Converts Markdown tables to CSV format.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_csv.sh <input> <output> [options]
+scripts/md_to_csv.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -161,7 +161,7 @@ scripts/bin/md_to_csv.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_csv.sh /path/input.md /path/output.csv
+scripts/md_to_csv.sh /path/input.md /path/output.csv
 ```
 
 
@@ -171,7 +171,7 @@ Converts Markdown text to PDF format with support for Chinese, Japanese, and oth
 
 **Usage:**
 ```bash
-scripts/bin/md_to_pdf.sh <input> <output> [options]
+scripts/md_to_pdf.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -183,7 +183,7 @@ scripts/bin/md_to_pdf.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_pdf.sh /path/input.md /path/output.pdf
+scripts/md_to_pdf.sh /path/input.md /path/output.pdf
 ```
 
 
@@ -193,7 +193,7 @@ Converts Markdown text to DOCX format using pandoc.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_docx.sh <input> <output> [options]
+scripts/md_to_docx.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -206,8 +206,8 @@ scripts/bin/md_to_docx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_docx.sh /path/input.md /path/output.docx
-scripts/bin/md_to_docx.sh /path/input.md /path/output.docx --template /path/template.docx
+scripts/md_to_docx.sh /path/input.md /path/output.docx
+scripts/md_to_docx.sh /path/input.md /path/output.docx --template /path/template.docx
 ```
 
 
@@ -217,7 +217,7 @@ Converts Markdown tables to XLSX format with multiple sheets support.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_xlsx.sh <input> <output> [options]
+scripts/md_to_xlsx.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -230,7 +230,7 @@ scripts/bin/md_to_xlsx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_xlsx.sh /path/input.md /path/output.xlsx
+scripts/md_to_xlsx.sh /path/input.md /path/output.xlsx
 ```
 
 
@@ -240,7 +240,7 @@ Converts Markdown text to PPTX format using md2pptx.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_pptx.sh <input> <output> [options]
+scripts/md_to_pptx.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -252,7 +252,7 @@ scripts/bin/md_to_pptx.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_pptx.sh /path/input.md /path/output.pptx
+scripts/md_to_pptx.sh /path/input.md /path/output.pptx
 ```
 
 
@@ -262,7 +262,7 @@ Extracts code blocks from Markdown and saves them as individual files.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_codeblock.sh <input> <output> [options]
+scripts/md_to_codeblock.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -274,8 +274,8 @@ scripts/bin/md_to_codeblock.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_codeblock.sh /path/input.md /path/output_dir
-scripts/bin/md_to_codeblock.sh /path/input.md /path/output.zip --compress
+scripts/md_to_codeblock.sh /path/input.md /path/output_dir
+scripts/md_to_codeblock.sh /path/input.md /path/output.zip --compress
 ```
 
 
@@ -285,7 +285,7 @@ Converts Markdown tables to JSON or JSONL format.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_json.sh <input> <output> [options]
+scripts/md_to_json.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -298,8 +298,8 @@ scripts/bin/md_to_json.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_json.sh /path/input.md /path/output.json
-scripts/bin/md_to_json.sh /path/input.md /path/output.json --style json_array
+scripts/md_to_json.sh /path/input.md /path/output.json
+scripts/md_to_json.sh /path/input.md /path/output.json --style json_array
 ```
 
 
@@ -309,7 +309,7 @@ Converts Markdown text to XML format.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_xml.sh <input> <output> [options]
+scripts/md_to_xml.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -321,7 +321,7 @@ scripts/bin/md_to_xml.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_xml.sh /path/input.md /path/output.xml
+scripts/md_to_xml.sh /path/input.md /path/output.xml
 ```
 
 
@@ -331,7 +331,7 @@ Converts Markdown tables to LaTeX format.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_latex.sh <input> <output> [options]
+scripts/md_to_latex.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -343,7 +343,7 @@ scripts/bin/md_to_latex.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_latex.sh /path/input.md /path/output.tex
+scripts/md_to_latex.sh /path/input.md /path/output.tex
 ```
 
 
@@ -353,7 +353,7 @@ Converts Markdown text to HTML format using pandoc.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_html.sh <input> <output> [options]
+scripts/md_to_html.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -365,7 +365,7 @@ scripts/bin/md_to_html.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_html.sh /path/input.md /path/output.html
+scripts/md_to_html.sh /path/input.md /path/output.html
 ```
 
 
@@ -375,7 +375,7 @@ Converts Markdown text to HTML and outputs to stdout.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_html_text.sh <input>
+scripts/md_to_html_text.sh <input>
 ```
 
 **Arguments:**
@@ -383,7 +383,7 @@ scripts/bin/md_to_html_text.sh <input>
 
 **Example:**
 ```bash
-scripts/bin/md_to_html_text.sh /path/input.md
+scripts/md_to_html_text.sh /path/input.md
 ```
 
 
@@ -393,7 +393,7 @@ Converts Markdown text to PNG images (one per page).
 
 **Usage:**
 ```bash
-scripts/bin/md_to_png.sh <input> <output> [options]
+scripts/md_to_png.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -406,8 +406,8 @@ scripts/bin/md_to_png.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_png.sh /path/input.md /path/output.png
-scripts/bin/md_to_png.sh /path/input.md /path/output.png --compress
+scripts/md_to_png.sh /path/input.md /path/output.png
+scripts/md_to_png.sh /path/input.md /path/output.png --compress
 ```
 
 
@@ -417,7 +417,7 @@ Saves Markdown text to a .md file.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_md.sh <input> <output>
+scripts/md_to_md.sh <input> <output>
 ```
 
 **Arguments:**
@@ -426,7 +426,7 @@ scripts/bin/md_to_md.sh <input> <output>
 
 **Example:**
 ```bash
-scripts/bin/md_to_md.sh /path/input.md /path/output.md
+scripts/md_to_md.sh /path/input.md /path/output.md
 ```
 
 
@@ -436,7 +436,7 @@ Extracts image links from Markdown and downloads them as files.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_linked_image.sh <input> <output> [options]
+scripts/md_to_linked_image.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -448,8 +448,8 @@ scripts/bin/md_to_linked_image.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_linked_image.sh /path/input.md /path/output_dir
-scripts/bin/md_to_linked_image.sh /path/input.md /path/output.zip --compress
+scripts/md_to_linked_image.sh /path/input.md /path/output_dir
+scripts/md_to_linked_image.sh /path/input.md /path/output.zip --compress
 ```
 
 
@@ -459,7 +459,7 @@ Converts Mermaid diagram code blocks in Markdown to PNG images.
 
 **Usage:**
 ```bash
-scripts/bin/md_to_mermaid.sh <input> <output> [options]
+scripts/md_to_mermaid.sh <input> <output> [options]
 ```
 
 **Arguments:**
@@ -472,8 +472,8 @@ scripts/bin/md_to_mermaid.sh <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/bin/md_to_mermaid.sh /path/input.md /path/output.png
-scripts/bin/md_to_mermaid.sh /path/input.md /path/output.zip --compress
+scripts/md_to_mermaid.sh /path/input.md /path/output.png
+scripts/md_to_mermaid.sh /path/input.md /path/output.zip --compress
 ```
 
 
