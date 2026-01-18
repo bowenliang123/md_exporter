@@ -37,12 +37,14 @@ class MarkdownToJsonTool(Tool):
                 temp_json_output_path = Path(temp_json_file.name)
 
             # convert markdown to json using the shared function
-            created_files = convert_md_to_json(md_text, temp_json_output_path, style=output_style, is_strip_wrapper=True)
-            
+            created_files = convert_md_to_json(
+                md_text, temp_json_output_path, style=output_style, is_strip_wrapper=True
+            )
+
             # read the result bytes for each created file
             for i, file_path in enumerate(created_files):
                 result_file_bytes = file_path.read_bytes()
-                
+
                 result_filename: str | None = None
                 if output_filename:
                     if len(created_files) > 1:
@@ -64,9 +66,9 @@ class MarkdownToJsonTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_json_output_path' in locals():
+            if "temp_json_output_path" in locals():
                 temp_json_output_path.unlink(missing_ok=True)
-            if 'created_files' in locals():
+            if "created_files" in locals():
                 for file_path in created_files:
                     file_path.unlink(missing_ok=True)
 

@@ -12,7 +12,9 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 from scripts.utils.markdown_utils import get_md_text
 
 
-def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> Path:
+def convert_md_to_pptx(
+    md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False
+) -> Path:
     """
     Convert Markdown text to PPTX format using md2pptx
     Args:
@@ -28,18 +30,18 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
     """
     # Process Markdown text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Check for disallowed macros
     if "``` run-python" in processed_md:
         raise ValueError("The `run-python` macro of md2pptx is not allowed.")
-    
+
     # Get md2pptx directory path
     script_dir = Path(__file__).resolve().parent.parent  # Go up two levels: scripts/lib -> scripts
     md2pptx_dir = script_dir / "md2pptx-6.1.1"
-    
+
     if not md2pptx_dir.exists():
         raise Exception(f"md2pptx directory not found: {md2pptx_dir}. Please ensure md2pptx is properly installed.")
-    
+
     # Determine template file
     final_template_path = template_path
     if not final_template_path:
@@ -47,7 +49,7 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
         default_template = script_dir.parent / "assets" / "template" / "pptx_template.pptx"
         if default_template.exists():
             final_template_path = default_template
-    
+
     # Convert to PPTX
     try:
         with TemporaryDirectory() as temp_dir:
@@ -56,11 +58,11 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
             if final_template_path:
                 metadata += f"template: {final_template_path}\n"
             metadata += "DeleteFirstSlide: yes\n"
-            
+
             full_md_text = metadata + "\n" + processed_md
 
             # Create temporary Markdown file
-            with NamedTemporaryFile(mode='w', suffix='.md', delete=False, encoding='utf-8') as md_file:
+            with NamedTemporaryFile(mode="w", suffix=".md", delete=False, encoding="utf-8") as md_file:
                 md_file.write(full_md_text)
                 md_file_path = md_file.name
 
@@ -69,14 +71,11 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
             cmd = [sys.executable, str(md2pptx_script), md_file_path, str(output_path)]
 
             try:
-                result = subprocess.run(
-                    cmd,
-                    timeout=60,
-                    capture_output=True,
-                    text=True
-                )
+                result = subprocess.run(cmd, timeout=60, capture_output=True, text=True)
                 if result.returncode != 0:
-                    raise Exception(f"md2pptx failed with return code {result.returncode}. stdout: {result.stdout}, stderr: {result.stderr}")
+                    raise Exception(
+                        f"md2pptx failed with return code {result.returncode}. stdout: {result.stdout}, stderr: {result.stderr}"
+                    )
             finally:
                 # Delete temporary file
                 if os.path.exists(md_file_path):
@@ -87,6 +86,3 @@ def convert_md_to_pptx(md_text: str, output_path: Path, template_path: Path | No
         raise Exception("md2pptx execution timed out")
     except Exception as e:
         raise Exception(f"Failed to convert to PPTX: {e}")
-
-
-

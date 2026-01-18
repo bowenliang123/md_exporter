@@ -22,11 +22,12 @@ def convert_md_to_latex(md_text: str, output_path: Path, is_strip_wrapper: bool 
     # Process Markdown text
     from scripts.utils.markdown_utils import get_md_text
     from scripts.utils.table_utils import parse_md_to_tables
+
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Parse Markdown tables
     tables = parse_md_to_tables(processed_md)
-    
+
     # Convert to LaTeX
     created_files = []
     for i, table in enumerate(tables):
@@ -51,8 +52,5 @@ def convert_md_to_latex(md_text: str, output_path: Path, is_strip_wrapper: bool 
         # Write to file
         output_file.write_bytes(result_file_bytes)
         created_files.append(output_file)
-    
+
     return created_files
-
-
-

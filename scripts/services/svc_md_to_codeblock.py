@@ -64,10 +64,10 @@ SUFFIX_MAP = {
 def extract_code_blocks(text: str) -> list[CodeBlock]:
     """Extract code blocks"""
     code_blocks: list[CodeBlock] = []
-    pattern = re.compile(r'```([a-zA-Z0-9\+#\-_]*)\s*\n(.*?)\n```', re.DOTALL)
+    pattern = re.compile(r"```([a-zA-Z0-9\+#\-_]*)\s*\n(.*?)\n```", re.DOTALL)
 
     for match in pattern.finditer(text):
-        lang_type = match.group(1).strip() or 'text'
+        lang_type = match.group(1).strip() or "text"
         code_content = match.group(2).strip()
         code_blocks.append(CodeBlock(lang_type, code_content))
 
@@ -84,8 +84,9 @@ def get_suffix_by_language(lang_type: str) -> str:
     return SUFFIX_MAP.get(lang_type.lower(), ".txt")
 
 
-def convert_md_to_codeblock(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> \
-list[Path]:
+def convert_md_to_codeblock(
+    md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False
+) -> list[Path]:
     """
     Extract code blocks from Markdown and save them as files
     Args:
@@ -101,6 +102,7 @@ list[Path]:
     """
     # Process Markdown text
     from scripts.utils.markdown_utils import get_md_text
+
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
 
     # Extract code blocks
@@ -114,8 +116,10 @@ list[Path]:
     if compress:
         # Compress into ZIP file
         try:
-            with NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file, \
-                    zipfile.ZipFile(temp_zip_file.name, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
+            with (
+                NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file,
+                zipfile.ZipFile(temp_zip_file.name, mode="w", compression=zipfile.ZIP_DEFLATED) as zip_file,
+            ):
                 for idx, code_block in enumerate(code_blocks, 1):
                     suffix = get_suffix_by_language(code_block.lang_type)
                     with NamedTemporaryFile(prefix=f"code_{idx}", suffix=suffix, delete=True) as temp_file:
@@ -134,7 +138,7 @@ list[Path]:
         # Save as separate files
         try:
             # If output path is directory, create directory
-            if output_path.suffix == '':
+            if output_path.suffix == "":
                 output_path.mkdir(parents=True, exist_ok=True)
                 base_path = output_path
             else:

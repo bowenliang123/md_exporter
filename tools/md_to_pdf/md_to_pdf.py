@@ -21,7 +21,7 @@ class MarkdownToPdfTool(Tool):
         """
         # get parameters
         md_text = get_md_text_from_tool_params(tool_parameters, is_strip_wrapper=True)
-        
+
         try:
             # create a temporary output PDF file
             with NamedTemporaryFile(suffix=".pdf", delete=False) as temp_pdf_file:
@@ -29,7 +29,7 @@ class MarkdownToPdfTool(Tool):
 
             # convert markdown to pdf using the shared function
             convert_md_to_pdf(md_text, temp_pdf_output_path, is_strip_wrapper=True)
-            
+
             # read the result bytes
             result_file_bytes = temp_pdf_output_path.read_bytes()
 
@@ -39,7 +39,7 @@ class MarkdownToPdfTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_pdf_output_path' in locals():
+            if "temp_pdf_output_path" in locals():
                 temp_pdf_output_path.unlink(missing_ok=True)
 
         yield self.create_blob_message(

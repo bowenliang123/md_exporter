@@ -25,8 +25,7 @@ def pre_install_mermaid():
     """
     try:
         # Execute npx command to install mermaid-cli
-        cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
-                    "mmdc", "-V"]
+        cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli", "mmdc", "-V"]
         logger.info("Pre-installing mermaid-cli...")
         result = npx(cmd_args, return_completed_process=True)
         logger.info("Mermaid-cli pre-installation completed successfully")
@@ -53,7 +52,7 @@ def extract_mermaid_blocks(md_text: str) -> list[str]:
         List of mermaid code blocks
     """
     # Pattern to match mermaid code blocks
-    mermaid_pattern = re.compile(r'```mermaid\n(.*?)```', re.DOTALL)
+    mermaid_pattern = re.compile(r"```mermaid\n(.*?)```", re.DOTALL)
     mermaid_blocks = mermaid_pattern.findall(md_text)
 
     # Clean up code blocks
@@ -88,26 +87,32 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
 
         # Execute mermaid-cli command using nodejs-wheel npx
         logger.info(f"Executing mermaid-cli command for file: {temp_mermaid_path}")
-        
+
         success = False
-        
+
         try:
             logger.debug("Using nodejs-wheel npx")
-            
+
             # Command arguments for mermaid-cli
-            cmd_args = ["--yes", "--package", "@mermaid-js/mermaid-cli",
-                        "mmdc",
-                        "-i", str(temp_mermaid_path),
-                        "-o", str(output_path),
-                        "--scale", "2",
-                        ]
+            cmd_args = [
+                "--yes",
+                "--package",
+                "@mermaid-js/mermaid-cli",
+                "mmdc",
+                "-i",
+                str(temp_mermaid_path),
+                "-o",
+                str(output_path),
+                "--scale",
+                "2",
+            ]
             logger.debug(f"Running command: npx {' '.join(cmd_args)}")
-            
+
             # Execute the command using nodejs-wheel npx
             result = npx(cmd_args, return_completed_process=True)
-            
+
             logger.debug(f"Command returned: {result}")
-            
+
             # Check if output file exists and has content
             if output_path.exists() and output_path.stat().st_size > 0:
                 logger.info("Success with nodejs-wheel npx")
@@ -118,13 +123,13 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
                 # Clean up empty output file
                 if output_path.exists():
                     output_path.unlink()
-                    
+
         except Exception as e:
             logger.error(f"Error with nodejs-wheel npx: {e}")
             # Clean up empty output file
             if output_path.exists():
                 output_path.unlink()
-        
+
         if not success:
             logger.error("Error: Failed to convert mermaid code to PNG")
             return False
@@ -142,15 +147,16 @@ def convert_mermaid_to_png(mermaid_code: str, output_path: Path) -> bool:
         return False
     finally:
         # Clean up temporary files
-        if 'temp_mermaid_path' in locals() and temp_mermaid_path.exists():
+        if "temp_mermaid_path" in locals() and temp_mermaid_path.exists():
             try:
                 temp_mermaid_path.unlink()
             except Exception:
                 pass
 
 
-def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = False,
-                          is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_mermaid(
+    md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False
+) -> list[Path]:
     """
     Extract mermaid code blocks from Markdown and convert them to PNG files
     Args:
@@ -197,7 +203,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
         except Exception as e:
             logger.error(f"Error converting mermaid diagram {i + 1}: {e}")
             # Clean up temporary files
-            if 'temp_png_path' in locals() and temp_png_path.exists():
+            if "temp_png_path" in locals() and temp_png_path.exists():
                 try:
                     temp_png_path.unlink()
                 except Exception:
@@ -214,7 +220,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
             with NamedTemporaryFile(suffix=".zip", delete=False) as temp_zip_file:
                 temp_zip_path = Path(temp_zip_file.name)
 
-            with zipfile.ZipFile(temp_zip_path, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
+            with zipfile.ZipFile(temp_zip_path, mode="w", compression=zipfile.ZIP_DEFLATED) as zip_file:
                 for i, png_path in enumerate(png_files):
                     zip_file.write(png_path, arcname=f"mermaid_{i + 1}.png")
 
@@ -230,7 +236,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
 
         except Exception as e:
             # Clean up temporary files
-            if 'temp_zip_path' in locals() and temp_zip_path.exists():
+            if "temp_zip_path" in locals() and temp_zip_path.exists():
                 temp_zip_path.unlink()
             for png_path in png_files:
                 if png_path.exists():
@@ -240,7 +246,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
         # Save as separate files
         try:
             # If output path is a directory, create directory
-            if output_path.suffix == '':
+            if output_path.suffix == "":
                 output_path.mkdir(parents=True, exist_ok=True)
                 base_path = output_path
             else:
@@ -251,7 +257,7 @@ def convert_md_to_mermaid(md_text: str, output_path: Path, compress: bool = Fals
                 if len(png_files) > 1:
                     file_path = base_path / f"{output_path.stem}_{i + 1}.png"
                 else:
-                    file_path = output_path if output_path.suffix == '.png' else base_path / f"{output_path.name}.png"
+                    file_path = output_path if output_path.suffix == ".png" else base_path / f"{output_path.name}.png"
 
                 file_path.parent.mkdir(parents=True, exist_ok=True)
                 # Copy PNG content

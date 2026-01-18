@@ -44,7 +44,7 @@ class MarkdownToPptxTool(Tool):
 
             # convert markdown to pptx using the shared function
             output_path = convert_md_to_pptx(md_text, temp_pptx_output_path, temp_pptx_template_file_path)
-            
+
             # read the result bytes
             result_file_bytes = output_path.read_bytes()
 
@@ -55,7 +55,7 @@ class MarkdownToPptxTool(Tool):
             # clean up temporary files
             if temp_pptx_template_file:
                 Path(temp_pptx_template_file.name).unlink(missing_ok=True)
-            if 'temp_pptx_output_path' in locals():
+            if "temp_pptx_output_path" in locals():
                 temp_pptx_output_path.unlink(missing_ok=True)
 
         yield self.create_blob_message(

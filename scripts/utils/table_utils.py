@@ -15,10 +15,10 @@ def extract_headings(html_str: str, extract_headings_for_sheet_names: bool) -> l
     if not extract_headings_for_sheet_names:
         return []
 
-    soup = BeautifulSoup(html_str, 'html.parser')
+    soup = BeautifulSoup(html_str, "html.parser")
     headings = []
     for i in range(1, 6):
-        for tag in soup.find_all(f'h{i}'):
+        for tag in soup.find_all(f"h{i}"):
             tag_text = tag.text.strip()
             if tag_text:
                 tag_text = tag_text[0:30] if len(tag_text) > 30 else tag_text
@@ -26,17 +26,19 @@ def extract_headings(html_str: str, extract_headings_for_sheet_names: bool) -> l
     return headings
 
 
-def parse_md_to_tables(md_text: str, 
-                       force_value_to_str: bool = True, 
-                       extract_headings_for_sheet_names: bool = True,
-                       logger: Logger | None = None) -> list[pd.DataFrame]:
+def parse_md_to_tables(
+    md_text: str,
+    force_value_to_str: bool = True,
+    extract_headings_for_sheet_names: bool = True,
+    logger: Logger | None = None,
+) -> list[pd.DataFrame]:
     """Parse Markdown text to tables"""
     try:
         md_text = strip_markdown_wrapper(md_text)
-        if not md_text.startswith('|') and '|' in md_text:
-            md_text = md_text.replace('|', '\n|', 1)
+        if not md_text.startswith("|") and "|" in md_text:
+            md_text = md_text.replace("|", "\n|", 1)
 
-        html_str = markdown.markdown(text=md_text, extensions=['tables'])
+        html_str = markdown.markdown(text=md_text, extensions=["tables"])
         tables: list[pd.DataFrame] = pd.read_html(StringIO(html_str), encoding="utf-8")
         headings: list[str] = extract_headings(html_str, extract_headings_for_sheet_names)
 
@@ -44,7 +46,7 @@ def parse_md_to_tables(md_text: str,
             table = table.fillna("")
             if force_value_to_str:
                 for col in table.columns:
-                    if table[col].dtype not in {'object', 'string'}:
+                    if table[col].dtype not in {"object", "string"}:
                         table[col] = table[col].astype(str)
             return table
 

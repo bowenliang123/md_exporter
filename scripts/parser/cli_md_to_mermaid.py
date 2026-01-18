@@ -21,6 +21,7 @@ from scripts.utils.logger_utils import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 
+
 def main():
     """
     Main function

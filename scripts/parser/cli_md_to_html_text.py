@@ -23,22 +23,20 @@ from scripts.utils.logger_utils import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 
+
 def main():
     parser = argparse.ArgumentParser(
-        description='Convert Markdown text to HTML and output to stdout',
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        description="Convert Markdown text to HTML and output to stdout",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument(
-        'input',
-        help='Input Markdown file path'
-    )
+    parser.add_argument("input", help="Input Markdown file path")
 
     args = parser.parse_args()
 
     # Read input
     input_path = args.input
     try:
-        with open(input_path, encoding='utf-8') as f:
+        with open(input_path, encoding="utf-8") as f:
             md_text = f.read()
     except FileNotFoundError:
         logger.error(f"Error: Input file '{input_path}' does not exist")
@@ -53,5 +51,5 @@ def main():
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

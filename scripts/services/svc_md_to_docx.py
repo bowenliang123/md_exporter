@@ -9,37 +9,39 @@ from pathlib import Path
 from scripts.utils.markdown_utils import get_md_text
 
 
-def convert_md_to_docx(md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False) -> None:
+def convert_md_to_docx(
+    md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False
+) -> None:
     """
     Convert Markdown text to DOCX format
-    
+
     Args:
         md_text: Markdown text to convert
         output_path: Path to save the output DOCX file
         template_path: Optional path to DOCX template file
         is_strip_wrapper: Whether to remove code block wrapper if present
-        
+
     Raises:
         ValueError: If input processing fails
         Exception: If conversion fails
     """
     # Process Markdown text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Prepare pandoc arguments
     extra_args = []
     if template_path and template_path.exists():
         extra_args.append(f"--reference-doc={template_path}")
-    
+
     # Convert to DOCX - use convert_file with temporary file since convert_text doesn't work for DOCX
     from tempfile import NamedTemporaryFile
 
     from pypandoc import convert_file
-    
-    with NamedTemporaryFile(suffix=".md", delete=False, mode='w', encoding='utf-8') as temp_md_file:
+
+    with NamedTemporaryFile(suffix=".md", delete=False, mode="w", encoding="utf-8") as temp_md_file:
         temp_md_file.write(processed_md)
         temp_md_file_path = temp_md_file.name
-    
+
     try:
         # Convert using convert_file with outputfile parameter
         convert_file(
@@ -47,21 +49,22 @@ def convert_md_to_docx(md_text: str, output_path: Path, template_path: Path | No
             format="markdown",
             to="docx",
             outputfile=str(output_path),
-            extra_args=extra_args
+            extra_args=extra_args,
         )
     finally:
         # Clean up temporary file
         import os
+
         os.unlink(temp_md_file_path)
 
 
 def get_default_template(script_dir: Path) -> Path | None:
     """
     Get the default DOCX template path
-    
+
     Args:
         script_dir: Directory of the calling script
-        
+
     Returns:
         Optional[Path]: Path to default template if it exists, None otherwise
     """

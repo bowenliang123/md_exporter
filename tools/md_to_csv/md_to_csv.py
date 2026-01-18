@@ -31,11 +31,11 @@ class MarkdownToCsvTool(Tool):
 
             # convert markdown to csv using the shared function
             created_files = convert_md_to_csv(md_text, temp_csv_output_path)
-            
+
             # read the result bytes for each created file
             for i, file_path in enumerate(created_files):
                 result_file_bytes = file_path.read_bytes()
-                
+
                 result_filename: str | None = None
                 if output_filename:
                     if len(created_files) > 1:
@@ -57,9 +57,9 @@ class MarkdownToCsvTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_csv_output_path' in locals():
+            if "temp_csv_output_path" in locals():
                 temp_csv_output_path.unlink(missing_ok=True)
-            if 'created_files' in locals():
+            if "created_files" in locals():
                 for file_path in created_files:
                     file_path.unlink(missing_ok=True)
 

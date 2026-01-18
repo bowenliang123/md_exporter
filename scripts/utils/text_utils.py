@@ -1,13 +1,13 @@
 import re
 
 # Regex pattern for removing think tags
-THINK_TAG_REGEX = re.compile(r'<think>.*?</think>', flags=re.DOTALL)
+THINK_TAG_REGEX = re.compile(r"<think>.*?</think>", flags=re.DOTALL)
 
 # Regex pattern for matching Chinese characters
-CHINESE_CHAR_PATTERN = re.compile(r'[\u4e00-\u9fff]')
+CHINESE_CHAR_PATTERN = re.compile(r"[\u4e00-\u9fff]")
 
 # Regex pattern for matching Japanese characters
-JAPANESE_CHAR_PATTERN = re.compile(r'[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]')
+JAPANESE_CHAR_PATTERN = re.compile(r"[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]")
 
 
 def contains_chinese(text: str) -> bool:
@@ -22,7 +22,7 @@ def contains_japanese(text: str) -> bool:
 
 def remove_think_tags(text: str) -> str:
     """Remove think tags from text"""
-    return THINK_TAG_REGEX.sub('', text)
+    return THINK_TAG_REGEX.sub("", text)
 
 
 def normalize_line_breaks(text: str) -> str:

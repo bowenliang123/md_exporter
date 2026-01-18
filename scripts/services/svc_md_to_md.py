@@ -21,14 +21,12 @@ def convert_md_to_md(md_text: str, output_path: Path, is_strip_wrapper: bool = F
     """
     # Process Markdown text
     from scripts.utils.markdown_utils import get_md_text
+
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     # Write to output file
     try:
-        output_path.write_text(processed_md, encoding='utf-8')
+        output_path.write_text(processed_md, encoding="utf-8")
         return output_path
     except Exception as e:
         raise Exception(f"Failed to save MD file: {e}")
-
-
-

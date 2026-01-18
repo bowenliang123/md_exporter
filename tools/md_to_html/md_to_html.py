@@ -26,14 +26,14 @@ class MarkdownToHtmlTool(Tool):
             # Create temporary output file
             with NamedTemporaryFile(suffix=".html", delete=False) as temp_output_file:
                 temp_output_path = Path(temp_output_file.name)
-            
+
             try:
                 # Convert to HTML using the public service
                 convert_md_to_html(md_text, temp_output_path, is_strip_wrapper=True)
-                
+
                 # Read the converted file content
                 result_file_bytes = temp_output_path.read_bytes()
-                
+
                 yield self.create_blob_message(
                     blob=result_file_bytes,
                     meta=get_meta_data(

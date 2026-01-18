@@ -64,17 +64,17 @@ class MarkdownToDocxTool(Tool):
         return
 
     def is_contains_chinese_chars(self, text: str) -> bool:
-        return bool(re.search(r'[\u4e00-\u9fff]', text))
+        return bool(re.search(r"[\u4e00-\u9fff]", text))
 
     def set_chinese_fonts(self, doc):
         # Setting fonts globally
         # https://github.com/python-openxml/python-docx/issues/346#issuecomment-1698885586
         # https://zhuanlan.zhihu.com/p/548039429
-        style = doc.styles['Normal']
+        style = doc.styles["Normal"]
         font = style.font
         font.name = DocxFontEnum.TIMES_NEW_ROMAN
         rPr = style.element.get_or_add_rPr()
-        rPr.rFonts.set(qn('w:eastAsia'), DocxFontEnum.SONG_TI)
+        rPr.rFonts.set(qn("w:eastAsia"), DocxFontEnum.SONG_TI)
 
     def set_fonts_for_all_runs(self, doc: Document):
         """Set Times New Roman for English text and SimSun for Chinese text in all text elements."""
@@ -106,10 +106,10 @@ class MarkdownToDocxTool(Tool):
             # Set default font to Times New Roman
             run.font.name = DocxFontEnum.TIMES_NEW_ROMAN
             # Set East Asian font to SimSun
-            run._element.rPr.rFonts.set(qn('w:eastAsia'), DocxFontEnum.SONG_TI)
+            run._element.rPr.rFonts.set(qn("w:eastAsia"), DocxFontEnum.SONG_TI)
             # Set ASCII font to Times New Roman
-            run._element.rPr.rFonts.set(qn('w:ascii'), DocxFontEnum.TIMES_NEW_ROMAN)
+            run._element.rPr.rFonts.set(qn("w:ascii"), DocxFontEnum.TIMES_NEW_ROMAN)
             # Set high ANSI font to Times New Roman
-            run._element.rPr.rFonts.set(qn('w:hAnsi'), DocxFontEnum.TIMES_NEW_ROMAN)
+            run._element.rPr.rFonts.set(qn("w:hAnsi"), DocxFontEnum.TIMES_NEW_ROMAN)
         except Exception as e:
             self.logger.exception("Failed to apply fonts to run")

@@ -50,10 +50,7 @@ class MarkdownToMermaidTool(Tool):
                     # determine MIME type based on file suffix
                     mime_type = MimeType.PNG
 
-                    yield self.create_blob_message(
-                        blob=file_path.read_bytes(),
-                        meta={"mime_type": mime_type}
-                    )
+                    yield self.create_blob_message(blob=file_path.read_bytes(), meta={"mime_type": mime_type})
 
         except Exception as e:
             self.logger.exception("Failed to convert markdown to mermaid PNG images")
@@ -61,9 +58,9 @@ class MarkdownToMermaidTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_output_path' in locals():
+            if "temp_output_path" in locals():
                 temp_output_path.unlink(missing_ok=True)
-            if 'created_files' in locals():
+            if "created_files" in locals():
                 for file_path in created_files:
                     file_path.unlink(missing_ok=True)
 

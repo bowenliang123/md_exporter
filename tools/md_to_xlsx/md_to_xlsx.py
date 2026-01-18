@@ -22,21 +22,21 @@ class MarkdownToXlsxTool(Tool):
 
         # get parameters
         md_text = get_md_text_from_tool_params(tool_parameters)
-        force_text_value: bool = ("true" == get_param_value(tool_parameters, "force_text_value", "true").lower())
+        force_text_value: bool = "true" == get_param_value(tool_parameters, "force_text_value", "true").lower()
 
         # generate XLSX file using shared service
         try:
             # Create temporary output file
             with NamedTemporaryFile(suffix=".xlsx", delete=False) as temp_xlsx_file:
                 temp_output_path = Path(temp_xlsx_file.name)
-            
+
             try:
                 # Convert to XLSX using the public service
                 convert_md_to_xlsx(md_text, temp_output_path, is_strip_wrapper=True, force_text=force_text_value)
-                
+
                 # Read the converted file content
                 result_file_bytes = temp_output_path.read_bytes()
-                
+
                 yield self.create_blob_message(
                     blob=result_file_bytes,
                     meta=get_meta_data(
@@ -50,6 +50,5 @@ class MarkdownToXlsxTool(Tool):
                     temp_output_path.unlink()
         except Exception as e:
             self.logger.exception("Failed to convert file")
-            yield self.create_text_message(
-                f"Failed to convert markdown text to XLSX file, error: {str(e)}")
+            yield self.create_text_message(f"Failed to convert markdown text to XLSX file, error: {str(e)}")
             return

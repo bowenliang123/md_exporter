@@ -1,4 +1,3 @@
-
 from .mimetype_utils import MimeType
 
 

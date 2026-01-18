@@ -82,8 +82,8 @@ class MarkdownToCodeblockTool(Tool):
                         blob=file_path.read_bytes(),
                         meta=get_meta_data(
                             mime_type=mime_type,
-                            output_filename=(tool_parameters.get("output_filename") or "code") +
-                                            (("_" + str(index + 1)) if len(created_files) > 1 else ""),
+                            output_filename=(tool_parameters.get("output_filename") or "code")
+                            + (("_" + str(index + 1)) if len(created_files) > 1 else ""),
                         ),
                     )
         except Exception as e:
@@ -94,7 +94,7 @@ class MarkdownToCodeblockTool(Tool):
             if temp_output_path.exists():
                 temp_output_path.unlink()
             # clean up any other created files if not compressed
-            if not compress and 'created_files' in locals():
+            if not compress and "created_files" in locals():
                 for file_path in created_files:
                     if file_path.exists():
                         file_path.unlink()

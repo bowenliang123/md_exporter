@@ -23,30 +23,18 @@ from scripts.utils.logger_utils import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 
+
 def main():
     parser = argparse.ArgumentParser(
-        description='Convert Markdown tables to JSON or JSONL format',
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        description="Convert Markdown tables to JSON or JSONL format",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
+    parser.add_argument("input", help="Input Markdown file path")
+    parser.add_argument("output", help="Output JSON file path")
     parser.add_argument(
-        'input',
-        help='Input Markdown file path'
+        "--style", choices=["jsonl", "json_array"], default="jsonl", help="JSON output style (default: jsonl)"
     )
-    parser.add_argument(
-        'output',
-        help='Output JSON file path'
-    )
-    parser.add_argument(
-        '--style',
-        choices=['jsonl', 'json_array'],
-        default='jsonl',
-        help='JSON output style (default: jsonl)'
-    )
-    parser.add_argument(
-        '--strip-wrapper',
-        action='store_true',
-        help='Remove code block wrapper if present'
-    )
+    parser.add_argument("--strip-wrapper", action="store_true", help="Remove code block wrapper if present")
 
     args = parser.parse_args()
 
@@ -55,7 +43,7 @@ def main():
     if not input_path.exists():
         logger.error(f"Error: Input file '{input_path}' does not exist")
         sys.exit(1)
-    md_text = input_path.read_text(encoding='utf-8')
+    md_text = input_path.read_text(encoding="utf-8")
 
     # Convert to JSON
     output_path = Path(args.output)
@@ -68,5 +56,5 @@ def main():
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

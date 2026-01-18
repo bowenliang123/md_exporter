@@ -28,12 +28,14 @@ def convert_to_html_with_font_support(md_text: str) -> str:
         return html_str
 
     # Add Chinese font CSS
-    font_families = ",".join([
-        "Sans-serif",
-        "STSong-Light",
-        "MSung-Light",
-        "HeiseiMin-W3",
-    ])
+    font_families = ",".join(
+        [
+            "Sans-serif",
+            "STSong-Light",
+            "MSung-Light",
+            "HeiseiMin-W3",
+        ]
+    )
     css_style = f"""
     <style>
         html {{
@@ -50,7 +52,9 @@ def convert_to_html_with_font_support(md_text: str) -> str:
     return result
 
 
-def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_png(
+    md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False
+) -> list[Path]:
     """
     Convert Markdown text to PNG images
     Args:
@@ -66,12 +70,13 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
     """
     # Process Markdown text
     from scripts.utils.markdown_utils import get_md_text
+
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
-    
+
     output_filename = output_path.stem if output_path.suffix else "output"
     created_files = []
     images_for_zip = []
-    
+
     try:
         # Convert to HTML
         html_str = convert_to_html_with_font_support(processed_md)
@@ -115,23 +120,24 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
                 if output_path.suffix and total_page_count == 1:
                     output_file = output_path
                 else:
-                    output_file = output_path.parent / image_filename if output_path.suffix else output_path / image_filename
-                
+                    output_file = (
+                        output_path.parent / image_filename if output_path.suffix else output_path / image_filename
+                    )
+
                 output_file.parent.mkdir(parents=True, exist_ok=True)
                 output_file.write_bytes(image_bytes)
                 created_files.append(output_file)
                 logger.info(f"Successfully converted to {output_file}")
             else:
                 # Add to ZIP list
-                images_for_zip.append({
-                    "blob": image_bytes,
-                    "suffix": ".png"
-                })
+                images_for_zip.append({"blob": image_bytes, "suffix": ".png"})
 
         # If compression to ZIP is needed
         if compress and images_for_zip:
-            with NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file, \
-                    zipfile.ZipFile(temp_zip_file.name, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
+            with (
+                NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file,
+                zipfile.ZipFile(temp_zip_file.name, mode="w", compression=zipfile.ZIP_DEFLATED) as zip_file,
+            ):
                 for idx, image_data in enumerate(images_for_zip, 1):
                     with NamedTemporaryFile(delete=True) as temp_file:
                         temp_file.write(image_data["blob"])
@@ -145,8 +151,5 @@ def convert_md_to_png(md_text: str, output_path: Path, compress: bool = False, i
 
     except Exception as e:
         raise Exception(f"Failed to convert to PNG: {e}")
-    
+
     return created_files
-
-
-

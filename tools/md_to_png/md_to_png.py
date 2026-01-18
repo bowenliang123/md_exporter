@@ -51,8 +51,10 @@ class MarkdownToPngTool(Tool):
                         blob=file_path.read_bytes(),
                         meta=get_meta_data(
                             mime_type=MimeType.PNG,
-                            output_filename=output_filename if len(created_files) == 1 else f"{output_filename}_{file_path.stem.split('_')[-1]}",
-                        )
+                            output_filename=output_filename
+                            if len(created_files) == 1
+                            else f"{output_filename}_{file_path.stem.split('_')[-1]}",
+                        ),
                     )
 
         except Exception as e:
@@ -61,9 +63,9 @@ class MarkdownToPngTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_output_path' in locals():
+            if "temp_output_path" in locals():
                 temp_output_path.unlink(missing_ok=True)
-            if 'created_files' in locals():
+            if "created_files" in locals():
                 for file_path in created_files:
                     file_path.unlink(missing_ok=True)
 

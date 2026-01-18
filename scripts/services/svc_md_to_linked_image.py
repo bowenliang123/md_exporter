@@ -41,9 +41,9 @@ def extract_image_urls(md_text: str) -> list[str]:
 
     image_urls: list[str] = []
     try:
-        soup = BeautifulSoup(html, 'html.parser')
-        img_tags = soup.find_all('img')
-        image_urls = [img.get('src') for img in img_tags if img.get('src')]
+        soup = BeautifulSoup(html, "html.parser")
+        img_tags = soup.find_all("img")
+        image_urls = [img.get("src") for img in img_tags if img.get("src")]
     except Exception as e:
         logger.warning(f"Warning: Failed to extract image URLs by HTML parser, trying regex: {e}")
 
@@ -68,8 +68,9 @@ def extract_image_urls(md_text: str) -> list[str]:
     return result_image_urls
 
 
-def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool = False,
-                               is_strip_wrapper: bool = False) -> list[Path]:
+def convert_md_to_linked_image(
+    md_text: str, output_path: Path, compress: bool = False, is_strip_wrapper: bool = False
+) -> list[Path]:
     """
     Extract image links from Markdown and download them as files
     Args:
@@ -98,14 +99,13 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         try:
             response = httpx.get(url, timeout=120)
             if response.status_code != 200:
-                logger.warning(f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}")
+                logger.warning(
+                    f"Warning: Failed to download image from URL: {url}, HTTP status code: {response.status_code}"
+                )
                 continue
 
-            content_type = response.headers.get('Content-Type', 'image/png')
-            downloaded_images.append({
-                "blob": response.content,
-                "mime_type": content_type
-            })
+            content_type = response.headers.get("Content-Type", "image/png")
+            downloaded_images.append({"blob": response.content, "mime_type": content_type})
             logger.info(f"Downloaded: {url}")
 
         except Exception as e:
@@ -121,8 +121,10 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
     if compress:
         # Compress to ZIP file
         try:
-            with NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file, \
-                    zipfile.ZipFile(temp_zip_file.name, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
+            with (
+                NamedTemporaryFile(suffix=".zip", delete=True) as temp_zip_file,
+                zipfile.ZipFile(temp_zip_file.name, mode="w", compression=zipfile.ZIP_DEFLATED) as zip_file,
+            ):
                 for idx, image_data in enumerate(downloaded_images, 1):
                     suffix = get_extension_by_mime_type(image_data["mime_type"])
                     with NamedTemporaryFile(delete=True) as temp_file:
@@ -141,7 +143,7 @@ def convert_md_to_linked_image(md_text: str, output_path: Path, compress: bool =
         # Save as separate files
         try:
             # If output path is a directory, create directory
-            if output_path.suffix == '':
+            if output_path.suffix == "":
                 output_path.mkdir(parents=True, exist_ok=True)
                 base_path = output_path
             else:

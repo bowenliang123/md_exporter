@@ -30,7 +30,7 @@ class MarkdownToMarkdownTool(Tool):
 
             # convert markdown to md using the shared function
             created_file = convert_md_to_md(md_text, temp_md_output_path, is_strip_wrapper=True)
-            
+
             # read the result bytes
             result_file_bytes = created_file.read_bytes()
 
@@ -40,7 +40,7 @@ class MarkdownToMarkdownTool(Tool):
             return
         finally:
             # clean up temporary files
-            if 'temp_md_output_path' in locals():
+            if "temp_md_output_path" in locals():
                 temp_md_output_path.unlink(missing_ok=True)
 
         yield self.create_blob_message(
