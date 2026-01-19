@@ -2,7 +2,7 @@ identity:
   name: md_to_mermaid
   author: bowenliang123
   label:
-    en_US: Mermaid diagrams to PNG images
+    en_US: Mermaid to PNG images
     zh_Hans: Mermaid 流程图 转 PNG 文件
 description:
   human:

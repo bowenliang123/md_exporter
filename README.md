@@ -119,7 +119,7 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
 
 ## 📖 Usage Example
 
-![Usage Demo](_assets/usage_md_to_docx.png)
+![Usage Demo](assets/screenshots/usage_md_to_docx.png)
 
 Simply input your Markdown text, select your desired output format, and click export. It's that easy!
 
@@ -144,7 +144,7 @@ Create professional Word documents with beautiful formatting.
 >
 > Check out the [default docx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/docx_template.docx) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
 
-![DOCX Example](_assets/md_to_docx_1.png)
+![DOCX Example](assets/screenshots/md_to_docx_1.png)
 
 ---
 
@@ -163,7 +163,7 @@ Convert your Markdown tables into polished Excel spreadsheets with auto-fitted c
 ```
 
 **Output:**
-![XLSX Example](_assets/md_to_xlsx_1.png)
+![XLSX Example](assets/screenshots/md_to_xlsx_1.png)
 
 ---
 
@@ -206,7 +206,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 ```
 
 **Output:**
-![PPTX Example](_assets/md_to_pptx_1.png)
+![PPTX Example](assets/screenshots/md_to_pptx_1.png)
 
 ---
 
@@ -214,7 +214,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 
 Transform your Markdown into clean, semantic HTML perfect for web pages.
 
-![HTML Example](_assets/md_to_html_1.png)
+![HTML Example](assets/screenshots/md_to_html_1.png)
 
 ---
 
@@ -222,7 +222,7 @@ Transform your Markdown into clean, semantic HTML perfect for web pages.
 
 Generate professional PDF documents perfect for printing or sharing.
 
-![PDF Example](_assets/md_to_pdf_1.png)
+![PDF Example](assets/screenshots/md_to_pdf_1.png)
 
 ---
 
@@ -233,7 +233,7 @@ Convert your Markdown into beautiful PNG images. Great for:
 - Documentation screenshots
 - Quick sharing in chat apps
 
-![PNG Example](_assets/md_to_png_1.png)
+![PNG Example](assets/screenshots/md_to_png_1.png)
 
 ---
 
@@ -253,12 +253,12 @@ Effortlessly extract code blocks from your Markdown and save them as individual 
 | XML        | `.xml`         | Markdown   | `.md`          |
 | SVG        | `.svg`         |            |                |
 
-![Code Block Example 1](_assets/usage_md_to_codeblock_2.png)
+![Code Block Example 1](assets/screenshots/usage_md_to_codeblock_2.png)
 
 **Pro Tip:** Enable compression to bundle all extracted files into a single ZIP archive for easy sharing and organization!
 
-![Code Block Example 2](_assets/usage_md_to_codeblock_3.png)
-![Code Block Example 3](_assets/usage_md_to_codeblock_4.png)
+![Code Block Example 2](assets/screenshots/usage_md_to_codeblock_3.png)
+![Code Block Example 3](assets/screenshots/usage_md_to_codeblock_4.png)
 
 ---
 
@@ -266,7 +266,7 @@ Effortlessly extract code blocks from your Markdown and save them as individual 
 
 Automatically download all images referenced in your Markdown.
 
-![Linked Image Example](_assets/usage_md_to_linked_image_1.png)
+![Linked Image Example](assets/screenshots/usage_md_to_linked_image_1.png)
 
 ---
 
@@ -290,9 +290,9 @@ graph TD
 
 **Output:**
 
-![Mermaid Usage](_assets/md_to_mermaid_1.png)
+![Mermaid Usage](assets/screenshots/md_to_mermaid_1.png)
 
-![Mermaid Output](_assets/md_to_mermaid_2.png)
+![Mermaid Output](assets/screenshots/md_to_mermaid_2.png)
 
 ---
 
@@ -300,7 +300,7 @@ graph TD
 
 Export your Markdown tables to universal CSV format.
 
-![CSV Example](_assets/md_to_csv_1.png)
+![CSV Example](assets/screenshots/md_to_csv_1.png)
 
 ---
 
@@ -312,13 +312,13 @@ Convert your tables into structured data formats.
 - One JSON object per line
 - Perfect for streaming and logging
 
-![JSONL Example](_assets/md_to_json_2.png)
+![JSONL Example](assets/screenshots/md_to_json_2.png)
 
 **JSON Array Style**
 - All objects in a single array
 - Ideal for API responses
 
-![JSON Example](_assets/md_to_json_1.png)
+![JSON Example](assets/screenshots/md_to_json_1.png)
 
 ---
 
@@ -326,7 +326,7 @@ Convert your tables into structured data formats.
 
 Transform your data into XML format.
 
-![XML Example](_assets/md_to_xml_1.png)
+![XML Example](assets/screenshots/md_to_xml_1.png)
 
 ---
 
@@ -335,10 +335,10 @@ Transform your data into XML format.
 Generate LaTeX source code for academic and technical documents.
 
 **LaTeX Output:**
-![LaTeX Example 1](_assets/md_to_latex_1.png)
+![LaTeX Example 1](assets/screenshots/md_to_latex_1.png)
 
 **Compiled PDF:**
-![LaTeX Example 2](_assets/md_to_latex_2.png)
+![LaTeX Example 2](assets/screenshots/md_to_latex_2.png)
 
 ---
 
