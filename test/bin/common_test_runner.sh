@@ -68,17 +68,17 @@ function run_file_test() {
     cleanup_test_output "$output_file"
     
     # Run the bash script
-    echo "Running test for ${script_name}.sh..."
-    "$PROJECT_ROOT/scripts/${script_name}.sh" "$input_file" "$output_file"
+    echo "Running test for ${script_name}..."
+    "$PROJECT_ROOT/scripts/md-exporter" "$script_name" "$input_file" "$output_file"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_file_output "$output_file"; then
-        echo "✓ Test passed: ${script_name}.sh generated valid output"
+        echo "✓ Test passed: ${script_name} generated valid output"
         # Clean up test output
         cleanup_test_output "$output_file"
         return 0
     else
-        echo "✗ Test failed: ${script_name}.sh did not generate valid output"
+        echo "✗ Test failed: ${script_name} did not generate valid output"
         if [ -f "$output_file" ]; then
             echo "Output file exists but is empty or invalid"
             # Clean up test output
@@ -99,17 +99,17 @@ function run_dir_test() {
     cleanup_test_output "$output_dir"
     
     # Run the bash script
-    echo "Running test for ${script_name}.sh..."
-    "$PROJECT_ROOT/scripts/${script_name}.sh" "$input_file" "$output_dir"
+    echo "Running test for ${script_name}..."
+    "$PROJECT_ROOT/scripts/md-exporter" "$script_name" "$input_file" "$output_dir"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_dir_output "$output_dir"; then
-        echo "✓ Test passed: ${script_name}.sh generated valid output"
+        echo "✓ Test passed: ${script_name} generated valid output"
         # Clean up test output
         cleanup_test_output "$output_dir"
         return 0
     else
-        echo "✗ Test failed: ${script_name}.sh did not generate valid output"
+        echo "✗ Test failed: ${script_name} did not generate valid output"
         if [ -d "$output_dir" ]; then
             echo "Output directory exists but is empty"
             # Clean up test output
@@ -125,15 +125,15 @@ function run_stdout_test() {
     local input_file="$2"
     
     # Run the bash script and capture output
-    echo "Running test for ${script_name}.sh..."
-    local output="$($PROJECT_ROOT/scripts/${script_name}.sh "$input_file")"
+    echo "Running test for ${script_name}..."
+    local output="$($PROJECT_ROOT/scripts/md-exporter "$script_name" "$input_file")"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_stdout_output "$output"; then
-        echo "✓ Test passed: ${script_name}.sh generated valid output"
+        echo "✓ Test passed: ${script_name} generated valid output"
         return 0
     else
-        echo "✗ Test failed: ${script_name}.sh did not generate valid output"
+        echo "✗ Test failed: ${script_name} did not generate valid output"
         return 1
     fi
 }

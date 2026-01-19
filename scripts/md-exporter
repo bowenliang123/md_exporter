@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Import common script
+source "$(dirname "${BASH_SOURCE[0]}")/script_runner.sh"
+
+# Check if a subcommand is provided
+if [[ $# -lt 1 ]]; then
+    echo "Error: Subcommand is required"
+    echo "Usage: md-exporter <subcommand> [options]"
+    echo "Subcommands:"
+    echo "  md_to_codeblock"
+    echo "  md_to_csv"
+    echo "  md_to_docx"
+    echo "  md_to_html"
+    echo "  md_to_html_text"
+    echo "  md_to_json"
+    echo "  md_to_latex"
+    echo "  md_to_linked_image"
+    echo "  md_to_md"
+    echo "  md_to_mermaid"
+    echo "  md_to_pdf"
+    echo "  md_to_png"
+    echo "  md_to_pptx"
+    echo "  md_to_xlsx"
+    echo "  md_to_xml"
+    exit 1
+fi
+
+# Get the subcommand
+subcommand="$1"
+shift
+
+# Define valid subcommands
+valid_subcommands=(
+    "md_to_codeblock"
+    "md_to_csv"
+    "md_to_docx"
+    "md_to_html"
+    "md_to_html_text"
+    "md_to_json"
+    "md_to_latex"
+    "md_to_linked_image"
+    "md_to_md"
+    "md_to_mermaid"
+    "md_to_pdf"
+    "md_to_png"
+    "md_to_pptx"
+    "md_to_xlsx"
+    "md_to_xml"
+)
+
+# Check if the subcommand is valid
+valid=false
+for cmd in "${valid_subcommands[@]}"; do
+    if [[ "$subcommand" == "$cmd" ]]; then
+        valid=true
+        break
+    fi
+done
+
+if [[ "$valid" == false ]]; then
+    echo "Error: Invalid subcommand '$subcommand'"
+    echo "Usage: md-exporter <subcommand> [options]"
+    echo "Subcommands:"
+    for cmd in "${valid_subcommands[@]}"; do
+        echo "  $cmd"
+    done
+    exit 1
+fi
+
+# Determine the Python script name based on the subcommand
+python_script="cli_${subcommand}.py"
+
+# Run Python script
+run_python_script "$python_script" "$@"
