@@ -18,7 +18,6 @@ if parent_dir not in sys.path:
     sys.path.insert(0, parent_dir)
 
 from scripts.services.svc_md_to_json import convert_md_to_json  # noqa: E402
-
 from scripts.utils.logger_utils import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
