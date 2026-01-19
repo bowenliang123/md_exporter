@@ -1,7 +1,7 @@
 [project]
-name = "md_exporter"
+name = "md-exporter"
 version = "3.1.0"
-description = "Convert markdown text to files in various formats such as DOCX, XLSX, PDF, PPTX, and images."
+description = "An Agent Skill and Dify plugin to Convert markdown text into files in various formats such as DOCX, XLSX, PDF, PPTX, Mermaid and images."
 license = "Apache-2.0"
 requires-python = ">=3.11"
 authors = [
