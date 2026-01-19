@@ -51,14 +51,14 @@ function run_python_script() {
     local i=0
     while [[ $i -lt $# ]]; do
         local arg="${@:i+1:1}"
-        if [[ "$arg" == --* ]]; then
-            # This is an option, add it as-is
+        if [[ "$arg" == --* ]] || [[ "$arg" == -* && ${#arg} -eq 2 ]]; then
+            # This is an option (long or short), add it as-is
             abs_args+=("$arg")
             i=$((i+1))
             # Check if this option has a value
             if [[ $i -lt $# ]]; then
                 local next_arg="${@:i+1:1}"
-                if [[ "$next_arg" != --* ]]; then
+                if [[ "$next_arg" != --* ]] && [[ "$next_arg" != -* ]]; then
                     # This is the value for the option
                     if [[ "$next_arg" == /* ]]; then
                         # Already an absolute path
