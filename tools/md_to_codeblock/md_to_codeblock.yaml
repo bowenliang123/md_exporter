@@ -2,8 +2,8 @@ identity:
   name: md_to_codeblock
   author: bowenliang123
   label:
-    en_US: Codeblocks to files
-    zh_Hans: 提取 代码片段 为文件
+    en_US: Codeblocks in Markdown ⮕ Script Fiels
+    zh_Hans: Markdown 中代码段 ⮕ 脚本文件
 description:
   human:
     en_US: Generate script files from code blocks from Markdown text

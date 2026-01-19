@@ -2,8 +2,8 @@ identity:
   name: md_to_pptx
   author: bowenliang123
   label:
-    en_US: Markdown to PPTX file
-    zh_Hans: Markdown 转 PPTX 文件
+    en_US: Markdown ⮕ PPTX
+    zh_Hans: Markdown ⮕ PPTX
 description:
   human:
     en_US: Generate PPTX file from Markdown text

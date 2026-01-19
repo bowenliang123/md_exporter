@@ -2,8 +2,8 @@ identity:
   name: md_to_linked_image
   author: bowenliang123
   label:
-    en_US: Image files extraction
-    zh_Hans: 提取 图片链接 为文件
+    en_US: Image Links in Markdown ⮕ Images
+    zh_Hans: Markdown 的图片链接 ⮕ Images
 description:
   human:
     en_US: Extract image links in Markdown text to image files

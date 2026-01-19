@@ -2,8 +2,8 @@ identity:
   name: md_to_pdf
   author: bowenliang123
   label:
-    en_US: Markdown to PDF file
-    zh_Hans: Markdown 转 PDF 文件
+    en_US: Markdown ⮕ PDF
+    zh_Hans: Markdown ⮕ PDF
 description:
   human:
     en_US: Generate PDF file from Markdown text

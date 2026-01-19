@@ -2,8 +2,8 @@ identity:
   name: md_to_csv
   author: bowenliang123
   label:
-    en_US: Markdown to CSV file
-    zh_Hans: Markdown 转 CSV 文件
+    en_US: Markdown tables ⮕ CSV
+    zh_Hans: Markdown 表格 ⮕ CSV
 description:
   human:
     en_US: Generate CSV file from Markdown tables

@@ -2,8 +2,8 @@ identity:
   name: md_to_xlsx
   author: bowenliang123
   label:
-    en_US: Markdown to XLSX file
-    zh_Hans: Markdown 转 XLSX 文件
+    en_US: Markdown tables⮕ XLSX
+    zh_Hans: Markdown 表格 ⮕ XLSX
 description:
   human:
     en_US: Generate XLSX file from Markdown tables

@@ -2,8 +2,8 @@ identity:
   name: md_to_html_text
   author: bowenliang123
   label:
-    en_US: Markdown to HTML text
-    zh_Hans: Markdown 转 HTML 文本
+    en_US: Markdown ⮕ HTML Text
+    zh_Hans: Markdown ⮕ HTML Text
 description:
   human:
     en_US: Generate HTML text from Markdown.

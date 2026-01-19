@@ -2,8 +2,8 @@ identity:
   name: md_to_png
   author: bowenliang123
   label:
-    en_US: Markdown to PNG images
-    zh_Hans: Markdown 转 PNG 图片
+    en_US: Markdown ⮕ PNG
+    zh_Hans: Markdown ⮕ PNG
 description:
   human:
     en_US: Generate PNG images from Markdown text

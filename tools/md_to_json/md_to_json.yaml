@@ -2,8 +2,8 @@ identity:
   name: md_to_json
   author: bowenliang123
   label:
-    en_US: Markdown to JSON file
-    zh_Hans: Markdown 转 JSON 文件
+    en_US: Markdown tables ⮕ JSON
+    zh_Hans: Markdown 表格 ⮕ JSON
 description:
   human:
     en_US: Generate JSON or JSONL file from Markdown tables

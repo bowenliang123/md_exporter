@@ -2,8 +2,8 @@ identity:
   name: md_to_docx
   author: bowenliang123
   label:
-    en_US: Markdown to DOCX file
-    zh_Hans: Markdown 转 DOCX 文件
+    en_US: Markdown ⮕ DOCX
+    zh_Hans: Markdown ⮕ DOCX
 description:
   human:
     en_US: Generate DOCX file from Markdown text
