@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Update README image paths to use GitHub raw URLs
+        run: |
+          # Replace relative image paths with GitHub raw URLs (only for png and jpg)
+          sed -i 's|!\[\([^]]*\)\](assets/\([^)]*\)\.\(png\|jpg\))|![\1](https://raw.githubusercontent.com/bowenliang123/md_exporter/refs/heads/main/assets/\2.\3)|g' README.md
+
       - name: Build release distributions
         run: |
           # NOTE: put your own distribution build steps here.
