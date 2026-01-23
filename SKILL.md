@@ -1,6 +1,6 @@
 ---
 name: markdown-exporter
-description: Markdown exporter for transform Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML, Mermaid files, and extract code blocks in Markdown to Python, Bash,JS and etc files. Also known as the md_exporter skill.
+description: Markdown exporter for export Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, MD, CSV, JSON, JSONL, XML, Mermaid files, and extract code blocks in Markdown to Python, Bash,JS and etc files. Also known as the md_exporter skill.
 allowed-tools: 
 disable: false
 ---
@@ -8,7 +8,7 @@ disable: false
 
 ## ✨ What is Markdown Exporter?
 
-**Markdown Exporter** is a powerful skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+**Markdown Exporter** is a Agent Skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
 
 ### Tools and Supported Formats
 

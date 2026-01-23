@@ -1,5 +1,5 @@
 # Markdown Exporter
-### An Agent Skill and Dify plugin to Transform Markdowns Into Powerful Documents
+### An Agent Skill and Dify plugin to Export Markdown Into Powerful Documents
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
 - Github Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
@@ -16,7 +16,7 @@
 
 ## ✨ What is Markdown Exporter?
 
-**Markdown Exporter** is a powerful toolset as both Dify plugin and Claude Skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+**Markdown Exporter** is a powerful toolset as an Agent Skill or a Dify plugin and  that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
 
 With support for **15+ output formats**, Markdown Exporter bridges the gap between simple text editing and professional document creation, all while maintaining the simplicity and elegance of Markdown syntax.
 
@@ -360,10 +360,10 @@ Release changelogs:
   - Refactor Agent Skill scripts and entry shell scripts
   
 - 3.0.0:
-  - `md_exporter` is now ready for Claude Agent Skills and runnable in standalone
-    - Add `SKILL.md` for Claude Skills description
-    - Add `/scripts` for code scripts of all tools as Claude Skills exectuion entry
-    - Extract the core file transformation logic into `/scripts/lib` sharing by both Claude Skills scripts and Dify Plugin
+  - `md_exporter` is now ready for Agent Skills and runnable in standalone
+    - Add `SKILL.md` for Agent Skills description
+    - Add `/scripts` for code scripts of all tools as Agent Skills exectuion entry
+    - Extract the core file transformation logic into `/scripts/lib` sharing by both Agent Skills scripts and Dify Plugin
     - Add `pyproject.toml` as Python project description and dependency management
   - Add automated tests covering all usage of entry of Claude Skills scripts
   - bump `md2pptx` from 6.1 to 6.1.1 for bug fix in table caption 
