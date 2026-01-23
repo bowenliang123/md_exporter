@@ -1,82 +1,171 @@
-# AGENTS.md
+# Agent Coding Guidelines for md-exporter
 
-## Project Overview
+This document provides essential information for agentic coding agents working in the md-exporter repository.
 
-`md_exporter`, aka `Markdown Exporter`, is a project for exporting Markdown text to files in other formats, such as HTML, PPTX, CSV, etc. This project can be used as either a [Dify Plugin](https://docs.dify.ai/en/develop-plugin/dev-guides-and-walkthroughs/tool-plugin) or a Claude [Agent Skill](https://agentskills.io/specification).
+## 🔧 Build, Lint, and Test Commands
 
-### Dependencies
+### Package Management
+- **Primary**: `uv` package manager is used for dependency management
+- **Fallback**: `pip` if `uv` is not available
+- **Python Requirement**: Python 3.11 or higher required
 
-#### Dependencies Manager
-- `uv` is preferred as the dependencies manager.
-- project dependencies are defined in `pyproject.toml`.
-- `uv pip` can be used as `pip` replacement to install the required Python packages.
+### Code Quality and Formatting
 
-#### Required Python Dependencies
-- try the best to keep `requirements.txt` aligned with dependencies defined in `pyproject.toml`.
-- when running the project as a Dify Plugin
-    - `requirements.txt` will be used to install the required Python packages with `pip`
-    - `dify_plugin` is only required when running the project as a Dify Plugin.
-
-
-### Dify Plugin
-
-This project can be used as a Dify Plugin. 
-
-#### Run the plugin locally
-
-Run the plugin locally with `uv`:
+#### Lint and Format Code
 ```bash
-uv run python -m main
+# Alternative: Run from project root using provided script
+./dev.reformat.sh
 ```
 
-As it's running as Dify plugin, it will try to connect to a Dify server, which is not always available.
-It's alright and ignorable to see the following error message:
-1. `Failed to connect to localhost:5003`, as the Dify server is not running.
-2. `Broken pipe`, as the Dify server switched the accepted `REMOTE_INSTALL_KEY` which is set and should be the same in `.env` on plugin side.
-
-#### Scripts and Resources used for Dify Plugin
-- `manifest.xml` - Dify Plugin manifest file.
-- `tools` - Dify Tools
-    - `tools/md_to_XXX` - Dify Tool implementation code for converting Markdown to XXX format in `tools/md_to_XXX/md_to_XXX.py` and Dify tool specification in `tools/md_to_XXX/md_to_XXX.yaml`.
-- `/scripts/services/*.py` - Shared python code used for Dify Plugin and Agent Skill.
-- `.env` - Environment variables for running the Dify Plugin
-- `/_assets` - Assets used by both Dify Plugin, such as Dify Plugin icons, images used in `README.md`, etc.
-- `/assets` - Assets used by both Agent Skill and Dify Plugin, such as file templates used for generating `.docx` and `.pptx` files
-
-### Claude Agent Skill
-
-The main usage of the Agent Skill can be found in `SKILL.md`.
-The `SKILL.md` tells how to use the Agent Skill, including the arguments, options, and examples.
-
-Unlike the Dify Plugin, the Agent Skill is not running as a server. It should be able to be executed locally.
-
-
-For example, to translate a Markdown table to Excel file `.xlsx`, run the following command:
-
+#### Run Tests
 ```bash
-uv run --with 'dep1,dep2~=1.0.0,dep3>=2.0.0' python scripts/parser/cli_md_to_xlsx.py <input> <output> [options]
+# Run all tests
+test/bin/run_all_tests.sh 
+
+# Run specific test file
+test/bin/test_md_to_docx.sh 
+
+or
+
+uv run pytest test/skills/test_md_to_docx.py
 ```
 
-#### Scripts and Resources used for Dify Plugin
-- `SKILL.md` - Agent Skill specification file and the usage guides and examples of the kills.
-- `/scripts/parser/cli_md_to_XXX.py` - Skill implementation code for converting Markdown to XXX format.
-- `/scripts/services/*.py` - Shared python code used for Dify Plugin and Agent Skill.
-- `/assets` - Assets used by both Agent Skill and Dify Plugin, such as file templates used for generating `.docx` and `.pptx` files
+### Development Scripts
+- **Main CLI**: `scripts/md-exporter` (shell script wrapper)
+- **Test Scripts**: Individual test scripts in `test/bin/`
 
-## Development Guide
+## 📝 Code Style Guidelines
 
-### Code Linting and Formatting
+### Formatting and Style
+- **Line Length**: 120 characters maximum
+- **Line Ending**: LF (Unix-style)
+- **Indentation**: 4 spaces (not tabs)
+- **Quotes**: Use double quotes for strings unless single quotes are preferred for specific cases
+- **End of File**: All files must end with newline character
 
-- do the linting and formatting every time the Python code is modified and before running the code.
-- run `dev/reformat` to lint and format the code with `ruff`.
-- The ruff rules and configs are defined in `ruff.toml`.
+### Python Style Standards
 
-### Testing
-- test files are located in the `tests` folder, which are testing the each script and tool of Agent Skills and can be run in standalone
-- run `test/bin/run_all_tests.sh` to test all scripts`.
+#### Import Organization
+```python
+# Standard library imports
+from pathlib import Path
+from tempfile import NamedTemporaryFile
 
-### Logging
-- do not use `print` statements in the code. Use `from scripts.utils.logger_utils import get_logger` instead.
+# Third-party imports
+from pypandoc import convert_file
 
-### Exclusions
-- The `md2pptx-X.Y.Z` folder contains upstream code of `md2pptx` project used for Markdown to PPTX conversion. The content of this folder should be kept as-is and excluded from linting, formatting, and testing.
+# Local imports (relative paths)
+from scripts.utils.markdown_utils import get_md_text
+```
+
+#### Type Hints and Annotations
+- Use Python 3.11+ union syntax: `Path | None` (not `Optional[Path]`)
+- All function parameters and return values should have type hints
+- Use pathlib.Path for file paths, not strings
+
+#### Function Documentation
+```python
+def convert_md_to_docx(
+    md_text: str, output_path: Path, template_path: Path | None = None, is_strip_wrapper: bool = False
+) -> None:
+    """
+    Convert Markdown text to DOCX format
+
+    Args:
+        md_text: Markdown text to convert
+        output_path: Path to save the output DOCX file
+        template_path: Optional path to DOCX template file
+        is_strip_wrapper: Whether to remove code block wrapper if present
+
+    Raises:
+        ValueError: If input processing fails
+        Exception: If conversion fails
+    """
+```
+
+#### Naming Conventions
+- **Files**: `snake_case.py` for Python files
+- **Functions**: `snake_case()` for functions and methods
+- **Classes**: `PascalCase` for classes
+- **Constants**: `UPPER_SNAKE_CASE` for constants
+- **Private Methods**: Prefix with single underscore `_private_method()`
+
+### Error Handling
+- Always handle exceptions properly, never use empty catch blocks
+- Raise specific exceptions with descriptive messages
+- Use context managers (`with` statements) for resource management
+- Clean up temporary files in `finally` blocks
+
+### Ruff Linting Rules
+The project uses these ruff rules:
+- **UP**: pyupgrade rules for modern Python features
+- **I**: isort for import organization
+- **E402**: Module level import not at top of file
+- **F401**: Imported but unused
+
+Configuration is in `.ruff.toml`.
+
+## 📁 Project Structure
+
+### Core Directories
+- **`scripts/`**: Main entry points and core logic
+  - `services/`: Conversion service modules (`svc_*.py`)
+  - `parser/`: CLI parsers for each tool (`cli_*.py`)
+  - `utils/`: Shared utility functions
+- **`test/`**: Test files organized by functionality
+  - `skills/`: Tests for each conversion tool
+  - `bin/`: Shell script test runners
+- **`assets/`**: Template files and static resources
+  - `template/`: DOCX and PPTX template files
+
+### Key Service Patterns
+Each conversion tool follows this pattern:
+- **Service**: `scripts/services/svc_md_to_X.py` - Core conversion logic
+- **Parser**: `scripts/parser/cli_md_to_X.py` - CLI argument parsing
+- **CLI**: `scripts/md-exporter X` - Shell script entry point
+- **Test**: `test/skills/test_md_to_X.py` - Unit tests
+
+### File Processing Patterns
+- Use `pathlib.Path` for all file operations
+- Implement proper cleanup for temporary files
+- Support custom template files when available
+- Handle both relative and absolute file paths correctly
+
+## 🧪 Testing Guidelines
+
+### Test Structure
+- Tests extend `TestBase` class
+- Use `run_script()` method for CLI testing
+- Verify output files exist and are not empty
+- Use descriptive test method names: `test_tool_name()`
+
+### Test Data
+- Input files are in `test/resources/`
+- Output files should go to `test_output/`
+- Each tool has corresponding test resources
+
+### Running Individual Tests
+```bash
+# Run specific tool test
+cd test/bin && ./test_md_to_html.sh
+
+# Run with pytest directly
+uv run pytest test/skills/test_md_to_docx.py -v
+```
+
+## 🚫 Important Constraints
+
+1. **Python Version**: Always use Python 3.11+ features and syntax
+2. **Package Manager**: Prefer `uv` over `pip` for development
+3. **Path Handling**: Use `pathlib.Path` exclusively for file paths
+4. **Error Handling**: Never suppress exceptions or use empty catch blocks
+5. **Code Quality**: Always run `ruff check --fix` before committing
+6. **Testing**: Run tests after any changes to ensure functionality
+
+## 🔄 Development Workflow
+
+1. Make changes following the code style guidelines
+2. Run linting: `dev/reformat.sh`
+3. Run tests: `test/bin/run_all_tests.sh`
+4. Verify all tools still work correctly
+5. Test individual tools via CLI scripts
