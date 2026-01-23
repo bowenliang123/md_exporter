@@ -200,14 +200,19 @@ def convert_md_to_mermaid(
                 if temp_png_path.exists():
                     temp_png_path.unlink()
 
+                raise Exception(f"Error converting mermaid diagram {i + 1}, Exception: {e}, Mermaid Code: {mermaid_code}")
+
         except Exception as e:
-            logger.error(f"Error converting mermaid diagram {i + 1}: {e}")
+            logger.error(f"Error converting mermaid diagram {i + 1}, Exception: {e}, Mermaid Code: {mermaid_code}")
+
             # Clean up temporary files
             if "temp_png_path" in locals() and temp_png_path.exists():
                 try:
                     temp_png_path.unlink()
                 except Exception:
                     pass
+
+            raise Exception(f"Error converting mermaid diagram {i + 1}, Exception: {e}, Mermaid Code: {mermaid_code}")
 
     if not png_files:
         raise Exception("No mermaid diagrams were successfully converted")
