@@ -200,7 +200,7 @@ def convert_md_to_mermaid(
                 if temp_png_path.exists():
                     temp_png_path.unlink()
 
-                raise Exception(f"Error converting mermaid diagram {i + 1}, Exception: {e}, Mermaid Code: {mermaid_code}")
+                raise Exception(f"Error converting mermaid diagram {i + 1}, Mermaid Code: {mermaid_code}")
 
         except Exception as e:
             logger.error(f"Error converting mermaid diagram {i + 1}, Exception: {e}, Mermaid Code: {mermaid_code}")
