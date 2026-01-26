@@ -99,11 +99,6 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
     <td>📝 LaTeX file (.tex)</td>
   </tr>
   <tr>
-    <td><code>md_to_mermaid</code></td>
-    <td>📊 <a href="https://mermaid.js.org/intro/#diagram-types">Mermaid diagrams in Markdown</a> </td>
-    <td>🖼️ PNG image(s) of Mermaid diagrams</td>
-  </tr>
-  <tr>
     <td><code>md_to_codeblock</code></td>
     <td>💻 <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks"> Code blocks in Markdown </a> </td>
     <td>📁 Code files by language (.py, .js, .sh, etc.)</td>
@@ -270,31 +265,6 @@ Automatically download all images referenced in your Markdown.
 
 ---
 
-### 🖼️ Markdown → Mermaid Diagrams
-
-Convert Mermaid diagram code blocks in your Markdown to PNG images.
-
-**Input Example:**
-
-<code>
-```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[Decision]
-    C -->|Yes| D[Success]
-    C -->|No| E[Failure]
-    D --> F[End]
-    E --> F
-```
-</code>
-
-**Output:**
-
-![Mermaid Usage](_assets/screenshots/md_to_mermaid_1.png)
-
-![Mermaid Output](_assets/screenshots/md_to_mermaid_2.png)
-
----
 
 ### 📋 Markdown → CSV
 

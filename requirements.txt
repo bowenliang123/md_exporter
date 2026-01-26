@@ -23,9 +23,6 @@ python-pptx~=1.0.2
 PyMuPDF~=1.26.4
 pillow~=12.1.0
 
-# for markdown to mermaid
-nodejs-wheel-binaries>=20.13.0
-
 # pandoc
 pypandoc-binary~=1.16.2
 
