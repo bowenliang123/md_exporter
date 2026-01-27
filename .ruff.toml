@@ -1,6 +1,6 @@
 line-length = 120
 exclude = [
-    "md2pptx-6.1.1",
+    "md2pptx-6.2.1",
 ]
 
 

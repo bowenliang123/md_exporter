@@ -37,7 +37,7 @@ def convert_md_to_pptx(
 
     # Get md2pptx directory path
     script_dir = Path(__file__).resolve().parent.parent  # Go up two levels: scripts/lib -> scripts
-    md2pptx_dir = script_dir / "md2pptx-6.1.1"
+    md2pptx_dir = script_dir / "md2pptx-6.2.1"
 
     if not md2pptx_dir.exists():
         raise Exception(f"md2pptx directory not found: {md2pptx_dir}. Please ensure md2pptx is properly installed.")

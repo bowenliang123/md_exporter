@@ -8,8 +8,8 @@ First argument is file to write to
 Reads from stdin
 """
 
-md2pptx_level = "6.1.1"
-md2pptx_date = "15 December, 2025"
+md2pptx_level = "6.2.1"
+md2pptx_date = "26 January, 2026"
 
 import re
 import sys
@@ -99,6 +99,19 @@ namespaceURL = {
     "r":   "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 }
 
+def showRenderingRectangle(slide, renderingRectangle):
+    rr = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE,
+        renderingRectangle.left,
+        renderingRectangle.top,
+        renderingRectangle.width,
+        renderingRectangle.height
+    )
+    
+    rr.fill.background()
+    rr.line.color.rgb = RGBColor(255, 0, 0) 
+                    
+                    
+
 def namespacesFragment(prefixes):
     xml = ""
     for prefix in prefixes:
@@ -118,6 +131,7 @@ class SlideInfo:
         code,
         sequence,
         tableCaptions,
+        figureCaptions,
     ):
         self.titleText = titleText
         self.subtitleText = subtitleText
@@ -128,6 +142,7 @@ class SlideInfo:
         self.code = code
         self.sequence = sequence
         self.tableCaptions = tableCaptions
+        self.figureCaptions = figureCaptions
 
 
 # Information about a single table. (A slide might have more than one - or none.)
@@ -707,8 +722,9 @@ def sendToBack(shapes, shape):
     firstShapeElement.addprevious(shape._element)
 
 
-# Turn a paragraph into a numbered inList item
+# Turn a paragraph into a numbered list item
 def makeNumberedListItem(p):
+    originalFontSize = p.font.size
     if (
         p._element.getchildren()[0].tag
         == "{http://schemas.openxmlformats.org/drawingml/2006/main}pPr"
@@ -730,6 +746,8 @@ def makeNumberedListItem(p):
     buAutoNum = OxmlElement("a:buAutoNum")
     buAutoNum.set("type", "arabicPeriod")
     pPr.append(buAutoNum)
+
+    p.font.size = originalFontSize
 
 # Add a drop shadow to a shape
 def createShadow(shape):
@@ -940,13 +958,14 @@ def getVideoInfo(audioVideoInfo):
 
 
 # Render a list of bullets
-def renderText(shape, bullets):
+def renderText(shape, bulletList):
     baseTextDecrement = globals.processingOptions.getCurrentOption("baseTextDecrement")
     baseTextSize = globals.processingOptions.getCurrentOption("baseTextSize")
 
     tf = shape.text_frame
 
-    for bulletNumber, bullet in enumerate(bullets):
+    shape.text = ""
+    for bulletNumber, bullet in enumerate(bulletList):
         para0 = tf.paragraphs[0]
 
         if bulletNumber == 0:
@@ -956,16 +975,19 @@ def renderText(shape, bullets):
             # We need a new paragraph
             p = tf.add_paragraph()
 
+        # Unpack bullet information
+        level, textToFormat, bulletType = bullet
+
         # Set the paragraph's level - zero-indexed
-        p.level = int(bullet[0])
+        p.level = int(level)
 
         # Set the paragraph's font size, adjusted for level, if necessary
         if baseTextSize > 0:
             p.font.size = Pt(baseTextSize - p.level * baseTextDecrement)
 
-        addFormattedText(p, bullet[1])
+        addFormattedText(p, textToFormat)
 
-        if bullet[2] == "numbered":
+        if bulletType == "numbered":
             makeNumberedListItem(p)
 
     tf.auto_size = MSO_AUTO_SIZE.TEXT_TO_FIT_SHAPE
@@ -1495,6 +1517,7 @@ def handleGraphViz(slide, renderingRectangle, codeLines, codeType):
     dotGraphicWidth, dotGraphicHeight = getGraphicDimensions(dotFile)
 
     # Adjust those dimensions with the usual scaling rules
+    # Note: No <figcaption> adjustment
     (dotPicWidth, dotPicHeight, scaledByHeight) = scalePicture(
         renderingRectangle.width,
         renderingRectangle.height,
@@ -1873,11 +1896,11 @@ def createContentSlide(presentation, slideNumber, slideInfo):
 
     # Create the slide and check for bullets and/or cards
     if (slideInfo.bullets == []) & (slideInfo.cards == []):
-        # No bullets or cards so "title only"
+        # No bullets or cards so "title only" layout wanted
         slideLayout = titleOnlyLayout
         haveBulletsCards = False
     else:
-        # Either bullets or cards or both so not "title only"
+        # Either bullets or cards or both so "content slide" layout wanted
         slideLayout = contentSlideLayout
         haveBulletsCards = True
 
@@ -1933,6 +1956,7 @@ def createContentSlide(presentation, slideNumber, slideInfo):
 
     codeBlockNumber = 0
     tableBlockNumber = 0
+    listBlockNumber = 0
 
     for b in range(blocksToRender):
         if globals.processingOptions.getCurrentOption("contentSplitDirection") == "vertical":
@@ -1961,7 +1985,8 @@ def createContentSlide(presentation, slideNumber, slideInfo):
             tableBlockNumber += 1
 
         elif slideInfo.sequence[b] == "list":
-            createListBlock(slideInfo, slide, renderingRectangle)
+            createListBlock(slideInfo, slide, renderingRectangle, listBlockNumber)
+            listBlockNumber += 1
         else:
             createCodeBlock(slideInfo, slide, renderingRectangle, codeBlockNumber)
             codeBlockNumber += 1
@@ -1972,7 +1997,7 @@ def createContentSlide(presentation, slideNumber, slideInfo):
     return slide
 
 
-def createListBlock(slideInfo, slide, renderingRectangle):
+def createListBlock(slideInfo, slide, renderingRectangle, listBlockNumber):
     horizontalCardGap = globals.processingOptions.getCurrentOption("horizontalcardgap")
     verticalCardGap = globals.processingOptions.getCurrentOption("verticalcardgap")
     cardTitleAlign = globals.processingOptions.getCurrentOption("cardtitlealign")
@@ -1997,13 +2022,19 @@ def createListBlock(slideInfo, slide, renderingRectangle):
 
     # Get bulleted text shape - either for bullets above cards or first card's body shape
     bulletsShape = findBodyShape(slide)
+    
+    if listBlockNumber > 0:
+        bulletsShape = addClonedShape(slide, bulletsShape)
 
-    # Set bulleted shape top, left, width
+        # Set bulleted shape top, left, width
     bulletsShape.top = renderingRectangle.top
     bulletsShape.left = renderingRectangle.left
     bulletsShape.width = renderingRectangle.width
 
-    bulletCount = len(slideInfo.bullets)
+    if len(slideInfo.bullets) == 0:
+        bulletCount = 0
+    else:
+        bulletCount = len(slideInfo.bullets[listBlockNumber])
 
     # Set bulleted text height - depending on whether there's a card
     # Remainder is card area height - if there are cards
@@ -2164,7 +2195,12 @@ def createListBlock(slideInfo, slide, renderingRectangle):
                         graphicTitle = "" if card.graphicTitle == None else card.graphicTitle
 
                         pictureInfos.append(
-                            (card.graphicShape, mediaURL, graphicTitle)
+                            (
+                                card.graphicShape,
+                                mediaURL,
+                                graphicTitle,
+                                "",
+                            )
                         )
 
                 except:
@@ -2312,7 +2348,8 @@ def createListBlock(slideInfo, slide, renderingRectangle):
     bulletsShape.bottom = bulletsShape.top + bulletsShape.height
 
     # Fill in the main bullets shape
-    renderText(bulletsShape, slideInfo.bullets)
+    if len(slideInfo.bullets) > 0:
+        renderText(bulletsShape, slideInfo.bullets[listBlockNumber])
 
     # Second go on each card
     for c, card in enumerate(slideInfo.cards):
@@ -2448,6 +2485,7 @@ def createListBlock(slideInfo, slide, renderingRectangle):
 
             else:
                 # Scale graphic, audio, or video
+                # Note: No <figcaption> adjustment
                 (cardMediaWidth, cardMediaHeight, scaledByHeight) = scalePicture(
                     cardGraphicSizeRaw,
                     cardGraphicSizeRaw,
@@ -2896,13 +2934,26 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
         # Calculate the size of each graphic - scaled by the above rect    #
         ####################################################################
 
+        figureNumber = 0
+
+        figCaps = slideInfo.figureCaptions
+        figCapCount = len(figCaps)
+
+        figCapHeight = Inches(0.3)
+        
+        topLeftFigCapHeight = figCapHeight if figureNumber < figCapCount else 0
+        
         if (topLeftGraphicFilename != "") | (topLeftVideo is not None):
+            # Establish dimensions, taking into account any <figcaption>
             (
                 topLeftPicWidth,
                 topLeftPicHeight,
                 usingHeightToScale,
             ) = scalePicture(
-                maxPicWidth, maxPicHeight, topLeftMediaWidth, topLeftMediaHeight
+                maxPicWidth,
+                maxPicHeight - topLeftFigCapHeight,
+                topLeftMediaWidth,
+                topLeftMediaHeight
             )
 
             if usingHeightToScale:
@@ -2929,8 +2980,8 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                     # Center sole top media item
                     topLeftPicX = midGraphicsSpaceX - topLeftPicWidth / 2
 
-            # Calculate vertical start
-            topLeftPicY = renderingRectangle.top + (maxPicHeight - topLeftPicHeight) / 2
+            # Calculate vertical start - centred within the rendering rectangle
+            topLeftPicY = renderingRectangle.top + (maxPicHeight - topLeftPicHeight - topLeftFigCapHeight) / 2
 
             if gridRows == 2:
                 topLeftPicY -= Inches(0.2)
@@ -2959,8 +3010,25 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                     topLeftGraphicHref = None
 
                 pictureInfos.append(
-                    (topLeftPicture, topLeftGraphicHref, topLeftGraphicTitle)
-            )
+                    (
+                        topLeftPicture,
+                        topLeftGraphicHref,
+                        topLeftGraphicTitle,
+                        "",
+                    )
+                )
+                
+                if len(figureCaptions) > 0:
+                    topLeftFigCap = slide.shapes.add_textbox(topLeftPicX,
+                        renderingRectangle.bottom - topLeftFigCapHeight,
+                        topLeftPicWidth,
+                        topLeftFigCapHeight
+                    )
+                    topLeftFigCapTF = topLeftFigCap.text_frame
+                    topLeftFigCapP = topLeftFigCapTF.paragraphs[0]
+                    addFormattedText(topLeftFigCapP, f"*{figureCaptions[-1]}")
+                    
+                    topLeftFigCapP.font.size = Pt(16)
 
         elif topLeftVideo is not None:
             if leftMediaMissing or topLeftMediaMissing:
@@ -2972,7 +3040,7 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                     maxPicWidth,
                     maxPicHeight - Inches(0.2)
                 )
-                    
+
             else:
                 if topLeftVideoType == "Local":
                     # Can use local file directly
@@ -3007,12 +3075,18 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
         if gridColumns == 2:
             # Top right media item
             if (topRightGraphicFilename != "") | (topRightVideo is not None):
+                figureNumber += 1
+
+                # Establish dimensions
                 (
                     topRightPicWidth,
                     topRightPicHeight,
                     usingHeightToScale,
                 ) = scalePicture(
-                    maxPicWidth, maxPicHeight, topRightMediaWidth, topRightMediaHeight
+                    maxPicWidth,
+                    maxPicHeight,
+                    topRightMediaWidth,
+                    topRightMediaHeight
                 )
 
                 if usingHeightToScale:
@@ -3058,7 +3132,12 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                         topRightGraphicHref = None
 
                     pictureInfos.append(
-                        (topRightPicture, topRightGraphicHref, topRightGraphicTitle)
+                        (
+                            topRightPicture,
+                            topRightGraphicHref,
+                            topRightGraphicTitle,
+                            "",
+                        )
                     )
 
             elif topRightVideo is not None:
@@ -3107,6 +3186,9 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
             # Need second row of media items
             # Bottom left media item
             if (bottomLeftGraphicFilename != "") | (bottomLeftVideo is not None):
+                figureNumber += 1
+
+                # Establish dimensions
                 (
                     bottomLeftPicWidth,
                     bottomLeftPicHeight,
@@ -3171,7 +3253,12 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                         bottomLeftGraphicHref = None
 
                     pictureInfos.append(
-                       (bottomLeftPicture, bottomLeftGraphicHref, bottomLeftGraphicTitle)
+                       (
+                           bottomLeftPicture,
+                           bottomLeftGraphicHref,
+                           bottomLeftGraphicTitle,
+                           "",
+                        )
                     )
 
             elif bottomLeftVideo is not None:
@@ -3207,6 +3294,9 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
             if gridColumns == 2:
                 # Bottom right media item
                 if (bottomRightGraphicFilename != "") | (bottomRightVideo is not None):
+                    figureNumber += 1
+
+                    # Establish dimensions
                     (
                         bottomRightPicWidth,
                         bottomRightPicHeight,
@@ -3272,6 +3362,7 @@ def createTableBlock(slideInfo, slide, renderingRectangle, tableBlockNumber):
                                 bottomRightPicture,
                                 bottomRightGraphicHref,
                                 bottomRightGraphicTitle,
+                                "",
                             )
                         )
                 elif bottomRightVideo is not None:
@@ -4266,7 +4357,8 @@ def createTaskSlides(prs, slideNumber, tasks, titleStem):
                     [],
                     [],
                     ["table"],
-                    ['']
+                    [''],
+                    [],
                 )
                 
                 slide = createContentSlide(prs, slideNumber, slideInfo)
@@ -4320,7 +4412,8 @@ def createTaskSlides(prs, slideNumber, tasks, titleStem):
         [],
         [],
         ["table"],
-        ['']
+        [''],
+        [],
     )
         
     slide = createContentSlide(prs, slideNumber, slideInfo)
@@ -4375,7 +4468,8 @@ def createGlossarySlides(prs, slideNumber, abbrevDictionary):
                     [],
                     [],
                     ["table"],
-                    ['']
+                    [''],
+                    [],
                 )
                 slide = createContentSlide(prs, slideNumber, slideInfo)
 
@@ -4400,8 +4494,19 @@ def createGlossarySlides(prs, slideNumber, abbrevDictionary):
         title = glossaryTitle
 
     glossaryBlock = [glossaryRows]
-    slideInfo = SlideInfo(title, "", "table", [], glossaryBlock, [], [], ["table"],[]
+    slideInfo = SlideInfo(
+        title,
+        "",
+        "table",
+        [],
+        glossaryBlock,
+        [],
+        [],
+        ["table"],
+        [''],
+        [],
     )
+
     slide = createContentSlide(prs, slideNumber, slideInfo)
     glossarySlides.append(slide)
     slideNumber += 1
@@ -4449,8 +4554,18 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
                     title = footnotesTitle
 
                 slideInfo = SlideInfo(
-                    title, "", "content", bullets, [], cards, [], ["list", []]
+                    title,
+                    "",
+                    "content",
+                    bullets,
+                    [],
+                    cards,
+                    [],
+                    ["list"],
+                    [''],
+                    [],
                 )
+                
                 slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
                 footnoteSlides.append(slide)
@@ -4461,15 +4576,18 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
                 slideNumber += 1
             bullets = []
             old_sNum = 0
+        if bullets == []:
+            bullets.append([])
 
-        bullets.append(
-            [
-                1,
-                str(footnoteNumber + 1) + ". " + footnoteDefinitions[footnoteNumber][1],
-                "bullet",
-            ]
-        )
+        lastBulletList = bullets[-1]
 
+        lastBulletList.append([
+            1,
+            str(footnoteNumber + 1) + ". " + footnoteDefinitions[footnoteNumber][1],
+            "bullet",
+        ])
+        
+        bullets[-1] = lastBulletList
     # Print a final "footnote" slide
     footnotesSlideNumber += 1
     if footnoteCount > footnotesPerPage:
@@ -4479,8 +4597,19 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
         # Only one footnotes page
         title = footnotesTitle
 
-    slideInfo = SlideInfo(title, "", "content", bullets, [], cards, [], ["list"], []
+    slideInfo = SlideInfo(
+        title,
+        "",
+        "content",
+        bullets,
+        [],
+        cards,
+        [],
+        ["list"],
+        [''],
+        [],
     )
+
     slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
     footnoteSlides.append(slide)
@@ -4586,6 +4715,7 @@ dynamicMetadata2Regex = re.compile("^<!-- md2pptx: (.+): (.+) -->")
 dynamicMetadata1Regex = re.compile("^<!-- md2pptx: (.+) -->")
 indirectReferenceAnchorRegex = re.compile(r"^\[(.+?)\]: (.+)")
 indirectReferenceUsageRegex = re.compile(r"[(.+?)]\[(.+?)]")
+figcaptionRegex = re.compile(r"^<figcaption>(.+)</figcaption>$")
 
 # Default slide layout enumeration
 globals.processingOptions.setOptionValuesArray(
@@ -4660,6 +4790,13 @@ for line in input_file:
             # Line goes to post-metadata array
             afterMetadataAndHTML.append(line)
 
+        elif line in ["<br/>\n", "<br />\n"]:
+            # Line goes to post-metadata array
+            afterMetadataAndHTML.append(line)
+
+        elif line.startswith("<figcaption>"):
+            # Line goes to post-metadata array
+            afterMetadataAndHTML.append(line)
         else:
             inHTML = True
 
@@ -5599,6 +5736,8 @@ slideTitle = ""
 slideSubtitle = ""
 bullets = []
 tableRows = []
+tableCaptions = []
+figureCaptions = []
 cards = []
 code = []
 inCode = False
@@ -5647,6 +5786,10 @@ for line in afterMetadataAndHTML:
 
     elif line.startswith("<a id="):
         # This is an anchor line so keep it separate
+        linesAfterConcatenation.append(line)
+
+    elif line.startswith("<figcaption>"):
+        # This is a figure caption line so keep it separate
         linesAfterConcatenation.append(line)
 
     elif startswithOneOf(line, ["<video ", "<audio "]):
@@ -5708,7 +5851,6 @@ for line in linesAfterConcatenation:
     metadataLinenumber += 1
 
 lastTableLine = -1
-tableCaptions = []
 
 # Pass 5: Main pass over the input file, now that footnote
 # references have been gathered
@@ -5734,6 +5876,9 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
         inCode = False
         inHTMLCode = False
         inTitle = False
+
+    elif startswithOneOf(line, ["<br/>", "<br />"]):
+        inList = False
 
     if line.startswith("```"):
         inCode = not inCode
@@ -6270,7 +6415,9 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
                     code,
                     sequence,
                     tableCaptions,
+                    figureCaptions,
                 )
+
                 slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
                 # Register the previous slide's href - if there was one
@@ -6306,9 +6453,10 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
             slideSubtitle = ""
             bullets = []
             tableRows = []
+            tableCaptions = []
+            figureCaptions = []
             cards = []
             code = []
-            tableCaptions = []
 
             if (notes_text != "") & (slide != None):
                 createSlideNotes(slide, notes_text)
@@ -6319,52 +6467,42 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
         if (href != "") & (href in slideHrefs.keys()):
             print(f"Heading Reference redefined: '{href}' for slide {slideNumber}")
 
-    elif match := bulletRegex.match(line):
-        # Bulleted list
-        bulletLine = match.group(3).lstrip()
+    elif match := figcaptionRegex.match(line.rstrip()):
+        # Extract the figure caption text
+        if inTable:
+            # Update latest graphic to have a figure caption
+            figcap = match.group(1)
+            figureCaptions.append(figcap)
 
-        bulletLevel = calculateIndentationLevel(
+    elif match := (bulletRegex.match(line)) or (numberRegex.match(line)):
+        if match.re is bulletRegex:
+            listItemType = "bulleted"
+        else:
+            listItemType = "numbered"
+
+        # Is a list item
+        listItemLine = match.group(3).lstrip()
+
+        listItemLevel = calculateIndentationLevel(
             match.start(2), globals.processingOptions.getCurrentOption("indentSpaces")
         )
         
-        bulletType = "bulleted"
-        
         if inCard:
             # Bullet is on a card
-            cardBullets.append([bulletLevel, bulletLine, bulletType])
+            cardBullets.append([listItemLevel, listItemLine, listItemType])
 
             # Update bullet list for the card
             cards[-1].bullets = cardBullets
         else:
-            # Bullet is not on a card        
-            bullets.append([bulletLevel, bulletLine, bulletType])
-
-        if inList is False:
-            sequence.append("list")
-
-        inList = True
-        inTable = False
-        inTitle = False
-
-    elif match := numberRegex.match(line):
-        # Numbered list
-        bulletLine = match.group(3).lstrip()
-
-        bulletLevel = calculateIndentationLevel(
-            match.start(2), globals.processingOptions.getCurrentOption("indentSpaces")
-        )
-
-        bulletType = "numbered"
-
-        if inCard:
-            # Bullet is on a card
-            cardBullets.append([bulletLevel, bulletLine, bulletType])
-
-            # Update bullet list for the card
-            cards[-1].bullets = cardBullets
-        else:
-            # Bullet is not on a card        
-            bullets.append([bulletLevel, bulletLine, bulletType])
+            # Bullet is not on a card
+            if inList is False:
+                bulletList = []
+                bulletList.append([listItemLevel, listItemLine, listItemType])
+                bullets.append(bulletList)
+            else:
+                bulletList = bullets[-1]
+                bulletList.append([listItemLevel, listItemLine, listItemType])
+                bullets[-1] = bulletList                
 
         if inList is False:
             sequence.append("list")
@@ -6520,6 +6658,7 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
     ):
         tableCaption = line[1:-1]
         tableCaptions.append(tableCaption)
+
     else:
         # Not in a table
         inTable = False
@@ -6547,7 +6686,16 @@ if len(tableCaptions) < len(tableRows):
 ######################################################################################
 if (inBlock is True) | (inCode is True) | (inTable is True):
     slideInfo = SlideInfo(
-        slideTitle, slideSubtitle, blockType, bullets, tableRows, cards, code, sequence, tableCaptions
+        slideTitle,
+        slideSubtitle,
+        blockType,
+        bullets,
+        tableRows,
+        cards,
+        code,
+        sequence,
+        tableCaptions,
+        figureCaptions,
     )
     slideNumber, slide, sequence = createSlide(prs, slideNumber, slideInfo)
 
@@ -6768,7 +6916,7 @@ for href in globals.href_runs.keys():
 # There's a corresponding entry in picture_tooltips
 
 # fix up any clickable picture links
-for (picture, href, tooltip) in pictureInfos:
+for (picture, href, tooltip, figcap) in pictureInfos:
     # Pick up link target - if any
     if href == None:
         target = None
