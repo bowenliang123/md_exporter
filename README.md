@@ -325,6 +325,10 @@ Releases are available at
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
 Release changelogs:
+- 3.3.0:
+  - Update `md_to_pptx` from 6.1.1 to 6.2.1
+  - Remove `md_to_mermaid` tool for less installation timecost and footprint for downloading Nodejs runtime
+
 - 3.2.0:
   - Introduce `md_to_mermaid` tool for converting Mermaid diagram code blocks in Markdown to PNG images
   - Refactor Agent Skill scripts and entry shell scripts
