@@ -74,7 +74,9 @@ def convert_md_to_pptx(
                 result = subprocess.run(cmd, timeout=60, capture_output=True, text=True)
                 if result.returncode != 0:
                     raise Exception(
-                        f"md2pptx failed with return code {result.returncode}. stdout: {result.stdout}, stderr: {result.stderr}"
+                        f"md2pptx failed with return code {result.returncode}."
+                        f" stdout: {result.stdout},"
+                        f" stderr: {result.stderr}"
                     )
             finally:
                 # Delete temporary file

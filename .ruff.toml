@@ -8,6 +8,6 @@ exclude = [
 select = [
     "I",
     "UP",
-    "E402",
-    "F401",
+    "E",
+    "F",
 ]

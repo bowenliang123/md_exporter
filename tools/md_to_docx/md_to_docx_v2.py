@@ -111,5 +111,5 @@ class MarkdownToDocxTool(Tool):
             run._element.rPr.rFonts.set(qn("w:ascii"), DocxFontEnum.TIMES_NEW_ROMAN)
             # Set high ANSI font to Times New Roman
             run._element.rPr.rFonts.set(qn("w:hAnsi"), DocxFontEnum.TIMES_NEW_ROMAN)
-        except Exception as e:
+        except Exception:
             self.logger.exception("Failed to apply fonts to run")
