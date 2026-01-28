@@ -1,34 +1,107 @@
 ---
-title: "Introduction to Dify"
-subtitle: "The LLM Application Development Platform"
-author: "Your Name"
-date: "2026-01-28"
+title: PowerPoint Kitchen Sink Presentation
+author: Claude Assistant
+date: September 17, 2024
 ---
 
-# What is Dify?
+# Introduction
 
-Dify is an open-source platform designed to simplify the development and operation of large language model (LLM) applications [1,8](@ref).
+## Welcome Slide
+
+Welcome to our PowerPoint Kitchen Sink presentation!
+
+::: notes
+Remember to greet the audience warmly.
+:::
+
+---
+
+# Section 1: Basic Layouts
+
+## Title and Content
+
+- This is a basic slide with bullet points
+- It uses the "Title and Content" layout
+- Perfect for simple content presentation
+
+## Two Column Layout
+
+::::: columns
+::: column
+Left column content:
+- Point 1
+- Point 2
+:::
+::: column
+Right column content:
+- Point A
+- Point B
+:::
+:::::
+
+## Comparison Layout
+
+::::: columns
+::: column
+Text followed by an image:
 
 ![Test Image](https://avatars.githubusercontent.com/u/127165244?s=48&v=4)
+:::
+::: column
+- This triggers the "Comparison" layout
+- Useful for side-by-side comparisons
+:::
+:::::
+
+## Content with Caption
+
+Here's some explanatory text about the image below.
+
+![Test Image](https://avatars.githubusercontent.com/u/127165244?s=48&v=4 "fig:Test Image")
 
 ---
 
-# Core Features
+# Section 2: Advanced Features
 
-## Key Capabilities
+## Code Block
 
-Dify provides a comprehensive set of tools for building AI-powered applications.
+Here's a Python code block:
 
-| Feature | Description | Benefit |
-| :--- | :--- | :--- |
-| **Visual Workflow** | Design application logic with a drag-and-drop interface [1](@ref). | Lowers technical barrier, improves development efficiency. |
-| **Multi-Model Support** | Integrates with various LLMs like OpenAI, Claude, and open-source models [1](@ref). | Provides flexibility and avoids vendor lock-in. |
-| **One-Click Deployment** | Deploy applications as APIs or web interfaces quickly [1](@ref). | Simplifies operations and enables rapid launch. |
+```python
+def greet(name):
+    return f"Hello, {name}!"
 
----
+print(greet("World"))
+```
 
-# Getting Started: Create an App
+## Table Example
 
-## Using the Python SDK
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1    | Data     | More     |
+| Row 2    | Info     | Stuff    |
 
-The following code snippet demonstrates a basic interaction with a Dify application using its SDK.
+## Incremental List
+
+::: incremental
+- This point appears first
+- Then this one
+- And finally this one
+:::
+
+## {background-image="https://avatars.githubusercontent.com/u/127165244?s=48&v=4"}
+
+::: notes
+This is a slide with a background image and speaker notes only.
+The "Blank" layout will be used.
+:::
+
+# Conclusion
+
+## Thank You
+
+Thank you for viewing this kitchen sink presentation!
+
+::: notes
+Remember to thank the audience and invite questions.
+:::
