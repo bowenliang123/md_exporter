@@ -75,7 +75,7 @@ function run_file_test() {
     if [ $? -eq 0 ] && verify_file_output "$output_file"; then
         echo "✓ Test passed: ${script_name} generated valid output"
         # Clean up test output
-        cleanup_test_output "$output_file"
+        # cleanup_test_output "$output_file"
         return 0
     else
         echo "✗ Test failed: ${script_name} did not generate valid output"
