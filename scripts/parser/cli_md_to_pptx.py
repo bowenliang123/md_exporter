@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Markdown to PPTX converter
-Converts Markdown text to PPTX format using md2pptx
+Converts Markdown text to PPTX format using pandoc
 """
+
 
 import argparse
 import sys
