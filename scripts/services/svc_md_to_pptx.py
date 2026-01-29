@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
+from pypandoc import convert_file
 from scripts.utils.markdown_utils import get_md_text
 
 
@@ -39,7 +40,6 @@ def convert_md_to_pptx(
             final_template_path = default_template
 
     # Convert to PPTX using pandoc
-    from pypandoc import convert_file
 
     # Prepare pandoc arguments
     extra_args = []
