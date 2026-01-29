@@ -4,7 +4,6 @@ Markdown to PPTX converter
 Converts Markdown text to PPTX format using pandoc
 """
 
-
 import argparse
 import sys
 from pathlib import Path
