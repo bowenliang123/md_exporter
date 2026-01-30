@@ -418,7 +418,12 @@ Releases are available at
 - [Github Repo Releases](https://github.com/bowenliang123/md_exporter/releases).
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
-Release changelogs:
+Changelog:
+
+- 3.4.0:
+  - [ BREAKING CHANGE ] migrated `md_to_pptx` tool to use `pandoc` for conversion for stable features and less dependency footprint.
+  - the markdown input for `md_to_pptx` tool now must follow the syntax and guidance in [Pandoc slid shows](https://pandoc.org/MANUAL.html#slide-shows).
+
 - 3.3.0:
   - Update `md_to_pptx` from 6.1.1 to 6.2.1
   - Remove `md_to_mermaid` tool for less installation timecost and footprint for downloading Nodejs runtime
