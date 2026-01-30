@@ -422,7 +422,7 @@ Changelog:
 
 - 3.4.0:
   - [ BREAKING CHANGE ] migrated `md_to_pptx` tool to use `pandoc` for conversion for stable features and less dependency footprint.
-  - The Markdown input for `md_to_pptx` tool now must follow the markdown syntax and guidance in [Pandoc slid shows](https://pandoc.org/MANUAL.html#slide-shows).
+  - The Markdown input for `md_to_pptx` tool now must follow the markdown syntax and guidance in [Pandoc slides](https://pandoc.org/MANUAL.html#slide-shows).
 
 - 3.3.0:
   - Update `md_to_pptx` from 6.1.1 to 6.2.1
