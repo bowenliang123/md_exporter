@@ -172,7 +172,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 >
 > **Supported Features:**
 > - ✅ Title slides
-> - ✅ Bullet lists with nesting
+> - ✅ Column Layout
 > - ✅ Tables
 > - ✅ Hyperlinks
 > - ✅ And more!
@@ -181,24 +181,118 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 > >
 > > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get the [default pptx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/pptx_template.pptx).
 
+The input Markdown must follows the syntax and guidance in [Pandoc Slide Shows](https://pandoc.org/MANUAL.html#slide-shows).
+
 **Input Example:**
-```markdown
-# Markdown Exporter
 
-### Slide 1 Title
-* One
-    * One A
-    * One B
-* Two
-    * Two X
-    * Two Y
+````markdown
+---
+title: Markdown Exporter
+author: Bowen Liang
+---
 
-### Slide 2 Title
-|Left Heading|Centre Heading|Right Heading|
-|:---|:-:|--:|
-|Alpha|Bravo|1|
-|Charlie|Delta|2|
+# Introduction
+
+## Welcome Slide
+
+Welcome to our Markdown Exporter!
+
+::: notes
+Remember to greet the audience warmly.
+:::
+
+---
+
+# Section 1: Basic Layouts
+
+## Title and Content
+
+- This is a basic slide with bullet points
+- It uses the "Title and Content" layout
+- Perfect for simple content presentation
+
+## Two Column Layout
+
+::::: columns
+::: column
+Left column content:
+- Point 1
+- Point 2
+:::
+::: column
+Right column content:
+- Point A
+- Point B
+:::
+:::::
+
+## Comparison Layout
+
+::::: columns
+::: column
+Text followed by an image:
+
+![Test Image](https://avatars.githubusercontent.com/u/127165244?s=48&v=4)
+:::
+::: column
+- This triggers the "Comparison" layout
+- Useful for side-by-side comparisons
+:::
+:::::
+
+## Content with Caption
+
+Here's some explanatory text about the image below.
+
+![Test Image](https://avatars.githubusercontent.com/u/127165244?s=48&v=4 "fig:Test Image")
+
+---
+
+# Section 2: Advanced Features
+
+## Code Block
+
+Here's a Python code block:
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("World"))
 ```
+
+## Table Example
+
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1    | Data     | More     |
+| Row 2    | Info     | Stuff    |
+
+## Incremental List
+
+::: incremental
+- This point appears first
+- Then this one
+- And finally this one
+  :::
+
+## {background-image="https://avatars.githubusercontent.com/u/127165244?s=48&v=4"}
+
+::: notes
+This is a slide with a background image and speaker notes only.
+The "Blank" layout will be used.
+:::
+
+# Conclusion
+
+## Thank You
+
+Thank you for viewing this kitchen sink presentation!
+
+::: notes
+Remember to thank the audience and invite questions.
+:::
+````
 
 **Output:**
 ![PPTX Example](_assets/screenshots/md_to_pptx_1.png)

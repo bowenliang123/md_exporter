@@ -1,14 +1,13 @@
 ---
-title: PowerPoint Kitchen Sink Presentation
-author: Claude Assistant
-date: September 17, 2024
+title: Markdown Exporter
+author: Bowen Liang
 ---
 
 # Introduction
 
 ## Welcome Slide
 
-Welcome to our PowerPoint Kitchen Sink presentation!
+Welcome to our Markdown Exporter!
 
 ::: notes
 Remember to greet the audience warmly.
