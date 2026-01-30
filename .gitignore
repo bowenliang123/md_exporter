@@ -170,3 +170,6 @@ cython_debug/
 
 # Trae IDE
 .trae/
+
+# Test output
+test_output/

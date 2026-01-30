@@ -14,11 +14,6 @@ lxml>=6.0.1
 # for markdown to rst
 # mistune~=3.1.4
 
-
-
-# for markdown to pptx
-python-pptx~=1.0.2
-
 # for markdown to png
 PyMuPDF~=1.26.4
 pillow~=12.1.0

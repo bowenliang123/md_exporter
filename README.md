@@ -72,7 +72,7 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
         📝 Markdown slides
       </div>
       <div>
-      in <a href="https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides"> md2pptx </a> style
+      in <a href="https://pandoc.org/MANUAL.html#slide-shows">Pandoc style </a>
       </div>
     </td>
     <td>🎯 PowerPoint (.pptx)</td>
@@ -168,7 +168,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 
 > **✨ Syntax Requirements**
 >
-> Input slides must follow [md2pptx syntax](https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides).
+
 >
 > **Supported Features:**
 > - ✅ Title slides
@@ -498,8 +498,8 @@ This project stands on the shoulders of giants. We're grateful to these amazing 
 
 | Project | License |
 |---------|---------|
-| [md2pptx](https://github.com/MartinPacker/md2pptx) | MIT License |
+
 | [pypandoc](https://github.com/JessicaTegner/pypandoc) | MIT License |
 | [pandas](https://github.com/pandas-dev/pandas) | BSD 3-Clause License |
-| [python-pptx](https://github.com/scanny/python-pptx) | MIT License |
+
 | [xhtml2pdf](https://github.com/xhtml2pdf/xhtml2pdf) | Apache License 2.0 |

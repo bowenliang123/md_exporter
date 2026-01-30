@@ -9,4 +9,4 @@
 setup_test_env
 
 # Run test
-run_file_test "md_to_pptx" "test/resources/example_md.md" "pptx"
+run_file_test "md_to_pptx" "test/resources/example_md_pptx.md" "pptx"

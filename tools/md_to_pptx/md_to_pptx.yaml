@@ -17,8 +17,8 @@ parameters:
       en_US: Markdown text
       zh_Hans: Markdown格式文本
     human_description:
-      en_US: Following md2pptx dialect for slides，style docs：https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides
-      zh_Hans: 符合md2pptx方言的Markdown文本，样式文档： https://github.com/MartinPacker/md2pptx/blob/master/docs/user-guide.md#creating-slides
+      en_US: Markdown text for slides
+      zh_Hans: 用于幻灯片的Markdown文本
     form: llm
   - name: pptx_template_file
     type: file
