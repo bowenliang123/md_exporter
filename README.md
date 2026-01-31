@@ -10,6 +10,7 @@
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Dify Plugin                     | Platform: [Dify](https://github.com/langgenius/dify) <br/> - Install from the [Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).<br/> - Guide: Docs for [Installing Dify Plugins](https://docs.dify.ai/en/use-dify/workspace/plugins#installing-plugins).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | Agent Skills <br/> (standalone) | Platform: [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md) is availiable for Any Agent Skills supported platform.<br/> - IDEs / CLIs ([Claude Code](https://code.claude.com/docs/en/skills), [Trae](https://docs.trae.ai/ide/skills), [Codebuddy](https://copilot.tencent.com/docs/cli/skills) etc.) <br/> - Agent Frameworks ( [LangChain DeepAgents](https://www.blog.langchain.com/using-skills-with-deep-agents/), [AgentScope](https://doc.agentscope.io/tutorial/task_agent_skill.html) etc.). <br/> <br/>- Local Import: <br/> Import [the source code zip file](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip).<br/><br/> - Remote install: <br/>Run `/plugin marketplace add bowenliang123/md_exporter` on CLIs, installing as a Clude Marketplace plugin. | 
+| MCP Server                      | Platform: [Model Context Protocol](https://modelcontextprotocol.io/) <br/> - Compatible with Claude Desktop, Cline, and other MCP clients<br/> - See [MCP Server Usage](#-using-as-mcp-server) for configuration and usage instructions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Python Package                  | Platform: Python <br/> - [md-exporter](https://pypi.org/project/md-exporter/)  on PyPI. Install by `pip install md-exporter`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ---
@@ -410,6 +411,109 @@ Generate LaTeX source code for academic and technical documents.
 
 Save your Markdown content as a `.md` file for future use.
 
+
+---
+
+## 🔌 Using as MCP Server
+
+The Markdown Exporter can be used as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server, allowing AI assistants like Claude Desktop, Cline, and other MCP clients to access all markdown conversion tools.
+
+### What is MCP?
+
+The Model Context Protocol (MCP) is a standardized protocol that enables AI assistants to interact with external tools and data sources in a structured way. By running Markdown Exporter as an MCP server, you can give your AI assistant the ability to convert markdown to various formats.
+
+### Prerequisites
+
+- Python 3.11 or higher
+- `mcp` package (installed automatically with dependencies)
+- All markdown-exporter dependencies
+
+### Installation
+
+1. Clone or download this repository
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   pip install mcp
+   ```
+
+### Running the MCP Server
+
+#### Option 1: Using the Bash Script
+```bash
+scripts/mcp-server
+```
+
+#### Option 2: Using Python Directly
+```bash
+python scripts/mcp_server.py
+```
+
+### Configuration for MCP Clients
+
+#### Claude Desktop Configuration
+
+Add this to your Claude Desktop config file:
+
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "md-exporter": {
+      "command": "python",
+      "args": ["/path/to/md_exporter/scripts/mcp_server.py"]
+    }
+  }
+}
+```
+
+Replace `/path/to/md_exporter` with the actual path to your md_exporter installation.
+
+#### Using uv (Alternative)
+
+If you prefer using `uv`, you can configure it like this:
+
+```json
+{
+  "mcpServers": {
+    "md-exporter": {
+      "command": "uv",
+      "args": ["--directory", "/path/to/md_exporter", "run", "python", "scripts/mcp_server.py"]
+    }
+  }
+}
+```
+
+### Available MCP Tools
+
+Once configured, the following tools will be available to your MCP client:
+
+- `md_to_docx` - Convert Markdown to Word documents
+- `md_to_html` - Convert Markdown to HTML files
+- `md_to_html_text` - Convert Markdown to HTML text string
+- `md_to_md` - Save Markdown to file
+- `md_to_pptx` - Convert Markdown to PowerPoint presentations
+- `md_to_xlsx` - Convert Markdown tables to Excel spreadsheets
+- `md_to_csv` - Convert Markdown tables to CSV
+- `md_to_json` - Convert Markdown tables to JSON/JSONL
+- `md_to_xml` - Convert Markdown tables to XML
+- `md_to_latex` - Convert Markdown tables to LaTeX
+- `md_to_codeblock` - Extract code blocks to files
+- `md_to_linked_image` - Download images from Markdown
+
+### Example Usage in Claude Desktop
+
+Once configured, you can ask Claude to convert markdown:
+
+```
+Please convert this markdown to a Word document:
+# My Report
+This is a sample report with **bold** text.
+```
+
+Claude will use the `md_to_docx` tool to create the document and save it to your specified location.
 
 ---
 
