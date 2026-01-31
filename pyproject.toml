@@ -17,6 +17,7 @@ dependencies = [
     "PyMuPDF~=1.26.4",
     "pillow~=12.1.0",
     "pypandoc-binary~=1.16.2",
+    "mcp>=1.1.0",
 ]
 
 [dependency-groups]
