@@ -20,21 +20,14 @@ def test_mcp_server_initialization():
 
 async def test_list_tools():
     """Test that list_tools returns expected tools"""
-    # Get the list of registered tools
+    # Get the list of registered tools by calling the list_tools function directly
     try:
-        # The Server object stores request handlers, let's check if we can get tools
-        tools = []
-        
-        # Try to call list_tools through the server's protocol
-        # For testing, we'll just verify the handlers are set up
-        if hasattr(app, '_request_handlers'):
-            print(f"✓ Request handlers registered: {len(app._request_handlers)}")
-        
-        # Since we decorated with @app.list_tools(), the function should be registered
-        # Let's try to import and call it directly
+        # Import and call the list_tools function directly
+        # This avoids depending on MCP Server internals
         from scripts import mcp_server
+
         tools = await mcp_server.list_tools()
-        
+
         assert len(tools) > 0, "No tools returned"
         print(f"✓ {len(tools)} tools available")
 
@@ -54,7 +47,7 @@ async def test_list_tools():
 
         print(f"✓ All expected tools are registered: {', '.join(expected_tools)}")
         print(f"  Full tool list: {', '.join(tool_names)}")
-        
+
     except Exception as e:
         print(f"Error in test: {e}")
         raise
