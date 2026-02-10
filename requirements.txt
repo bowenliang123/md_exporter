@@ -1,21 +1,17 @@
 # dify plugin python sdk
 dify_plugin~=0.7.1
-markdown~=3.10.1
 
-# for tables
+# markdown
+markdown~=3.10.2
+
+# for markdown tables
 pandas[excel,html,xml]~=3.0.0
 
 # for markdown to pdf
 xhtml2pdf~=0.2.17
 
-# for markdown to xml
-lxml>=6.0.1
-
-# for markdown to rst
-# mistune~=3.1.4
-
 # for markdown to png
-PyMuPDF~=1.26.4
+PyMuPDF~=1.26.7
 pillow~=12.1.0
 
 # pandoc

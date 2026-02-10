@@ -786,10 +786,10 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "dify-plugin", specifier = "~=0.7.1" },
-    { name = "markdown", specifier = ">=3.10.1" },
+    { name = "markdown", specifier = ">=3.10.2" },
     { name = "pandas", extras = ["excel", "html", "xml"], specifier = "~=3.0.0" },
     { name = "pillow", specifier = "~=12.1.0" },
-    { name = "pymupdf", specifier = "~=1.26.4" },
+    { name = "pymupdf", specifier = "~=1.26.7" },
     { name = "pypandoc-binary", specifier = "~=1.16.2" },
     { name = "xhtml2pdf", specifier = "~=0.2.17" },
 ]
