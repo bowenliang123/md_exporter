@@ -426,6 +426,7 @@ Changelog:
 
 - 3.5.0:
   - Introduce `md_to_ipynb` tool for converting Markdown text to Jupyter Notebook (.ipynb) format
+  - The `md_to_ipynb` tool automatically splits markdown content into separate notebook cells
 
 - 3.4.0:
   - [ BREAKING CHANGE ] migrated `md_to_pptx` tool to use `pandoc` for conversion for stable features and less dependency footprint.
