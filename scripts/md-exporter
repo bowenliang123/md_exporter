@@ -23,6 +23,7 @@ if [[ $# -lt 1 ]]; then
     echo "  md_to_pptx"
     echo "  md_to_xlsx"
     echo "  md_to_xml"
+    echo "  md_to_ipynb"
     exit 1
 fi
 
@@ -47,6 +48,7 @@ valid_subcommands=(
     "md_to_pptx"
     "md_to_xlsx"
     "md_to_xml"
+    "md_to_ipynb"
 )
 
 # Check if the subcommand is valid

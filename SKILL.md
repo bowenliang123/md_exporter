@@ -20,7 +20,7 @@ disable: false
   </tr>
   <tr>
     <td><code>md_to_docx</code></td>
-    <td rowspan="6">📝 Markdown</td>
+    <td rowspan="7">📝 Markdown text</td>
     <td>📄 Word document (.docx)</td>
   </tr>
   <tr>
@@ -56,6 +56,10 @@ disable: false
     <td>🎯 PowerPoint (.pptx)</td>
   </tr>
   <tr>
+    <td><code>md_to_ipynb</code></td>
+    <td>📓 Jupyter Notebook (.ipynb)</td>
+  </tr>
+  <tr>
     <td><code>md_to_xlsx</code></td>
     <td rowspan="5">📋<a href="https://www.markdownguide.org/extended-syntax/#tables"> Markdown tables </a> </td>
     <td>📊 Excel spreadsheet (.xlsx)</td>
@@ -86,7 +90,6 @@ disable: false
     <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
     <td>🖼️ Downloaded image files</td>
   </tr>
-
 </table>
 
 ## Prerequisites
@@ -446,6 +449,28 @@ scripts/md-exporter md_to_linked_image <input> <output> [options]
 ```bash
 scripts/md-exporter md_to_linked_image /path/input.md /path/output_dir
 scripts/md-exporter md_to_linked_image /path/input.md /path/output.zip --compress
+```
+
+
+### md_to_ipynb - Convert Markdown to IPYNB
+
+Converts Markdown text to Jupyter Notebook (.ipynb) format.
+
+**Usage:**
+```bash
+scripts/md-exporter md_to_ipynb <input> <output> [options]
+```
+
+**Arguments:**
+- `input` - Input Markdown file path
+- `output` - Output IPYNB file path
+
+**Options:**
+- `--strip-wrapper` - Remove code block wrapper if present
+
+**Example:**
+```bash
+scripts/md-exporter md_to_ipynb /path/input.md /path/output.ipynb
 ```
 
 

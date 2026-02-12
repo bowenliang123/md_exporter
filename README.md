@@ -42,7 +42,7 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
   </tr>
   <tr>
     <td><code>md_to_docx</code></td>
-    <td rowspan="6">📝 Markdown text</td>
+    <td rowspan="7">📝 Markdown text</td>
     <td>📄 Word document (.docx)</td>
   </tr>
   <tr>
@@ -76,6 +76,10 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
       </div>
     </td>
     <td>🎯 PowerPoint (.pptx)</td>
+  </tr>
+  <tr>
+    <td><code>md_to_ipynb</code></td>
+    <td>📓 Jupyter Notebook (.ipynb)</td>
   </tr>
   <tr>
     <td><code>md_to_xlsx</code></td>
@@ -419,6 +423,9 @@ Releases are available at
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
 
 Changelog:
+
+- 3.5.0:
+  - Introduce `md_to_ipynb` tool for converting Markdown text to Jupyter Notebook (.ipynb) format
 
 - 3.4.0:
   - [ BREAKING CHANGE ] migrated `md_to_pptx` tool to use `pandoc` for conversion for stable features and less dependency footprint.

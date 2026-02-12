@@ -26,6 +26,7 @@ class MimeType(StrEnum):
     XML = "text/xml"
     YAML = "text/yaml"
     ZIP = "application/zip"
+    IPYNB = "application/x-ipynb+json"
 
     @classmethod
     def get_extension(cls, mime_type: str) -> str:
@@ -58,5 +59,6 @@ class MimeType(StrEnum):
             cls.XML: ".xml",
             cls.YAML: ".yaml",
             cls.ZIP: ".zip",
+            cls.IPYNB: ".ipynb",
         }
         return mime_type_map.get(mime_type, ".bin")
