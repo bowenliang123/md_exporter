@@ -2,13 +2,13 @@ identity:
   name: md_to_ipynb
   author: bowenliang123
   label:
-    en_US: Markdown ⮕ IPYNB
-    zh_Hans: Markdown ⮕ IPYNB
+    en_US: Markdown ⮕ Jupyter Notebook
+    zh_Hans: Markdown ⮕ Jupyter Notebook
 description:
   human:
-    en_US: Generate IPYNB file from Markdown text
-    zh_Hans: 将 Markdown 转换为 IPYNB 文件的工具
-  llm: Generate IPYNB file from Markdown text
+    en_US: Generate Jupyter Notebook file from Markdown text
+    zh_Hans: 将 Markdown 转换为 Jupyter Notebook 文件的工具
+  llm: Generate Jupyter Notebook file from Markdown text
 parameters:
   - name: md_text
     type: string
