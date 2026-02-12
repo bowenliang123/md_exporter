@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="_assets/icon.png" alt="Markdown Exporter Logo" width="200">
+</div>
+
 # Markdown Exporter
 ### An Agent Skill and Dify plugin to Export Markdown Into Powerful Documents
 
