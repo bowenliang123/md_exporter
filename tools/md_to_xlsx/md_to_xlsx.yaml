@@ -2,7 +2,7 @@ identity:
   name: md_to_xlsx
   author: bowenliang123
   label:
-    en_US: Markdown tables⮕ XLSX
+    en_US: Markdown tables ⮕ XLSX
     zh_Hans: Markdown 表格 ⮕ XLSX
 description:
   human:
