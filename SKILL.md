@@ -44,6 +44,10 @@ disable: false
     <td>📝 Markdown file (.md)</td>
   </tr>
   <tr>
+    <td><code>md_to_ipynb</code></td>
+    <td>📓 Jupyter Notebook (.ipynb)</td>
+  </tr>
+  <tr>
     <td><code>md_to_pptx</code></td>
     <td>
       <div>
@@ -54,10 +58,6 @@ disable: false
       </div>
     </td>
     <td>🎯 PowerPoint (.pptx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_ipynb</code></td>
-    <td>📓 Jupyter Notebook (.ipynb)</td>
   </tr>
   <tr>
     <td><code>md_to_xlsx</code></td>

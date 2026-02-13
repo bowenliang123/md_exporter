@@ -70,6 +70,10 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
     <td>📝 Markdown file (.md)</td>
   </tr>
   <tr>
+    <td><code>md_to_ipynb</code></td>
+    <td>📓 Jupyter Notebook (.ipynb)</td>
+  </tr>
+  <tr>
     <td><code>md_to_pptx</code></td>
     <td>
       <div>
@@ -80,10 +84,6 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
       </div>
     </td>
     <td>🎯 PowerPoint (.pptx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_ipynb</code></td>
-    <td>📓 Jupyter Notebook (.ipynb)</td>
   </tr>
   <tr>
     <td><code>md_to_xlsx</code></td>
