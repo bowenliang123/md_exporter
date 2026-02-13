@@ -6,8 +6,8 @@ identity:
     zh_Hans: Markdown ⮕ Jupyter Notebook
 description:
   human:
-    en_US: Generate Jupyter Notebook file from Markdown text
-    zh_Hans: 将 Markdown 转换为 Jupyter Notebook 文件的工具
+    en_US: Generate Jupyter Notebook .ipynb file from Markdown text
+    zh_Hans: 将 Markdown 转换为 Jupyter Notebook .ipynb 文件的工具
   llm: Generate Jupyter Notebook file from Markdown text
 parameters:
   - name: md_text
