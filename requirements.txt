@@ -11,8 +11,8 @@ pandas[excel,html,xml]~=3.0.0
 xhtml2pdf~=0.2.17
 
 # for markdown to png
-PyMuPDF~=1.26.7
-pillow~=12.1.0
+PyMuPDF~=1.27.1
+pillow~=12.1.1
 
 # pandoc
 pypandoc-binary~=1.16.2
