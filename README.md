@@ -473,6 +473,9 @@ Releases are available at
 
 Changelog:
 
+- 3.5.1
+  - Correctly handle code cells by pre-processing markdown input in `md_to_ipynb` tool 
+
 - 3.5.0:
   - Introduce `md_to_ipynb` tool for converting Markdown text to Jupyter Notebook (.ipynb) format
   - The `md_to_ipynb` tool automatically splits markdown content into separate notebook cells

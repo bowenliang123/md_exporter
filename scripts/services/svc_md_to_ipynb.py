@@ -5,6 +5,9 @@ Provides common functionality for converting Markdown to IPYNB format
 """
 
 from pathlib import Path
+from tempfile import NamedTemporaryFile
+
+from pypandoc import convert_file
 
 from scripts.utils.markdown_utils import get_md_text
 
@@ -47,11 +50,6 @@ def convert_md_to_ipynb(md_text: str, output_path: Path, is_strip_wrapper: bool 
     # Replace code block delimiters with ```code
     # inorder to separate code cells from Markdown cells
     processed_md = _enforce_code_cells(processed_md)
-
-    # Convert to IPYNB - use convert_file with temporary file
-    from tempfile import NamedTemporaryFile
-
-    from pypandoc import convert_file
 
     with NamedTemporaryFile(suffix=".md", delete=False, mode="w", encoding="utf-8") as temp_md_file:
         temp_md_file.write(processed_md)
