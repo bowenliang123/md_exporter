@@ -643,12 +643,12 @@ This project is licensed under the **Apache License 2.0**.
 
 ## 🔒 Privacy
 
-Your privacy matters. This plugin:
-- **Collects NO data**
+Privacy matters. See the [Privacy Policy](./PRIVACY.md) for more details. This plugin:
+- Collects **NO** data
 - Processes everything **locally**
 - Sends **NO information** to third-party services
 
-All file transformations happen entirely within your environment.
+All file transformations happen entirely within the local environment.
 
 ---
 
