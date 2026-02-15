@@ -6,21 +6,21 @@
 ### An Agent Skill and Dify plugin to Export Markdown Into Powerful Documents
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
-- Github Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
+- GitHub Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
 
 - Markdown Exporter can be used as:
 
 | Use As                          | Installation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Dify Plugin                     | Platform: [Dify](https://github.com/langgenius/dify) <br/> - Install from the [Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).<br/> - Guide: Docs for [Installing Dify Plugins](https://docs.dify.ai/en/use-dify/workspace/plugins#installing-plugins).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Agent Skills <br/> (standalone) | Platform: [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md) is availiable for Any Agent Skills supported platform.<br/> - IDEs / CLIs ([Claude Code](https://code.claude.com/docs/en/skills), [Trae](https://docs.trae.ai/ide/skills), [Codebuddy](https://copilot.tencent.com/docs/cli/skills) etc.) <br/> - Agent Frameworks ( [LangChain DeepAgents](https://www.blog.langchain.com/using-skills-with-deep-agents/), [AgentScope](https://doc.agentscope.io/tutorial/task_agent_skill.html) etc.). <br/> <br/>- Local Import: <br/> Import [the source code zip file](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip).<br/><br/> - Remote install: <br/>Run `/plugin marketplace add bowenliang123/md_exporter` on CLIs, installing as a Clude Marketplace plugin. | 
+| Agent Skills <br/> (standalone) | Platform: [SKILL.md](https://github.com/bowenliang123/md_exporter/blob/main/SKILL.md) is available for Any Agent Skills supported platform.<br/> - IDEs / CLIs ([Claude Code](https://code.claude.com/docs/en/skills), [Trae](https://docs.trae.ai/ide/skills), [Codebuddy](https://copilot.tencent.com/docs/cli/skills) etc.) <br/> - Agent Frameworks ( [LangChain DeepAgents](https://www.blog.langchain.com/using-skills-with-deep-agents/), [AgentScope](https://doc.agentscope.io/tutorial/task_agent_skill.html) etc.). <br/> <br/>- Local Import: <br/> Import [the source code zip file](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip).<br/><br/> - Remote install: <br/>Run `/plugin marketplace add bowenliang123/md_exporter` on CLIs, installing as a Claude Marketplace plugin. | 
 | Python Package                  | Platform: Python <br/> - [md-exporter](https://pypi.org/project/md-exporter/)  on PyPI. Install by `pip install md-exporter`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ---
 
 ## ✨ What is Markdown Exporter?
 
-**Markdown Exporter** is a powerful toolset as an Agent Skill or a Dify plugin and  that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+**Markdown Exporter** is a powerful toolset as an Agent Skill or a Dify plugin that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
 
 With support for **15+ output formats**, Markdown Exporter bridges the gap between simple text editing and professional document creation, all while maintaining the simplicity and elegance of Markdown syntax.
 
@@ -120,7 +120,7 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
 
 ---
 
-## 📖 Usage Example
+## 📖 Usage Examples
 
 ![Usage Demo](_assets/screenshots/usage_md_to_docx.png)
 
@@ -128,7 +128,7 @@ Simply input your Markdown text, select your desired output format, and click ex
 
 ---
 
-## 🎨 Tool Showcase
+## 🎨 Tool Showcases
 
 ### 📄 Markdown → DOCX
 
@@ -189,7 +189,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 > >
 > > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get the [default pptx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/pptx_template.pptx).
 
-The input Markdown must follows the syntax and guidance in [Pandoc Slide Shows](https://pandoc.org/MANUAL.html#slide-shows).
+The input Markdown must follow the syntax and guidance in [Pandoc Slide Shows](https://pandoc.org/MANUAL.html#slide-shows).
 
 **Input Example:**
 
@@ -282,7 +282,7 @@ print(greet("World"))
 - This point appears first
 - Then this one
 - And finally this one
-  :::
+:::
 
 ## {background-image="https://avatars.githubusercontent.com/u/127165244?s=48&v=4"}
 
@@ -466,154 +466,153 @@ Save your Markdown content as a `.md` file for future use.
 
 ---
 
-## 📢 Changelog
-Releases are available at
-- [Github Repo Releases](https://github.com/bowenliang123/md_exporter/releases).
-- [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter).
+## 📢 Releases
+Releases are available at:
+- [GitHub Repo Releases](https://github.com/bowenliang123/md_exporter/releases)
+- [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
 
-Changelog:
+### Changelog
 
 - 3.6.0
   - Improve conversion success rate in `md_to_docx`, `md_to_pptx`, and `md_to_ipynb` tools by removing enforcement of spaces and blank lines in heading headers
+  - Speed up first call on pandoc by running the warm-up method
 
 - 3.5.1
-  - Correctly handle code cells by pre-processing markdown input in `md_to_ipynb` tool 
+  - Correctly handle code cells by pre-processing markdown input in `md_to_ipynb` tool
 
-- 3.5.0:
+- 3.5.0
   - Introduce `md_to_ipynb` tool for converting Markdown text to Jupyter Notebook (.ipynb) format
   - The `md_to_ipynb` tool automatically splits markdown content into separate notebook cells
-  - Updated logo icon (for the very first time)
+  - Update logo icon (for the very first time)
 
-- 3.4.0:
-  - [ BREAKING CHANGE ] migrated `md_to_pptx` tool to use `pandoc` for conversion for stable features and less dependency footprint.
-  - The Markdown input for `md_to_pptx` tool now must follow the markdown syntax and guidance in [Pandoc slides](https://pandoc.org/MANUAL.html#slide-shows).
+- 3.4.0
+  - [BREAKING CHANGE] Migrate `md_to_pptx` tool to use `pandoc` for conversion for stable features and reduced dependency footprint
+  - The Markdown input for `md_to_pptx` tool now must follow the markdown syntax and guidance in [Pandoc slides](https://pandoc.org/MANUAL.html#slide-shows)
 
-- 3.3.0:
+- 3.3.0
   - Update `md_to_pptx` from 6.1.1 to 6.2.1
-  - Remove `md_to_mermaid` tool for less installation timecost and footprint for downloading Nodejs runtime
+  - Remove `md_to_mermaid` tool to reduce installation time and footprint by eliminating Node.js runtime dependency
 
-- 3.2.0:
+- 3.2.0
   - Introduce `md_to_mermaid` tool for converting Mermaid diagram code blocks in Markdown to PNG images
   - Refactor Agent Skill scripts and entry shell scripts
-  
-- 3.0.0:
-  - `md_exporter` is now ready for Agent Skills and runnable in standalone
+
+- 3.0.0
+  - `md_exporter` is now ready for Agent Skills and runnable as standalone
     - Add `SKILL.md` for Agent Skills description
-    - Add `/scripts` for code scripts of all tools as Agent Skills exectuion entry
-    - Extract the core file transformation logic into `/scripts/lib` sharing by both Agent Skills scripts and Dify Plugin
+    - Add `/scripts` for code scripts of all tools as Agent Skills execution entry
+    - Extract core file transformation logic into `/scripts/lib` shared by both Agent Skills scripts and Dify Plugin
     - Add `pyproject.toml` as Python project description and dependency management
-  - Add automated tests covering all usage of entry of Claude Skills scripts
-  - bump `md2pptx` from 6.1 to 6.1.1 for bug fix in table caption 
+  - Add automated tests covering all usage of Claude Skills scripts entry points
+  - Bump `md2pptx` from 6.1 to 6.1.1 for table caption bug fix
 
-- 2.3.0:
-  - resolve xlsx generation by skipping irrelevant chars before first table in `md_to_xlsx` tool
+- 2.3.0
+  - Resolve XLSX generation issue by skipping irrelevant characters before first table in `md_to_xlsx` tool
 
-- 2.2.0:
-  - fix CI problems in GitHub Actions
+- 2.2.0
+  - Fix CI problems in GitHub Actions
 
-- 2.1.0:
-  - fix remote image fetching in `md_to_pptx` tool by updating `md2pptx` to 6.1
+- 2.1.0
+  - Fix remote image fetching in `md_to_pptx` tool by updating `md2pptx` to 6.1
+  - Fix missing table border in `md_to_docx` tool by updating default DOCX template file
+  - Intercept `run-python` macro usage in `md_to_pptx` tool
 
-- 2.1.0:
-  - fix missing table border in `md_to_docx` tool by updating default docx template file
-  - intercept `run-python` marco usage in `md_to_pptx` tool
+- 2.0.0
+  - [BREAKING CHANGE] Migrate `md_to_docx` tool to use `pandoc` for conversion
+  - Major improvements in `md_to_docx` tool:
+    - Support custom styling using a template DOCX file, allowing font, font size, and color style customization for headings, paragraphs, etc.
+    - Optimize file size in generated DOCX files
+    - Better support for multi-language content
+  - Remove `md_to_rst` and `md_to_epub` tools
+  - Add `force_text_value` option in `md_to_xlsx` tool to control whether to force convert all cell values to text strings
 
-- 2.0.0:
-  - [ BREAKING CHANGE ] migrate `md_to_docx` tool to use `pandoc` for conversion
-  - Major improvements in `md_to_docx` tool
-    - support custom styling by using a template DOCX file, setting the fonts, font size, color style for headings, paragraphs, etc.
-    - optimized file size in generated docx file
-    - better support for multi-language content
-  - remove `md_to_rst` and `md_to_epub` tools
-  - add `force_text_value` option in md_to_xlsx tool to control whether to force convert all cell values to text string
+- 1.12.0
+  - Fix optional PPTX template file handling in `md_to_pptx` tool
+  - Fix error message with file path in command assembly in `md_to_pptx` tool
+  - Bump `md2pptx` to 6.0
 
-- 1.12.0:
-  - fix input pptx template file optional in `md_to_pptx` tool
-  - fix error message with file path in cmd assembly in `md_to_pptx` tool
-  - bump `md2pptx` to 6.0
+- 1.10.2
+  - Bump `md2pptx` from 5.4.4 to 5.4.5
+  - Bump `python-docx` from 1.1 to 1.2.0
+  - Increase PDF generation capacity limit to 500MB
 
-- 1.10.2:
-  - bump `md2pptx` from 5.4.4 to 5.4.5
-  - bump `python-docx` from 1.1 to 1.2.0
-  - increase PDF generation capacity limit to 500MB
+- 1.10.0
+  - Support JSONL output style in `md_to_json` tool, using JSON Lines format with one object per line
+  - Change default output style of `md_to_json` tool to JSONL
+  - Minor documentation updates in parameter descriptions
 
-- 1.10.0:
-  - Support output JSONL style in `md_to_json` tool, as JSON Lines format with one object per line
-  - Change the default output style of `md_to_json` tool to JSONL
-  - Minor doc updates in parameter description
-
-- 1.9.0:
-  - Support custom sheet name in `md_to_xlsx` tool by using headings in Markdown text
-  - Force convert column type to string in `md_to_xlsx` tool to prevent data precision loss and display issues in Microsoft Excel
+- 1.9.0
+  - Support custom sheet names in `md_to_xlsx` tool using headings in Markdown text
+  - Force convert column types to string in `md_to_xlsx` tool to prevent data precision loss and display issues in Microsoft Excel
   - Autofit column width in `md_to_xlsx` tool
 
-- 1.8.0:
-  - Solve issues with garbled characters when opening CSV files containing non-ASCII characters (eg. Chinese or Japanese characters, Emoji characters etc.) in Microsoft Excel
+- 1.8.0
+  - Resolve garbled character issues when opening CSV files containing non-ASCII characters (e.g., Chinese, Japanese, emoji characters) in Microsoft Excel
 
-- 1.7.0:
-  - Support custom PPTX template file in `md_to_pptx` tool
-  - Support file generation from multiple tables in md_to_csv, md_to_latex, md_to_xlsx tools
+- 1.7.0
+  - Support custom PPTX template files in `md_to_pptx` tool
+  - Support file generation from multiple tables in `md_to_csv`, `md_to_latex`, and `md_to_xlsx` tools
 
-- 1.6.0:
-  - Introducing `md_to_html_text` tool, support converting Markdown text to HTML text
-  - Standardize fonts for headings and body paragraphs DOCX file generated by `md_to_docx` tool
+- 1.6.0
+  - Introduce `md_to_html_text` tool for converting Markdown text to HTML text
+  - Standardize fonts for headings and body paragraphs in DOCX files generated by `md_to_docx` tool
 
-- 1.5.0:
-  - Improve PDF display for pure English markdown text input in `md_to_pdf` tool, by skipping the font setting for CJK characters
-  - Introduce `md_to_epub` tool, support converting Markdown text to EPUB eBook files
-  - Support compressing all png files in single zip file in `md_to_png` tool
-  - Increase capacity limit for PDF file to 100MB in `md_to_pdf` tool
-  - Remove explicit timeout config MAX_REQUEST_TIMEOUT
+- 1.5.0
+  - Improve PDF display for pure English markdown text input in `md_to_pdf` tool by skipping font settings for CJK characters
+  - Introduce `md_to_epub` tool for converting Markdown text to EPUB eBook files
+  - Support compressing all PNG files into a single zip file in `md_to_png` tool
+  - Increase capacity limit for PDF files to 100MB in `md_to_pdf` tool
+  - Remove explicit timeout configuration MAX_REQUEST_TIMEOUT
 
-- 1.4.100:
-  - Special version for celebrating [Dify](https://github.com/langgenius/dify)'s 100k GitHub stars milestone
-  - add `md_to_png` tool, support converting Markdown text to PNG image files
+- 1.4.100
+  - Special version celebrating [Dify](https://github.com/langgenius/dify)'s 100k GitHub stars milestone
+  - Add `md_to_png` tool for converting Markdown text to PNG image files
 
-- 1.3.0:
-  - update SDK version
+- 1.3.0
+  - Update SDK version
 
-- 1.2.0:
-  - Support compressing images to single zip file in `md_to_linked_image` tool
+- 1.2.0
+  - Support compressing images into a single zip file in `md_to_linked_image` tool
 
-- 1.1.0:
-  - Enable line breaks normalization in all tools by default, replacing all the occurrences of `\\n` to `\n`
-  - Remove `<think>` tags of reasoning content in the input Markdown text
-  - Fix missing custom output filename support in md_to_csv, md_to_json, md_to_latex tool
+- 1.1.0
+  - Enable line breaks normalization in all tools by default, replacing all occurrences of `\n` with `\n`
+  - Remove `<think>` tags of reasoning content in input Markdown text
+  - Fix missing custom output filename support in `md_to_csv`, `md_to_json`, and `md_to_latex` tools
 
-- 1.0.1:
-  - Remove redundant URL safe conversion in custom output filename
+- 1.0.1
+  - Remove redundant URL-safe conversion in custom output filenames
 
-- 1.0.0:
-  - Support customize the output file name
+- 1.0.0
+  - Support custom output filenames
 
-- 0.5.0:
-  - Introducing `md_to_linked_image` tool, support extracting image files in links in Markdown text
+- 0.5.0
+  - Introduce `md_to_linked_image` tool for extracting image files from links in Markdown text
 
-- 0.4.3:
-  - improve the display of Chinese characters in text paragraph in `md_to_docx` tool, by setting global font to Song if content contains Chinese     - improve the display of Chinese characters in text paragraph in `md_to_docx` tool, by setting global font to Song if content contains Chinese charactor
+- 0.4.3
+  - Improve Chinese character display in text paragraphs in `md_to_docx` tool by setting global font to Song if content contains Chinese characters
 
-- 0.4.2:
-  - support Java, PHP and Ruby file exporting in `md_to_codeblocks` tool
+- 0.4.2
+  - Support Java, PHP, and Ruby file exporting in `md_to_codeblock` tool
 
-- 0.4.1:
-  - support YAML file exporting in `md_to_codeblocks` tool
+- 0.4.1
+  - Support YAML file exporting in `md_to_codeblock` tool
 
-- 0.4.0:
-  - support exporting Markdown codeblocks in to single zip file in `md_to_codeblocks` tool
+- 0.4.0
+  - Support exporting Markdown codeblocks into a single zip file in `md_to_codeblock` tool
 
-- 0.3.0:
-  - Fixed the error in importing libraries of `md_to_pptx` tool when running on self-hosted Dify plugin-daemon service
+- 0.3.0
+  - Fix library import error in `md_to_pptx` tool when running on self-hosted Dify plugin-daemon service
 
-- 0.2.0:
-  - Introducing `md_to_codeblock` tool, support extracting code blocks in Markdown to Python, JSON, JS, BASH, SVG, HTML, XML, MARKDOWN files.
-  - Introducing `md_to_rst` tool, support reStructuredText `.rst` file format as destination file format
+- 0.2.0
+  - Introduce `md_to_codeblock` tool for extracting code blocks in Markdown to Python, JSON, JS, BASH, SVG, HTML, XML, and MARKDOWN files
+  - Introduce `md_to_rst` tool for converting Markdown to reStructuredText (.rst) format
 
-- 0.1.x:
-  - Introducing `md_to_pptx` tool, support PowerPoint `.pptx` file format as destination file format
+- 0.1.x
+  - Introduce `md_to_pptx` tool for converting Markdown to PowerPoint (.pptx) format
 
-- 0.0.x:
-  - Published to Dify Marketplace
-  - support exporting Markdown to DOCX, PPTX, XLSX, PDF, HTML, MD, CSV, JSON, XML, LaTex files
+- 0.0.x
+  - Publish to Dify Marketplace
+  - Support exporting Markdown to DOCX, PPTX, XLSX, PDF, HTML, MD, CSV, JSON, XML, and LaTeX files
 
 ---
 
@@ -633,7 +632,7 @@ uv run ruff check --fix --select UP .
 Or use the provided script:
 
 ```bash
-uv run dev.reformat.sh
+dev/reformat.sh
 ```
 
 ---
