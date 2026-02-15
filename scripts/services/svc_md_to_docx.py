@@ -7,6 +7,7 @@ Provides common functionality for converting Markdown to DOCX format
 from pathlib import Path
 
 from scripts.utils.markdown_utils import get_md_text
+from scripts.utils.pandoc_utils import pandoc_convert_file
 
 
 def convert_md_to_docx(
@@ -33,21 +34,19 @@ def convert_md_to_docx(
     if template_path and template_path.exists():
         extra_args.append(f"--reference-doc={template_path}")
 
-    # Convert to DOCX - use convert_file with temporary file since convert_text doesn't work for DOCX
+    # Convert to DOCX - use pandoc_convert_file with temporary file since convert_text doesn't work for DOCX
     from tempfile import NamedTemporaryFile
-
-    from pypandoc import convert_file
 
     with NamedTemporaryFile(suffix=".md", delete=False, mode="w", encoding="utf-8") as temp_md_file:
         temp_md_file.write(processed_md)
         temp_md_file_path = temp_md_file.name
 
     try:
-        # Convert using convert_file with outputfile parameter
-        convert_file(
+        # Convert using pandoc_convert_file
+        pandoc_convert_file(
             source_file=temp_md_file_path,
-            format="markdown",
-            to="docx",
+            input_format="markdown",
+            dest_format="docx",
             outputfile=str(output_path),
             extra_args=extra_args,
         )

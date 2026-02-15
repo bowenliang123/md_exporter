@@ -7,9 +7,8 @@ Provides common functionality for converting Markdown to IPYNB format
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-from pypandoc import convert_file
-
 from scripts.utils.markdown_utils import get_md_text
+from scripts.utils.pandoc_utils import pandoc_convert_file
 
 
 def _enforce_code_cells(md_text: str) -> str:
@@ -56,11 +55,11 @@ def convert_md_to_ipynb(md_text: str, output_path: Path, is_strip_wrapper: bool 
         temp_md_file_path = temp_md_file.name
 
     try:
-        # Convert using convert_file with outputfile parameter
-        convert_file(
+        # Convert using pandoc_convert_file
+        pandoc_convert_file(
             source_file=temp_md_file_path,
-            format="markdown",
-            to="ipynb",
+            input_format="markdown",
+            dest_format="ipynb",
             outputfile=str(output_path),
             extra_args=[],
         )

@@ -7,9 +7,8 @@ import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-from pypandoc import convert_file
-
 from scripts.utils.markdown_utils import get_md_text
+from scripts.utils.pandoc_utils import pandoc_convert_file
 
 
 def convert_md_to_pptx(
@@ -53,11 +52,11 @@ def convert_md_to_pptx(
         temp_md_file_path = temp_md_file.name
 
     try:
-        # Convert using convert_file with outputfile parameter
-        convert_file(
+        # Convert using pandoc_convert_file
+        pandoc_convert_file(
             source_file=temp_md_file_path,
-            format="markdown",
-            to="pptx",
+            input_format="markdown",
+            dest_format="pptx",
             outputfile=str(output_path),
             extra_args=extra_args,
         )
