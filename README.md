@@ -473,6 +473,9 @@ Releases are available at
 
 Changelog:
 
+- 3.6.0
+  - Improve conversion success rate in `md_to_docx`, `md_to_pptx`, and `md_to_ipynb` tools by removing enforcement of spaces and blank lines in heading headers
+
 - 3.5.1
   - Correctly handle code cells by pre-processing markdown input in `md_to_ipynb` tool 
 
