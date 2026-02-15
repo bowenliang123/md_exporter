@@ -2,7 +2,7 @@ identity:
   name: md_to_codeblock
   author: bowenliang123
   label:
-    en_US: Codeblocks in Markdown ⮕ Script Fiels
+    en_US: Codeblocks in Markdown ⮕ Script Files
     zh_Hans: Markdown 中代码段 ⮕ 脚本文件
 description:
   human:
