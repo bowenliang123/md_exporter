@@ -5,11 +5,15 @@ Pandoc utility functions
 
 from pypandoc import convert_file
 
+from scripts.utils import get_logger
+
 DEFAULT_ENABLED_INPUT_EXTENSIONS = []
 DEFAULT_DISABLED_INPUT_EXTENSIONS = [
-    "blank_before_header", # https://pandoc.org/MANUAL.html#extension-blank_before_header
-    "space_in_atx_header", # https://pandoc.org/MANUAL.html#extension-space_in_atx_header
+    "blank_before_header",  # https://pandoc.org/MANUAL.html#extension-blank_before_header
+    "space_in_atx_header",  # https://pandoc.org/MANUAL.html#extension-space_in_atx_header
 ]
+
+logger = get_logger(__name__)
 
 
 def pandoc_convert_file(
@@ -27,7 +31,7 @@ def pandoc_convert_file(
     extra_args = extra_args or []
     enabled = enabled_input_extensions or []
     disabled = disabled_input_extensions or []
-    
+
     # Build format string with extensions
     if not input_format:
         raise ValueError("input_format must be specified")
