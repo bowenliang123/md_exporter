@@ -656,10 +656,8 @@ All file transformations happen entirely within your environment.
 
 This project stands on the shoulders of giants. We're grateful to these amazing open-source projects:
 
-| Project | License |
-|---------|---------|
-
-| [pypandoc](https://github.com/JessicaTegner/pypandoc) | MIT License |
-| [pandas](https://github.com/pandas-dev/pandas) | BSD 3-Clause License |
-
-| [xhtml2pdf](https://github.com/xhtml2pdf/xhtml2pdf) | Apache License 2.0 |
+| Project                                               | License              |
+|-------------------------------------------------------|----------------------|
+| [pypandoc](https://github.com/JessicaTegner/pypandoc) | MIT License          |
+| [pandas](https://github.com/pandas-dev/pandas)        | BSD 3-Clause License |
+| [xhtml2pdf](https://github.com/xhtml2pdf/xhtml2pdf)   | Apache License 2.0   |
