@@ -123,11 +123,18 @@ You can also run the Python scripts directly, but you'll need to manage dependen
 
 1. **Using uv** (recommended if running directly):
    ```bash
+   # Enter the directory of current skill
+   cd $SKILL_HOME_MARKDOWN_EXPORTER
+   # Install dependencies first
+   uv sync
+   # Then run the script
    uv run python scripts/parser/<script_name>.py <args> [options]
    ```
 
 2. **Using pip**:
    ```bash
+   # Enter the directory of current skill
+   cd $SKILL_HOME_MARKDOWN_EXPORTER
    # Install dependencies first
    pip install -r requirements.txt
    # Then run the script
