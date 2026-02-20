@@ -37,27 +37,66 @@ function check_python_version() {
     fi
 }
 
+# Sanitize and validate input arguments to prevent shell injection
+function sanitize_arg() {
+    local arg="$1"
+    # Reject arguments that contain shell metacharacters that could be dangerous
+    if [[ "$arg" == *';'* ]] || [[ "$arg" == *'|'* ]] || [[ "$arg" == *'&'* ]] || \
+       [[ "$arg" == *'<'* ]] || [[ "$arg" == *'>'* ]] || [[ "$arg" == *'('* ]] || \
+       [[ "$arg" == *')'* ]] || [[ "$arg" == *'$'* ]] || [[ "$arg" == *'`'* ]] || \
+       [[ "$arg" == *'"'* ]] || [[ "$arg" == *"'"* ]] || [[ "$arg" == *'*'* ]] || \
+       [[ "$arg" == *'?'* ]] || [[ "$arg" == *'['* ]] || [[ "$arg" == *']'* ]] || \
+       [[ "$arg" == *'{'* ]] || [[ "$arg" == *'}'* ]] || [[ "$arg" == *'~'* ]]; then
+        echo "Error: Invalid argument containing potentially dangerous characters" >&2
+        exit 1
+    fi
+    echo "$arg"
+}
+
+# Validate script name to ensure it only contains valid characters
+function validate_script_name() {
+    local script_name="$1"
+    if [[ ! "$script_name" =~ ^[a-zA-Z0-9_]+\.py$ ]]; then
+        echo "Error: Invalid script name" >&2
+        exit 1
+    fi
+    # Ensure the script exists in the expected directory
+    local script_path="scripts/parser/$script_name"
+    local project_root="$(get_project_root)"
+    if [[ ! -f "$project_root/$script_path" ]]; then
+        echo "Error: Script not found: $script_name" >&2
+        exit 1
+    fi
+    echo "$script_name"
+}
+
 # Run Python script with dependency management
 function run_python_script() {
-    local script_name="$1"
+    local raw_script_name="$1"
     shift
+    
+    # Validate and sanitize script name
+    local script_name="$(validate_script_name "$raw_script_name")"
     
     local original_dir="$(pwd)"
     local project_root="$(get_project_root)"
     local script_path="scripts/parser/$script_name"
     
-    # Convert relative paths to absolute paths
+    # Convert relative paths to absolute paths and sanitize all arguments
     local abs_args=()
     local i=0
     while [[ $i -lt $# ]]; do
-        local arg="${@:i+1:1}"
+        local raw_arg="${@:i+1:1}"
+        local arg="$(sanitize_arg "$raw_arg")"
+        
         if [[ "$arg" == --* ]] || [[ "$arg" == -* && ${#arg} -eq 2 ]]; then
             # This is an option (long or short), add it as-is
             abs_args+=("$arg")
             i=$((i+1))
             # Check if this option has a value
             if [[ $i -lt $# ]]; then
-                local next_arg="${@:i+1:1}"
+                local raw_next_arg="${@:i+1:1}"
+                local next_arg="$(sanitize_arg "$raw_next_arg")"
                 if [[ "$next_arg" != --* ]] && [[ "$next_arg" != -* ]]; then
                     # This is the value for the option
                     if [[ "$next_arg" == /* ]]; then
@@ -91,7 +130,7 @@ function run_python_script() {
         export PYTHONPATH="$project_root:$PYTHONPATH"
         # install Python dependencies with uv
         uv sync
-        # run the script
+        # run the script - use array expansion for safety
         uv run python "$script_path" "${abs_args[@]}"
     else
         # Check Python version
@@ -102,6 +141,7 @@ function run_python_script() {
         # Set PYTHONPATH to include project root
         export PYTHONPATH="$project_root:$PYTHONPATH"
         pip install -r requirements.txt
+        # run the script - use array expansion for safety
         python "$script_path" "${abs_args[@]}"
     fi
 }
