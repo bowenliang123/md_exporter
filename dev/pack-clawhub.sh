@@ -48,6 +48,7 @@ ADDITIONAL_PATTERNS=(
     ".env.local"
     ".env.production.local"
     ".env.test.local"
+    ".github"
     ".ruff_cache"
     "*.docx"
     "*.ipynb"
