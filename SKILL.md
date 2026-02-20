@@ -12,85 +12,23 @@ disable: false
 
 ### Tools and Supported Formats
 
-<table>
-  <tr>
-    <th>Tool</th>
-    <th>Input</th>
-    <th>Output</th>
-  </tr>
-  <tr>
-    <td><code>md_to_docx</code></td>
-    <td rowspan="7">📝 Markdown text</td>
-    <td>📄 Word document (.docx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_html</code></td>
-    <td>🌐 HTML file (.html)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_html_text</code></td>
-    <td>🌐 HTML text string</td>
-  </tr>
-  <tr>
-    <td><code>md_to_pdf</code></td>
-    <td>📑 PDF file (.pdf)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_png</code></td>
-    <td>🖼️ PNG image(s) of PDF pages</td>
-  </tr>
-  <tr>
-    <td><code>md_to_md</code></td>
-    <td>📝 Markdown file (.md)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_ipynb</code></td>
-    <td>📓 Jupyter Notebook (.ipynb)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_pptx</code></td>
-    <td>
-      <div>
-        📝 Markdown slides
-      </div>
-      <div>
-      in <a href="https://pandoc.org/MANUAL.html#slide-shows">Pandoc style </a>
-      </div>
-    </td>
-    <td>🎯 PowerPoint (.pptx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_xlsx</code></td>
-    <td rowspan="5">📋<a href="https://www.markdownguide.org/extended-syntax/#tables"> Markdown tables </a> </td>
-    <td>📊 Excel spreadsheet (.xlsx)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_csv</code></td>
-    <td>📋 CSV file (.csv)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_json</code></td>
-    <td>📦 JSON/JSONL file (.json)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_xml</code></td>
-    <td>🏷️ XML file (.xml)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_latex</code></td>
-    <td>📝 LaTeX file (.tex)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_codeblock</code></td>
-    <td>💻 <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks"> Code blocks in Markdown </a> </td>
-    <td>📁 Code files by language (.py, .js, .sh, etc.)</td>
-  </tr>
-  <tr>
-    <td><code>md_to_linked_image</code></td>
-    <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
-    <td>🖼️ Downloaded image files</td>
-  </tr>
-</table>
+| Tool | Input | Output |
+|------|-------|--------|
+| `md_to_docx` | 📝 Markdown text | 📄 Word document (.docx) |
+| `md_to_html` | 📝 Markdown text | 🌐 HTML file (.html) |
+| `md_to_html_text` | 📝 Markdown text | 🌐 HTML text string |
+| `md_to_pdf` | 📝 Markdown text | 📑 PDF file (.pdf) |
+| `md_to_png` | 📝 Markdown text | 🖼️ PNG image(s) of PDF pages |
+| `md_to_md` | 📝 Markdown text | 📝 Markdown file (.md) |
+| `md_to_ipynb` | 📝 Markdown text | 📓 Jupyter Notebook (.ipynb) |
+| `md_to_pptx` | 📝 Markdown slides in [Pandoc style](https://pandoc.org/MANUAL.html#slide-shows) | 🎯 PowerPoint (.pptx) |
+| `md_to_xlsx` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 📊 Excel spreadsheet (.xlsx) |
+| `md_to_csv` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 📋 CSV file (.csv) |
+| `md_to_json` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 📦 JSON/JSONL file (.json) |
+| `md_to_xml` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 🏷️ XML file (.xml) |
+| `md_to_latex` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 📝 LaTeX file (.tex) |
+| `md_to_codeblock` | 💻 [Code blocks in Markdown](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) | 📁 Code files by language (.py, .js, .sh, etc.) |
+| `md_to_linked_image` | 🖼️ [Image links in Markdown](https://www.markdownguide.org/basic-syntax/#linking-images) | 🖼️ Downloaded image files |
 
 ## Prerequisites
 
