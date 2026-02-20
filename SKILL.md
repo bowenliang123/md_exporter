@@ -12,7 +12,7 @@ disable: false
 
 ### Tools and Supported Formats
 
-| Tool | Input | Output |
+| Tool | Input (File path of Markdown text or styles) | Output (File path of exported file) |
 |------|-------|--------|
 | `md_to_docx` | 📝 Markdown text | 📄 Word document (.docx) |
 | `md_to_html` | 📝 Markdown text | 🌐 HTML file (.html) |
