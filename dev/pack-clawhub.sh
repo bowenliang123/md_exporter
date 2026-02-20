@@ -39,7 +39,38 @@ if [ -f ".gitignore" ]; then
 fi
 
 # Add additional patterns
-ADDITIONAL_PATTERNS=(".difyignore" ".env" ".env.local" ".env.development.local" ".env.test.local" ".env.production.local" "node_modules" "md-exporter" "*.png" "*.ipynb" "*.pdf" "*.tex" "*.whl" "*.tar.gz" "*.zip" "*.tmp" "*.temp" "*.swp" "*.swo" "*~" ".DS_Store" "uv.lock" "MANIFEST.in" ".ruff_cache" ".claude" "*.docx" "*.xlsx" "*.pptx" "test" "dev")
+ADDITIONAL_PATTERNS=(
+    ".DS_Store"
+    ".claude"
+    ".difyignore"
+    ".env"
+    ".env.development.local"
+    ".env.local"
+    ".env.production.local"
+    ".env.test.local"
+    ".ruff_cache"
+    "*.docx"
+    "*.ipynb"
+    "*.pdf"
+    "*.png"
+    "*.pptx"
+    "*.swp"
+    "*.swo"
+    "*.tar.gz"
+    "*.temp"
+    "*.tex"
+    "*.tmp"
+    "*.whl"
+    "*.xlsx"
+    "*.zip"
+    "*~"
+    "dev"
+    "MANIFEST.in"
+    "md-exporter"
+    "node_modules"
+    "test"
+    "uv.lock"
+)
 ALL_PATTERNS+=("${ADDITIONAL_PATTERNS[@]}")
 
 # Remove duplicates
