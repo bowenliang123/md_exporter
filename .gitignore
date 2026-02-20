@@ -173,3 +173,6 @@ cython_debug/
 
 # Test output
 test_output/
+
+# ClawHub skill folder
+clawhub-skill/

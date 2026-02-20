@@ -183,3 +183,6 @@ dev/*.sh
 
 # Trae IDE
 .trae/
+
+# ClawHub skill folder
+clawhub-skill/
