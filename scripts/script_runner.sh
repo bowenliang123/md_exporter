@@ -89,7 +89,9 @@ function run_python_script() {
         cd "$project_root"
         # Set PYTHONPATH to include project root
         export PYTHONPATH="$project_root:$PYTHONPATH"
-        # uv run automatically handles dependencies
+        # install Python dependencies with uv
+        uv sync
+        # run the script
         uv run python "$script_path" "${abs_args[@]}"
     else
         # Check Python version
