@@ -78,5 +78,5 @@ def get_default_template() -> Path | None:
     if default_template.exists():
         return default_template
     else:
-        logger.warn(f"Default DOCX template not found at {default_template}")
+        logger.warning(f"Default DOCX template not found at {default_template}")
         return None
