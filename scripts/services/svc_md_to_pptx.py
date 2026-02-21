@@ -7,8 +7,27 @@ import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
+from scripts.utils import get_logger
 from scripts.utils.markdown_utils import get_md_text
 from scripts.utils.pandoc_utils import pandoc_convert_file
+
+logger = get_logger(__name__)
+
+
+def get_default_template() -> Path | None:
+    """
+    Get the default PPTX template path
+
+    Returns:
+        Optional[Path]: Path to default template if it exists, None otherwise
+    """
+    script_dir = Path(__file__).resolve().parent.parent
+    default_template = script_dir.parent / "assets" / "template" / "pptx_template.pptx"
+    if default_template.exists():
+        return default_template
+    else:
+        logger.warn(f"Default PPTX template not found at {default_template}")
+        return None
 
 
 def convert_md_to_pptx(
@@ -34,10 +53,7 @@ def convert_md_to_pptx(
     final_template_path = template_path
     if not final_template_path:
         # Use default template
-        script_dir = Path(__file__).resolve().parent.parent  # Go up two levels: scripts/lib -> scripts
-        default_template = script_dir.parent / "assets" / "template" / "pptx_template.pptx"
-        if default_template.exists():
-            final_template_path = default_template
+        final_template_path = get_default_template()
 
     # Convert to PPTX using pandoc
 

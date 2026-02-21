@@ -6,8 +6,11 @@ Provides common functionality for converting Markdown to DOCX format
 
 from pathlib import Path
 
+from scripts.utils import get_logger
 from scripts.utils.markdown_utils import get_md_text
 from scripts.utils.pandoc_utils import pandoc_convert_file
+
+logger = get_logger(__name__)
 
 
 def convert_md_to_docx(
@@ -29,10 +32,16 @@ def convert_md_to_docx(
     # Process Markdown text
     processed_md = get_md_text(md_text, is_strip_wrapper=is_strip_wrapper)
 
+    # Determine template file
+    final_template_path = template_path
+    if not final_template_path:
+        # Use default template
+        final_template_path = get_default_template()
+
     # Prepare pandoc arguments
     extra_args = []
-    if template_path and template_path.exists():
-        extra_args.append(f"--reference-doc={template_path}")
+    if final_template_path and final_template_path.exists():
+        extra_args.append(f"--reference-doc={final_template_path}")
 
     # Convert to DOCX - use pandoc_convert_file with temporary file since convert_text doesn't work for DOCX
     from tempfile import NamedTemporaryFile
@@ -57,15 +66,17 @@ def convert_md_to_docx(
         os.unlink(temp_md_file_path)
 
 
-def get_default_template(script_dir: Path) -> Path | None:
+def get_default_template() -> Path | None:
     """
     Get the default DOCX template path
-
-    Args:
-        script_dir: Directory of the calling script
 
     Returns:
         Optional[Path]: Path to default template if it exists, None otherwise
     """
+    script_dir = Path(__file__).resolve().parent.parent
     default_template = script_dir.parent / "assets" / "template" / "docx_template.docx"
-    return default_template if default_template.exists() else None
+    if default_template.exists():
+        return default_template
+    else:
+        logger.warn(f"Default DOCX template not found at {default_template}")
+        return None

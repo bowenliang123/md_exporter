@@ -51,7 +51,7 @@ def main():
             sys.exit(1)
     else:
         # Use default template
-        template_path = get_default_template(script_dir)
+        template_path = get_default_template()
 
     # Convert to DOCX
     output_path = Path(args.output)
