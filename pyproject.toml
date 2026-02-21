@@ -7,7 +7,7 @@ requires-python = ">=3.11"
 authors = [
     { name = "bowenliang123", email = "liang.bowen.123@qq.com" },
 ]
-readme="README.md"
+readme = "README.md"
 
 dependencies = [
     "dify_plugin~=0.7.1",
@@ -31,14 +31,13 @@ Repository = "https://github.com/bowenliang123/md_exporter.git"
 Issues = "https://github.com/bowenliang123/md_exporter/issues"
 Changelog = "https://github.com/bowenliang123/md_exporter/?tab=readme-ov-file#-changelog"
 
-[tool.setuptools]
-include-package-data = true
+[build-system]
+requires = ["uv_build>=0.10.4,<0.11.0"]
+build-backend = "uv_build"
 
-[tool.setuptools.packages.find]
-exclude = ["dev", "provider", "test", "test_output"]
-
-[tool.setuptools.package-data]
-"*" = ["assets/template/docx_template.docx", "assets/template/pptx_template.pptx"]
+[tool.uv.build-backend]
+module-name = "scripts"
+module-root = ""
 
 [project.scripts]
 markdown-exporter = "scripts.cli:main"
