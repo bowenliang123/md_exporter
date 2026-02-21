@@ -40,6 +40,7 @@ fi
 
 # Add additional patterns
 ADDITIONAL_PATTERNS=(
+    ".claude-plugin"
     ".difyignore"
     ".ruff.toml"
     "*.docx"
@@ -85,7 +86,7 @@ eval $RSYNC_COMMAND ./ "$DEST_FOLDER/"
 chmod +x "$DEST_FOLDER/dev/pack-clawhub.sh" 2>/dev/null
 
 # Simplified verification
-echo "\n=== Verification Results ==="
+echo "=== Verification Results ==="
 
 # Check representative excluded items
 EXCLUDED_ITEMS=(".env.example" ".DS_Store" ".idea" ".venv" "__pycache__" ".pytest_cache")
@@ -119,10 +120,10 @@ else
 fi
 
 # Check if the copy was successful
-echo "\n=== Final Result ==="
+echo "=== Final Result ==="
 if [ $? -eq 0 ] && $ALL_PASSED; then
     echo "✅ Successfully packaged the project into $DEST_FOLDER"
-    echo "\nExcluded patterns were consolidated from .gitignore and additional patterns."
+    echo "Excluded patterns were consolidated from .gitignore and additional patterns."
 else
     echo "❌ Error packaging the project"
     exit 1
