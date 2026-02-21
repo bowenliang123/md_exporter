@@ -81,4 +81,5 @@ def _warmup_pandoc() -> None:
 
 
 # Run warm-up to speed up first conversion using pandoc
-_warmup_pandoc()
+if os.environ.get("LOAD_FROM_DIFY_PLUGIN") == "1":
+    _warmup_pandoc()
