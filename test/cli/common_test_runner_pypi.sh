@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Common functions for test scripts
+# Common functions for PyPI CLI test scripts
 
 # Set up test environment
 function setup_test_env() {
@@ -62,14 +62,21 @@ function run_file_test() {
     local input_file="$2"
     local output_ext="$3"
     
-    local output_file="$OUTPUT_DIR/test_${script_name}.${output_ext}"
+    # Convert input file to absolute path
+    if [[ "$input_file" != /* ]]; then
+        input_file="$PROJECT_ROOT/$input_file"
+    fi
+    
+    local output_file="$OUTPUT_DIR/test_cli_${script_name}.${output_ext}"
     
     # Clean up previous test output
     cleanup_test_output "$output_file"
     
-    # Run the bash script
+    # Run the PyPI CLI command
     echo "Running test for ${script_name}..."
-    "$PROJECT_ROOT/scripts/md-exporter" "$script_name" "$input_file" "$output_file"
+    echo "Input file: $input_file"
+    echo "Output file: $output_file"
+    markdown-exporter "$script_name" "$input_file" "$output_file"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_file_output "$output_file"; then
@@ -93,14 +100,21 @@ function run_dir_test() {
     local script_name="$1"
     local input_file="$2"
     
+    # Convert input file to absolute path
+    if [[ "$input_file" != /* ]]; then
+        input_file="$PROJECT_ROOT/$input_file"
+    fi
+    
     local output_dir="$OUTPUT_DIR/${script_name}_output"
     
     # Clean up previous test output
     cleanup_test_output "$output_dir"
     
-    # Run the bash script
+    # Run the PyPI CLI command
     echo "Running test for ${script_name}..."
-    "$PROJECT_ROOT/scripts/md-exporter" "$script_name" "$input_file" "$output_dir"
+    echo "Input file: $input_file"
+    echo "Output directory: $output_dir"
+    markdown-exporter "$script_name" "$input_file" "$output_dir"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_dir_output "$output_dir"; then
@@ -124,9 +138,15 @@ function run_stdout_test() {
     local script_name="$1"
     local input_file="$2"
     
-    # Run the bash script and capture output
+    # Convert input file to absolute path
+    if [[ "$input_file" != /* ]]; then
+        input_file="$PROJECT_ROOT/$input_file"
+    fi
+    
+    # Run the PyPI CLI command and capture output
     echo "Running test for ${script_name}..."
-    local output="$($PROJECT_ROOT/scripts/md-exporter "$script_name" "$input_file")"
+    echo "Input file: $input_file"
+    local output="$(markdown-exporter "$script_name" "$input_file")"
     
     # Verify the output
     if [ $? -eq 0 ] && verify_stdout_output "$output"; then
