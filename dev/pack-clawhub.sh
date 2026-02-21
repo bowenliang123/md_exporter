@@ -34,45 +34,25 @@ if [ -f ".gitignore" ]; then
         [[ -z "$line" ]] && continue
         
         # Add to patterns
-        ALL_PATTERNS+=("$line")
+        ALL_PATTERNS+=($line)
     done < ".gitignore"
 fi
 
 # Add additional patterns
 ADDITIONAL_PATTERNS=(
-    ".DS_Store"
-    ".claude"
     ".difyignore"
-    ".env"
-    ".env.development.local"
-    ".env.local"
-    ".env.production.local"
-    ".env.test.local"
-    ".github"
-    ".ruff_cache"
     "*.docx"
-    "*.ipynb"
     "*.pdf"
     "*.png"
     "*.pptx"
-    "*.swp"
-    "*.swo"
-    "*.tar.gz"
-    "*.temp"
-    "*.tex"
-    "*.tmp"
-    "*.whl"
     "*.xlsx"
-    "*.zip"
-    "*~"
     "dev"
     "MANIFEST.in"
     "md-exporter"
-    "node_modules"
     "test"
     "uv.lock"
 )
-ALL_PATTERNS+=("${ADDITIONAL_PATTERNS[@]}")
+ALL_PATTERNS+=(${ADDITIONAL_PATTERNS[@]})
 
 # Remove duplicates
 UNIQUE_PATTERNS=$(printf "%s\n" "${ALL_PATTERNS[@]}" | awk '!seen[$0]++')

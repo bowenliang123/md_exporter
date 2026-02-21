@@ -176,3 +176,36 @@ test_output/
 
 # ClawHub skill folder
 clawhub-skill/
+
+# Mac
+.DS_Store
+
+# Claude
+.claude
+
+# GitHub
+.github
+
+# Python linting
+.ruff_cache
+
+# Node.js
+node_modules/
+
+# Environment files
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+
+# File types
+*.ipynb
+*.swp
+*.swo
+*.tar.gz
+*.temp
+*.tex
+*.tmp
+*.whl
+*.zip
+*~
