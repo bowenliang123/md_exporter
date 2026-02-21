@@ -6,11 +6,11 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
 
-from scripts.services.svc_md_to_pptx import convert_md_to_pptx
-from scripts.utils.file_utils import get_meta_data
-from scripts.utils.logger_utils import get_logger
-from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text_from_tool_params
+from md_exporter.services.svc_md_to_pptx import convert_md_to_pptx
+from md_exporter.utils.file_utils import get_meta_data
+from md_exporter.utils.logger_utils import get_logger
+from md_exporter.utils.mimetype_utils import MimeType
+from md_exporter.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToPptxTool(Tool):

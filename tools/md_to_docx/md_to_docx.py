@@ -8,10 +8,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.file.file import File
 
-from scripts.services.svc_md_to_docx import convert_md_to_docx, get_default_template
-from scripts.utils.file_utils import get_meta_data
-from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text_from_tool_params
+from md_exporter.services.svc_md_to_docx import convert_md_to_docx, get_default_template
+from md_exporter.utils.file_utils import get_meta_data
+from md_exporter.utils.mimetype_utils import MimeType
+from md_exporter.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToDocxTool(Tool):
@@ -41,7 +41,7 @@ class MarkdownToDocxTool(Tool):
                 current_script_folder = Path(os.path.split(os.path.realpath(__file__))[0])
                 # Use scripts/lib's get_default_template function but adjust for tools directory structure
                 scripts_dir = current_script_folder.parent.parent / "scripts"
-                template_path = get_default_template(scripts_dir)
+                template_path = get_default_template()
 
             # Create temporary output file
             with NamedTemporaryFile(suffix=".docx", delete=False) as temp_output_file:

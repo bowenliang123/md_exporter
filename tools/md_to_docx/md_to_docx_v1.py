@@ -5,9 +5,9 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from html2docx import html2docx
 
-from scripts.utils.file_utils import get_meta_data
-from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text_from_tool_params
+from md_exporter.utils.file_utils import get_meta_data
+from md_exporter.utils.mimetype_utils import MimeType
+from md_exporter.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToDocxTool(Tool):

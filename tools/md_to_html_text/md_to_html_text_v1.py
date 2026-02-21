@@ -3,9 +3,9 @@ from collections.abc import Generator
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from scripts.utils import MarkdownUtils
-from scripts.utils.logger_utils import get_logger
-from scripts.utils.param_utils import get_md_text_from_tool_params
+from md_exporter.utils import MarkdownUtils
+from md_exporter.utils.logger_utils import get_logger
+from md_exporter.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToHtmlTextTool(Tool):

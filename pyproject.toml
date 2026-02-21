@@ -39,7 +39,7 @@ requires = ["uv_build>=0.10.4,<0.11.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
-module-name = "scripts"
+module-name = "md_exporter"
 module-root = ""
 
 [tool.uv.build-backend.includes]
@@ -47,4 +47,4 @@ assets = "assets/"
 assets_template = "assets/template/"
 
 [project.scripts]
-markdown-exporter = "scripts.cli:main"
+markdown-exporter = "md_exporter.cli:main"

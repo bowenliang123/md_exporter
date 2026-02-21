@@ -7,10 +7,10 @@ from tempfile import NamedTemporaryFile
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from scripts.services.svc_md_to_ipynb import convert_md_to_ipynb
-from scripts.utils.file_utils import get_meta_data
-from scripts.utils.mimetype_utils import MimeType
-from scripts.utils.param_utils import get_md_text_from_tool_params
+from md_exporter.services.svc_md_to_ipynb import convert_md_to_ipynb
+from md_exporter.utils.file_utils import get_meta_data
+from md_exporter.utils.mimetype_utils import MimeType
+from md_exporter.utils.param_utils import get_md_text_from_tool_params
 
 
 class MarkdownToIpynbTool(Tool):
