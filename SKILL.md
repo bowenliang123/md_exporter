@@ -39,49 +39,26 @@ To use the Markdown Exporter skill, ensure you have the following prerequisites 
 ## 📦 Usage
 
 ### Overview
-All scripts provided in this project are Python scripts located in the `scripts/` directory. All required Python dependencies are declared in the project's [pyproject.toml](./pyproject.toml) file.
+Markdown Exporter is now available as a PyPI package, which provides a seamless command-line interface for all its functionality.
 
-### Recommended Execution Method - Using Bash Scripts
-We strongly recommend using the bash scripts located in the `scripts/` directory. These scripts provide a seamless experience by automatically handling dependency management and execution:
+### Installation
+You can install the package directly from PyPI using pip:
 
-1. **Automatic Dependency Management**: When you run a bash script from the `scripts/` directory, it will:
-   - First check if the `uv` package manager is installed
-   - If `uv` is available, it will use `uv run` to automatically install dependencies and execute the Python script in one step
-   - If `uv` is not available, it will fall back to using `pip` to install dependencies from `requirements.txt` before executing the script
-   - Check that Python 3.11 or higher is installed (when using pip fallback)
+```bash
+pip install md-exporter
+```
 
-2. **Execute scripts with bash**:
-   ```bash
-   scripts/md-exporter <script_name> <args> [options]
-   ```
+### Basic Usage
+After installation, you can use the `markdown-exporter` command to access all the tools:
 
-### Alternative Execution Method - Direct Python Execution
-You can also run the Python scripts directly, but you'll need to manage dependencies yourself:
-
-1. **Using uv** (recommended if running directly):
-   ```bash
-   # Enter the directory of current skill
-   cd $SKILL_HOME_MARKDOWN_EXPORTER
-   # Install dependencies first
-   uv sync
-   # Then run the script
-   uv run python scripts/parser/<script_name>.py <args> [options]
-   ```
-
-2. **Using pip**:
-   ```bash
-   # Enter the directory of current skill
-   cd $SKILL_HOME_MARKDOWN_EXPORTER
-   # Install dependencies first
-   pip install -r requirements.txt
-   # Then run the script
-   python scripts/parser/<script_name>.py <args> [options]
-   ```
+```bash
+markdown-exporter <subcommand> <args> [options]
+```
 
 ### Important Notes
-- Always navigate to the root directory of the project before executing any scripts.
-- The bash scripts in `scripts/` provide the most convenient way to run the tools, as they handle all dependency management automatically.
-- All scripts only support file paths as input
+- All commands only support file paths as input
+- The package handles all dependency management automatically
+- You can run the command from anywhere in your system, no need to navigate to the project directory
 
 
 ## 🔧 Scripts
@@ -92,7 +69,7 @@ Converts Markdown tables to CSV format.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_csv <input> <output> [options]
+markdown-exporter md_to_csv <input> <output> [options]
 ```
 
 **Arguments:**
@@ -104,7 +81,7 @@ scripts/md-exporter md_to_csv <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_csv /path/input.md /path/output.csv
+markdown-exporter md_to_csv /path/input.md /path/output.csv
 ```
 
 
@@ -114,7 +91,7 @@ Converts Markdown text to PDF format with support for Chinese, Japanese, and oth
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_pdf <input> <output> [options]
+markdown-exporter md_to_pdf <input> <output> [options]
 ```
 
 **Arguments:**
@@ -126,7 +103,7 @@ scripts/md-exporter md_to_pdf <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_pdf /path/input.md /path/output.pdf
+markdown-exporter md_to_pdf /path/input.md /path/output.pdf
 ```
 
 
@@ -136,7 +113,7 @@ Converts Markdown text to DOCX format using pandoc.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_docx <input> <output> [options]
+markdown-exporter md_to_docx <input> <output> [options]
 ```
 
 **Arguments:**
@@ -149,8 +126,8 @@ scripts/md-exporter md_to_docx <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_docx /path/input.md /path/output.docx
-scripts/md-exporter md_to_docx /path/input.md /path/output.docx --template /path/template.docx
+markdown-exporter md_to_docx /path/input.md /path/output.docx
+markdown-exporter md_to_docx /path/input.md /path/output.docx --template /path/template.docx
 ```
 
 
@@ -160,7 +137,7 @@ Converts Markdown tables to XLSX format with multiple sheets support.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_xlsx <input> <output> [options]
+markdown-exporter md_to_xlsx <input> <output> [options]
 ```
 
 **Arguments:**
@@ -173,7 +150,7 @@ scripts/md-exporter md_to_xlsx <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_xlsx /path/input.md /path/output.xlsx
+markdown-exporter md_to_xlsx /path/input.md /path/output.xlsx
 ```
 
 
@@ -183,7 +160,7 @@ Converts Markdown text to PPTX format using pandoc.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_pptx <input> <output> [options]
+markdown-exporter md_to_pptx <input> <output> [options]
 ```
 
 **Arguments:**
@@ -195,7 +172,7 @@ scripts/md-exporter md_to_pptx <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_pptx /path/input.md /path/output.pptx
+markdown-exporter md_to_pptx /path/input.md /path/output.pptx
 ```
 
 
@@ -205,7 +182,7 @@ Extracts code blocks from Markdown and saves them as individual files.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_codeblock <input> <output> [options]
+markdown-exporter md_to_codeblock <input> <output> [options]
 ```
 
 **Arguments:**
@@ -217,8 +194,8 @@ scripts/md-exporter md_to_codeblock <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_codeblock /path/input.md /path/output_dir
-scripts/md-exporter md_to_codeblock /path/input.md /path/output.zip --compress
+markdown-exporter md_to_codeblock /path/input.md /path/output_dir
+markdown-exporter md_to_codeblock /path/input.md /path/output.zip --compress
 ```
 
 
@@ -228,7 +205,7 @@ Converts Markdown tables to JSON or JSONL format.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_json <input> <output> [options]
+markdown-exporter md_to_json <input> <output> [options]
 ```
 
 **Arguments:**
@@ -241,8 +218,8 @@ scripts/md-exporter md_to_json <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_json /path/input.md /path/output.json
-scripts/md-exporter md_to_json /path/input.md /path/output.json --style json_array
+markdown-exporter md_to_json /path/input.md /path/output.json
+markdown-exporter md_to_json /path/input.md /path/output.json --style json_array
 ```
 
 
@@ -252,7 +229,7 @@ Converts Markdown text to XML format.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_xml <input> <output> [options]
+markdown-exporter md_to_xml <input> <output> [options]
 ```
 
 **Arguments:**
@@ -264,7 +241,7 @@ scripts/md-exporter md_to_xml <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_xml /path/input.md /path/output.xml
+markdown-exporter md_to_xml /path/input.md /path/output.xml
 ```
 
 
@@ -274,7 +251,7 @@ Converts Markdown tables to LaTeX format.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_latex <input> <output> [options]
+markdown-exporter md_to_latex <input> <output> [options]
 ```
 
 **Arguments:**
@@ -286,7 +263,7 @@ scripts/md-exporter md_to_latex <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_latex /path/input.md /path/output.tex
+markdown-exporter md_to_latex /path/input.md /path/output.tex
 ```
 
 
@@ -296,7 +273,7 @@ Converts Markdown text to HTML format using pandoc.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_html <input> <output> [options]
+markdown-exporter md_to_html <input> <output> [options]
 ```
 
 **Arguments:**
@@ -308,7 +285,7 @@ scripts/md-exporter md_to_html <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_html /path/input.md /path/output.html
+markdown-exporter md_to_html /path/input.md /path/output.html
 ```
 
 
@@ -318,7 +295,7 @@ Converts Markdown text to HTML and outputs to stdout.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_html_text <input>
+markdown-exporter md_to_html_text <input>
 ```
 
 **Arguments:**
@@ -326,7 +303,7 @@ scripts/md-exporter md_to_html_text <input>
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_html_text /path/input.md
+markdown-exporter md_to_html_text /path/input.md
 ```
 
 
@@ -336,7 +313,7 @@ Converts Markdown text to PNG images (one per page).
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_png <input> <output> [options]
+markdown-exporter md_to_png <input> <output> [options]
 ```
 
 **Arguments:**
@@ -349,8 +326,8 @@ scripts/md-exporter md_to_png <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_png /path/input.md /path/output.png
-scripts/md-exporter md_to_png /path/input.md /path/output.png --compress
+markdown-exporter md_to_png /path/input.md /path/output.png
+markdown-exporter md_to_png /path/input.md /path/output.png --compress
 ```
 
 
@@ -360,7 +337,7 @@ Saves Markdown text to a .md file.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_md <input> <output>
+markdown-exporter md_to_md <input> <output>
 ```
 
 **Arguments:**
@@ -369,7 +346,7 @@ scripts/md-exporter md_to_md <input> <output>
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_md /path/input.md /path/output.md
+markdown-exporter md_to_md /path/input.md /path/output.md
 ```
 
 
@@ -380,7 +357,7 @@ Converts Markdown text to Jupyter Notebook (.ipynb) format.
 
 **Usage:**
 ```bash
-scripts/md-exporter md_to_ipynb <input> <output> [options]
+markdown-exporter md_to_ipynb <input> <output> [options]
 ```
 
 **Arguments:**
@@ -392,7 +369,7 @@ scripts/md-exporter md_to_ipynb <input> <output> [options]
 
 **Example:**
 ```bash
-scripts/md-exporter md_to_ipynb /path/input.md /path/output.ipynb
+markdown-exporter md_to_ipynb /path/input.md /path/output.ipynb
 ```
 
 

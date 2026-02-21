@@ -39,3 +39,6 @@ exclude = ["dev", "provider", "test", "test_output"]
 
 [tool.setuptools.package-data]
 "*" = ["assets/template/docx_template.docx", "assets/template/pptx_template.pptx"]
+
+[project.scripts]
+markdown-exporter = "scripts.cli:main"
