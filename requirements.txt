@@ -16,15 +16,3 @@ pillow~=12.1.0
 
 # pandoc
 pypandoc-binary~=1.16.2
-
-# deprecated 1:
-# markdowntodocx~=0.1.5.10
-# python-docx~=1.1.2
-
-# deprecated 2:
-# html2docx~=1.6.0
-
-# deprecated in md_to_docx v2
-# htmldocx~=0.0.6
-# python-docx~=1.2.0
-# bs4~=0.0.2
