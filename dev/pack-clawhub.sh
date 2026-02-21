@@ -41,15 +41,24 @@ fi
 # Add additional patterns
 ADDITIONAL_PATTERNS=(
     ".difyignore"
+    ".ruff.toml"
     "*.docx"
     "*.pdf"
     "*.png"
     "*.pptx"
     "*.xlsx"
+    "_assets"
+    "assets"
     "dev"
     "MANIFEST.in"
+    "main.py"
+    "manifest.yaml"
     "md-exporter"
+    "PRIVACY.md"
+    "provider"
+    "README.md"
     "test"
+    "tools"
     "uv.lock"
 )
 ALL_PATTERNS+=(${ADDITIONAL_PATTERNS[@]})
