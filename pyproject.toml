@@ -39,5 +39,9 @@ build-backend = "uv_build"
 module-name = "scripts"
 module-root = ""
 
+[tool.uv.build-backend.includes]
+assets = "assets/"
+assets_template = "assets/template/"
+
 [project.scripts]
 markdown-exporter = "scripts.cli:main"
