@@ -54,7 +54,7 @@ ADDITIONAL_PATTERNS=(
     "MANIFEST.in"
     "main.py"
     "manifest.yaml"
-    "md-exporter"
+
     "PRIVACY.md"
     "provider"
     "README.md"

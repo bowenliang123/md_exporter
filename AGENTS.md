@@ -31,7 +31,7 @@ uv run pytest test/skills/test_md_to_docx.py
 ```
 
 ### Development Scripts
-- **Main CLI**: `scripts/md-exporter` (shell script wrapper)
+
 - **Test Scripts**: Individual test scripts in `test/bin/`
 
 ## 📝 Code Style Guidelines
@@ -122,7 +122,7 @@ Configuration is in `.ruff.toml`.
 Each conversion tool follows this pattern:
 - **Service**: `scripts/services/svc_md_to_X.py` - Core conversion logic
 - **Parser**: `scripts/parser/cli_md_to_X.py` - CLI argument parsing
-- **CLI**: `scripts/md-exporter X` - Shell script entry point
+
 - **Test**: `test/skills/test_md_to_X.py` - Unit tests
 
 ### File Processing Patterns
