@@ -15,7 +15,6 @@ if [[ $# -lt 1 ]]; then
     echo "  md_to_html_text"
     echo "  md_to_json"
     echo "  md_to_latex"
-    echo "  md_to_linked_image"
     echo "  md_to_md"
 
     echo "  md_to_pdf"
@@ -40,7 +39,6 @@ valid_subcommands=(
     "md_to_html_text"
     "md_to_json"
     "md_to_latex"
-    "md_to_linked_image"
     "md_to_md"
 
     "md_to_pdf"

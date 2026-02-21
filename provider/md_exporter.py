@@ -11,7 +11,6 @@ from tools.md_to_html_text.md_to_html_text import MarkdownToHtmlTextTool
 from tools.md_to_ipynb.md_to_ipynb import MarkdownToIpynbTool
 from tools.md_to_json.md_to_json import MarkdownToJsonTool
 from tools.md_to_latex.md_to_latex import MarkdownToLatexTool
-from tools.md_to_linked_image.md_to_linked_image import MarkdownToLinkedImageTool
 from tools.md_to_md.md_to_md import MarkdownToMarkdownTool
 from tools.md_to_pdf.md_to_pdf import MarkdownToPdfTool
 from tools.md_to_png.md_to_png import MarkdownToPngTool
@@ -34,7 +33,6 @@ class MdExporterProvider(ToolProvider):
                 MarkdownToHtmlTextTool,
                 MarkdownToJsonTool,
                 MarkdownToLatexTool,
-                MarkdownToLinkedImageTool,
                 MarkdownToMarkdownTool,
                 MarkdownToPdfTool,
                 MarkdownToPngTool,

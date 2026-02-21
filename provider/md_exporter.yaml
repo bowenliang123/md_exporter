@@ -25,7 +25,6 @@ tools:
   - tools/md_to_xml/md_to_xml.yaml
   - tools/md_to_latex/md_to_latex.yaml
   - tools/md_to_codeblock/md_to_codeblock.yaml
-  - tools/md_to_linked_image/md_to_linked_image.yaml
 extra:
   python:
     source: provider/md_exporter.py

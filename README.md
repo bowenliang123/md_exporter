@@ -112,11 +112,6 @@ With support for **15+ output formats**, Markdown Exporter bridges the gap betwe
     <td>💻 <a href="https://www.markdownguide.org/extended-syntax/#fenced-code-blocks"> Code blocks in Markdown </a> </td>
     <td>📁 Code files by language (.py, .js, .sh, etc.)</td>
   </tr>
-  <tr>
-    <td><code>md_to_linked_image</code></td>
-    <td>🖼️ <a href="https://www.markdownguide.org/basic-syntax/#linking-images">Image links in Markdown</a> </td>
-    <td>🖼️ Downloaded image files</td>
-  </tr>
 </table>
 
 ---
@@ -403,15 +398,7 @@ Effortlessly extract code blocks from your Markdown and save them as individual 
 ![Code Block Example 2](_assets/screenshots/usage_md_to_codeblock_3.png)
 ![Code Block Example 3](_assets/screenshots/usage_md_to_codeblock_4.png)
 
----
 
-### 🖼️ Markdown → Linked Images
-
-Automatically download all images referenced in your Markdown.
-
-![Linked Image Example](_assets/screenshots/usage_md_to_linked_image_1.png)
-
----
 
 
 ### 📋 Markdown → CSV

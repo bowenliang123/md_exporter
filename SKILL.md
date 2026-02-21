@@ -28,7 +28,6 @@ disable: false
 | `md_to_xml` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 🏷️ XML file (.xml) |
 | `md_to_latex` | 📋 [Markdown tables](https://www.markdownguide.org/extended-syntax/#tables) | 📝 LaTeX file (.tex) |
 | `md_to_codeblock` | 💻 [Code blocks in Markdown](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) | 📁 Code files by language (.py, .js, .sh, etc.) |
-| `md_to_linked_image` | 🖼️ [Image links in Markdown](https://www.markdownguide.org/basic-syntax/#linking-images) | 🖼️ Downloaded image files |
 
 ## Prerequisites
 
@@ -373,28 +372,6 @@ scripts/md-exporter md_to_md <input> <output>
 scripts/md-exporter md_to_md /path/input.md /path/output.md
 ```
 
-
-### md_to_linked_image - Extract Image Links to Files
-
-Extracts image links from Markdown and downloads them as files.
-
-**Usage:**
-```bash
-scripts/md-exporter md_to_linked_image <input> <output> [options]
-```
-
-**Arguments:**
-- `input` - Input Markdown file path
-- `output` - Output file or directory path
-
-**Options:**
-- `--compress` - Compress all images into a ZIP file
-
-**Example:**
-```bash
-scripts/md-exporter md_to_linked_image /path/input.md /path/output_dir
-scripts/md-exporter md_to_linked_image /path/input.md /path/output.zip --compress
-```
 
 
 ### md_to_ipynb - Convert Markdown to IPYNB
