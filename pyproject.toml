@@ -13,15 +13,15 @@ dependencies = [
     "markdown>=3.10.2",
     "pandas[excel,html,xml]~=3.0.1",
     "xhtml2pdf~=0.2.17",
-    "PyMuPDF~=1.26.7",
-    "pillow~=12.1.0",
+    "PyMuPDF~=1.27.1",
+    "pillow~=12.1.1",
     "pypandoc-binary~=1.16.2",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
-    "ruff>=0.14.11",
+    "ruff>=0.15.2",
 ]
 dify = [
     "dify_plugin~=0.7.1",
