@@ -2,37 +2,22 @@
 
 import sys
 
-from scripts.parser.cli_md_to_codeblock import main as md_to_codeblock_main
-from scripts.parser.cli_md_to_csv import main as md_to_csv_main
-from scripts.parser.cli_md_to_docx import main as md_to_docx_main
-from scripts.parser.cli_md_to_html import main as md_to_html_main
-from scripts.parser.cli_md_to_html_text import main as md_to_html_text_main
-from scripts.parser.cli_md_to_ipynb import main as md_to_ipynb_main
-from scripts.parser.cli_md_to_json import main as md_to_json_main
-from scripts.parser.cli_md_to_latex import main as md_to_latex_main
-from scripts.parser.cli_md_to_md import main as md_to_md_main
-from scripts.parser.cli_md_to_pdf import main as md_to_pdf_main
-from scripts.parser.cli_md_to_png import main as md_to_png_main
-from scripts.parser.cli_md_to_pptx import main as md_to_pptx_main
-from scripts.parser.cli_md_to_xlsx import main as md_to_xlsx_main
-from scripts.parser.cli_md_to_xml import main as md_to_xml_main
-
-# Mapping of subcommands to their main functions
+# Mapping of subcommands to their module paths
 SUBCOMMANDS = {
-    "md_to_codeblock": md_to_codeblock_main,
-    "md_to_csv": md_to_csv_main,
-    "md_to_docx": md_to_docx_main,
-    "md_to_html": md_to_html_main,
-    "md_to_html_text": md_to_html_text_main,
-    "md_to_ipynb": md_to_ipynb_main,
-    "md_to_json": md_to_json_main,
-    "md_to_latex": md_to_latex_main,
-    "md_to_md": md_to_md_main,
-    "md_to_pdf": md_to_pdf_main,
-    "md_to_png": md_to_png_main,
-    "md_to_pptx": md_to_pptx_main,
-    "md_to_xlsx": md_to_xlsx_main,
-    "md_to_xml": md_to_xml_main,
+    "md_to_codeblock": "scripts.parser.cli_md_to_codeblock",
+    "md_to_csv": "scripts.parser.cli_md_to_csv",
+    "md_to_docx": "scripts.parser.cli_md_to_docx",
+    "md_to_html": "scripts.parser.cli_md_to_html",
+    "md_to_html_text": "scripts.parser.cli_md_to_html_text",
+    "md_to_ipynb": "scripts.parser.cli_md_to_ipynb",
+    "md_to_json": "scripts.parser.cli_md_to_json",
+    "md_to_latex": "scripts.parser.cli_md_to_latex",
+    "md_to_md": "scripts.parser.cli_md_to_md",
+    "md_to_pdf": "scripts.parser.cli_md_to_pdf",
+    "md_to_png": "scripts.parser.cli_md_to_png",
+    "md_to_pptx": "scripts.parser.cli_md_to_pptx",
+    "md_to_xlsx": "scripts.parser.cli_md_to_xlsx",
+    "md_to_xml": "scripts.parser.cli_md_to_xml",
 }
 
 
@@ -44,21 +29,39 @@ def main():
         print("Subcommands:")
         for cmd in sorted(SUBCOMMANDS.keys()):
             print(f"  {cmd}")
+        print("\nUse 'markdown-exporter <subcommand> --help' for help on a specific subcommand.")
         sys.exit(1)
 
     subcommand = sys.argv[1]
+    
+    # Handle help options
+    if subcommand in ("--help", "-h"):
+        print("Usage: markdown-exporter <subcommand> [options]")
+        print("Subcommands:")
+        for cmd in sorted(SUBCOMMANDS.keys()):
+            print(f"  {cmd}")
+        print("\nUse 'markdown-exporter <subcommand> --help' for help on a specific subcommand.")
+        sys.exit(0)
+        
     if subcommand not in SUBCOMMANDS:
         print(f"Error: Invalid subcommand '{subcommand}'")
         print("Usage: markdown-exporter <subcommand> [options]")
         print("Subcommands:")
         for cmd in sorted(SUBCOMMANDS.keys()):
             print(f"  {cmd}")
+        print("Use 'markdown-exporter --help' for a list of all subcommands.")
         sys.exit(1)
 
     # Call the corresponding main function with the remaining arguments
     sys.argv = [sys.argv[0]] + sys.argv[2:]
     try:
-        SUBCOMMANDS[subcommand]()
+        # Dynamically import the module
+        module_path = SUBCOMMANDS[subcommand]
+        module = __import__(module_path, fromlist=['main'])
+        # Get the main function
+        main_func = getattr(module, 'main')
+        # Call the main function
+        main_func()
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

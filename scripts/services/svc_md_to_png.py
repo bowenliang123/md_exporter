@@ -8,10 +8,6 @@ import zipfile
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-import pymupdf
-from PIL import Image
-from xhtml2pdf import pisa
-
 from scripts.utils.logger_utils import get_logger
 from scripts.utils.markdown_utils import convert_markdown_to_html
 from scripts.utils.text_utils import contains_chinese, contains_japanese
@@ -81,7 +77,8 @@ def convert_md_to_png(
         # Convert to HTML
         html_str = convert_to_html_with_font_support(processed_md)
 
-        # Convert to PDF
+        # Convert to PDF - import heavy dependencies here to avoid slow startup
+        from xhtml2pdf import pisa
         result_file_bytes = pisa.CreatePDF(
             src=html_str,
             dest_bytes=True,
@@ -89,7 +86,9 @@ def convert_md_to_png(
             capacity=500 * 1024 * 1024,
         )
 
-        # Open PDF and convert to PNG
+        # Open PDF and convert to PNG - import pymupdf and PIL here
+        import pymupdf
+        from PIL import Image
         doc = pymupdf.open(stream=result_file_bytes)
         total_page_count = doc.page_count
         zoom = 2

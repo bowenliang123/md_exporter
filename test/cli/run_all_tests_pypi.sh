@@ -143,9 +143,9 @@ echo "Tests failed: $TESTS_FAILED"
 echo "Total tests: $((TESTS_PASSED + TESTS_FAILED))"
 
 if [ $TESTS_FAILED -eq 0 ]; then
-    echo "\n✓ All tests passed!"
+    echo "✓ All tests passed!"
     exit 0
 else
-    echo "\n✗ Some tests failed!"
+    echo "✗ Some tests failed!"
     exit 1
 fi
