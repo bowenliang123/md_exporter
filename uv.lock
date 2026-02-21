@@ -768,6 +768,7 @@ name = "md-exporter"
 version = "3.6.0"
 source = { editable = "." }
 dependencies = [
+    { name = "jinja2" },
     { name = "markdown" },
     { name = "pandas", extra = ["excel", "html", "xml"] },
     { name = "pillow" },
@@ -787,6 +788,7 @@ dify = [
 
 [package.metadata]
 requires-dist = [
+    { name = "jinja2", specifier = ">=3.1.6" },
     { name = "markdown", specifier = ">=3.10.2" },
     { name = "pandas", extras = ["excel", "html", "xml"], specifier = "~=3.0.1" },
     { name = "pillow", specifier = "~=12.1.1" },
