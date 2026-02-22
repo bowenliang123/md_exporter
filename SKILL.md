@@ -15,10 +15,11 @@ metadata:
 ---
 
 
-## ✨ What is Markdown Exporter?
+# Markdown Exporter
 
-**Markdown Exporter** is a Agent Skill that transforms your Markdown text into a wide variety of professional formats. Whether you need to create polished reports, stunning presentations, organized spreadsheets, or code files—this tool has you covered.
+Markdown Exporter is an Agent Skill that transforms your Markdown text into a wide variety of professional format files.
 
+This SKILL.md file and the cli tool and Python package of `markdown-exporter`  are maintained in the Github repository [bowenliang123/markdown-exporter](https://github.com/bowenliang123/markdown-exporter) by [Bowen Liang](https://github.com/bowenliang123).
 
 ### Tools and Supported Formats
 
