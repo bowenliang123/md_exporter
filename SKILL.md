@@ -74,7 +74,7 @@ markdown-exporter <subcommand> <args> [options]
 
 ### md_to_csv - Convert Markdown tables to CSV
 
-Converts Markdown tables to CSV format.
+Converts Markdown tables to CSV format file.
 
 **Usage:**
 ```bash
@@ -118,7 +118,7 @@ markdown-exporter md_to_pdf /path/input.md /path/output.pdf
 
 ### md_to_docx - Convert Markdown to DOCX
 
-Converts Markdown text to DOCX format using pandoc.
+Converts Markdown text to DOCX format file.
 
 **Usage:**
 ```bash
@@ -165,7 +165,7 @@ markdown-exporter md_to_xlsx /path/input.md /path/output.xlsx
 
 ### md_to_pptx - Convert Markdown to PPTX
 
-Converts Markdown text to PPTX format using pandoc.
+Converts Markdown text to PPTX format file.
 
 **Usage:**
 ```bash
@@ -210,7 +210,7 @@ markdown-exporter md_to_codeblock /path/input.md /path/output.zip --compress
 
 ### md_to_json - Convert Markdown Tables to JSON
 
-Converts Markdown tables to JSON or JSONL format.
+Converts Markdown tables to JSON or JSONL format file.
 
 **Usage:**
 ```bash
@@ -234,7 +234,7 @@ markdown-exporter md_to_json /path/input.md /path/output.json --style json_array
 
 ### md_to_xml - Convert Markdown to XML
 
-Converts Markdown text to XML format.
+Converts Markdown text to XML format file.
 
 **Usage:**
 ```bash
@@ -256,7 +256,7 @@ markdown-exporter md_to_xml /path/input.md /path/output.xml
 
 ### md_to_latex - Convert Markdown Tables to LaTeX
 
-Converts Markdown tables to LaTeX format.
+Converts Markdown tables to LaTeX format file.
 
 **Usage:**
 ```bash
@@ -278,7 +278,7 @@ markdown-exporter md_to_latex /path/input.md /path/output.tex
 
 ### md_to_html - Convert Markdown to HTML
 
-Converts Markdown text to HTML format using pandoc.
+Converts Markdown text to HTML format file.
 
 **Usage:**
 ```bash
@@ -362,7 +362,7 @@ markdown-exporter md_to_md /path/input.md /path/output.md
 
 ### md_to_ipynb - Convert Markdown to IPYNB
 
-Converts Markdown text to Jupyter Notebook (.ipynb) format.
+Converts Markdown text to Jupyter Notebook (.ipynb) format file.
 
 **Usage:**
 ```bash
