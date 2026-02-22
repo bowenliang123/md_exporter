@@ -765,7 +765,7 @@ wheels = [
 
 [[package]]
 name = "md-exporter"
-version = "3.6.1"
+version = "3.6.6"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },

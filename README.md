@@ -460,6 +460,11 @@ Releases are available at:
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
 
 ### Changelog
+- 3.6.6
+  - Refactor code structure to ensure Agent Skill, Dify plugin and CLI properly share the core file transformation logic 
+  - Make project installable and usable on OpenClaw as Agent Skill 🦞
+  - Refactor Python packaging to make `markdown-exporter` as standalone CLI tool with Python package `md-exporter` installed
+  - Remove `md_to_linked_image` tool
 
 - 3.6.0
   - Improve conversion success rate in `md_to_docx`, `md_to_pptx`, and `md_to_ipynb` tools by removing enforcement of spaces and blank lines in heading headers
