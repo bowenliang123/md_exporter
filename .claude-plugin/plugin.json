@@ -7,12 +7,12 @@
     "email":"liang.bowen.123@qq.com",
     "url": "https://github.com/bowenliang123"
   },
-  "homepage": "https://github.com/bowenliang123/md_exporter/",
-  "repository": "https://github.com/bowenliang123/md_exporter.git",
+  "homepage": "https://github.com/bowenliang123/markdown-exporter/",
+  "repository": "https://github.com/bowenliang123/markdown-exporter.git",
   "license": "Apache-2.0",
   "keywords": [
+    "markdown-exporter",
     "markdown",
-    "md_exporter",
     "md2docx",
     "md2xlsx",
     "md2pptx"

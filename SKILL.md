@@ -4,7 +4,7 @@ description: Markdown exporter for export Markdown text to DOCX, PPTX, XLSX, PDF
 disable: false
 metadata:
   openclaw:
-    homepage: https://github.com/bowenliang123/md_exporter/
+    homepage: https://github.com/bowenliang123/markdown-exporter
     emoji: 🖨
     requires:
       bins: [markdown-exporter]

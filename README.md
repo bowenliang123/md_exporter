@@ -6,14 +6,14 @@
 ### An Agent Skill and Dify plugin to Export Markdown Into Powerful Documents
 
 - Author: [bowenliang123](https://github.com/bowenliang123)
-- GitHub Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/md_exporter)](https://github.com/bowenliang123/md_exporter)
+- GitHub Repository: [![GitHub Repo](https://img.shields.io/badge/github-repo-blue?logo=github&label=bowenliang123/markdown-exporter)](https://github.com/bowenliang123/markdown-exporter)
 
 - Markdown Exporter can be used as:
 
 | Use As         | Platforms & Installation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 |----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Dify Plugin    | **Platform**: [Dify](https://github.com/langgenius/dify) <br/> **Installation**: <br/> - Install from [Dify Marketplace](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Agent Skills   | **Platforms**: Any platform supporting [Agent Skills](https://agentskills.io) <br/> - **IDEs/CLIs**: [Claude Code](https://code.claude.com/docs/en/skills), [Trae](https://docs.trae.ai/ide/skills), [Codebuddy](https://copilot.tencent.com/docs/cli/skills), etc. <br/> - **Agent Frameworks**: [LangChain DeepAgents](https://www.blog.langchain.com/using-skills-with-deep-agents/), [AgentScope](https://doc.agentscope.io/tutorial/task_agent_skill.html), etc. <br/><br/> **Installation**: <br/> - **Local Import**: Download and import [source code zip](https://github.com/bowenliang123/md_exporter/archive/refs/heads/main.zip) <br/> - **Remote Install**: `/plugin marketplace add bowenliang123/md_exporter` in agent CLIs |
+| Agent Skills   | **Platforms**: Any platform supporting [Agent Skills](https://agentskills.io) <br/> - **IDEs/CLIs**: [Claude Code](https://code.claude.com/docs/en/skills), [Trae](https://docs.trae.ai/ide/skills), [Codebuddy](https://copilot.tencent.com/docs/cli/skills), etc. <br/> - **Agent Frameworks**: [LangChain DeepAgents](https://www.blog.langchain.com/using-skills-with-deep-agents/), [AgentScope](https://doc.agentscope.io/tutorial/task_agent_skill.html), etc. <br/><br/> **Installation**: <br/> - **Local Import**: Download and import [source code zip](https://github.com/bowenliang123/markdown-exporter/archive/refs/heads/main.zip) <br/> - **Remote Install**: `/plugin marketplace add bowenliang123/markdown-exporter` in agent CLIs |
 | OpenClaw Skill | **Platform**: 🦞 [OpenClaw](https://openclaw.ai) <br/> - Install from [ClawHub](https://clawhub.ai/bowenliang123/markdown-exporter): `npx clawhub@latest install markdown-exporter`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 | Python Package | **Platform**: Python<br/> - Install from [PyPI](https://pypi.org/project/md-exporter/): `pip install md-exporter`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
@@ -141,7 +141,7 @@ Create professional Word documents with beautiful formatting.
 > - List styles and bullets
 > - And much more!
 >
-> Check out the [default docx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/docx_template.docx) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
+> Check out the [default docx template](https://github.com/bowenliang123/markdown-exporter/blob/main/assets/template/docx_template.docx) or create your own. Learn how at [Customize or create new styles](https://support.microsoft.com/en-us/office/customize-or-create-new-styles-d38d6e47-f6fc-48eb-a607-1eb120dec563).
 
 ![DOCX Example](_assets/screenshots/md_to_docx_1.png)
 
@@ -183,7 +183,7 @@ Turn your Markdown into stunning PowerPoint presentations automatically.
 >
 > > **🎨 Custom Templates:**
 > >
-> > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get the [default pptx template](https://github.com/bowenliang123/md_exporter/blob/main/assets/template/pptx_template.pptx).
+> > Use custom PPTX templates with slide masters to match your brand's visual identity. [Learn how](https://support.microsoft.com/en-us/office/customize-a-slide-master-036d317b-3251-4237-8ddc-22f4668e2b56). Get the [default pptx template](https://github.com/bowenliang123/markdown-exporter/blob/main/assets/template/pptx_template.pptx).
 
 The input Markdown must follow the syntax and guidance in [Pandoc Slide Shows](https://pandoc.org/MANUAL.html#slide-shows).
 
@@ -456,7 +456,7 @@ Save your Markdown content as a `.md` file for future use.
 
 ## 📢 Releases
 Releases are available at:
-- [GitHub Repo Releases](https://github.com/bowenliang123/md_exporter/releases)
+- [GitHub Repo Releases](https://github.com/bowenliang123/markdown-exporter/releases)
 - [Dify Marketplace Releases](https://marketplace.dify.ai/plugins/bowenliang123/md_exporter)
 
 ### Changelog
@@ -607,7 +607,7 @@ Releases are available at:
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues or pull requests on our [GitHub repository](https://github.com/bowenliang123/md_exporter).
+Contributions are welcome! Please feel free to submit issues or pull requests on our [GitHub repository](https://github.com/bowenliang123/markdown-exporter).
 
 ### Code Style
 
