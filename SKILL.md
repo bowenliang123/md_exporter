@@ -1,7 +1,6 @@
 ---
 name: markdown-exporter
 description: Markdown exporter for export Markdown text to DOCX, PPTX, XLSX, PDF, PNG, HTML, IPYNB, MD, CSV, JSON, JSONL, XML files, and extract code blocks in Markdown to Python, Bash,JS and etc files. Also known as the md_exporter skill.
-allowed-tools: 
 disable: false
 ---
 
